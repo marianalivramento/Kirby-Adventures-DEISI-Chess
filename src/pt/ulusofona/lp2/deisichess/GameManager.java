@@ -1,9 +1,6 @@
 package pt.ulusofona.lp2.deisichess;
 import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 
@@ -13,50 +10,51 @@ public class GameManager {
     public GameManager() {
     }
 
+    public void parseFicheiro4x4() {
+
+    }
+    public void parseFicheiro8x8() {
+
+    }
 
 
     public boolean loadGame(File file) {
 
-        // tou a aplicar a lógica do projeto passado
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            int linha = 0; //para contar o numero de linhas a ajudar a colocar os atributos
 
-            while ((line = reader.readLine()) != null) {
-                String[] tokens = line.split(":");
+        BufferedReader buffered = null;
 
-                if (linha == 0){
-                    // assinalar o tamanho
-                }else if (linha == 1){
-                    // assinalar o numero de peças
-                }else {
-                    /*
-                   if(linhas <= 1+numeroDePecas){
-                        tokens[0] = idDaPeca;
-                        tokens[1] = tipoDaPeca;
-                        tokens[2] = equipa;
-                        tokens[3] = alcunhaDaPeca;
+        String linha = null;
 
-                       -> assinalar cada numero separado por : à sua caracteristica de acordo com o regulamento do projeto
-                    }else{
-                    tokens[0] = quadrado1;
-                        tokens[1] = quadrado2;
-                        tokens[2] = quadrado3;
-                        tokens[3] = quadrado4;
 
-                        -> aqui vemos se os quadrados estão ocupados e obtemos as coordenadas sendo quadrado(n) e n sendo a ordenada=y e (linhas - (1+numeroDePecas)) a abcissa=x
-                    }
-
-                     */
-                }
-
-                linha++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        try {
+            buffered = new BufferedReader(new FileReader(file));
+        } catch (FileNotFoundException e) {
+            return false;
         }
+
+        try {
+            linha = buffered.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (linha != null) {
+
+            switch (linha) {
+                case "4":
+                    System.out.println("li ficheiro 4x4");
+                    parseFicheiro4x4();
+                    return true;
+                case "8":
+                    parseFicheiro8x8();
+                    return true;
+                default:
+                    return false;
+                }
+            }
         return false;
     }
+
 
    public int getBoardSize() {
         return 0;
