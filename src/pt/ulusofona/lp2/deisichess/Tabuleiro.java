@@ -7,4 +7,11 @@ public class Tabuleiro {
     int numeroDePecas;
     ArrayList<Peca> pecas;
 
+    public Tabuleiro() {
+
+    }
+
+    void adicionaPecas(int i) {
+        numeroDePecas = i;
+    }
 }

@@ -7,7 +7,7 @@ public class Main {
         GameManager gm = new GameManager();
 
         System.out.println(gm.loadGame(new File("4x4.txt")));
-
+        System.out.println(gm.getBoardSize());
         System.out.println("Vamos ver se isto funciona - suzy");
     }
 }

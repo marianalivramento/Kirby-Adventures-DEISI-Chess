@@ -8,4 +8,12 @@ public class Jogo {
     Equipa equipaBranca;
     Equipa equipaPreta;
     JPanel creditos;
+
+    public Jogo() {
+    }
+
+    void criaTabuleiro() {
+        tabuleiro = new Tabuleiro();
+    }
+
 }
