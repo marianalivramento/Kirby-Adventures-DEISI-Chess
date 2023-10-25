@@ -1,8 +1,8 @@
 package pt.ulusofona.lp2.deisichess;
+
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
-
 
 
 public class GameManager {
@@ -12,7 +12,7 @@ public class GameManager {
     public GameManager() {
     }
 
-    public void parseFicheiro4x4(File file) {
+    /*public void parseFicheiro4x4(File file) {
         jogo.criaTabuleiro();
         jogo.tabuleiro.tamanho = 4;
 
@@ -55,42 +55,52 @@ public class GameManager {
         jogo.tabuleiro.tamanho = 8;
     }
 
+     */
+
+
+    public void parsePecas(String linha) {
+        String[] elementos = linha.split(":");
+
+        Peca peca = new Peca();
+        peca.id = Integer.parseInt(elementos[0]);
+        peca.tipo = Integer.parseInt(elementos[1]);
+        peca.equipa = new Equipa(Integer.parseInt(elementos[2]));
+        jogo.defineEquipa(peca.equipa);
+        peca.alcunha = elementos[3];
+
+        jogo.tabuleiro.pecas.add(peca);
+    }
 
     public boolean loadGame(File file) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            int linha = 0;
 
-        BufferedReader buffered = null;
-        String linha = null;
-
-        try {
-            buffered = new BufferedReader(new FileReader(file));
-        } catch (FileNotFoundException e) {
-            return false;
-        }
-
-        try {
-            linha = buffered.readLine();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        if (linha != null) {
-
-            switch (linha) {
-                case "4":
-                    parseFicheiro4x4(file);
-                    break;
-                case "8":
-                    parseFicheiro8x8(file);
-                    break;
-                default:
-                    return false;
+            while ((line = reader.readLine()) != null) {
+                switch (linha) {
+                    case 0:
+                        jogo.criaTabuleiro(Integer.parseInt(line));
+                        break;
+                    case 1:
+                        jogo.tabuleiro.adicionaPecas(Integer.parseInt(line));
+                        break;
+                    default:
+                        for (int i = 0; i < jogo.tabuleiro.numeroDePecas; i++) {
+                            parsePecas(line);
+                        }
+                        break;
                 }
+                linha++;
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 
 
-   public int getBoardSize() {
+
+    public int getBoardSize() {
         return jogo.tabuleiro.tamanho;
     }
 
@@ -98,11 +108,11 @@ public class GameManager {
         return false;
     }
 
-    public String [] getSquareInfo(int x, int y) {
+    public String[] getSquareInfo(int x, int y) {
         return null;
     }
 
-    public String [] getPieceInfo(int ID) {
+    public String[] getPieceInfo(int ID) {
         return null;
     }
 

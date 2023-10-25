@@ -8,6 +8,5 @@ public class Main {
 
         System.out.println(gm.loadGame(new File("4x4.txt")));
         System.out.println(gm.getBoardSize());
-        System.out.println("Vamos ver se isto funciona - suzy");
     }
 }

@@ -12,8 +12,18 @@ public class Jogo {
     public Jogo() {
     }
 
-    void criaTabuleiro() {
+    void criaTabuleiro(int lado) {
         tabuleiro = new Tabuleiro();
+        tabuleiro.tamanho = lado;
+        // pensei que daria mais jeito se fizessemos diretamente o tabuleiro com o tamanho
+    }
+
+    //acrescentei isto pq pensei q fosse mais fácil
+    void defineEquipa(Equipa equipa){
+        if (equipa.pretoOuBranco == 1){
+             equipaBranca = equipa;
+        }
+        equipaPreta = equipa;
     }
 
 }

@@ -6,4 +6,8 @@ public class Equipa {
     int nrCapturas;
     int nrJogadasValidas;
     int nrTentativasInvalidas;
+
+    public Equipa(int pretoOuBranco) {
+        this.pretoOuBranco = pretoOuBranco;
+    }
 }
