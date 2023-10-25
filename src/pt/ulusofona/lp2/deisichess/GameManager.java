@@ -20,11 +20,8 @@ public class GameManager {
 
     public boolean loadGame(File file) {
 
-
         BufferedReader buffered = null;
-
         String linha = null;
-
 
         try {
             buffered = new BufferedReader(new FileReader(file));
