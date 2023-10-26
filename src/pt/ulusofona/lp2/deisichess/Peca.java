@@ -49,7 +49,7 @@ public class Peca {
         this.coordenadas = coordenadas;
     }
 
-    public boolean isEstado() {
+    public boolean getEstado() {
         return estado;
     }
 

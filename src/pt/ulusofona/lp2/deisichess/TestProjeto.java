@@ -59,6 +59,18 @@ public class TestProjeto {
 
     }
 
+    @Test
+    public void teste_getInfoPieceAsString() {
+
+        GameManager gm = new GameManager();
+
+        gm.loadGame(new File("4x4.txt"));
+        String s = gm.getPieceInfoAsString(1);
+
+        assertEquals("1 | 0 | 0 | Chefe @(1,0)",s);
+
+    }
+
 
 
 }

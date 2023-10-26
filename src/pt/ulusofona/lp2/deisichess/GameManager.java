@@ -110,14 +110,13 @@ public class GameManager {
         if (sq == null) {
             return null;
         }
-        if (!sq.ocupado) {
+        if (!sq.isOcupado()) {
             return retorno;
         }
-
-        retorno[0] = Integer.toString(sq.peca.id);
-        retorno[1] = Integer.toString(sq.peca.tipo);
-        retorno[2] = Integer.toString(sq.peca.equipa.pretoOuBranco);
-        retorno[3] = sq.peca.alcunha;
+        retorno[0] = Integer.toString(sq.getPeca().getId());
+        retorno[1] = Integer.toString(sq.getPeca().getTipo());
+        retorno[2] = Integer.toString(sq.getPeca().getEquipa().getPretoOuBranco());
+        retorno[3] = sq.getPeca().getAlcunha();
         retorno[4] = null;
 
         return retorno;
@@ -131,14 +130,14 @@ public class GameManager {
             return null;
         }
 
-        retorno[0] = Integer.toString(peca.id);
-        retorno[1] = Integer.toString(peca.tipo);
-        retorno[2] = Integer.toString(peca.equipa.pretoOuBranco);
-        retorno[3] = peca.alcunha;
-        if (peca.estado) {
+        retorno[0] = Integer.toString(peca.getId());
+        retorno[1] = Integer.toString(peca.getTipo());
+        retorno[2] = Integer.toString(peca.getEquipa().getPretoOuBranco());
+        retorno[3] = peca.getAlcunha();
+        if (peca.getEstado()) {
             retorno[4] = "true";
-            retorno[5] = Integer.toString(peca.coordenadas.coordenadaX);
-            retorno[6] = Integer.toString(peca.coordenadas.coordenadaY);
+            retorno[5] = Integer.toString(peca.getCoordenadas().getCoordenadaX());
+            retorno[6] = Integer.toString(peca.getCoordenadas().getCoordenadaY());
         } else {
             retorno[4] = "false";
         }
@@ -146,8 +145,32 @@ public class GameManager {
         return retorno;
     }
 
+
     public String getPieceInfoAsString(int ID) {
-        return null;
+        String retorno = "";
+
+        String[] string = getPieceInfo(ID);
+
+
+        //o meu intelij dá avisos aqui a dizer que i nunca é atualizado (???) mas passa no teste unitario so idk
+        for (int i = 0; i < string.length; i++) {
+            if (i <= 2) {
+                retorno += string[i] + " | ";
+            }
+
+            if (i == 3) {
+                retorno += string[i] + " @";
+            }
+
+            if (i == 5 && string[i] != null) {
+                retorno += "(" + string[i] + ",";
+            }
+
+            if (i == 6 && string[i] != null) {
+                retorno +=  string[i] + ")";
+            }
+        }
+        return retorno;
     }
 
     public int getCurrentTeamID() {
