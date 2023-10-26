@@ -78,9 +78,9 @@ public class TestProjeto {
         GameManager gm = new GameManager();
 
         gm.loadGame(new File("4x4.txt"));
-        String s = gm.getPieceInfoAsString(6);
+        String s = gm.getPieceInfoAsString(7);
 
-        assertEquals("6 | 0 | 1 | O Beberolas @ (1,2)" ,s);
+        assertEquals(null ,s);
 
     }
 

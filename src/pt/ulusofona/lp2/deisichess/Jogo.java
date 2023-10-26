@@ -5,6 +5,7 @@ import javax.swing.*;
 public class Jogo {
     String resultado;
     Tabuleiro tabuleiro = new Tabuleiro();
+    int equipaAtual = 0;
     Equipa equipaBranca;
     Equipa equipaPreta;
     JPanel creditos;
@@ -52,6 +53,18 @@ public class Jogo {
         this.creditos = creditos;
     }
 
+    public int getEquipaAtual() {
+        return equipaAtual;
+    }
+
+    void mudarEquipa() {
+        if (equipaAtual == 0) {
+            equipaAtual = 1;
+        } else {
+            equipaAtual = 0;
+        }
+    }
+
     void criaTabuleiro(int lado) {
         tabuleiro = new Tabuleiro();
         tabuleiro.tamanho = lado;
@@ -65,6 +78,8 @@ public class Jogo {
         }
         equipaPreta = equipa;
     }
+
+
 
 
 }

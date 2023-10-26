@@ -185,7 +185,7 @@ public class GameManager {
             }
 
             if (i == 5 && string[i] != null) {
-                retorno += "(" + string[i] + ",";
+                retorno += "(" + string[i] + ", ";
             }
 
             if (i == 6 && string[i] != null) {
@@ -196,7 +196,7 @@ public class GameManager {
     }
 
     public int getCurrentTeamID() {
-        return 0;
+        return jogo.equipaAtual;
     }
 
     public boolean gameOver() {
