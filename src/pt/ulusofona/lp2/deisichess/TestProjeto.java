@@ -19,22 +19,21 @@ public class TestProjeto {
 
     @Test
     public void teste_getSquareInfoPiece() {
-/*
+
         GameManager gm = new GameManager();
 
         gm.loadGame(new File("4x4.txt"));
-        String[] u = gm.getSquareInfo(2,3);
+        String[] u = gm.getSquareInfo(1,3);
 
         String[] r = new String[5];
-        r[0] = "1";
+        r[0] = "5";
         r[1] = "0";
-        r[2] = "0";
-        r[3] = "Chefe";
+        r[2] = "1";
+        r[3] = "O Amigo";
         r[4] = null;
 
         assertEquals(r, u);
 
- */
 
     }
 
@@ -43,7 +42,7 @@ public class TestProjeto {
     @Test
     public void teste_getInfoPiece() {
 
-        /*GameManager gm = new GameManager();
+        GameManager gm = new GameManager();
 
         gm.loadGame(new File("4x4.txt"));
         String[] u = gm.getPieceInfo(2);
@@ -58,7 +57,7 @@ public class TestProjeto {
         r[6] = null;
 
 
-        assertEquals(r, u);*/
+        assertEquals(r, u);
 
     }
 

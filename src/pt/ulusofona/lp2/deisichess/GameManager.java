@@ -43,8 +43,8 @@ public class GameManager {
             } else {
                 if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[i])) != null) {
                     quadrado.setOcupado(true);
-                    jogo.getTabuleiro().getPecas().get(Integer.parseInt(elementos[i])).setCoordenadas(quadrado);
-                    quadrado.setPeca(jogo.getTabuleiro().getPecas().get(Integer.parseInt(elementos[i])));
+                    jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[i])).setCoordenadas(quadrado);
+                    quadrado.setPeca(jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[i])));
                 }
             }
             jogo.getTabuleiro().adicionaQuadrado(quadrado);
@@ -75,7 +75,6 @@ public class GameManager {
                                 leituraParse++;
 
                                 if (leituraParse == jogo.getTabuleiro().getNumeroDePecas()) {
-                                    parsePecas(line);
                                     leituraParse = 0;
                                     jaLeu = true;
                                 }
