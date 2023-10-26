@@ -30,12 +30,37 @@ public class GameManager {
 
     }
 
+    public void parsePosicoes(String linha, int x) {
+        String[] elementos = linha.split(":");
+
+        for (int i = 0; i < elementos.length; i++) {
+            Square quadrado = new Square();
+            quadrado.setCoordenadaX(x);
+            quadrado.setCoordenadaY(i);
+
+            if (Integer.parseInt(elementos[i]) == 0) {
+                quadrado.setOcupado(false);
+            } else {
+                if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[i])) != null) {
+                    quadrado.setOcupado(true);
+                    jogo.getTabuleiro().getPecas().get(Integer.parseInt(elementos[i])).setCoordenadas(quadrado);
+                    quadrado.setPeca(jogo.getTabuleiro().getPecas().get(Integer.parseInt(elementos[i])));
+                }
+            }
+            jogo.getTabuleiro().adicionaQuadrado(quadrado);
+        }
+    }
+
+
     public boolean loadGame(File file) {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             int linha = 0;
+            int leituraParse = 0;
+            boolean jaLeu = false;
 
             while ((line = reader.readLine()) != null) {
+
                 switch (linha) {
                     case 0:
                         jogo.criaTabuleiro(Integer.parseInt(line));
@@ -44,10 +69,21 @@ public class GameManager {
                         jogo.getTabuleiro().setNumeroDePecas(Integer.parseInt(line));
                         break;
                     default:
-                        for (int i = 0; i < jogo.getTabuleiro().getNumeroDePecas(); i++) {
-                            parsePecas(line);
-                        }
+                        if (!jaLeu) {
+                            if (leituraParse <= jogo.getTabuleiro().getNumeroDePecas()) {
+                                parsePecas(line);
+                                leituraParse++;
 
+                                if (leituraParse == jogo.getTabuleiro().getNumeroDePecas()) {
+                                    parsePecas(line);
+                                    leituraParse = 0;
+                                    jaLeu = true;
+                                }
+                            }
+                        } else {
+                            parsePosicoes(line, leituraParse);
+                            leituraParse++;
+                        }
                         break;
                 }
                 linha++;
@@ -59,7 +95,6 @@ public class GameManager {
     }
 
 
-
     public int getBoardSize() {
         return jogo.getTabuleiro().getTamanho();
     }
@@ -69,10 +104,10 @@ public class GameManager {
     }
 
     public String[] getSquareInfo(int x, int y) {
-        String [] retorno = new String[5];
-        Square sq = jogo.getTabuleiro().retornoPeca(x,y);
+        String[] retorno = new String[5];
+        Square sq = jogo.getTabuleiro().retornoPeca(x, y);
 
-        if(sq == null) {
+        if (sq == null) {
             return null;
         }
         if (!sq.ocupado) {
