@@ -14,7 +14,8 @@ public class TestProjeto {
 
        GameManager gm = new GameManager();
 
-       assertTrue(gm.loadGame(new File("4x4.txt")));
+       assertEquals(true,gm.loadGame(new File("4x4.txt")));
+
    }
 
     @Test
@@ -35,6 +36,19 @@ public class TestProjeto {
         assertEquals(Arrays.toString(r), Arrays.toString(u));
     }
 
+    @Test
+    public void teste_getSquareInfoNoPiece() {
+
+        GameManager gm = new GameManager();
+
+        gm.loadGame(new File("4x4.txt"));
+        String[] exp = gm.getSquareInfo(0,0);
+
+        String[] ret = new String[5];
+
+        assertEquals(Arrays.toString(ret), Arrays.toString(exp));
+    }
+
 
     @Test
     public void teste_getInfoPiece() {
@@ -42,7 +56,7 @@ public class TestProjeto {
         GameManager gm = new GameManager();
 
         gm.loadGame(new File("4x4.txt"));
-        String[] u = gm.getPieceInfo(2);
+        String[] s = gm.getPieceInfo(2);
 
         String[] r = new String[7];
         r[0] = "2";
@@ -54,7 +68,7 @@ public class TestProjeto {
         r[6] = "0";
 
 
-        assertEquals(Arrays.toString(r), Arrays.toString(u));
+        assertEquals(Arrays.toString(r), Arrays.toString(s));
 
     }
 
@@ -64,9 +78,9 @@ public class TestProjeto {
         GameManager gm = new GameManager();
 
         gm.loadGame(new File("4x4.txt"));
-        String s = gm.getPieceInfoAsString(1);
+        String s = gm.getPieceInfoAsString(6);
 
-        assertEquals("1 | 0 | 0 | Chefe @(1,0)",s);
+        assertEquals("6 | 0 | 1 | O Beberolas @ (1,2)" ,s);
 
     }
 

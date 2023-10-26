@@ -120,11 +120,15 @@ public class GameManager {
     }
 
     public String[] getSquareInfo(int x, int y) {
+
+        if((x < 0 || x > 3) || (y < 0 || y > 3)) {
+            return null;
+        }
         String[] retorno = new String[5];
         Square sq = jogo.getTabuleiro().retornoPeca(x, y);
 
         if (sq == null) {
-            return null;
+            return retorno;
         }
         if (!sq.isOcupado()) {
             return retorno;
@@ -167,7 +171,9 @@ public class GameManager {
 
         String[] string = getPieceInfo(ID);
 
-
+        if(string == null) {
+            return null;
+        }
         //o meu intelij dá avisos aqui a dizer que i nunca é atualizado (???) mas passa no teste unitario so idk
         for (int i = 0; i < string.length; i++) {
             if (i <= 2) {
@@ -175,7 +181,7 @@ public class GameManager {
             }
 
             if (i == 3) {
-                retorno += string[i] + " @";
+                retorno += string[i] + " @ ";
             }
 
             if (i == 5 && string[i] != null) {
