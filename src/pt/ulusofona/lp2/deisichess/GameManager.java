@@ -90,6 +90,7 @@ public class GameManager {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
         return true;
     }
