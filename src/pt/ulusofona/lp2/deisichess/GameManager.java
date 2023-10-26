@@ -37,8 +37,7 @@ public class GameManager {
             Square quadrado = new Square();
             quadrado.setCoordenadaX(i);
             quadrado.setCoordenadaY(x);
-            jogo.getTabuleiro().retornoPeca(i,x).coordenadaX = i;
-            jogo.getTabuleiro().retornoPeca(i,x).coordenadaY = x;
+
 
             if (Integer.parseInt(elementos[i]) == 0) {
                 quadrado.setOcupado(false);
@@ -137,11 +136,11 @@ public class GameManager {
         retorno[2] = Integer.toString(peca.equipa.pretoOuBranco);
         retorno[3] = peca.alcunha;
         if (peca.estado) {
-            retorno[4] = "1";
+            retorno[4] = "true";
             retorno[5] = Integer.toString(peca.coordenadas.coordenadaX);
             retorno[6] = Integer.toString(peca.coordenadas.coordenadaY);
         } else {
-            retorno[4] = "0";
+            retorno[4] = "false";
         }
 
         return retorno;

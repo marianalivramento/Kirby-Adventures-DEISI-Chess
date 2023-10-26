@@ -7,7 +7,7 @@ public class Peca {
     Equipa equipa;
     String alcunha;
     Square coordenadas;
-    boolean estado;
+    boolean estado = true;
 
     public int getId() {
         return id;

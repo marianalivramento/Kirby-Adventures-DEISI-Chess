@@ -50,7 +50,7 @@ public class TestProjeto {
         r[1] = "0";
         r[2] = "0";
         r[3] = "Selvagem";
-        r[4] = "0";
+        r[4] = "true";
         r[5] = "3";
         r[6] = "0";
 
