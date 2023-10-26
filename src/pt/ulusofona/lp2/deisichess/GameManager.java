@@ -35,8 +35,8 @@ public class GameManager {
 
         for (int i = 0; i < elementos.length; i++) {
             Square quadrado = new Square();
-            quadrado.setCoordenadaX(x);
-            quadrado.setCoordenadaY(i);
+            quadrado.setCoordenadaX(i);
+            quadrado.setCoordenadaY(x);
 
             if (Integer.parseInt(elementos[i]) == 0) {
                 quadrado.setOcupado(false);
