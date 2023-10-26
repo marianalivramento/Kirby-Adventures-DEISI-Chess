@@ -4,14 +4,12 @@ import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 
-
 public class GameManager {
 
     Jogo jogo = new Jogo();
 
     public GameManager() {
     }
-
 
     public void parsePecas(String linha) {
 
@@ -103,8 +101,10 @@ public class GameManager {
 
     public boolean move(int x0, int y0, int x1, int y1) {
 
-        if ((x0 < 0 || x0 > 3) || (y0 < 0 || y0 > 3) || (x1 < 0 || x1 > 3) || (y1 < 0 || y1 > 3)) {
-            return false;
+        int boardSize = jogo.getTabuleiro().getTamanho();
+
+        if (x0 < 0 || x0 >= boardSize || y0 < 0 || y0 >= boardSize || x1 < 0 || x1 >= boardSize || y1 < 0 || y1 >= boardSize) {
+            return false; // Coordinates out of bounds
         }
 
         Square sqPartida = jogo.getTabuleiro().retornoPeca(x0, y0);
@@ -121,11 +121,12 @@ public class GameManager {
     }
 
     public String[] getSquareInfo(int x, int y) {
-
-        if ((x < 0 || x > 3) || (y < 0 || y > 3)) {
-            return null;
-        }
         String[] retorno = new String[5];
+
+        if ((x < 0 || x > jogo.getTabuleiro().getTamanho()) || (y < 0 || y > jogo.getTabuleiro().getTamanho())) {
+            return retorno;
+        }
+
         Square sq = jogo.getTabuleiro().retornoPeca(x, y);
 
         if (sq == null) {
@@ -176,11 +177,10 @@ public class GameManager {
 
     public String getPieceInfoAsString(int ID) {
         StringBuilder retorno = new StringBuilder();
-
         String[] string = getPieceInfo(ID);
 
         if (string == null) {
-            return "";
+            return null;
         }
         //o meu intelij dá avisos aqui a dizer que i nunca é atualizado (???) mas passa no teste unitario so idk
         for (int i = 0; i < string.length; i++) {
@@ -200,7 +200,7 @@ public class GameManager {
                 retorno.append(string[i]).append(")");
             }
         }
-        return retorno.toString();
+        return String.valueOf(retorno);
     }
 
     public int getCurrentTeamID() {

@@ -9,22 +9,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestProjeto {
 
-   @Test
-   public void teste_loadGame_1() {
+    @Test
+    public void teste_loadGame_1() {
 
-       GameManager gm = new GameManager();
+        GameManager gm = new GameManager();
 
-       assertEquals(true,gm.loadGame(new File("4x4.txt")));
+        assertEquals(true, gm.loadGame(new File("test-files/4x4.txt")));
 
-   }
+    }
 
     @Test
     public void teste_getSquareInfoPiece() {
 
         GameManager gm = new GameManager();
 
-        gm.loadGame(new File("4x4.txt"));
-        String[] u = gm.getSquareInfo(1,0);
+        gm.loadGame(new File("test-files/4x4.txt"));
+        String[] u = gm.getSquareInfo(1, 0);
 
         String[] r = new String[5];
         r[0] = "1";
@@ -41,8 +41,8 @@ public class TestProjeto {
 
         GameManager gm = new GameManager();
 
-        gm.loadGame(new File("4x4.txt"));
-        String[] exp = gm.getSquareInfo(0,0);
+        gm.loadGame(new File("test-files/4x4.txt"));
+        String[] exp = gm.getSquareInfo(0, 0);
 
         String[] ret = new String[5];
 
@@ -55,7 +55,7 @@ public class TestProjeto {
 
         GameManager gm = new GameManager();
 
-        gm.loadGame(new File("4x4.txt"));
+        gm.loadGame(new File("test-files/4x4.txt"));
         String[] s = gm.getPieceInfo(2);
 
         String[] r = new String[7];
@@ -77,10 +77,10 @@ public class TestProjeto {
 
         GameManager gm = new GameManager();
 
-        gm.loadGame(new File("4x4.txt"));
+        gm.loadGame(new File("test-files/4x4.txt"));
         String s = gm.getPieceInfoAsString(7);
 
-        assertEquals(null ,s);
+        assertEquals(null, s);
 
     }
 
@@ -89,9 +89,8 @@ public class TestProjeto {
         GameManager gm = new GameManager();
         gm.jogo.mudarEquipa();
 
-        assertEquals(1 ,gm.getCurrentTeamID());
+        assertEquals(1, gm.getCurrentTeamID());
     }
-
 
 
 }
