@@ -15,6 +15,7 @@ public class TestProjeto {
         GameManager gm = new GameManager();
         assertEquals(true, gm.loadGame(new File("test-files/4x4.txt")));
 
+
     }
 
     @Test
