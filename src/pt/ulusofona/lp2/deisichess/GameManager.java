@@ -124,7 +124,26 @@ public class GameManager {
     }
 
     public String[] getPieceInfo(int ID) {
-        return null;
+        String[] retorno = new String[7];
+        Peca peca = jogo.getTabuleiro().retornaPecaPorId(ID);
+
+        if (peca == null) {
+            return null;
+        }
+
+        retorno[0] = Integer.toString(peca.id);
+        retorno[1] = Integer.toString(peca.tipo);
+        retorno[2] = Integer.toString(peca.equipa.pretoOuBranco);
+        retorno[3] = peca.alcunha;
+        if (peca.estado) {
+            retorno[4] = "1";
+            retorno[5] = Integer.toString(peca.coordenadas.coordenadaX);
+            retorno[6] = Integer.toString(peca.coordenadas.coordenadaY);
+        } else {
+            retorno[4] = "0";
+        }
+
+        return retorno;
     }
 
     public String getPieceInfoAsString(int ID) {
