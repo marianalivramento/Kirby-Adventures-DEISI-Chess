@@ -53,6 +53,10 @@ public class GameManager {
 
 
     public boolean loadGame(File file) {
+        if (!file.exists() || !file.isFile()) {
+            return false; // File doesn't exist or is not a regular file
+        }
+
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             int linha = 0;
@@ -87,11 +91,12 @@ public class GameManager {
                 }
                 linha++;
             }
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+
         }
-        return true;
+        return false;
     }
 
 

@@ -13,8 +13,15 @@ public class TestProjeto {
     public void teste_loadGame_1() {
 
         GameManager gm = new GameManager();
-
         assertEquals(true, gm.loadGame(new File("test-files/4x4.txt")));
+
+    }
+
+    @Test
+    public void teste_loadGame_2() {
+
+        GameManager gm = new GameManager();
+        assertEquals(false, gm.loadGame(new File("naoExiste.txt")));
 
     }
 
