@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class Jogo {
     String resultado;
-    Tabuleiro tabuleiro;
+    Tabuleiro tabuleiro = new Tabuleiro();
     Equipa equipaBranca;
     Equipa equipaPreta;
     JPanel creditos;

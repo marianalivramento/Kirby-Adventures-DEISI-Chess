@@ -101,7 +101,22 @@ public class GameManager {
     }
 
     public boolean move(int x0, int y0, int x1, int y1) {
-        return false;
+
+        if((x0 < 0 || x0 > 3) || (y0 < 0 || y0 > 3) || (x1 < 0 || x1 > 3) || (y1 < 0 || y1 > 3)) {
+            return false;
+        }
+
+        Square sqPartida = jogo.getTabuleiro().retornoPeca(x0,y0);
+
+        if (sqPartida == null) {
+            return false;
+        } else {
+            sqPartida.resetQuadrado();
+            //Square sqDestino = jogo.getTabuleiro().retornoPeca(x1,y1);
+        }
+
+
+        return true;
     }
 
     public String[] getSquareInfo(int x, int y) {
@@ -136,11 +151,11 @@ public class GameManager {
         retorno[2] = Integer.toString(peca.getEquipa().getPretoOuBranco());
         retorno[3] = peca.getAlcunha();
         if (peca.getEstado()) {
-            retorno[4] = "true";
+            retorno[4] = "em jogo";
             retorno[5] = Integer.toString(peca.getCoordenadas().getCoordenadaX());
             retorno[6] = Integer.toString(peca.getCoordenadas().getCoordenadaY());
         } else {
-            retorno[4] = "false";
+            retorno[4] = "capturada";
         }
 
         return retorno;

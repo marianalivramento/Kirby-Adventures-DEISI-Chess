@@ -38,4 +38,9 @@ public class Square {
     public void setPeca(Peca peca) {
         this.peca = peca;
     }
+
+    void resetQuadrado() {
+        ocupado = false;
+        peca = null;
+    }
 }
