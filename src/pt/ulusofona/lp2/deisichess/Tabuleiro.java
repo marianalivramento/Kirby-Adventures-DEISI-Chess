@@ -5,13 +5,36 @@ import java.util.ArrayList;
 public class Tabuleiro {
     int tamanho;
     int numeroDePecas;
-    ArrayList<Peca> pecas;
+    ArrayList<Peca> pecas = new ArrayList<>();
 
-    public Tabuleiro() {
-        pecas = new ArrayList<>(); // a inicializar pq tou a usar o atributo e pode dar null
+
+    public int getTamanho() {
+        return tamanho;
     }
 
-    void adicionaPecas(int i) {
-        numeroDePecas = i;
+    public void setTamanho(int tamanho) {
+        this.tamanho = tamanho;
     }
+
+    public int getNumeroDePecas() {
+        return numeroDePecas;
+    }
+
+    public void setNumeroDePecas(int numeroDePecas) {
+        this.numeroDePecas = numeroDePecas;
+    }
+
+    public ArrayList<Peca> getPecas() {
+        return pecas;
+    }
+
+    public void setPecas(ArrayList<Peca> pecas) {
+        this.pecas = pecas;
+    }
+
+    void adicionaPecas(Peca p) {
+        pecas.add(p);
+    }
+
+
 }
