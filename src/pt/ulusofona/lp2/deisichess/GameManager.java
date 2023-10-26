@@ -69,7 +69,23 @@ public class GameManager {
     }
 
     public String[] getSquareInfo(int x, int y) {
-        return null;
+        String [] retorno = new String[5];
+        Square sq = jogo.getTabuleiro().retornoPeca(x,y);
+
+        if(sq == null) {
+            return null;
+        }
+        if (!sq.ocupado) {
+            return retorno;
+        }
+
+        retorno[0] = Integer.toString(sq.peca.id);
+        retorno[1] = Integer.toString(sq.peca.tipo);
+        retorno[2] = Integer.toString(sq.peca.equipa.pretoOuBranco);
+        retorno[3] = sq.peca.alcunha;
+        retorno[4] = null;
+
+        return retorno;
     }
 
     public String[] getPieceInfo(int ID) {

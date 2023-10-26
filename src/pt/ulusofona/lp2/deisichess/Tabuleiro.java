@@ -36,5 +36,14 @@ public class Tabuleiro {
         pecas.add(p);
     }
 
+    Square retornoPeca(int x, int y) {
+        for (Peca p : pecas) {
+            if(p.coordenadas.coordenadaX == x && p.coordenadas.coordenadaY == y) {
+                return p.coordenadas;
+            }
+        }
+        return null;
+    }
+
 
 }
