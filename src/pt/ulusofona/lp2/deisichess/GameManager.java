@@ -37,6 +37,8 @@ public class GameManager {
             Square quadrado = new Square();
             quadrado.setCoordenadaX(i);
             quadrado.setCoordenadaY(x);
+            jogo.getTabuleiro().retornoPeca(i,x).coordenadaX = i;
+            jogo.getTabuleiro().retornoPeca(i,x).coordenadaY = x;
 
             if (Integer.parseInt(elementos[i]) == 0) {
                 quadrado.setOcupado(false);

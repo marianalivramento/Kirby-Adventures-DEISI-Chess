@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.deisichess;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,20 +24,17 @@ public class TestProjeto {
         GameManager gm = new GameManager();
 
         gm.loadGame(new File("4x4.txt"));
-        String[] u = gm.getSquareInfo(1,3);
+        String[] u = gm.getSquareInfo(1,0);
 
         String[] r = new String[5];
-        r[0] = "5";
+        r[0] = "1";
         r[1] = "0";
-        r[2] = "1";
-        r[3] = "O Amigo";
+        r[2] = "0";
+        r[3] = "Chefe";
         r[4] = null;
 
-        assertEquals(r, u);
-
-
+        assertEquals(Arrays.toString(r), Arrays.toString(u));
     }
-
 
 
     @Test
@@ -53,11 +51,11 @@ public class TestProjeto {
         r[2] = "0";
         r[3] = "Selvagem";
         r[4] = "0";
-        r[5] = null;
-        r[6] = null;
+        r[5] = "3";
+        r[6] = "0";
 
 
-        assertEquals(r, u);
+        assertEquals(Arrays.toString(r), Arrays.toString(u));
 
     }
 
