@@ -7,6 +7,14 @@ public class Square {
     int coordenadaY;
     Peca peca;
 
+    public Square() {
+    }
+
+    public Square(int coordenadaX, int coordenadaY) {
+        this.coordenadaX = coordenadaX;
+        this.coordenadaY = coordenadaY;
+    }
+
     public boolean isOcupado() {
         return ocupado;
     }

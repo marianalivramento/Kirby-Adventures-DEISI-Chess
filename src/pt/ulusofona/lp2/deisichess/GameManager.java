@@ -101,20 +101,39 @@ public class GameManager {
     }
 
     public boolean move(int x0, int y0, int x1, int y1) {
+        //coordenadas que nao existem
+        if ((x0 < 0 || x0 > 3) || (y0 < 0 || y0 > 3) || (x1 < 0 || x1 > 3) || (y1 < 0 || y1 > 3)) {
+            return false;
+        }
 
-        if((x0 < 0 || x0 > 3) || (y0 < 0 || y0 > 3) || (x1 < 0 || x1 > 3) || (y1 < 0 || y1 > 3)) {
+        //nao posso mover a peça para cima dela propria
+        if( x0 == x1 && y0 == y1) {
             return false;
         }
 
         Square sqPartida = jogo.getTabuleiro().retornoPeca(x0,y0);
+        Square sqChegada = jogo.getTabuleiro().retornoQuadrado(x1,y1);
+        //sqChegada.getPeca().setEquipa(jogo.equipaAtual);
 
-        if (sqPartida == null) {
+
+
+        if (!sqPartida.isOcupado()) {
+            //não há nenhuma peça no quadro para se mover
+            return false;
+        } else if (jogo.equipaAtual == sqChegada.peca.equipa.pretoOuBranco) {
+            //estou a mover uma peça para cima de uma peça da mesma equipa
+            //!!! esta condição dá null pointer execption porque se nao houver nenhuma peça a equipa está a null !!!
+            return false;
+        } else if (!(x1 == x0 + 1 || x1 == x0 - 1) && (y1 == y0 + 1 || y1 == y0 - 1)){
+            //condição para controlar se só anda uma casa para os lados
             return false;
         } else {
+            //tiramos a peça do quadrado e adicionar no novo quadrado
+            Peca p = sqPartida.getPeca();
+            p.setCoordenadas(sqChegada);
             sqPartida.resetQuadrado();
-            //Square sqDestino = jogo.getTabuleiro().retornoPeca(x1,y1);
-        }
 
+        }
 
         return true;
     }

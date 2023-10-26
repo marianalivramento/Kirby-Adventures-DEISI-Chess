@@ -75,7 +75,9 @@ public class Tabuleiro {
                 return s;
             }
         }
-        return null;
+        Square s = new Square(x, y);
+        quadrados.add(s);
+        return s;
     }
 
 
