@@ -84,6 +84,14 @@ public class TestProjeto {
 
     }
 
+    @Test
+    public void teste_get_current_team_id() {
+        GameManager gm = new GameManager();
+        gm.jogo.mudarEquipa();
+
+        assertEquals(1 ,gm.getCurrentTeamID());
+    }
+
 
 
 }
