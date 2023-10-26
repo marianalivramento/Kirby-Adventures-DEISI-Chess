@@ -129,22 +129,22 @@ public class GameManager {
 
         Square sq = jogo.getTabuleiro().retornoPeca(x, y);
 
-        if (sq == null) {
-            return retorno;
-        }
-        if (!sq.isOcupado()) {
-            return retorno;
-        }
+        if (sq != null) {
+            if (!sq.isOcupado()) {
+                if (sq.getPeca() != null) {
+                    retorno[0] = Integer.toString(sq.getPeca().getId());
+                    retorno[1] = Integer.toString(sq.getPeca().getTipo());
+                    retorno[2] = Integer.toString(sq.getPeca().getEquipa().getPretoOuBranco());
+                    retorno[3] = sq.getPeca().getAlcunha();
+                    retorno[4] = null;
 
-        if (sq.getPeca() != null) {
-            retorno[0] = Integer.toString(sq.getPeca().getId());
-            retorno[1] = Integer.toString(sq.getPeca().getTipo());
-            retorno[2] = Integer.toString(sq.getPeca().getEquipa().getPretoOuBranco());
-            retorno[3] = sq.getPeca().getAlcunha();
-            retorno[4] = null;
-
+                }
+            }else {
+                return null;
+            }
+        }else {
+            return null;
         }
-
         return retorno;
     }
 
@@ -180,7 +180,7 @@ public class GameManager {
         String[] string = getPieceInfo(ID);
 
         if (string == null) {
-            return null;
+            return "";
         }
         //o meu intelij dá avisos aqui a dizer que i nunca é atualizado (???) mas passa no teste unitario so idk
         for (int i = 0; i < string.length; i++) {
