@@ -30,22 +30,23 @@ public class GameManager {
 
     }
 
-    public void parsePosicoes(String linha, int x) {
+    // acrescentei uma condicao para n aceitar valores null e vazios
+    public void parsePosicoes(String linha, int y) {
         String[] elementos = linha.split(":");
-
         for (int i = 0; i < elementos.length; i++) {
             Square quadrado = new Square();
             quadrado.setCoordenadaX(i);
-            quadrado.setCoordenadaY(x);
+            quadrado.setCoordenadaY(y);
 
-
-            if (Integer.parseInt(elementos[i]) == 0) {
-                quadrado.setOcupado(false);
-            } else {
-                if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[i])) != null) {
-                    quadrado.setOcupado(true);
-                    jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[i])).setCoordenadas(quadrado);
-                    quadrado.setPeca(jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[i])));
+            if (elementos[i] != null && !elementos[i].isEmpty()) {
+                if (Integer.parseInt(elementos[i]) == 0) {
+                    quadrado.setOcupado(false);
+                } else {
+                    if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[i])) != null) {
+                        quadrado.setOcupado(true);
+                        jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[i])).setCoordenadas(quadrado);
+                        quadrado.setPeca(jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[i])));
+                    }
                 }
             }
             jogo.getTabuleiro().adicionaQuadrado(quadrado);
@@ -102,11 +103,11 @@ public class GameManager {
 
     public boolean move(int x0, int y0, int x1, int y1) {
 
-        if((x0 < 0 || x0 > 3) || (y0 < 0 || y0 > 3) || (x1 < 0 || x1 > 3) || (y1 < 0 || y1 > 3)) {
+        if ((x0 < 0 || x0 > 3) || (y0 < 0 || y0 > 3) || (x1 < 0 || x1 > 3) || (y1 < 0 || y1 > 3)) {
             return false;
         }
 
-        Square sqPartida = jogo.getTabuleiro().retornoPeca(x0,y0);
+        Square sqPartida = jogo.getTabuleiro().retornoPeca(x0, y0);
 
         if (sqPartida == null) {
             return false;
@@ -121,7 +122,7 @@ public class GameManager {
 
     public String[] getSquareInfo(int x, int y) {
 
-        if((x < 0 || x > 3) || (y < 0 || y > 3)) {
+        if ((x < 0 || x > 3) || (y < 0 || y > 3)) {
             return null;
         }
         String[] retorno = new String[5];
@@ -133,11 +134,15 @@ public class GameManager {
         if (!sq.isOcupado()) {
             return retorno;
         }
-        retorno[0] = Integer.toString(sq.getPeca().getId());
-        retorno[1] = Integer.toString(sq.getPeca().getTipo());
-        retorno[2] = Integer.toString(sq.getPeca().getEquipa().getPretoOuBranco());
-        retorno[3] = sq.getPeca().getAlcunha();
-        retorno[4] = null;
+
+        if (sq.getPeca() != null) {
+            retorno[0] = Integer.toString(sq.getPeca().getId());
+            retorno[1] = Integer.toString(sq.getPeca().getTipo());
+            retorno[2] = Integer.toString(sq.getPeca().getEquipa().getPretoOuBranco());
+            retorno[3] = sq.getPeca().getAlcunha();
+            retorno[4] = null;
+
+        }
 
         return retorno;
     }
@@ -155,9 +160,12 @@ public class GameManager {
         retorno[2] = Integer.toString(peca.getEquipa().getPretoOuBranco());
         retorno[3] = peca.getAlcunha();
         if (peca.getEstado()) {
-            retorno[4] = "em jogo";
-            retorno[5] = Integer.toString(peca.getCoordenadas().getCoordenadaX());
-            retorno[6] = Integer.toString(peca.getCoordenadas().getCoordenadaY());
+            if (peca.getCoordenadas() != null) {
+                retorno[4] = "em jogo";
+                retorno[5] = Integer.toString(peca.getCoordenadas().getCoordenadaX());
+                retorno[6] = Integer.toString(peca.getCoordenadas().getCoordenadaY());
+            }
+
         } else {
             retorno[4] = "capturada";
         }
@@ -167,32 +175,32 @@ public class GameManager {
 
 
     public String getPieceInfoAsString(int ID) {
-        String retorno = "";
+        StringBuilder retorno = new StringBuilder();
 
         String[] string = getPieceInfo(ID);
 
-        if(string == null) {
-            return null;
+        if (string == null) {
+            return "";
         }
         //o meu intelij dá avisos aqui a dizer que i nunca é atualizado (???) mas passa no teste unitario so idk
         for (int i = 0; i < string.length; i++) {
             if (i <= 2) {
-                retorno += string[i] + " | ";
+                retorno.append(string[i]).append(" | ");
             }
 
             if (i == 3) {
-                retorno += string[i] + " @ ";
+                retorno.append(string[i]).append(" @ ");
             }
 
             if (i == 5 && string[i] != null) {
-                retorno += "(" + string[i] + ", ";
+                retorno.append("(").append(string[i]).append(", ");
             }
 
             if (i == 6 && string[i] != null) {
-                retorno +=  string[i] + ")";
+                retorno.append(string[i]).append(")");
             }
         }
-        return retorno;
+        return retorno.toString();
     }
 
     public int getCurrentTeamID() {
