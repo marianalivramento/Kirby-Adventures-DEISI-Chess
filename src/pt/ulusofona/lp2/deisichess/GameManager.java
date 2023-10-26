@@ -130,7 +130,7 @@ public class GameManager {
         Square sq = jogo.getTabuleiro().retornoPeca(x, y);
 
         if (sq != null) {
-            if (!sq.isOcupado()) {
+            if (sq.isOcupado()) {
                 if (sq.getPeca() != null) {
                     retorno[0] = Integer.toString(sq.getPeca().getId());
                     retorno[1] = Integer.toString(sq.getPeca().getTipo());
@@ -139,8 +139,6 @@ public class GameManager {
                     retorno[4] = null;
 
                 }
-            }else {
-                return null;
             }
         }else {
             return null;
