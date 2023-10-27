@@ -114,7 +114,6 @@ public class GameManager {
         }
 
         if (sqPartida == null) {
-            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
             return false;
         } else if ((x0 == x1) && (y0 == y1)) {
             sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
