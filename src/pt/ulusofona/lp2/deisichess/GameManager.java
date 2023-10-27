@@ -88,12 +88,15 @@ public class GameManager {
                         } else {
                             parsePosicoes(line, leituraParse);
                             leituraParse++;
+                            if (leituraParse == jogo.getTabuleiro().getTamanho()){
+                                jogo.leFicheiroComCapturados();
+                            }
                         }
                         break;
                 }
                 linha++;
             }
-            jogo.leFicheiroComCapturados();
+
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -142,7 +145,7 @@ public class GameManager {
                         sqPartida.getPeca().getEquipa().setNrCapturas(sqPartida.getPeca().getEquipa().getNrCapturas() + 1);
                         sqPartida.getPeca().getEquipa().setTurno(false);
                         sqChegada.getPeca().setNaoCapturado(false);
-                        jogo.getTabuleiro().getPecas().remove(sqChegada.getPeca());
+                        //jogo.getTabuleiro().getPecas().remove(sqChegada.getPeca());
 
                         if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 1) {
                             jogo.getEquipaPreta().setTurno(true);
