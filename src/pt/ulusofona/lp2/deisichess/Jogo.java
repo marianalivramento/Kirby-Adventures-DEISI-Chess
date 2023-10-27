@@ -79,6 +79,20 @@ public class Jogo {
         equipaPreta = equipa;
     }
 
+    void leFicheiroComCapturados(){
+        for (Peca p : getTabuleiro().pecas) {
+            if (p.getCoordenadas() == null) {
+                p.setNaoCapturado(false);
+                if (p.getEquipa().getPretoOuBranco() == 1) {
+                    getEquipaPreta().setNrCapturas(getEquipaPreta().getNrCapturas() + 1);
+                }else{
+                    getEquipaBranca().setNrCapturas(getEquipaBranca().getNrCapturas() + 1);
+                }
+            }
+
+        }
+    }
+
 
 
 

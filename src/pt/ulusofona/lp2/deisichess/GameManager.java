@@ -50,17 +50,7 @@ public class GameManager {
             jogo.getTabuleiro().adicionaQuadrado(quadrado);
         }
 
-        for (Peca p : jogo.getTabuleiro().getPecas()) {
-            if (p.getCoordenadas() == null) {
-                p.setNaoCapturado(false);
-                if (p.getEquipa().getPretoOuBranco() == 1) {
-                    jogo.getEquipaPreta().setNrCapturas(jogo.getEquipaPreta().getNrCapturas() + 1);
-                }else{
-                    jogo.getEquipaBranca().setNrCapturas(jogo.getEquipaBranca().getNrCapturas() + 1);
-                }
-            }
 
-        }
     }
 
 
@@ -80,6 +70,7 @@ public class GameManager {
                 switch (linha) {
                     case 0:
                         jogo.criaTabuleiro(Integer.parseInt(line));
+
                         break;
                     case 1:
                         jogo.getTabuleiro().setNumeroDePecas(Integer.parseInt(line));
@@ -98,11 +89,15 @@ public class GameManager {
                         } else {
                             parsePosicoes(line, leituraParse);
                             leituraParse++;
+                            if (leituraParse == jogo.getTabuleiro().getTamanho()){
+                                jogo.leFicheiroComCapturados();
+                            }
                         }
                         break;
                 }
                 linha++;
             }
+            jogo.getEquipaPreta().setTurno(true);
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -150,7 +145,8 @@ public class GameManager {
                     } else {
                         sqPartida.getPeca().getEquipa().setNrCapturas(sqPartida.getPeca().getEquipa().getNrCapturas() + 1);
                         sqPartida.getPeca().getEquipa().setTurno(false);
-                        jogo.getTabuleiro().getPecas().remove(sqChegada.getPeca());
+                        sqChegada.getPeca().setNaoCapturado(false);
+                        //jogo.getTabuleiro().getPecas().remove(sqChegada.getPeca());
 
                         if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 1) {
                             jogo.getEquipaPreta().setTurno(true);
