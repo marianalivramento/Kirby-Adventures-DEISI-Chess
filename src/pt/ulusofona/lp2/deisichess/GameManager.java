@@ -105,22 +105,70 @@ public class GameManager {
     }
 
     public boolean move(int x0, int y0, int x1, int y1) {
+        Square sqPartida = jogo.getTabuleiro().retornoPeca(x0, y0);
 
         int boardSize = jogo.getTabuleiro().getTamanho();
-
         if (x0 < 0 || x0 >= boardSize || y0 < 0 || y0 >= boardSize || x1 < 0 || x1 >= boardSize || y1 < 0 || y1 >= boardSize) {
+            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
             return false; // Coordinates out of bounds
         }
 
-        Square sqPartida = jogo.getTabuleiro().retornoPeca(x0, y0);
-
         if (sqPartida == null) {
             return false;
+        } else if ((x0 == x1) && (y0 == y1)) {
+            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+            return false;
+        } else if ((x1 != x0 + 1) && (x1 != x0 - 1) && (x1 != x0)) {
+            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+            return false;
+        } else if ((y1 != y0 + 1) && (y1 != y0 - 1) && (y1 != y0)) {
+            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+            return false;
         } else {
-            sqPartida.resetQuadrado();
-            //Square sqDestino = jogo.getTabuleiro().retornoPeca(x1,y1);
-        }
+            Square sqChegada = jogo.getTabuleiro().retornoQuadrado(x1, y1);
 
+            if (sqChegada != null) {
+                if (sqChegada.isOcupado()) {
+                    if (sqChegada.getPeca() != null) {
+                        sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+                        return false;
+                    }
+                    if (sqChegada.getPeca().getEquipa() == sqPartida.getPeca().getEquipa()) {
+                        sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+                        return false;
+                    } else {
+                        sqPartida.getPeca().getEquipa().setNrCapturas(sqPartida.getPeca().getEquipa().getNrCapturas() + 1);
+                        sqPartida.getPeca().getEquipa().setTurno(false);
+                        jogo.getTabuleiro().getPecas().remove(sqChegada.getPeca());
+
+                        if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 1) {
+                            jogo.getEquipaPreta().setTurno(true);
+                        } else {
+                            jogo.getEquipaBranca().setTurno(true);
+                        }
+                        sqPartida.getPeca().getEquipa().setNrJogadasValidas(sqPartida.getPeca().getEquipa().getNrJogadasValidas() + 1);
+                        sqPartida.resetQuadrado();
+
+                    }
+
+                } else {
+                    sqChegada.peca = sqPartida.peca;
+                    sqChegada.setOcupado(true);
+                    sqPartida.getPeca().getEquipa().setTurno(false);
+                    if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 1) {
+                        jogo.getEquipaPreta().setTurno(true);
+                    } else {
+                        jogo.getEquipaBranca().setTurno(true);
+                    }
+                    sqPartida.getPeca().getEquipa().setNrJogadasValidas(sqPartida.getPeca().getEquipa().getNrJogadasValidas() + 1);
+                    sqPartida.resetQuadrado();
+                }
+
+            } else {
+                sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+                return false;
+            }
+        }
 
         return true;
     }
@@ -132,7 +180,7 @@ public class GameManager {
             return retorno;
         }
 
-        Square sq = jogo.getTabuleiro().retornoPeca(x, y);
+        Square sq = jogo.getTabuleiro().retornoQuadrado(x, y);
 
         if (sq != null) {
             if (sq.isOcupado()) {
@@ -144,8 +192,10 @@ public class GameManager {
                     retorno[4] = null;
 
                 }
+            } else {
+                return null;
             }
-        }else {
+        } else {
             return null;
         }
         return retorno;
