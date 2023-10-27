@@ -50,17 +50,7 @@ public class GameManager {
             jogo.getTabuleiro().adicionaQuadrado(quadrado);
         }
 
-        for (Peca p : jogo.getTabuleiro().getPecas()) {
-            if (p.getCoordenadas() == null) {
-                p.setNaoCapturado(false);
-                if (p.getEquipa().getPretoOuBranco() == 1) {
-                    jogo.getEquipaPreta().setNrCapturas(jogo.getEquipaPreta().getNrCapturas() + 1);
-                }else{
-                    jogo.getEquipaBranca().setNrCapturas(jogo.getEquipaBranca().getNrCapturas() + 1);
-                }
-            }
 
-        }
     }
 
 
@@ -102,6 +92,17 @@ public class GameManager {
                         break;
                 }
                 linha++;
+            }
+            for (Peca p : jogo.getTabuleiro().getPecas()) {
+                if (p.getCoordenadas() == null) {
+                    p.setNaoCapturado(false);
+                    if (p.getEquipa().getPretoOuBranco() == 1) {
+                        jogo.getEquipaPreta().setNrCapturas(jogo.getEquipaPreta().getNrCapturas() + 1);
+                    }else{
+                        jogo.getEquipaBranca().setNrCapturas(jogo.getEquipaBranca().getNrCapturas() + 1);
+                    }
+                }
+
             }
             return true;
         } catch (IOException e) {
@@ -150,6 +151,7 @@ public class GameManager {
                     } else {
                         sqPartida.getPeca().getEquipa().setNrCapturas(sqPartida.getPeca().getEquipa().getNrCapturas() + 1);
                         sqPartida.getPeca().getEquipa().setTurno(false);
+                        sqChegada.getPeca().setNaoCapturado(false);
                         jogo.getTabuleiro().getPecas().remove(sqChegada.getPeca());
 
                         if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 1) {
