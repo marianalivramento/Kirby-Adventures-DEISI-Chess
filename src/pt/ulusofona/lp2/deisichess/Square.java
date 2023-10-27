@@ -40,7 +40,7 @@ public class Square {
     }
 
     void resetQuadrado() {
-        ocupado = false;
-        peca = null;
+        this.ocupado = false;
+        this.peca = null;
     }
 }

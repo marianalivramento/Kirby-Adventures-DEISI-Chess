@@ -124,11 +124,33 @@ public class GameManager {
             Square sqChegada = jogo.getTabuleiro().retornoQuadrado(x1,y1);
 
             if (sqChegada.isOcupado()){
-                return false;
+                if (sqChegada.getPeca().getEquipa() == sqPartida.getPeca().getEquipa()){
+                    return false;
+                }else{
+                    sqPartida.getPeca().getEquipa().setNrCapturas(sqPartida.getPeca().getEquipa().getNrCapturas() + 1);
+                    sqPartida.getPeca().getEquipa().setTurno(false);
+                    jogo.getTabuleiro().getPecas().remove(sqChegada.getPeca());
+
+                    if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 1){
+                        jogo.getEquipaPreta().setTurno(true);
+                    }else{
+                        jogo.getEquipaBranca().setTurno(true);
+                    }
+                    sqPartida.resetQuadrado();
+
+                }
+
             }else{
                 sqChegada.peca = sqPartida.peca;
                 sqChegada.setOcupado(true);
+                sqPartida.getPeca().getEquipa().setTurno(false);
+                if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 1){
+                    jogo.getEquipaPreta().setTurno(true);
+                }else{
+                    jogo.getEquipaBranca().setTurno(true);
+                }
                 sqPartida.resetQuadrado();
+
             }
 
         }
