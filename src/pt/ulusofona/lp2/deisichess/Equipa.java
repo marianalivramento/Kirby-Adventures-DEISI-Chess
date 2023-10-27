@@ -50,4 +50,6 @@ public class Equipa {
     public void setNrTentativasInvalidas(int nrTentativasInvalidas) {
         this.nrTentativasInvalidas = nrTentativasInvalidas;
     }
+
+
 }

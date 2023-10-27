@@ -125,4 +125,25 @@ public class TestProjeto {
         assertEquals(Arrays.toString(ret), Arrays.toString(gm.getSquareInfo(0,0)));
     }
 
+    @Test
+    public void teste_move_captura_peca_da_mesma_equipa() {
+        GameManager gm = new GameManager();
+        gm.loadGame(new File("test-files/4x4.txt"));
+
+        assertEquals(false, gm.move(1,0,2,1));
+    }
+
+    @Test
+    public void teste_move_peca_capturada_muda_estado() {
+        GameManager gm = new GameManager();
+        gm.loadGame(new File("test-files/4x4.txt"));
+
+        gm.move(2,1,1,2);
+
+        String[] ret = gm.getPieceInfo(6);
+
+        assertEquals("capturada", ret[4]);
+    }
+
+
 }

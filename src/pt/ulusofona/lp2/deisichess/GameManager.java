@@ -112,7 +112,10 @@ public class GameManager {
     }
 
     public boolean move(int x0, int y0, int x1, int y1) {
+        //PROBLEMA
+        //-A PEÇCA QUE CAPTURA DESAPARECE
         Square sqPartida = jogo.getTabuleiro().retornoPeca(x0, y0);
+
 
         int boardSize = jogo.getTabuleiro().getTamanho();
         if (x0 < 0 || x0 >= boardSize || y0 < 0 || y0 >= boardSize || x1 < 0 || x1 >= boardSize || y1 < 0 || y1 >= boardSize) {
@@ -131,15 +134,19 @@ public class GameManager {
         } else if ((y1 != y0 + 1) && (y1 != y0 - 1) && (y1 != y0)) {
             sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
             return false;
+        } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.equipaAtual) {
+            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+        return false;
         } else {
             Square sqChegada = jogo.getTabuleiro().retornoQuadrado(x1, y1);
 
             if (sqChegada != null) {
                 if (sqChegada.isOcupado()) {
+                    //esta condição de == null é para quê?
                     if (sqChegada.getPeca() == null) {
                         return false;
                     }
-                    if (sqChegada.getPeca().getEquipa() == sqPartida.getPeca().getEquipa()) {
+                    if (sqChegada.getPeca().getEquipa().getPretoOuBranco() == sqPartida.getPeca().getEquipa().getPretoOuBranco()) {
                         sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
                         return false;
                     } else {
@@ -176,7 +183,7 @@ public class GameManager {
                 return false;
             }
         }
-
+        jogo.mudarEquipa();
         return true;
     }
 

@@ -56,4 +56,6 @@ public class Peca {
     public void setNaoCapturado(boolean naoCapturado) {
         this.naoCapturado = naoCapturado;
     }
+
+
 }
