@@ -268,11 +268,58 @@ public class GameManager {
     }
 
     public boolean gameOver() {
+        ArrayList<Peca> pecasEmJogo = new ArrayList<>();
+        int pecasBrancas = 0;
+        boolean flagPecasBrancas = false;
+        int pecasPretas = 0;
+        boolean flagPecasPretas = false;
+        for (Peca p : jogo.getTabuleiro().pecas) {
+                if (p.getNaoCapturado()) {
+                    pecasEmJogo.add(p);
+                    if (p.getEquipa().getPretoOuBranco() == 0) {
+                        pecasPretas++;
+                        flagPecasPretas = true;
+                    } else {
+                        pecasBrancas++;
+                        flagPecasBrancas = true;
+                    }
+
+                }
+        }
+
+        if (pecasPretas == 1 &&pecasBrancas == 1) {
+            getGameResults();
+            return true;
+        }
+
+        if(jogo.nrDeJogadasSemCaptura == 10) {
+            getGameResults();
+            return true;
+        }
+
+        if (!flagPecasPretas || !flagPecasBrancas) {
+            getGameResults();
+            return true;
+        }
+
+
         return false;
     }
 
     public ArrayList<String> getGameResults() {
-        return null;
+        ArrayList<String> retorno = new ArrayList<>();
+        retorno.add("JOGO DE CRAZY CHESS\n");
+        retorno.add("Resultado: " + jogo.resultado + "\n");
+        retorno.add("---\n");
+        retorno.add("Equipa das Pretas\n");
+        retorno.add(jogo.equipaPreta.nrCapturas + "\n");
+        retorno.add(jogo.equipaPreta.nrJogadasValidas + "\n");
+        retorno.add(jogo.equipaPreta.nrTentativasInvalidas + "\n");
+        retorno.add("Equipa das Brancas\n");
+        retorno.add(jogo.equipaBranca.nrCapturas + "\n");
+        retorno.add(jogo.equipaBranca.nrJogadasValidas + "\n");
+        retorno.add(jogo.equipaBranca.nrTentativasInvalidas + "");
+        return retorno;
     }
 
     public JPanel getAuthorsPanel() {

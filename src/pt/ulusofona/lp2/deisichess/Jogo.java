@@ -10,6 +10,8 @@ public class Jogo {
     Equipa equipaPreta;
     JPanel creditos;
 
+    int nrDeJogadasSemCaptura = 0;
+
     public Jogo() {
     }
 

@@ -8,6 +8,7 @@ public class Tabuleiro {
     ArrayList<Square> quadrados = new ArrayList<>();
     ArrayList<Peca> pecas = new ArrayList<>();
 
+
     public ArrayList<Square> getQuadrados() {
         return quadrados;
     }
@@ -57,6 +58,8 @@ public class Tabuleiro {
         return null;
     }
 
+
+
     Square retornoPeca(int x, int y) {
         for (Peca p : pecas) {
             if (p.coordenadas != null) {
@@ -70,14 +73,13 @@ public class Tabuleiro {
 
     // para obter um quadrado especifico dentro de mts quadrados
     Square retornoQuadrado(int x, int y) {
+
         for (Square s : quadrados) {
             if (s.getCoordenadaX() == x && s.getCoordenadaY() == y) {
                 return s;
             }
         }
-        Square s = new Square(x, y);
-        quadrados.add(s);
-        return s;
+        return null;
     }
 
 

@@ -51,4 +51,14 @@ public class Square {
         this.ocupado = false;
         this.peca = null;
     }
+
+    @Override
+    public String toString() {
+        return "Square{" +
+                "ocupado=" + ocupado +
+                ", coordenadaX=" + coordenadaX +
+                ", coordenadaY=" + coordenadaY +
+                ", peca=" + peca +
+                '}';
+    }
 }

@@ -100,5 +100,29 @@ public class TestProjeto {
         assertEquals(1, gm.getCurrentTeamID());
     }
 
+    @Test
+    public void teste_move_coordenada_validas() {
+        GameManager gm = new GameManager();
+        gm.loadGame(new File("test-files/4x4.txt"));
+
+        assertEquals(true, gm.move(1,0,0,0));
+
+
+    }
+    @Test
+    public void teste_move_coordenada_validas2() {
+        GameManager gm = new GameManager();
+        gm.loadGame(new File("test-files/4x4.txt"));
+        gm.move(1,0,0,0);
+
+        String[] ret = new String[5];
+        ret[0] = "1";
+        ret[1] = "0";
+        ret[2] = "0";
+        ret[3] = "Chefe";
+        ret[4] = null;
+
+        assertEquals(Arrays.toString(ret), Arrays.toString(gm.getSquareInfo(0,0)));
+    }
 
 }
