@@ -50,17 +50,7 @@ public class GameManager {
             jogo.getTabuleiro().adicionaQuadrado(quadrado);
         }
 
-        for (Peca p : jogo.getTabuleiro().getPecas()) {
-            if (p.getCoordenadas() == null) {
-                p.setNaoCapturado(false);
-                if (p.getEquipa().getPretoOuBranco() == 1) {
-                    jogo.getEquipaPreta().setNrCapturas(jogo.getEquipaPreta().getNrCapturas() + 1);
-                }else{
-                    jogo.getEquipaBranca().setNrCapturas(jogo.getEquipaBranca().getNrCapturas() + 1);
-                }
-            }
 
-        }
     }
 
 
@@ -103,6 +93,18 @@ public class GameManager {
                 }
                 linha++;
             }
+
+            for (Peca p : jogo.getTabuleiro().getPecas()) {
+                if (p.getCoordenadas() == null) {
+                    p.setNaoCapturado(false);
+                    if (p.getEquipa().getPretoOuBranco() == 1) {
+                        jogo.getEquipaPreta().setNrCapturas(jogo.getEquipaPreta().getNrCapturas() + 1);
+                    }else{
+                        jogo.getEquipaBranca().setNrCapturas(jogo.getEquipaBranca().getNrCapturas() + 1);
+                    }
+                }
+
+            }
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -141,8 +143,7 @@ public class GameManager {
 
             if (sqChegada != null) {
                 if (sqChegada.isOcupado()) {
-                    if (sqChegada.getPeca() != null) {
-                        sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+                    if (sqChegada.getPeca() == null) {
                         return false;
                     }
                     if (sqChegada.getPeca().getEquipa() == sqPartida.getPeca().getEquipa()) {
@@ -233,7 +234,7 @@ public class GameManager {
             }
 
         } else {
-            retorno[4] = "capturada";
+            retorno[4] = "capturado";
         }
 
         return retorno;
