@@ -7,7 +7,7 @@ public class Peca {
     Equipa equipa;
     String alcunha;
     Square coordenadas;
-    boolean estado = true;
+    boolean naoCapturado = true;
 
     public int getId() {
         return id;
@@ -49,11 +49,11 @@ public class Peca {
         this.coordenadas = coordenadas;
     }
 
-    public boolean getEstado() {
-        return estado;
+    public boolean getNaoCapturado() {
+        return naoCapturado;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setNaoCapturado(boolean naoCapturado) {
+        this.naoCapturado = naoCapturado;
     }
 }
