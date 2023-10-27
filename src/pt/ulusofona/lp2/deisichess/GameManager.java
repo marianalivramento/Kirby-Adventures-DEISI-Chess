@@ -122,9 +122,15 @@ public class GameManager {
             return false;
         } else {
             Square sqChegada = jogo.getTabuleiro().retornoQuadrado(x1,y1);
-            sqChegada.peca = sqPartida.peca;
-            sqChegada.setOcupado(true);
-            sqPartida.resetQuadrado();
+
+            if (sqChegada.isOcupado()){
+                return false;
+            }else{
+                sqChegada.peca = sqPartida.peca;
+                sqChegada.setOcupado(true);
+                sqPartida.resetQuadrado();
+            }
+
         }
 
         return true;
