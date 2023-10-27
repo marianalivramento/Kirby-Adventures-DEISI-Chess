@@ -70,6 +70,7 @@ public class GameManager {
                 switch (linha) {
                     case 0:
                         jogo.criaTabuleiro(Integer.parseInt(line));
+
                         break;
                     case 1:
                         jogo.getTabuleiro().setNumeroDePecas(Integer.parseInt(line));
@@ -96,7 +97,7 @@ public class GameManager {
                 }
                 linha++;
             }
-
+            jogo.getEquipaPreta().setTurno(true);
             return true;
         } catch (IOException e) {
             e.printStackTrace();
