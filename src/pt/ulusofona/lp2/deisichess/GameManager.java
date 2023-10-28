@@ -114,7 +114,7 @@ public class GameManager {
     public boolean move(int x0, int y0, int x1, int y1) {
         //PROBLEMA
         //-A PEÇCA QUE CAPTURA DESAPARECE
-        Square sqPartida = jogo.getTabuleiro().retornoPeca(x0, y0);
+        Square sqPartida = jogo.getTabuleiro().retornoQuadrado(x0, y0);
 
 
         int boardSize = jogo.getTabuleiro().getTamanho();

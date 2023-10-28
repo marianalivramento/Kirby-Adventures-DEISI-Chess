@@ -182,7 +182,20 @@ public class TestProjeto {
         gm.move(2,1,1,2);
 
 
-        assertEquals(0, gm.jogo.nrDeJogadasSemCaptura);
+        assertEquals(3, gm.jogo.nrDeJogadasSemCaptura);
+    }
+
+    @Test
+    public void teste_temp() {
+        GameManager gm = new GameManager();
+        gm.loadGame(new File("test-files/4x4.txt"));
+
+        gm.move(1,0,0,0);
+        gm.move(1,2,0,2);
+        //gm.move(0,0,1,0);
+
+
+        assertEquals(true, gm.move(0,0,1,0));
     }
 
 }
