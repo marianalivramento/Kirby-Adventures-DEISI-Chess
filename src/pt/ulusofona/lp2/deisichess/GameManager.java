@@ -259,6 +259,7 @@ public class GameManager {
         } else {
             retorno[4] = "capturado";
             retorno[5] = "";
+            retorno[6] = "";
         }
 
         return retorno;
