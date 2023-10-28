@@ -129,11 +129,13 @@ public class GameManager {
 
         int boardSize = jogo.getTabuleiro().getTamanho();
         if (x0 < 0 || x0 >= boardSize || y0 < 0 || y0 >= boardSize || x1 < 0 || x1 >= boardSize || y1 < 0 || y1 >= boardSize) {
-            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas()+1);
+            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
             return false; // Coordinates out of bounds
         }
 
         if (sqPartida == null) {
+            return false;
+        } else if (sqPartida.getPeca() == null) {
             return false;
         } else if ((x0 == x1) && (y0 == y1)) {
             sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
@@ -144,8 +146,7 @@ public class GameManager {
         } else if ((y1 != y0 + 1) && (y1 != y0 - 1) && (y1 != y0)) {
             sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
             return false;
-        } else if (sqPartida.getPeca() == null) {
-            return false;
+
         } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.equipaAtual) {
             sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
             return false;
