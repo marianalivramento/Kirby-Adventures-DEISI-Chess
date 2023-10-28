@@ -89,7 +89,7 @@ public class GameManager {
                         } else {
                             parsePosicoes(line, leituraParse);
                             leituraParse++;
-                            if (leituraParse == jogo.getTabuleiro().getTamanho()){
+                            if (leituraParse == jogo.getTabuleiro().getTamanho()) {
                                 jogo.leFicheiroComCapturados();
                             }
                         }
@@ -136,13 +136,13 @@ public class GameManager {
             return false;
         } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.equipaAtual) {
             sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
-        return false;
+            return false;
         } else {
             Square sqChegada = jogo.getTabuleiro().retornoQuadrado(x1, y1);
 
             if (sqChegada != null) {
                 if (sqChegada.isOcupado()) {
-                    //esta condição de == null é para quê?
+                    //esta condição de == null é para quê? é pq o sq de chegada pode n consegue acedar à equipa da peca se n houver peca
                     if (sqChegada.getPeca() == null) {
                         return false;
                     }
@@ -195,7 +195,7 @@ public class GameManager {
         String[] retorno = new String[5];
 
         if ((x < 0 || x > jogo.getTabuleiro().getTamanho()) || (y < 0 || y > jogo.getTabuleiro().getTamanho())) {
-            return retorno;
+            return null; // de acordo com o video do stor
         }
 
         Square sq = jogo.getTabuleiro().retornoQuadrado(x, y);
@@ -207,7 +207,12 @@ public class GameManager {
                     retorno[1] = Integer.toString(sq.getPeca().getTipo());
                     retorno[2] = Integer.toString(sq.getPeca().getEquipa().getPretoOuBranco());
                     retorno[3] = sq.getPeca().getAlcunha();
-                    retorno[4] = null;
+                    if (sq.getPeca().getEquipa().getPretoOuBranco() == 1){
+                        retorno[4] = "crazy_emoji_white.png";
+                    }else{
+                        retorno[4] = "crazy_emoji_black.png";
+                    }
+
 
                 }
             } else {
@@ -285,25 +290,25 @@ public class GameManager {
         int pecasPretas = 0;
         boolean flagPecasPretas = false;
         for (Peca p : jogo.getTabuleiro().pecas) {
-                if (p.getNaoCapturado()) {
-                    pecasEmJogo.add(p);
-                    if (p.getEquipa().getPretoOuBranco() == 0) {
-                        pecasPretas++;
-                        flagPecasPretas = true;
-                    } else {
-                        pecasBrancas++;
-                        flagPecasBrancas = true;
-                    }
-
+            if (p.getNaoCapturado()) {
+                pecasEmJogo.add(p);
+                if (p.getEquipa().getPretoOuBranco() == 0) {
+                    pecasPretas++;
+                    flagPecasPretas = true;
+                } else {
+                    pecasBrancas++;
+                    flagPecasBrancas = true;
                 }
+
+            }
         }
 
-        if (pecasPretas == 1 &&pecasBrancas == 1) {
+        if (pecasPretas == 1 && pecasBrancas == 1) {
             getGameResults();
             return true;
         }
 
-        if(jogo.nrDeJogadasSemCaptura == 10) {
+        if (jogo.nrDeJogadasSemCaptura == 10) {
             getGameResults();
             return true;
         }
