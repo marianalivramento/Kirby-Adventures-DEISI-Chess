@@ -274,23 +274,40 @@ public class GameManager {
             return "";
         }
         //o meu intelij dá avisos aqui a dizer que i nunca é atualizado (???) mas passa no teste unitario so idk
-        for (int i = 0; i < string.length; i++) {
-            if (i <= 2) {
-                retorno.append(string[i]).append(" | ");
-            }
+        if (jogo.getTabuleiro().retornaPecaPorId(ID).getCoordenadas() != null) {
+            for (int i = 0; i < string.length; i++) {
+                if (i <= 2) {
+                    retorno.append(string[i]).append(" | ");
+                }
 
-            if (i == 3) {
-                retorno.append(string[i]).append(" @ ");
-            }
+                if (i == 3) {
+                    retorno.append(string[i]).append(" @ ");
+                }
 
-            if (i == 5 && string[i] != null) {
-                retorno.append("(").append(string[i]).append(", ");
-            }
+                if (i == 5 && string[i] != null) {
+                    retorno.append("(").append(string[i]).append(", ");
+                }
 
-            if (i == 6 && string[i] != null) {
-                retorno.append(string[i]).append(")");
+                if (i == 6 && string[i] != null) {
+                    retorno.append(string[i]).append(")");
+                }
+            }
+        }else{
+            for (int i = 0; i < string.length; i++) {
+                if (i <= 2) {
+                    retorno.append(string[i]).append(" | ");
+                }
+
+                if (i == 3) {
+                    retorno.append(string[i]).append(" @ ");
+                }
+
+                if (string[i] != null) {
+                    retorno.append("(").append(string[i]).append("n/a").append(")");
+                }
             }
         }
+
         return String.valueOf(retorno);
     }
 
@@ -324,6 +341,11 @@ public class GameManager {
         }
 
         if (jogo.nrDeJogadasSemCaptura == 10) {
+            if (jogo.getEquipaPreta().getNrCapturas() > 0 || jogo.getEquipaBranca().getNrCapturas() > 0) {
+                getGameResults();
+                return true;
+            }
+        } else if (jogo.nrDeJogadasSemCaptura > 20) {
             getGameResults();
             return true;
         }
