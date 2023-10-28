@@ -324,17 +324,17 @@ public class GameManager {
 
     public ArrayList<String> getGameResults() {
         ArrayList<String> retorno = new ArrayList<>();
-        retorno.add("JOGO DE CRAZY CHESS\n");
-        retorno.add("Resultado: " + jogo.resultado + "\n");
-        retorno.add("---\n");
+        retorno.add("JOGO DE CRAZY CHESS");
+        retorno.add("Resultado: " + jogo.getResultado());
+        retorno.add("---");
         retorno.add("Equipa das Pretas\n");
-        retorno.add(jogo.equipaPreta.nrCapturas + "\n");
-        retorno.add(jogo.equipaPreta.nrJogadasValidas + "\n");
-        retorno.add(jogo.equipaPreta.nrTentativasInvalidas + "\n");
-        retorno.add("Equipa das Brancas\n");
-        retorno.add(jogo.equipaBranca.nrCapturas + "\n");
-        retorno.add(jogo.equipaBranca.nrJogadasValidas + "\n");
-        retorno.add(jogo.equipaBranca.nrTentativasInvalidas + "");
+        retorno.add(String.valueOf(jogo.getEquipaPreta().getNrCapturas()));
+        retorno.add(String.valueOf(jogo.getEquipaPreta().getNrJogadasValidas()));
+        retorno.add(String.valueOf(jogo.getEquipaPreta().getNrTentativasInvalidas()));
+        retorno.add("Equipa das Brancas");
+        retorno.add(String.valueOf(jogo.getEquipaBranca().getNrCapturas()));
+        retorno.add(String.valueOf(jogo.getEquipaBranca().getNrJogadasValidas()));
+        retorno.add(jogo.getEquipaBranca().getNrTentativasInvalidas() + "");
         return retorno;
     }
 
