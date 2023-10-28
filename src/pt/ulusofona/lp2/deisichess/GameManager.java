@@ -55,7 +55,7 @@ public class GameManager {
 
 
     public boolean loadGame(File file) {
-        if (!file.exists() || !file.isFile()) {
+        if (file == null || !file.exists() || !file.isFile()) {
             return false; // File doesn't exist or is not a regular file
         }
 
@@ -97,6 +97,8 @@ public class GameManager {
                 }
                 linha++;
             }
+            jogo.setEquipaBranca();
+            jogo.setEquipaPreta();
             jogo.getEquipaPreta().setTurno(true);
             return true;
         } catch (IOException e) {
@@ -134,7 +136,9 @@ public class GameManager {
         } else if ((y1 != y0 + 1) && (y1 != y0 - 1) && (y1 != y0)) {
             sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
             return false;
-        } else if (sqPartida.getPeca() == null || sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.equipaAtual) {
+        } else if (sqPartida.getPeca() == null){
+            return false;
+        } else if(sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.equipaAtual) {
             sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
             return false;
         } else {

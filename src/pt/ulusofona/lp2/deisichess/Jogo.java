@@ -35,16 +35,8 @@ public class Jogo {
         return equipaBranca;
     }
 
-    public void setEquipaBranca(Equipa equipaBranca) {
-        this.equipaBranca = equipaBranca;
-    }
-
     public Equipa getEquipaPreta() {
         return equipaPreta;
-    }
-
-    public void setEquipaPreta(Equipa equipaPreta) {
-        this.equipaPreta = equipaPreta;
     }
 
     public JPanel getCreditos() {
@@ -95,7 +87,21 @@ public class Jogo {
         }
     }
 
+    public void setEquipaBranca() {
+        for (Peca peca : tabuleiro.getPecas()) {
+            if (peca.getEquipa().getPretoOuBranco() == 1) {
+               this.equipaBranca = peca.getEquipa();
+            }
+        }
+    }
 
+    public void setEquipaPreta() {
+        for (Peca peca : tabuleiro.getPecas()) {
+            if (peca.getEquipa().getPretoOuBranco() == 0) {
+                this.equipaPreta = peca.getEquipa();
+            }
+        }
+    }
 
 
 }
