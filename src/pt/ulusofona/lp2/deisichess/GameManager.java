@@ -55,6 +55,8 @@ public class GameManager {
 
 
     public boolean loadGame(File file) {
+
+        jogo.clearGame();
         if (file == null || !file.exists() || !file.isFile()) {
             return false; // File doesn't exist or is not a regular file
         }

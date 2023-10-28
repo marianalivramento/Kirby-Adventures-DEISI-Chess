@@ -15,7 +15,23 @@ public class Jogo {
     public Jogo() {
     }
 
+    void clearGame() {
+        resultado = "";
+        tabuleiro = new Tabuleiro();
+        equipaAtual = 0;
+        equipaBranca = null;
+        equipaPreta = null;
+    }
+
     public String getResultado() {
+
+        if (equipaBranca.getNrCapturas() > equipaPreta.getNrCapturas()) {
+            this.resultado = "VENCERAM AS BRANCAS";
+        } else if (equipaBranca.getNrCapturas() == equipaPreta.getNrCapturas()) {
+            this.resultado = "EMPATE";
+        } else {
+            this.resultado = "VENCERAM AS PRETAS";
+        }
         return resultado;
     }
 
@@ -66,20 +82,20 @@ public class Jogo {
     }
 
     //acrescentei isto pq pensei q fosse mais fácil
-    void defineEquipa(Equipa equipa){
-        if (equipa.pretoOuBranco == 1){
-             equipaBranca = equipa;
+    void defineEquipa(Equipa equipa) {
+        if (equipa.pretoOuBranco == 1) {
+            equipaBranca = equipa;
         }
         equipaPreta = equipa;
     }
 
-    void leFicheiroComCapturados(){
+    void leFicheiroComCapturados() {
         for (Peca p : getTabuleiro().pecas) {
             if (p.getCoordenadas() == null) {
                 p.setNaoCapturado(false);
                 if (p.getEquipa().getPretoOuBranco() == 1) {
                     getEquipaPreta().setNrCapturas(getEquipaPreta().getNrCapturas() + 1);
-                }else{
+                } else {
                     getEquipaBranca().setNrCapturas(getEquipaBranca().getNrCapturas() + 1);
                 }
             }
@@ -90,7 +106,7 @@ public class Jogo {
     public void setEquipaBranca() {
         for (Peca peca : tabuleiro.getPecas()) {
             if (peca.getEquipa().getPretoOuBranco() == 1) {
-               this.equipaBranca = peca.getEquipa();
+                this.equipaBranca = peca.getEquipa();
             }
         }
     }
