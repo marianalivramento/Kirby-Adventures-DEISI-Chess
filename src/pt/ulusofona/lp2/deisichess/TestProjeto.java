@@ -142,8 +142,47 @@ public class TestProjeto {
 
         String[] ret = gm.getPieceInfo(6);
 
-        assertEquals("capturada", ret[4]);
+        assertEquals("capturado", ret[4]);
     }
 
+    @Test
+    public void teste_move_muda_peca_depois_de_capturar() {
+        GameManager gm = new GameManager();
+        gm.loadGame(new File("test-files/4x4.txt"));
+
+        gm.move(2,1,1,2);
+
+        String[] ret = gm.getSquareInfo(1,2);
+
+        assertEquals("Grande Artista", ret[3]);
+    }
+
+    @Test
+    public void teste_move_acabar_o_jgo() {
+        GameManager gm = new GameManager();
+        gm.loadGame(new File("test-files/4x4.txt"));
+
+        gm.move(2,1,1,2);
+        gm.move(2,3,2,2);
+        gm.move(1,2,2,2);
+        gm.move(1,3,1,2);
+        gm.move(2,2,1,2);
+        gm.gameOver();
+
+        assertEquals(true, gm.gameOver());
+    }
+
+    @Test
+    public void nr_jogadas_sem_captura() {
+        GameManager gm = new GameManager();
+        gm.loadGame(new File("test-files/4x4.txt"));
+
+        gm.move(1,0,0,0);
+        gm.move(1,2,0,2);
+        gm.move(2,1,1,2);
+
+
+        assertEquals(0, gm.jogo.nrDeJogadasSemCaptura);
+    }
 
 }

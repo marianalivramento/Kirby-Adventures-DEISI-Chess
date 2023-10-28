@@ -161,10 +161,13 @@ public class GameManager {
                             jogo.getEquipaBranca().setTurno(true);
                         }
                         sqPartida.getPeca().getEquipa().setNrJogadasValidas(sqPartida.getPeca().getEquipa().getNrJogadasValidas() + 1);
-                        sqPartida.resetQuadrado();
+                        //sqPartida.resetQuadrado();
 
                     }
-
+                    sqPartida.getPeca().coordenadas = sqChegada;
+                    sqChegada.peca = sqPartida.peca;
+                    sqPartida.resetQuadrado();
+                    jogo.nrDeJogadasSemCaptura = 0;
                 } else {
                     sqChegada.peca = sqPartida.peca;
                     sqChegada.setOcupado(true);
@@ -176,6 +179,7 @@ public class GameManager {
                     }
                     sqPartida.getPeca().getEquipa().setNrJogadasValidas(sqPartida.getPeca().getEquipa().getNrJogadasValidas() + 1);
                     sqPartida.resetQuadrado();
+                    jogo.nrDeJogadasSemCaptura++;
                 }
 
             } else {
