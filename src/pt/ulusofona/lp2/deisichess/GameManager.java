@@ -89,6 +89,9 @@ public class GameManager {
                                 }
                             }
                         } else {
+                            if (linha > 2 + jogo.getTabuleiro().getNumeroDePecas() + jogo.getTabuleiro().getTamanho()) {
+                                return false;
+                            }
                             parsePosicoes(line, leituraParse);
                             leituraParse++;
                             if (leituraParse == jogo.getTabuleiro().getTamanho()) {
@@ -98,6 +101,9 @@ public class GameManager {
                         break;
                 }
                 linha++;
+            }
+            if (linha < 2 + jogo.getTabuleiro().getNumeroDePecas() + jogo.getTabuleiro().getTamanho()) {
+                return false;
             }
             jogo.setEquipaBranca();
             jogo.setEquipaPreta();
@@ -123,7 +129,7 @@ public class GameManager {
 
         int boardSize = jogo.getTabuleiro().getTamanho();
         if (x0 < 0 || x0 >= boardSize || y0 < 0 || y0 >= boardSize || x1 < 0 || x1 >= boardSize || y1 < 0 || y1 >= boardSize) {
-            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas()+1);
             return false; // Coordinates out of bounds
         }
 
@@ -138,9 +144,9 @@ public class GameManager {
         } else if ((y1 != y0 + 1) && (y1 != y0 - 1) && (y1 != y0)) {
             sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
             return false;
-        } else if (sqPartida.getPeca() == null){
+        } else if (sqPartida.getPeca() == null) {
             return false;
-        } else if(sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.equipaAtual) {
+        } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.equipaAtual) {
             sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
             return false;
         } else {
@@ -333,7 +339,7 @@ public class GameManager {
         retorno.add("JOGO DE CRAZY CHESS");
         retorno.add("Resultado: " + jogo.getResultado());
         retorno.add("---");
-        retorno.add("Equipa das Pretas\n");
+        retorno.add("Equipa das Pretas");
         retorno.add(String.valueOf(jogo.getEquipaPreta().getNrCapturas()));
         retorno.add(String.valueOf(jogo.getEquipaPreta().getNrJogadasValidas()));
         retorno.add(String.valueOf(jogo.getEquipaPreta().getNrTentativasInvalidas()));
