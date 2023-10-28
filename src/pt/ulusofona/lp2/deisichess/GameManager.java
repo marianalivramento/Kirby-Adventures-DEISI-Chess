@@ -134,7 +134,7 @@ public class GameManager {
         } else if ((y1 != y0 + 1) && (y1 != y0 - 1) && (y1 != y0)) {
             sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
             return false;
-        } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.equipaAtual) {
+        } else if (sqPartida.getPeca() == null || sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.equipaAtual) {
             sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
             return false;
         } else {
@@ -207,9 +207,9 @@ public class GameManager {
                     retorno[1] = Integer.toString(sq.getPeca().getTipo());
                     retorno[2] = Integer.toString(sq.getPeca().getEquipa().getPretoOuBranco());
                     retorno[3] = sq.getPeca().getAlcunha();
-                    if (sq.getPeca().getEquipa().getPretoOuBranco() == 1){
+                    if (sq.getPeca().getEquipa().getPretoOuBranco() == 1) {
                         retorno[4] = "crazy_emoji_white.png";
-                    }else{
+                    } else {
                         retorno[4] = "crazy_emoji_black.png";
                     }
 
