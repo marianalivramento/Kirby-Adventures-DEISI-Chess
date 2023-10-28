@@ -274,38 +274,22 @@ public class GameManager {
             return "";
         }
         //o meu intelij dá avisos aqui a dizer que i nunca é atualizado (???) mas passa no teste unitario so idk
+        for (int i = 0; i < 4; i++) {
+            retorno.append(string[i]);
+            if (i < 3) {
+                retorno.append(" | ");
+            }
+        }
+
+        // Check if coordenadas is not null and append coordinates or "n/a"
         if (jogo.getTabuleiro().retornaPecaPorId(ID).getCoordenadas() != null) {
-            for (int i = 0; i < string.length; i++) {
-                if (i <= 2) {
-                    retorno.append(string[i]).append(" | ");
-                }
-
-                if (i == 3) {
-                    retorno.append(string[i]).append(" @ ");
-                }
-
-                if (i == 5 && string[i] != null) {
-                    retorno.append("(").append(string[i]).append(", ");
-                }
-
-                if (i == 6 && string[i] != null) {
-                    retorno.append(string[i]).append(")");
-                }
-            }
-        }else{
-            for (int i = 0; i < string.length; i++) {
-                if (i <= 2) {
-                    retorno.append(string[i]).append(" | ");
-                }
-
-                if (i == 3) {
-                    retorno.append(string[i]).append(" @ ");
-                }
-
-                if (string[i] != null) {
-                    retorno.append("(").append(string[i]).append("n/a").append(")");
-                }
-            }
+            retorno.append(" @ (");
+            retorno.append(string[5]);
+            retorno.append(", ");
+            retorno.append(string[6]);
+            retorno.append(")");
+        } else {
+            retorno.append(" @ (n/a)");
         }
 
         return String.valueOf(retorno);
