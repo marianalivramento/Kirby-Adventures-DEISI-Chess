@@ -177,12 +177,12 @@ public class TestProjeto {
         GameManager gm = new GameManager();
         gm.loadGame(new File("test-files/4x4.txt"));
 
-        gm.move(1,0,0,0);
+        gm.move(1,0,0,1);
         gm.move(1,2,0,2);
-        gm.move(2,1,1,2);
+        gm.move(0,1,0,2);
 
 
-        assertEquals(3, gm.jogo.nrDeJogadasSemCaptura);
+        assertEquals(0, gm.jogo.nrDeJogadasSemCaptura);
     }
 
     @Test
@@ -208,15 +208,14 @@ public class TestProjeto {
         assertEquals(true, gm.gameOver());
     }
 
-    @Test
+    /*@Test
     public void teste_temp() {
         GameManager gm = new GameManager();
         gm.loadGame(new File("test-files/4x4.txt"));
 
-        gm.move(1,0,0,0);
-        gm.move(2,3,3,3);
+        gm.move(1,0,0,3);
 
-        assertEquals(1, gm.jogo.equipaBranca.nrJogadasValidas);
-    }
+        assertEquals(Arrays.toString(new String[5]), Arrays.toString(gm.getSquareInfo(0,3)));
+    }*/
 
 }

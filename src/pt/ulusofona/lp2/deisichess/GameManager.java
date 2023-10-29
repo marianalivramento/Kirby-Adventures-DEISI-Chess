@@ -328,11 +328,6 @@ public class GameManager {
 
 
         if (jogo.nrDeJogadasSemCaptura == 10) {
-            getGameResults();
-            return true;
-        }
-
-        /*if (jogo.nrDeJogadasSemCaptura == 10) {
             if (jogo.getEquipaPreta().getNrCapturas() > 0 || jogo.getEquipaBranca().getNrCapturas() > 0) {
                 getGameResults();
                 return true;
@@ -340,7 +335,7 @@ public class GameManager {
         } else if (jogo.nrDeJogadasSemCaptura > 20) {
             getGameResults();
             return true;
-        }*/
+        }
 
         if (!flagPecasPretas || !flagPecasBrancas) {
             getGameResults();
