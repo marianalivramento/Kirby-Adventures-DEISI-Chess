@@ -181,6 +181,7 @@ public class GameManager {
 
                     }
                     sqPartida.getPeca().coordenadas = sqChegada;
+                    sqChegada.getPeca().getCoordenadas().setOcupado(false);
                     sqChegada.peca = sqPartida.peca;
                     sqPartida.resetQuadrado();
                     jogo.nrDeJogadasSemCaptura = 0;
@@ -271,8 +272,7 @@ public class GameManager {
         return retorno;
     }
 
-
-    public String getPieceInfoAsString(int ID) {
+   public String getPieceInfoAsString(int ID) {
         StringBuilder retorno = new StringBuilder();
         String[] string = getPieceInfo(ID);
 
@@ -288,7 +288,7 @@ public class GameManager {
             }
         }
 
-        if (jogo.getTabuleiro().retornaPecaPorId(ID).getCoordenadas() != null) {
+        if (jogo.getTabuleiro().retornaPecaPorId(ID).getCoordenadas().isOcupado()) {
             String coordX = string[5];
             String coordY = string[6];
 
@@ -302,6 +302,11 @@ public class GameManager {
         }
         return String.valueOf(retorno);
     }
+
+
+
+
+
 
     public int getCurrentTeamID() {
         return jogo.equipaAtual;
@@ -331,6 +336,7 @@ public class GameManager {
             getGameResults();
             return true;
         }
+
 
 
         if (jogo.nrDeJogadasSemCaptura == 10) {

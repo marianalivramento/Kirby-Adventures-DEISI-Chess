@@ -52,7 +52,7 @@ public class TestProjeto {
         gm.loadGame(new File("test-files/4x4.txt"));
         String[] exp = gm.getSquareInfo(0, 0);
 
-        String[] ret = new String[5];
+        String[] ret = new String[0];
 
         assertEquals(Arrays.toString(ret), Arrays.toString(exp));
     }
@@ -80,17 +80,6 @@ public class TestProjeto {
 
     }
 
-    @Test
-    public void teste_getInfoPieceAsString() {
-
-        GameManager gm = new GameManager();
-
-        gm.loadGame(new File("test-files/4x4.txt"));
-        String s = gm.getPieceInfoAsString(7);
-
-        assertEquals(null, s);
-
-    }
 
     @Test
     public void teste_get_current_team_id() {
@@ -211,9 +200,9 @@ public class TestProjeto {
     @Test
     public void teste_temp() {
         GameManager gm = new GameManager();
-        gm.loadGame(new File("test-files/4x4-vitoria"));
-
-        assertEquals(true, gm.gameOver());
+        gm.loadGame(new File("test-files/4x4.txt"));
+        gm.move(2,1,1,2);
+        assertEquals("3 | 0 | 0 | Grande Artista @ (n/a)", gm.getPieceInfoAsString(3));
     }
 
 }

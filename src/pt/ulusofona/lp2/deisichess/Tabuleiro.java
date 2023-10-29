@@ -79,7 +79,7 @@ public class Tabuleiro {
                 return s;
             }
         }
-        return null;
+        return new Square(x,y);
     }
 
     int nrDePecasBrancasEmJogo() {
