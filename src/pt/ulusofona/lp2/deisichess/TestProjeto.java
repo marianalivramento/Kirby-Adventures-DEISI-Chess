@@ -120,7 +120,7 @@ public class TestProjeto {
         ret[1] = "0";
         ret[2] = "0";
         ret[3] = "Chefe";
-        ret[4] = null;
+        ret[4] = "crazy_emoji_black.png";
 
         assertEquals(Arrays.toString(ret), Arrays.toString(gm.getSquareInfo(0,0)));
     }
