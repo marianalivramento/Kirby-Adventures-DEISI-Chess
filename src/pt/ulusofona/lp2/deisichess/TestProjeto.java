@@ -208,14 +208,12 @@ public class TestProjeto {
         assertEquals(true, gm.gameOver());
     }
 
-    /*@Test
+    @Test
     public void teste_temp() {
         GameManager gm = new GameManager();
-        gm.loadGame(new File("test-files/4x4.txt"));
+        gm.loadGame(new File("test-files/4x4-vitoria"));
 
-        gm.move(1,0,0,3);
-
-        assertEquals(Arrays.toString(new String[5]), Arrays.toString(gm.getSquareInfo(0,3)));
-    }*/
+        assertEquals(true, gm.gameOver());
+    }
 
 }

@@ -6,8 +6,8 @@ public class Jogo {
     String resultado;
     Tabuleiro tabuleiro = new Tabuleiro();
     int equipaAtual = 0;
-    Equipa equipaBranca;
-    Equipa equipaPreta;
+    Equipa equipaBranca = new Equipa(1);
+    Equipa equipaPreta = new Equipa(0);
     JPanel creditos;
 
     int nrDeJogadasSemCaptura = 0;
@@ -19,8 +19,8 @@ public class Jogo {
         resultado = "";
         tabuleiro = new Tabuleiro();
         equipaAtual = 0;
-        equipaBranca = null;
-        equipaPreta = null;
+        equipaBranca = new Equipa(0);
+        equipaPreta = new Equipa(1);
     }
 
     public String getResultado() {
@@ -93,15 +93,18 @@ public class Jogo {
         for (Peca p : getTabuleiro().pecas) {
             if (p.getCoordenadas() == null) {
                 p.setNaoCapturado(false);
-                if (p.getEquipa().getPretoOuBranco() == 1) {
+                /*if (p.getEquipa().getPretoOuBranco() == 1) {
                     getEquipaPreta().setNrCapturas(getEquipaPreta().getNrCapturas() + 1);
                 } else {
                     getEquipaBranca().setNrCapturas(getEquipaBranca().getNrCapturas() + 1);
-                }
+                }*/
             }
 
         }
     }
+
+
+
 
     public void setEquipaBranca() {
         for (Peca peca : tabuleiro.getPecas()) {

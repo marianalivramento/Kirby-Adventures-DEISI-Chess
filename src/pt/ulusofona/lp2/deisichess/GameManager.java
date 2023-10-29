@@ -108,11 +108,13 @@ public class GameManager {
             jogo.setEquipaBranca();
             jogo.setEquipaPreta();
             jogo.getEquipaPreta().setTurno(true);
+
             return true;
         } catch (IOException e) {
             e.printStackTrace();
 
         }
+
         return false;
     }
 
@@ -124,6 +126,7 @@ public class GameManager {
     public boolean move(int x0, int y0, int x1, int y1) {
         //PROBLEMA
         //-A PEÇCA QUE CAPTURA DESAPARECE
+
         Square sqPartida = jogo.getTabuleiro().retornoQuadrado(x0, y0);
 
 
