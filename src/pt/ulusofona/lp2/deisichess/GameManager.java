@@ -288,7 +288,7 @@ public class GameManager {
             }
         }
 
-        if (jogo.getTabuleiro().retornaPecaPorId(ID).getCoordenadas().isOcupado()) {
+        if (jogo.getTabuleiro().retornaPecaPorId(ID).getCoordenadas() != null && jogo.getTabuleiro().retornaPecaPorId(ID).getCoordenadas().isOcupado()) {
             String coordX = string[5];
             String coordY = string[6];
 
