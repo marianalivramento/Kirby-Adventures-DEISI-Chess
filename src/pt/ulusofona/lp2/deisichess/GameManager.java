@@ -192,7 +192,6 @@ public class GameManager {
                         jogo.getEquipaBranca().setTurno(true);
                         jogo.getEquipaPreta().aumentarJogadas();
                     }
-
                     sqPartida.resetQuadrado();
                     jogo.nrDeJogadasSemCaptura++;
                 }

@@ -4,7 +4,7 @@ public class Equipa {
     int pretoOuBranco;
     boolean turno;
     int nrCapturas = 0;
-    int nrJogadasValidas;
+    int nrJogadasValidas = 0;
     int nrTentativasInvalidas = 0;
 
     public Equipa(int pretoOuBranco) {
