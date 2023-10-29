@@ -235,6 +235,7 @@ public class GameManager {
             } else {
                 String[] arrayVazio = new String[0];
                 return arrayVazio;
+
             }
         } else {
             return retorno;
