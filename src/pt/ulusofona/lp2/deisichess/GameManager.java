@@ -187,10 +187,12 @@ public class GameManager {
                     sqPartida.getPeca().getEquipa().setTurno(false);
                     if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 1) {
                         jogo.getEquipaPreta().setTurno(true);
+                        jogo.getEquipaBranca().aumentarJogadas();
                     } else {
                         jogo.getEquipaBranca().setTurno(true);
+                        jogo.getEquipaPreta().aumentarJogadas();
                     }
-                    sqPartida.getPeca().getEquipa().setNrJogadasValidas(sqPartida.getPeca().getEquipa().getNrJogadasValidas() + 1);
+
                     sqPartida.resetQuadrado();
                     jogo.nrDeJogadasSemCaptura++;
                 }
@@ -208,7 +210,7 @@ public class GameManager {
         String[] retorno = new String[5];
 
         if ((x < 0 || x > jogo.getTabuleiro().getTamanho()) || (y < 0 || y > jogo.getTabuleiro().getTamanho())) {
-            return null; // de acordo com o video do stor
+            return null;
         }
 
         Square sq = jogo.getTabuleiro().retornoQuadrado(x, y);
@@ -232,7 +234,7 @@ public class GameManager {
                 return null;
             }
         } else {
-            return null;
+            return retorno;
         }
         return retorno;
     }
@@ -319,12 +321,19 @@ public class GameManager {
             }
         }
 
-        if (pecasPretas == 1 && pecasBrancas == 1) {
+        if (pecasPretas == 1 || pecasBrancas == 1) {
             getGameResults();
             return true;
         }
 
+
+
         if (jogo.nrDeJogadasSemCaptura == 10) {
+            getGameResults();
+            return true;
+        }
+
+        /*if (jogo.nrDeJogadasSemCaptura == 10) {
             if (jogo.getEquipaPreta().getNrCapturas() > 0 || jogo.getEquipaBranca().getNrCapturas() > 0) {
                 getGameResults();
                 return true;
@@ -332,7 +341,7 @@ public class GameManager {
         } else if (jogo.nrDeJogadasSemCaptura > 20) {
             getGameResults();
             return true;
-        }
+        }*/
 
         if (!flagPecasPretas || !flagPecasBrancas) {
             getGameResults();

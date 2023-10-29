@@ -3,9 +3,9 @@ package pt.ulusofona.lp2.deisichess;
 public class Equipa {
     int pretoOuBranco;
     boolean turno;
-    int nrCapturas;
+    int nrCapturas = 0;
     int nrJogadasValidas;
-    int nrTentativasInvalidas;
+    int nrTentativasInvalidas = 0;
 
     public Equipa(int pretoOuBranco) {
         this.pretoOuBranco = pretoOuBranco;
@@ -49,6 +49,10 @@ public class Equipa {
 
     public void setNrTentativasInvalidas(int nrTentativasInvalidas) {
         this.nrTentativasInvalidas = nrTentativasInvalidas;
+    }
+
+    public void aumentarJogadas() {
+        nrJogadasValidas++;
     }
 
 

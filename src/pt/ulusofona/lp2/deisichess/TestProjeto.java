@@ -39,7 +39,7 @@ public class TestProjeto {
         r[1] = "0";
         r[2] = "0";
         r[3] = "Chefe";
-        r[4] = null;
+        r[4] = "crazy_emoji_black.png";
 
         assertEquals(Arrays.toString(r), Arrays.toString(u));
     }
@@ -186,16 +186,37 @@ public class TestProjeto {
     }
 
     @Test
+    public void teste_acaba_depois_de_dez_sem_captura() {
+        GameManager gm = new GameManager();
+        gm.loadGame(new File("test-files/4x4.txt"));
+
+        gm.move(1,0,0,0);
+        gm.move(2,3,3,3);
+
+        gm.move(0,0,1,0);
+        gm.move(3,3,2,3);
+
+        gm.move(1,0,0,0);
+        gm.move(2,3,3,3);
+
+        gm.move(0,0,1,0);
+        gm.move(3,3,2,3);
+
+        gm.move(1,0,0,0);
+        gm.move(2,3,3,3);
+
+        assertEquals(true, gm.gameOver());
+    }
+
+    @Test
     public void teste_temp() {
         GameManager gm = new GameManager();
         gm.loadGame(new File("test-files/4x4.txt"));
 
         gm.move(1,0,0,0);
-        gm.move(1,2,0,2);
-        //gm.move(0,0,1,0);
+        gm.move(2,3,3,3);
 
-
-        assertEquals(true, gm.move(0,0,1,0));
+        assertEquals(1, gm.jogo.equipaBranca.nrJogadasValidas);
     }
 
 }
