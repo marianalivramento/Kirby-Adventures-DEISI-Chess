@@ -26,9 +26,9 @@ public class Jogo {
     public String getResultado() {
 
 
-        if (tabuleiro.nrDePecasBrancasEmJogo() > tabuleiro.nrDePecasPretasEmJogo()) {
+        if (tabuleiro.nrDePecasPretasEmJogo() == 0) {
             this.resultado = "VENCERAM AS BRANCAS";
-        } else if (tabuleiro.nrDePecasBrancasEmJogo() < tabuleiro.nrDePecasPretasEmJogo()) {
+        } else if (tabuleiro.nrDePecasBrancasEmJogo() == 0) {
             this.resultado = "VENCERAM AS PRETAS";
         } else {
             this.resultado = "EMPATE";

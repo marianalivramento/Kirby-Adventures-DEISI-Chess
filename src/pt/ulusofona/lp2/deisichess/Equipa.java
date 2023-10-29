@@ -55,6 +55,10 @@ public class Equipa {
         nrJogadasValidas++;
     }
 
+    public void aumentarTenativasInvalidas() {
+        nrTentativasInvalidas++;
+    }
+
     public void aumentarPecasCapturadas() {
         nrCapturas++;
     }
