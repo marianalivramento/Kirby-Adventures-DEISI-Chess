@@ -287,14 +287,16 @@ public class GameManager {
             }
         }
 
-        // Check if coordenadas is not null and append coordinates or "n/a"
         if (jogo.getTabuleiro().retornaPecaPorId(ID).getCoordenadas() != null) {
-            retorno.append(" @ (");
-            retorno.append(string[5]);
-            retorno.append(", ");
-            retorno.append(string[6]);
-            retorno.append(")");
-        } else {
+            String coordX = string[5];
+            String coordY = string[6];
+
+            if ((coordX != null && !coordX.isEmpty()) && (coordY != null && !coordY.isEmpty())) {
+                retorno.append(" @ (").append(coordX).append(", ").append(coordY).append(")");
+            } else {
+                retorno.append(" @ (n/a)");
+            }
+        }else{
             retorno.append(" @ (n/a)");
         }
 
@@ -329,7 +331,6 @@ public class GameManager {
             getGameResults();
             return true;
         }
-
 
 
         if (jogo.nrDeJogadasSemCaptura == 10) {
