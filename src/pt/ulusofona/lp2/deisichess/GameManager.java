@@ -124,49 +124,43 @@ public class GameManager {
     }
 
     public boolean move(int x0, int y0, int x1, int y1) {
-        //PROBLEMA
-        //-A PEÇCA QUE CAPTURA DESAPARECE
 
         Square sqPartida = jogo.getTabuleiro().retornoQuadrado(x0, y0);
 
 
         int boardSize = jogo.getTabuleiro().getTamanho();
         if (x0 < 0 || x0 >= boardSize || y0 < 0 || y0 >= boardSize || x1 < 0 || x1 >= boardSize || y1 < 0 || y1 >= boardSize) {
-            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+            jogo.tentativasInvalidasPorEquipa();
             return false; // Coordinates out of bounds
         }
 
         if (sqPartida == null || sqPartida.getPeca() == null) {
-            if (jogo.getEquipaAtual() == 1) {
-                jogo.getEquipaBranca().aumentarTenativasInvalidas();
-            } else {
-                jogo.getEquipaPreta().aumentarTenativasInvalidas();
-            }
+            jogo.tentativasInvalidasPorEquipa();
             return false;
         } else if ((x0 == x1) && (y0 == y1)) {
-            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+            jogo.tentativasInvalidasPorEquipa();
             return false;
         } else if ((x1 != x0 + 1) && (x1 != x0 - 1) && (x1 != x0)) {
-            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+            jogo.tentativasInvalidasPorEquipa();
             return false;
         } else if ((y1 != y0 + 1) && (y1 != y0 - 1) && (y1 != y0)) {
-            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+            jogo.tentativasInvalidasPorEquipa();
             return false;
 
         } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.equipaAtual) {
-            sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+            jogo.tentativasInvalidasPorEquipa();
+
             return false;
         } else {
             Square sqChegada = jogo.getTabuleiro().retornoQuadrado(x1, y1);
 
             if (sqChegada != null) {
                 if (sqChegada.isOcupado()) {
-                    //esta condição de == null é para quê? é pq o sq de chegada pode n consegue acedar à equipa da peca se n houver peca
                     if (sqChegada.getPeca() == null) {
                         return false;
                     }
                     if (sqChegada.getPeca().getEquipa().getPretoOuBranco() == sqPartida.getPeca().getEquipa().getPretoOuBranco()) {
-                        sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+                        jogo.tentativasInvalidasPorEquipa();
                         return false;
                     } else {
                         //sqPartida.getPeca().getEquipa().setNrJogadasValidas(sqPartida.getPeca().getEquipa().getNrJogadasValidas() + 1);
@@ -219,7 +213,8 @@ public class GameManager {
                 }
 
             } else {
-                sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
+                jogo.tentativasInvalidasPorEquipa();
+
                 return false;
             }
         }
@@ -289,7 +284,7 @@ public class GameManager {
         return retorno;
     }
 
-   public String getPieceInfoAsString(int ID) {
+    public String getPieceInfoAsString(int ID) {
         StringBuilder retorno = new StringBuilder();
         String[] string = getPieceInfo(ID);
 
@@ -314,15 +309,11 @@ public class GameManager {
             } else {
                 retorno.append(" @ (n/a)");
             }
-        }else{
+        } else {
             retorno.append(" @ (n/a)");
         }
         return String.valueOf(retorno);
     }
-
-
-
-
 
 
     public int getCurrentTeamID() {
@@ -349,7 +340,7 @@ public class GameManager {
             }
         }
 
-        if(pecasBrancas == 1 && pecasPretas == 1) {
+        if (pecasBrancas == 1 && pecasPretas == 1) {
             getGameResults();
             return true;
         }

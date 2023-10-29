@@ -138,7 +138,16 @@ public class Jogo {
                 this.equipaPreta = peca.getEquipa();
             }
         }
+
     }
 
+    void tentativasInvalidasPorEquipa() {
+
+        if (equipaAtual == 1) {
+            equipaBranca.aumentarTenativasInvalidas();
+        } else {
+            equipaPreta.aumentarTenativasInvalidas();
+        }
+    }
 
 }
