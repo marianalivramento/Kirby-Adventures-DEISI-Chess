@@ -280,6 +280,7 @@ public class GameManager {
             return "";
         }
         //o meu intelij dá avisos aqui a dizer que i nunca é atualizado (???) mas passa no teste unitario so idk
+        //revcebe update
         for (int i = 0; i < 4; i++) {
             retorno.append(string[i]);
             if (i < 3) {
@@ -299,7 +300,6 @@ public class GameManager {
         }else{
             retorno.append(" @ (n/a)");
         }
-
         return String.valueOf(retorno);
     }
 
