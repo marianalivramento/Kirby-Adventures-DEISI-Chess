@@ -136,9 +136,12 @@ public class GameManager {
             return false; // Coordinates out of bounds
         }
 
-        if (sqPartida == null) {
-            return false;
-        } else if (sqPartida.getPeca() == null) {
+        if (sqPartida == null || sqPartida.getPeca() == null) {
+            if (jogo.getEquipaAtual() == 1) {
+                jogo.getEquipaBranca().aumentarTenativasInvalidas();
+            } else {
+                jogo.getEquipaPreta().aumentarTenativasInvalidas();
+            }
             return false;
         } else if ((x0 == x1) && (y0 == y1)) {
             sqPartida.getPeca().getEquipa().setNrTentativasInvalidas(sqPartida.getPeca().getEquipa().getNrTentativasInvalidas() + 1);
