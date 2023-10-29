@@ -25,13 +25,15 @@ public class Jogo {
 
     public String getResultado() {
 
-        if (equipaBranca.getNrCapturas() > equipaPreta.getNrCapturas()) {
+
+        if (tabuleiro.nrDePecasBrancasEmJogo() > tabuleiro.nrDePecasPretasEmJogo()) {
             this.resultado = "VENCERAM AS BRANCAS";
-        } else if (equipaBranca.getNrCapturas() == equipaPreta.getNrCapturas()) {
-            this.resultado = "EMPATE";
-        } else {
+        } else if (tabuleiro.nrDePecasBrancasEmJogo() < tabuleiro.nrDePecasPretasEmJogo()) {
             this.resultado = "VENCERAM AS PRETAS";
+        } else {
+            this.resultado = "EMPATE";
         }
+
         return resultado;
     }
 

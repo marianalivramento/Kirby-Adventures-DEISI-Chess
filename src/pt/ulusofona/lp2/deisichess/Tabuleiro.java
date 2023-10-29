@@ -82,5 +82,25 @@ public class Tabuleiro {
         return null;
     }
 
+    int nrDePecasBrancasEmJogo() {
+        int retorno = 0;
+        for (Peca p : pecas) {
+            if (p.getNaoCapturado() && p.getEquipa().pretoOuBranco == 1) {
+                retorno++;
+            }
+        }
+        return retorno;
+    }
+
+    int nrDePecasPretasEmJogo() {
+        int retorno = 0;
+        for (Peca p : pecas) {
+            if (p.getNaoCapturado() && p.getEquipa().pretoOuBranco == 0) {
+                retorno++;
+            }
+        }
+        return retorno;
+    }
+
 
 }
