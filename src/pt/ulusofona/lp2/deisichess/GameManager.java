@@ -238,7 +238,7 @@ public class GameManager {
 
             }
         } else {
-            return retorno;
+            return null;
         }
         return retorno;
     }

@@ -108,6 +108,18 @@ public class Jogo {
 
 
 
+    void atualizarEquipas(Equipa equipaDasPecas){
+        if (equipaDasPecas.getPretoOuBranco() == 1) {
+            equipaBranca.setNrCapturas(equipaBranca.getNrCapturas() + equipaDasPecas.getNrCapturas());
+            equipaBranca.setNrJogadasValidas(equipaBranca.getNrJogadasValidas() + equipaDasPecas.getNrJogadasValidas());
+            equipaBranca.setNrJogadasValidas(equipaBranca.getNrTentativasInvalidas() + equipaDasPecas.getNrTentativasInvalidas());
+        }else{
+            equipaPreta.setNrCapturas(equipaPreta.getNrCapturas() + equipaDasPecas.getNrCapturas());
+            equipaPreta.setNrJogadasValidas(equipaPreta.getNrJogadasValidas() + equipaDasPecas.getNrJogadasValidas());
+            equipaPreta.setNrJogadasValidas(equipaPreta.getNrTentativasInvalidas() + equipaDasPecas.getNrTentativasInvalidas());
+        }
+
+    }
     public void setEquipaBranca() {
         for (Peca peca : tabuleiro.getPecas()) {
             if (peca.getEquipa().getPretoOuBranco() == 1) {
