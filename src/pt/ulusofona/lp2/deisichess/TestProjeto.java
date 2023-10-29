@@ -198,11 +198,41 @@ public class TestProjeto {
     }
 
     @Test
-    public void teste_temp() {
+    public void teste_vitoria_brancas() {
         GameManager gm = new GameManager();
         gm.loadGame(new File("test-files/4x4.txt"));
-        gm.move(2,1,1,2);
-        assertEquals("3 | 0 | 0 | Grande Artista @ (n/a)", gm.getPieceInfoAsString(3));
+
+        gm.move(2,1,1,1);
+        gm.move(1,2,1,1);
+
+        gm.move(3,0,2,1);
+        gm.move(1,1,1,0);
+
+        gm.move(2,1,2,2);
+        gm.move(1,3,2,2);
+
+
+        assertEquals(3, gm.jogo.equipaBranca.nrCapturas);
     }
+
+    @Test
+    public void teste_vitoria_pretas() {
+        GameManager gm = new GameManager();
+        gm.loadGame(new File("test-files/4x4.txt"));
+
+        gm.move(2,1,1,1);
+        gm.move(1,2,1,1);
+
+        gm.move(3,0,2,1);
+        gm.move(1,1,1,0);
+
+        gm.move(2,1,2,2);
+        gm.move(1,3,2,2);
+
+
+        assertEquals(2, gm.jogo.equipaBranca.nrJogadasValidas);
+    }
+
+
 
 }

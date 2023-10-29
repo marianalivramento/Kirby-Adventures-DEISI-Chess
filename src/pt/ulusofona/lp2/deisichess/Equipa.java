@@ -55,5 +55,11 @@ public class Equipa {
         nrJogadasValidas++;
     }
 
+    public void aumentarPecasCapturadas() {
+        nrCapturas++;
+    }
+
+
+
 
 }

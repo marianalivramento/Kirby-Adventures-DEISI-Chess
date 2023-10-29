@@ -3,7 +3,7 @@ package pt.ulusofona.lp2.deisichess;
 import javax.swing.*;
 
 public class Jogo {
-    String resultado;
+    String resultado = "";
     Tabuleiro tabuleiro = new Tabuleiro();
     int equipaAtual = 0;
     Equipa equipaBranca = new Equipa(1);
@@ -71,8 +71,12 @@ public class Jogo {
 
     void mudarEquipa() {
         if (equipaAtual == 0) {
+            equipaBranca.setTurno(false);
+            equipaPreta.setTurno(true);
             equipaAtual = 1;
         } else {
+            equipaPreta.setTurno(false);
+            equipaBranca.setTurno(true);
             equipaAtual = 0;
         }
     }
