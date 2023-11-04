@@ -1,7 +1,6 @@
 package pt.ulusofona.lp2.deisichess;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -29,7 +28,7 @@ public class GameManager {
 
     }
 
-    // acrescentei uma condicao para n aceitar valores null e vazios
+
     public void parsePosicoes(String linha, int y) {
         String[] elementos = linha.split(":");
         for (int i = 0; i < elementos.length; i++) {
@@ -50,8 +49,6 @@ public class GameManager {
             }
             jogo.getTabuleiro().adicionaQuadrado(quadrado);
         }
-
-
     }
 
 
@@ -59,7 +56,7 @@ public class GameManager {
 
         jogo.clearGame();
         if (file == null || !file.exists() || !file.isFile()) {
-            return false; // File doesn't exist or is not a regular file
+            return false;
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -131,25 +128,25 @@ public class GameManager {
 
         int boardSize = jogo.getTabuleiro().getTamanho();
         if (x0 < 0 || x0 >= boardSize || y0 < 0 || y0 >= boardSize || x1 < 0 || x1 >= boardSize || y1 < 0 || y1 >= boardSize) {
-            jogo.tentativasInvalidasPorEquipa();
-            return false; // Coordinates out of bounds
+            jogo.aumentaTentativasInvalidasPorEquipa();
+            return false;
         }
 
         if (sqPartida == null || sqPartida.getPeca() == null) {
-            jogo.tentativasInvalidasPorEquipa();
+            jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } else if ((x0 == x1) && (y0 == y1)) {
-            jogo.tentativasInvalidasPorEquipa();
+            jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } else if ((x1 != x0 + 1) && (x1 != x0 - 1) && (x1 != x0)) {
-            jogo.tentativasInvalidasPorEquipa();
+            jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } else if ((y1 != y0 + 1) && (y1 != y0 - 1) && (y1 != y0)) {
-            jogo.tentativasInvalidasPorEquipa();
+            jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
 
-        } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.equipaAtual) {
-            jogo.tentativasInvalidasPorEquipa();
+        } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
+            jogo.aumentaTentativasInvalidasPorEquipa();
 
             return false;
         } else {
@@ -161,61 +158,57 @@ public class GameManager {
                         return false;
                     }
                     if (sqChegada.getPeca().getEquipa().getPretoOuBranco() == sqPartida.getPeca().getEquipa().getPretoOuBranco()) {
-                        jogo.tentativasInvalidasPorEquipa();
+                        jogo.aumentaTentativasInvalidasPorEquipa();
                         return false;
                     } else {
-                        //sqPartida.getPeca().getEquipa().setNrJogadasValidas(sqPartida.getPeca().getEquipa().getNrJogadasValidas() + 1);
-
-                        //sqPartida.getPeca().getEquipa().setNrCapturas(sqPartida.getPeca().getEquipa().getNrCapturas() + 1);
-                        //sqPartida.getPeca().getEquipa().setTurno(false);
                         sqChegada.getPeca().setNaoCapturado(false);
-                        //jogo.getTabuleiro().getPecas().remove(sqChegada.getPeca());
 
                         if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 1) {
 
-                            jogo.getEquipaBranca().aumentarJogadas();
+                            jogo.getEquipaBranca().aumentarJogadasValidas();
                             jogo.getEquipaBranca().aumentarPecasCapturadas();
                         } else {
 
-                            jogo.getEquipaPreta().aumentarJogadas();
+                            jogo.getEquipaPreta().aumentarJogadasValidas();
                             jogo.getEquipaPreta().aumentarPecasCapturadas();
 
                         }
-                        //sqPartida.getPeca().getEquipa().setNrJogadasValidas(sqPartida.getPeca().getEquipa().getNrJogadasValidas() + 1);
-                        //sqPartida.resetQuadrado();
 
                     }
 
-                    sqPartida.getPeca().getCoordenadas().setOcupado(false); // é preciso?
+                    sqPartida.getPeca().getCoordenadas().setOcupado(false);
 
-                    sqPartida.getPeca().coordenadas = sqChegada;
-                    sqChegada.peca = sqPartida.peca;
+                    sqPartida.getPeca().setCoordenadas(sqChegada);
+                    //sqPartida.getPeca().coordenadas = sqChegada;
+
+                    sqChegada.setPeca(sqPartida.getPeca());
+                    //sqChegada.peca = sqPartida.peca;
                     sqPartida.resetQuadrado();
 
-
-                    jogo.nrDeJogadasSemCaptura = 0;
+                    jogo.resetJogadasSemCaptura();
+                    //jogo.nrDeJogadasSemCaptura = 0;
                 } else {
-
-                    //sqPartida.getPeca().getEquipa().setNrJogadasValidas(sqPartida.getPeca().getEquipa().getNrJogadasValidas() + 1); // faltava esta
-
 
                     sqPartida.getPeca().getEquipa().setTurno(false);
                     if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 1) {
-                        jogo.getEquipaBranca().aumentarJogadas();
+                        jogo.getEquipaBranca().aumentarJogadasValidas();
                     } else {
 
-                        jogo.getEquipaPreta().aumentarJogadas();
+                        jogo.getEquipaPreta().aumentarJogadasValidas();
                     }
-                    sqChegada.peca = sqPartida.peca;
-                    sqPartida.peca.coordenadas = sqChegada; //faltava isto
+
+                    sqChegada.setPeca(sqPartida.getPeca());
+                    //sqChegada.peca = sqPartida.peca;
+                    sqPartida.getPeca().setCoordenadas(sqChegada);
+                    //sqPartida.peca.coordenadas = sqChegada; //faltava isto
                     sqChegada.setOcupado(true);
                     sqPartida.resetQuadrado();
-                    jogo.nrDeJogadasSemCaptura++;
+                    jogo.aumentaJogadasSemCaptura();
+                    //jogo.nrDeJogadasSemCaptura++;
                 }
 
             } else {
-                jogo.tentativasInvalidasPorEquipa();
-
+                jogo.aumentaTentativasInvalidasPorEquipa();
                 return false;
             }
         }
@@ -292,8 +285,7 @@ public class GameManager {
         if (string == null) {
             return "";
         }
-        //o meu intelij dá avisos aqui a dizer que i nunca é atualizado (???) mas passa no teste unitario so idk
-        //revcebe update
+
         for (int i = 0; i < 4; i++) {
             retorno.append(string[i]);
             if (i < 3) {
@@ -318,7 +310,7 @@ public class GameManager {
 
 
     public int getCurrentTeamID() {
-        return jogo.equipaAtual;
+        return jogo.getEquipaAtual();
     }
 
     public boolean gameOver() {
@@ -327,7 +319,7 @@ public class GameManager {
         boolean flagPecasBrancas = false;
         int pecasPretas = 0;
         boolean flagPecasPretas = false;
-        for (Peca p : jogo.getTabuleiro().pecas) {
+        for (Peca p : jogo.getTabuleiro().getPecas()) {
             if (p.getNaoCapturado()) {
                 pecasEmJogo.add(p);
                 if (p.getEquipa().getPretoOuBranco() == 0) {
@@ -346,12 +338,12 @@ public class GameManager {
             return true;
         }
 
-        if (jogo.nrDeJogadasSemCaptura == 10) {
+        if (jogo.getNrDeJogadasSemCaptura() == 10) {
             if (jogo.getEquipaPreta().getNrCapturas() > 0 || jogo.getEquipaBranca().getNrCapturas() > 0) {
                 getGameResults();
                 return true;
             }
-        } else if (jogo.nrDeJogadasSemCaptura > 20) {
+        } else if (jogo.getNrDeJogadasSemCaptura() > 20) {
             getGameResults();
             return true;
         }
@@ -382,9 +374,11 @@ public class GameManager {
     }
 
     public JPanel getAuthorsPanel() {
-        ImageIcon icon = new ImageIcon("SPOILER_creditos.png");
+
+        ImageIcon icon = new ImageIcon("src/images/SPOILER_creditos.png");
         JPanel panel = new JPanel();
         panel.add(new JLabel(icon));
         return panel;
+
     }
 }

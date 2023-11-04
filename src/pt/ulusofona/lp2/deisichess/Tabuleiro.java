@@ -9,14 +9,6 @@ public class Tabuleiro {
     ArrayList<Peca> pecas = new ArrayList<>();
 
 
-    public ArrayList<Square> getQuadrados() {
-        return quadrados;
-    }
-
-    public void setQuadrados(ArrayList<Square> quadrados) {
-        this.quadrados = quadrados;
-    }
-
     public int getTamanho() {
         return tamanho;
     }
@@ -37,10 +29,6 @@ public class Tabuleiro {
         return pecas;
     }
 
-    public void setPecas(ArrayList<Peca> pecas) {
-        this.pecas = pecas;
-    }
-
     void adicionaPecas(Peca p) {
         pecas.add(p);
     }
@@ -50,28 +38,14 @@ public class Tabuleiro {
     }
 
     Peca retornaPecaPorId(int id){
-        for (Peca p:pecas) {
-            if (p.id == id){
+        for (Peca p : pecas) {
+            if (p.getId() == id){
                 return p;
             }
         }
         return null;
     }
 
-
-
-    Square retornoPeca(int x, int y) {
-        for (Peca p : pecas) {
-            if (p.coordenadas != null) {
-                if (p.coordenadas.coordenadaX == x && p.coordenadas.coordenadaY == y) {
-                    return p.coordenadas;
-                }
-            }
-        }
-        return null;
-    }
-
-    // para obter um quadrado especifico dentro de mts quadrados
     Square retornoQuadrado(int x, int y) {
 
         for (Square s : quadrados) {
@@ -85,7 +59,7 @@ public class Tabuleiro {
     int nrDePecasBrancasEmJogo() {
         int retorno = 0;
         for (Peca p : pecas) {
-            if (p.getNaoCapturado() && p.getEquipa().pretoOuBranco == 1) {
+            if (p.getNaoCapturado() && p.getEquipa().getPretoOuBranco() == 1) {
                 retorno++;
             }
         }
@@ -95,12 +69,11 @@ public class Tabuleiro {
     int nrDePecasPretasEmJogo() {
         int retorno = 0;
         for (Peca p : pecas) {
-            if (p.getNaoCapturado() && p.getEquipa().pretoOuBranco == 0) {
+            if (p.getNaoCapturado() && p.getEquipa().getPretoOuBranco() == 0) {
                 retorno++;
             }
         }
         return retorno;
     }
-
 
 }

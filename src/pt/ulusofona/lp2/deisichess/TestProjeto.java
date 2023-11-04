@@ -1,7 +1,6 @@
 package pt.ulusofona.lp2.deisichess;
 
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.util.Arrays;
 
@@ -14,6 +13,17 @@ public class TestProjeto {
 
         GameManager gm = new GameManager();
         assertEquals(true, gm.loadGame(new File("test-files/4x4.txt")));
+
+
+    }
+
+    @Test
+    public void teste_get_board_size() {
+
+        GameManager gm = new GameManager();
+        gm.loadGame(new File("test-files/4x4.txt"));
+
+        assertEquals(4, gm.getBoardSize());
 
 
     }
@@ -42,6 +52,17 @@ public class TestProjeto {
         r[4] = "crazy_emoji_black.png";
 
         assertEquals(Arrays.toString(r), Arrays.toString(u));
+    }
+
+    @Test
+    public void teste_getPieceInfoAsString() {
+
+        GameManager gm = new GameManager();
+
+        gm.loadGame(new File("test-files/4x4.txt"));
+        String u = gm.getPieceInfoAsString(1);
+
+        assertEquals("1 | 0 | 0 | Chefe @ (1, 0)", u);
     }
 
     @Test
@@ -193,9 +214,5 @@ public class TestProjeto {
 
         assertEquals(3, gm.jogo.equipaBranca.nrCapturas);
     }
-
-
-
-
 
 }

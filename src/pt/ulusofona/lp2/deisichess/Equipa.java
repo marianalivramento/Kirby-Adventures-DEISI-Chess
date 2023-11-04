@@ -15,14 +15,6 @@ public class Equipa {
         return pretoOuBranco;
     }
 
-    public void setPretoOuBranco(int pretoOuBranco) {
-        this.pretoOuBranco = pretoOuBranco;
-    }
-
-    public boolean isTurno() {
-        return turno;
-    }
-
     public void setTurno(boolean turno) {
         this.turno = turno;
     }
@@ -31,27 +23,15 @@ public class Equipa {
         return nrCapturas;
     }
 
-    public void setNrCapturas(int nrCapturas) {
-        this.nrCapturas = nrCapturas;
-    }
-
     public int getNrJogadasValidas() {
         return nrJogadasValidas;
-    }
-
-    public void setNrJogadasValidas(int nrJogadasValidas) {
-        this.nrJogadasValidas = nrJogadasValidas;
     }
 
     public int getNrTentativasInvalidas() {
         return nrTentativasInvalidas;
     }
 
-    public void setNrTentativasInvalidas(int nrTentativasInvalidas) {
-        this.nrTentativasInvalidas = nrTentativasInvalidas;
-    }
-
-    public void aumentarJogadas() {
+    public void aumentarJogadasValidas() {
         nrJogadasValidas++;
     }
 
@@ -62,8 +42,5 @@ public class Equipa {
     public void aumentarPecasCapturadas() {
         nrCapturas++;
     }
-
-
-
 
 }
