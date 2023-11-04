@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisichess;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -381,6 +382,9 @@ public class GameManager {
     }
 
     public JPanel getAuthorsPanel() {
-        return null;
+        ImageIcon icon = new ImageIcon("SPOILER_creditos.png");
+        JPanel panel = new JPanel();
+        panel.add(new JLabel(icon));
+        return panel;
     }
 }
