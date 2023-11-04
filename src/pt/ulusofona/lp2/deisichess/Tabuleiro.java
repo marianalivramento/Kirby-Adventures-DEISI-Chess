@@ -29,7 +29,7 @@ public class Tabuleiro {
         return pecas;
     }
 
-    void adicionaPecas(Peca p) {
+    void adicionaPeca(Peca p) {
         pecas.add(p);
     }
 

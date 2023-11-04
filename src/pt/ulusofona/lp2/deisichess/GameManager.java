@@ -24,7 +24,7 @@ public class GameManager {
         jogo.defineEquipa(peca.getEquipa());
         peca.setAlcunha(elementos[3]);
 
-        jogo.getTabuleiro().adicionaPecas(peca);
+        jogo.getTabuleiro().adicionaPeca(peca);
 
     }
 
