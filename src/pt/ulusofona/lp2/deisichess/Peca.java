@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.deisichess;
 
-abstract class Peca implements Comparable<Peca> {
-
+//abstract class Peca implements Comparable<Peca> {
+class Peca {
     int id;
     int tipo;
     int valor;
@@ -62,6 +62,7 @@ abstract class Peca implements Comparable<Peca> {
         this.naoCapturado = naoCapturado;
     }
 
+    /*
     @Override
     public int compareTo(Peca peca) {
         if (peca.getValor() < valor) {
@@ -71,6 +72,8 @@ abstract class Peca implements Comparable<Peca> {
         }
         return -1;
     }
+
+     */
 
 
 }
