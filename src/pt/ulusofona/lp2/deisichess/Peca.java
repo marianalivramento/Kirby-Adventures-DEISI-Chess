@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.deisichess;
 
-public class Peca {
+class Peca {
 
     int id;
     int tipo;

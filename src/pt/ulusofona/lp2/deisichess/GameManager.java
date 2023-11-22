@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.deisichess;
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameManager {
 
@@ -52,11 +53,11 @@ public class GameManager {
     }
 
 
-    public boolean loadGame(File file) {
+    public void loadGame(File file) throws InvalidGameInputException, IOException {
 
         jogo.clearGame();
         if (file == null || !file.exists() || !file.isFile()) {
-            return false;
+            //returns false;
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -88,7 +89,7 @@ public class GameManager {
                             }
                         } else {
                             if (linha > 2 + jogo.getTabuleiro().getNumeroDePecas() + jogo.getTabuleiro().getTamanho()) {
-                                return false;
+                                //return false;
                             }
                             parsePosicoes(line, leituraParse);
                             leituraParse++;
@@ -101,19 +102,32 @@ public class GameManager {
                 linha++;
             }
             if (linha < 2 + jogo.getTabuleiro().getNumeroDePecas() + jogo.getTabuleiro().getTamanho()) {
-                return false;
+                //return false;
             }
             jogo.setEquipaBranca();
             jogo.setEquipaPreta();
             jogo.getEquipaPreta().setTurno(true);
 
-            return true;
+            //return true;
         } catch (IOException e) {
             e.printStackTrace();
 
         }
 
-        return false;
+        //return false;
+    }
+
+    public void saveGame(File file) throws IOException {
+
+    }
+
+    void undo() {
+
+    }
+
+
+    List<Comparable> getHints(int x, int y) {
+        return null;
     }
 
 
