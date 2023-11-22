@@ -1,13 +1,16 @@
 package pt.ulusofona.lp2.deisichess;
 
-public class Rei extends Peca{
+public class Rei extends Peca {
     int valor;
 
     public int getValor() {
         return valor;
     }
 
-    boolean move(int x0, int y0, int x1, int y1){
-        return true;
+    boolean move(int x0, int y0, int x1, int y1) {
+        if (((x1 == x0 + 1 || x1 == x0 - 1) && y1 == y0) || (x1 == x0 && (y1 == y0 + 1 || y1 == y0 - 1)) || ((y1 == y0 + 1 || y1 == y0 - 1) && (x1 == x0 + 1 || x1 == x0 - 1))) {
+            return true;
+        }
+        return false;
     }
 }
