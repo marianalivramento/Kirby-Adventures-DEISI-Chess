@@ -1,9 +1,10 @@
 package pt.ulusofona.lp2.deisichess;
 
-class Peca {
+abstract class Peca implements Comparable<Peca> {
 
     int id;
     int tipo;
+    int valor;
     Equipa equipa;
     String alcunha;
     Square coordenadas;
@@ -23,6 +24,10 @@ class Peca {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+
+    public int getValor() {
+        return valor;
     }
 
     public Equipa getEquipa() {
@@ -55,6 +60,16 @@ class Peca {
 
     public void setNaoCapturado(boolean naoCapturado) {
         this.naoCapturado = naoCapturado;
+    }
+
+    @Override
+    public int compareTo(Peca peca) {
+        if (peca.getValor() < valor) {
+            return 1;
+        } else if (peca.getValor() == valor) {
+            return 0;
+        }
+        return -1;
     }
 
 
