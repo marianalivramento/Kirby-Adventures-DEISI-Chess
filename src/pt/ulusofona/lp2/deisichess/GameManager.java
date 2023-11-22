@@ -14,9 +14,15 @@ public class GameManager {
     public GameManager() {
     }
 
-    public void parsePecas(String linha) {
+    public void parsePecas(String linha, int numeroLinha) throws InvalidGameInputException, IOException {
 
         String[] elementos = linha.split(":");
+        if (elementos.length < 4) {
+            throw new InvalidGameInputException((numeroLinha + 1), ("DADOS A MENOS (Esperava 4; Obtive " + elementos.length) + ")");
+        } else if (elementos.length > 4) {
+            throw new InvalidGameInputException((numeroLinha + 1), ("DADOS A MAIS (Esperava 4; Obtive " + elementos.length + ")"));
+        }
+
         Peca peca;
         switch(elementos[1]) {
             case "0":
@@ -44,8 +50,7 @@ public class GameManager {
                 peca = new Joker();
                 break;
             default:
-                peca = new Rei();
-                break;
+                throw new IOException();
 
         }
         peca.setId(Integer.parseInt(elementos[0]));
@@ -110,7 +115,7 @@ public class GameManager {
                     default:
                         if (!jaLeu) {
                             if (leituraParse <= jogo.getTabuleiro().getNumeroDePecas()) {
-                                parsePecas(line);
+                                parsePecas(line, linha);
                                 leituraParse++;
 
                                 if (leituraParse == jogo.getTabuleiro().getNumeroDePecas()) {
@@ -119,11 +124,13 @@ public class GameManager {
                                 }
                             }
                         } else {
-                            if (linha > 2 + jogo.getTabuleiro().getNumeroDePecas() + jogo.getTabuleiro().getTamanho()) {
-                                throw new InvalidGameInputException(linha, "Bad line");
 
+                            //ESTE IF COMENTADO ERA PARA QUÊ?
+                            /*if (linha > 2 + jogo.getTabuleiro().getNumeroDePecas() + jogo.getTabuleiro().getTamanho()) {
+                                throw new InvalidGameInputException(linha, "Bad line");
                                 //return false;
-                            }
+                            }*/
+
                             parsePosicoes(line, leituraParse);
                             leituraParse++;
                             if (leituraParse == jogo.getTabuleiro().getTamanho()) {
@@ -135,22 +142,20 @@ public class GameManager {
                 linha++;
             }
 
-            if (linha < 2 + jogo.getTabuleiro().getNumeroDePecas() + jogo.getTabuleiro().getTamanho()) {
+            //ESTE IF COMENTADO ERA PARA QUÊ?
+            /*if (linha < 2 + jogo.getTabuleiro().getNumeroDePecas() + jogo.getTabuleiro().getTamanho()) {
                 throw new InvalidGameInputException(linha, "Bad line");
-
                 //return false;
-            }
+            }*/
+
             jogo.setEquipaBranca();
             jogo.setEquipaPreta();
             jogo.getEquipaPreta().setTurno(true);
 
-            //return true;
         } catch (IOException e) {
-           // e.printStackTrace();
             throw new IOException(e);
         }
-        //throw new InvalidGameInputException(0, "Bad line");
-        //return false;
+
     }
 
     public void saveGame(File file) throws IOException {

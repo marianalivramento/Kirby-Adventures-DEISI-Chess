@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.deisichess;
 
 public class PoneiMagico extends Peca{
-    int valor;
+    int valor = 5;
 
     public int getValor() {
         return valor;

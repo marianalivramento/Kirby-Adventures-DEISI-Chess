@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.deisichess;
 
 public class Rainha extends Peca {
-    int valor;
+    int valor = 8;
 
     public int getValor() {
         return valor;

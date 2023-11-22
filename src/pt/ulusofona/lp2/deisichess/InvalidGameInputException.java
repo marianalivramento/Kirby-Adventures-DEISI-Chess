@@ -12,11 +12,11 @@ public class InvalidGameInputException extends Exception {
     }
 
 
-    int getLineWithError() {
+    public int getLineWithError() {
         return linha;
     }
 
-    String getProblemDescription() {
+    public String getProblemDescription() {
         return str;
     }
 }

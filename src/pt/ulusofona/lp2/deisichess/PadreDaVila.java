@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.deisichess;
 
 public class PadreDaVila extends Peca{
-    int valor;
+    int valor = 3;
 
     public int getValor() {
         return valor;
