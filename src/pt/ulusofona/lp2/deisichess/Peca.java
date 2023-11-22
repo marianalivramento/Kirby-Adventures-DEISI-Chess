@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.deisichess;
 
-class Peca {
+abstract class Peca {
 
     int id;
     int tipo;
@@ -57,5 +57,5 @@ class Peca {
         this.naoCapturado = naoCapturado;
     }
 
-
+    abstract boolean move(int x0, int y0, int x1, int y1);
 }

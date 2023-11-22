@@ -8,6 +8,7 @@ public class Jogo {
     Equipa equipaPreta = new Equipa(10);
     int nrDeJogadasSemCaptura = 0;
 
+
     public Jogo() {
     }
 
