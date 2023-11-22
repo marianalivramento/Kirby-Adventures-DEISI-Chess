@@ -3,9 +3,9 @@ package pt.ulusofona.lp2.deisichess;
 public class Jogo {
     String resultado = "";
     Tabuleiro tabuleiro = new Tabuleiro();
-    int equipaAtual = 0;
-    Equipa equipaBranca = new Equipa(1);
-    Equipa equipaPreta = new Equipa(0);
+    int equipaAtual = 10;
+    Equipa equipaBranca = new Equipa(20);
+    Equipa equipaPreta = new Equipa(10);
     int nrDeJogadasSemCaptura = 0;
 
     public Jogo() {
@@ -14,9 +14,9 @@ public class Jogo {
     void clearGame() {
         resultado = "";
         tabuleiro = new Tabuleiro();
-        equipaAtual = 0;
-        equipaBranca = new Equipa(0);
-        equipaPreta = new Equipa(1);
+        equipaAtual = 10;
+        equipaBranca = new Equipa(20);
+        equipaPreta = new Equipa(10);
     }
 
     public String getResultado() {
@@ -54,19 +54,19 @@ public class Jogo {
     }
 
     void mudarEquipa() {
-        if (equipaAtual == 0) {
+        if (equipaAtual == 10) {
             equipaBranca.setTurno(false);
             equipaPreta.setTurno(true);
-            equipaAtual = 1;
+            equipaAtual = 20;
         } else {
             equipaPreta.setTurno(false);
             equipaBranca.setTurno(true);
-            equipaAtual = 0;
+            equipaAtual = 10;
         }
     }
 
     void defineEquipa(Equipa equipa) {
-        if (equipa.getPretoOuBranco() == 1) {
+        if (equipa.getPretoOuBranco() == 20) {
             equipaBranca = equipa;
         }
         equipaPreta = equipa;
@@ -82,7 +82,7 @@ public class Jogo {
 
     public void setEquipaBranca() {
         for (Peca peca : tabuleiro.getPecas()) {
-            if (peca.getEquipa().getPretoOuBranco() == 1) {
+            if (peca.getEquipa().getPretoOuBranco() == 20) {
                 this.equipaBranca = peca.getEquipa();
             }
         }
@@ -90,7 +90,7 @@ public class Jogo {
 
     public void setEquipaPreta() {
         for (Peca peca : tabuleiro.getPecas()) {
-            if (peca.getEquipa().getPretoOuBranco() == 0) {
+            if (peca.getEquipa().getPretoOuBranco() == 10) {
                 this.equipaPreta = peca.getEquipa();
             }
         }

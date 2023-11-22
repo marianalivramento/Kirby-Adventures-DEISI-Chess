@@ -59,7 +59,7 @@ public class Tabuleiro {
     int nrDePecasBrancasEmJogo() {
         int retorno = 0;
         for (Peca p : pecas) {
-            if (p.getNaoCapturado() && p.getEquipa().getPretoOuBranco() == 1) {
+            if (p.getNaoCapturado() && p.getEquipa().getPretoOuBranco() == 20) {
                 retorno++;
             }
         }
@@ -69,7 +69,7 @@ public class Tabuleiro {
     int nrDePecasPretasEmJogo() {
         int retorno = 0;
         for (Peca p : pecas) {
-            if (p.getNaoCapturado() && p.getEquipa().getPretoOuBranco() == 0) {
+            if (p.getNaoCapturado() && p.getEquipa().getPretoOuBranco() == 10) {
                 retorno++;
             }
         }

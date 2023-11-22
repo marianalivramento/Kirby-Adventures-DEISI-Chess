@@ -21,22 +21,31 @@ public class GameManager {
         switch(elementos[1]) {
             case "0":
                 peca = new Rei();
+                break;
             case "1":
                 peca = new Rainha();
+                break;
             case "2":
                 peca = new PoneiMagico();
+                break;
             case "3":
                 peca = new PadreDaVila();
+                break;
             case "4":
                 peca = new TorreHorizontal();
+                break;
             case "5":
                 peca = new TorreVertical();
+                break;
             case "6":
                 peca = new HomerSimpson();
+                break;
             case "7":
                 peca = new Joker();
+                break;
             default:
                 peca = new Rei();
+                break;
 
         }
         peca.setId(Integer.parseInt(elementos[0]));
@@ -140,7 +149,7 @@ public class GameManager {
            // e.printStackTrace();
             throw new IOException(e);
         }
-        throw new InvalidGameInputException(0, "Bad line");
+        //throw new InvalidGameInputException(0, "Bad line");
         //return false;
     }
 
@@ -204,7 +213,7 @@ public class GameManager {
                     } else {
                         sqChegada.getPeca().setNaoCapturado(false);
 
-                        if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 1) {
+                        if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
 
                             jogo.getEquipaBranca().aumentarJogadasValidas();
                             jogo.getEquipaBranca().aumentarPecasCapturadas();
@@ -231,7 +240,7 @@ public class GameManager {
                 } else {
 
                     sqPartida.getPeca().getEquipa().setTurno(false);
-                    if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 1) {
+                    if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
                         jogo.getEquipaBranca().aumentarJogadasValidas();
                     } else {
 
@@ -273,7 +282,7 @@ public class GameManager {
                     retorno[1] = Integer.toString(sq.getPeca().getTipo());
                     retorno[2] = Integer.toString(sq.getPeca().getEquipa().getPretoOuBranco());
                     retorno[3] = sq.getPeca().getAlcunha();
-                    if (sq.getPeca().getEquipa().getPretoOuBranco() == 1) {
+                    if (sq.getPeca().getEquipa().getPretoOuBranco() == 20) {
                         retorno[4] = "crazy_emoji_white.png";
                     } else {
                         retorno[4] = "crazy_emoji_black.png";
@@ -363,7 +372,7 @@ public class GameManager {
         for (Peca p : jogo.getTabuleiro().getPecas()) {
             if (p.getNaoCapturado()) {
                 pecasEmJogo.add(p);
-                if (p.getEquipa().getPretoOuBranco() == 0) {
+                if (p.getEquipa().getPretoOuBranco() == 10) {
                     pecasPretas++;
                     flagPecasPretas = true;
                 } else {
