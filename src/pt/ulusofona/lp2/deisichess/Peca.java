@@ -1,9 +1,10 @@
 package pt.ulusofona.lp2.deisichess;
 
-abstract class Peca {
+abstract class Peca implements Comparable<Peca> {
 
     int id;
     int tipo;
+    int valor;
     Equipa equipa;
     String alcunha;
     Square coordenadas;
@@ -23,6 +24,10 @@ abstract class Peca {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+
+    public int getValor() {
+        return valor;
     }
 
     public Equipa getEquipa() {
@@ -57,6 +62,16 @@ abstract class Peca {
         this.naoCapturado = naoCapturado;
     }
 
-
     abstract boolean move(int x0, int y0, int x1, int y1);
+
+    @Override
+    public int compareTo(Peca peca) {
+        if (peca.getValor() < valor) {
+            return 1;
+        } else if (peca.getValor() == valor) {
+            return 0;
+        }
+        return -1;
+    }
 }
+
