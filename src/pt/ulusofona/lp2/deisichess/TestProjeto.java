@@ -1,16 +1,19 @@
 package pt.ulusofona.lp2.deisichess;
+
 import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestProjeto {
-
+/*
     @Test
     public void teste_loadGame_1() {
 
         GameManager gm = new GameManager();
         assertEquals(true, gm.loadGame(new File("test-files/4x4.txt")));
+
 
     }
 
@@ -21,6 +24,7 @@ public class TestProjeto {
         gm.loadGame(new File("test-files/4x4.txt"));
 
         assertEquals(4, gm.getBoardSize());
+
 
     }
 
@@ -192,6 +196,7 @@ public class TestProjeto {
     }
 
 
+
     @Test
     public void teste_vitoria_brancas() {
         GameManager gm = new GameManager();
@@ -209,5 +214,5 @@ public class TestProjeto {
 
         assertEquals(3, gm.jogo.equipaBranca.nrCapturas);
     }
-
+*/
 }

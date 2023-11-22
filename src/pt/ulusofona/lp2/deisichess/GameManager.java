@@ -3,7 +3,9 @@ package pt.ulusofona.lp2.deisichess;
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameManager {
 
@@ -15,9 +17,28 @@ public class GameManager {
     public void parsePecas(String linha) {
 
         String[] elementos = linha.split(":");
+        Peca peca;
+        switch(elementos[1]) {
+            case "0":
+                peca = new Rei();
+            case "1":
+                peca = new Rainha();
+            case "2":
+                peca = new PoneiMagico();
+            case "3":
+                peca = new PadreDaVila();
+            case "4":
+                peca = new TorreHorizontal();
+            case "5":
+                peca = new TorreVertical();
+            case "6":
+                peca = new HomerSimpson();
+            case "7":
+                peca = new Joker();
+            default:
+                peca = new Rei();
 
-        Peca peca = new Peca();
-
+        }
         peca.setId(Integer.parseInt(elementos[0]));
         peca.setTipo(Integer.parseInt(elementos[1]));
         peca.setEquipa(new Equipa(Integer.parseInt(elementos[2])));
@@ -55,9 +76,10 @@ public class GameManager {
 
     public void loadGame(File file) throws InvalidGameInputException, IOException {
 
+
         jogo.clearGame();
         if (file == null || !file.exists() || !file.isFile()) {
-            //returns false;
+            throw new IOException();
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -89,6 +111,8 @@ public class GameManager {
                             }
                         } else {
                             if (linha > 2 + jogo.getTabuleiro().getNumeroDePecas() + jogo.getTabuleiro().getTamanho()) {
+                                throw new InvalidGameInputException(linha, "Bad line");
+
                                 //return false;
                             }
                             parsePosicoes(line, leituraParse);
@@ -101,7 +125,10 @@ public class GameManager {
                 }
                 linha++;
             }
+
             if (linha < 2 + jogo.getTabuleiro().getNumeroDePecas() + jogo.getTabuleiro().getTamanho()) {
+                throw new InvalidGameInputException(linha, "Bad line");
+
                 //return false;
             }
             jogo.setEquipaBranca();
@@ -110,10 +137,10 @@ public class GameManager {
 
             //return true;
         } catch (IOException e) {
-            e.printStackTrace();
-
+           // e.printStackTrace();
+            throw new IOException(e);
         }
-
+        throw new InvalidGameInputException(0, "Bad line");
         //return false;
     }
 
@@ -394,5 +421,10 @@ public class GameManager {
         panel.add(new JLabel(icon));
         return panel;
 
+    }
+
+    public Map<String, String> customizeBoard() {
+        Map<String, String> map = new HashMap<>();
+        return map;
     }
 }
