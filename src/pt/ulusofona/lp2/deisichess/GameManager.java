@@ -160,7 +160,45 @@ public class GameManager {
 
     public void saveGame(File file) throws IOException {
 
+        if (file == null || !file.exists() || !file.isFile()) {
+            throw new IOException();
+        }
+
+        try {
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+
+            FileWriter fileWriter = new FileWriter(file, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            // Read existing content
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println("Existing line: " + line);
+            }
+
+            // Modify the content (add a new line, for example)
+            bufferedWriter.newLine();
+
+            for(Peca p : jogo.getTabuleiro().getPecas()) {
+                if (!p.getNaoCapturado()) {
+                    bufferedWriter.write("" + p.id);
+                }
+
+                if (p.numeroJogadas > 0) {
+                    bufferedWriter.write("" + p.id + ":" + p.getCoordenadas().coordenadaX + ":" + p.getCoordenadas().coordenadaY);
+                }
+            }
+
+            bufferedReader.close();
+            bufferedWriter.close();
+
+        } catch (IOException e) {
+            throw new IOException();
+        }
     }
+
 
     void undo() {
 
@@ -193,13 +231,15 @@ public class GameManager {
         } else if ((x0 == x1) && (y0 == y1)) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
-        } else if ((x1 != x0 + 1) && (x1 != x0 - 1) && (x1 != x0)) {
+        /*} else if ((x1 != x0 + 1) && (x1 != x0 - 1) && (x1 != x0)) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } else if ((y1 != y0 + 1) && (y1 != y0 - 1) && (y1 != y0)) {
             jogo.aumentaTentativasInvalidasPorEquipa();
+            return false;*/
+        }else if(!sqPartida.getPeca().move(x0,y0,x1,y1)) {
+            jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
-
         } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
 

@@ -10,6 +10,8 @@ abstract class Peca implements Comparable<Peca> {
     Square coordenadas;
     boolean naoCapturado = true;
 
+    int numeroJogadas = 0;
+
     public int getId() {
         return id;
     }
