@@ -2,6 +2,7 @@ package pt.ulusofona.lp2.deisichess;
 
 import org.junit.jupiter.api.Test;
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -119,20 +120,27 @@ public class TestProjeto {
 
 
     }
+
+
     @Test
     public void teste_move_coordenada_validas2() {
         GameManager gm = new GameManager();
-        gm.loadGame(new File("test-files/4x4.txt"));
-        gm.move(1,0,0,0);
+        try {
+            gm.loadGame(new File("test-files/4x4.txt"));
+            gm.move(2, 0, 0, 0);
 
-        String[] ret = new String[5];
-        ret[0] = "1";
-        ret[1] = "0";
-        ret[2] = "0";
-        ret[3] = "Chefe";
-        ret[4] = "crazy_emoji_black.png";
+            String[] ret = new String[5];
+            ret[0] = "2";
+            ret[1] = "0";
+            ret[2] = "10";
+            ret[3] = "Chefe";
+            ret[4] = "crazy_emoji_black.png";
 
-        assertEquals(Arrays.toString(ret), Arrays.toString(gm.getSquareInfo(0,0)));
+            assertEquals(Arrays.toString(ret), Arrays.toString(gm.getSquareInfo(0, 0)));
+        } catch (InvalidGameInputException | IOException e) {
+            // Handle the exception (print a message, fail the test, etc.)
+            fail("Exception not expected: " + e.getMessage());
+        }
     }
 
     @Test

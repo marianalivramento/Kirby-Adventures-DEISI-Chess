@@ -328,9 +328,66 @@ public class GameManager {
                     retorno[2] = Integer.toString(sq.getPeca().getEquipa().getPretoOuBranco());
                     retorno[3] = sq.getPeca().getAlcunha();
                     if (sq.getPeca().getEquipa().getPretoOuBranco() == 20) {
-                        retorno[4] = "crazy_emoji_white.png";
+                        switch (sq.getPeca().getTipo()) {
+                            case 0:
+                                retorno[4] = "crazy_emoji_white.png";
+                                break;
+                            case 1:
+                                retorno[4] = "rainha_white.png";
+                                break;
+                            case 2:
+                                retorno[4] = "ponei_magico_white.png";
+                                break;
+                            case 3:
+                                retorno[4] = "padre_vila_white.png";
+                                break;
+                            case 4:
+                                retorno[4] = "torre_h_white.png";
+                                break;
+                            case 5:
+                                retorno[4] = "torre_v_white.png";
+                                break;
+                            case 6:
+                                retorno[4] = "homer_white.png";
+                                break;
+                            case 7:
+                                retorno[4] = "joker_white.png";
+                                break;
+                            default:
+                                retorno[4] = "unknown-piece.png";
+                                break;
+                        }
+
                     } else {
-                        retorno[4] = "crazy_emoji_black.png";
+                        switch (sq.getPeca().getTipo()) {
+                            case 0:
+                                retorno[4] = "crazy_emoji_black.png";
+                                break;
+                            case 1:
+                                retorno[4] = "rainha_black.png";
+                                break;
+                            case 2:
+                                retorno[4] = "ponei_magico_black.png";
+                                break;
+                            case 3:
+                                retorno[4] = "padre_vila_black.png";
+                                break;
+                            case 4:
+                                retorno[4] = "torre_h_black.png";
+                                break;
+                            case 5:
+                                retorno[4] = "torre_v_black.png";
+                                break;
+                            case 6:
+                                retorno[4] = "homer_black.png";
+                                break;
+                            case 7:
+                                retorno[4] = "joker_black.png";
+                                break;
+                            default:
+                                retorno[4] = "unknown-piece.png";
+                                break;
+                        }
                     }
 
 
