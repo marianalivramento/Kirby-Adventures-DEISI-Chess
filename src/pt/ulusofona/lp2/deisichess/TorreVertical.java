@@ -9,6 +9,8 @@ public class TorreVertical extends Peca{
 
     boolean move(int x0, int y0, int x1, int y1){
         if (y0 == y1){
+            coordenadas.setCoordenadaX(x1);
+            coordenadas.setCoordenadaY(y1);
             return true;
         }
         return false;
