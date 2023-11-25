@@ -17,6 +17,8 @@ public class Rainha extends Peca {
                 return true;
             }
         }
+
+        //FALTA A CONDIÇÃO DE UMA RAINHA NAO CAPTURA UMA RAINHA
         return false;
     }
 }

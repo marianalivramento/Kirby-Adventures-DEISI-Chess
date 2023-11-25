@@ -11,6 +11,9 @@ public class GameManager {
 
     Jogo jogo = new Jogo();
 
+    ArrayList<String> gameFileInfo = new ArrayList<>();
+    ArrayList<String> moveHistory = new ArrayList<>();
+
     public GameManager() {
     }
 
@@ -103,11 +106,10 @@ public class GameManager {
             boolean jaLeu = false;
 
             while ((line = reader.readLine()) != null) {
-
+                gameFileInfo.add(line);
                 switch (linha) {
                     case 0:
                         jogo.criaTabuleiro(Integer.parseInt(line));
-
                         break;
                     case 1:
                         jogo.getTabuleiro().setNumeroDePecas(Integer.parseInt(line));
@@ -124,12 +126,6 @@ public class GameManager {
                                 }
                             }
                         } else {
-
-                            //ESTE IF COMENTADO ERA PARA QUÊ?
-                            /*if (linha > 2 + jogo.getTabuleiro().getNumeroDePecas() + jogo.getTabuleiro().getTamanho()) {
-                                throw new InvalidGameInputException(linha, "Bad line");
-                                //return false;
-                            }*/
 
                             parsePosicoes(line, leituraParse);
                             leituraParse++;
@@ -160,43 +156,37 @@ public class GameManager {
 
     public void saveGame(File file) throws IOException {
 
-        if (file == null || !file.exists() || !file.isFile()) {
-            throw new IOException();
+        if (file == null) {
+            throw new IOException("Invalid file");
         }
 
-        try {
-            FileReader fileReader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 
-            FileWriter fileWriter = new FileWriter(file, true);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
 
-            // Read existing content
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                System.out.println("Existing line: " + line);
+            for (int i = 0; i < gameFileInfo.size(); i++) {
+                bufferedWriter.write(gameFileInfo.get(i));
+                bufferedWriter.newLine();
             }
 
-            // Modify the content (add a new line, for example)
-            bufferedWriter.newLine();
-
-            for(Peca p : jogo.getTabuleiro().getPecas()) {
+            for (Peca p : jogo.getTabuleiro().getPecas()) {
                 if (!p.getNaoCapturado()) {
                     bufferedWriter.write("" + p.id);
+                    bufferedWriter.newLine();
+                    continue;
                 }
 
                 if (p.numeroJogadas > 0) {
                     bufferedWriter.write("" + p.id + ":" + p.getCoordenadas().coordenadaX + ":" + p.getCoordenadas().coordenadaY);
+                    bufferedWriter.newLine();
                 }
             }
 
-            bufferedReader.close();
-            bufferedWriter.close();
 
         } catch (IOException e) {
-            throw new IOException();
+            throw new IOException("Error writing to the file", e);
         }
+
     }
 
 
@@ -218,6 +208,8 @@ public class GameManager {
 
         Square sqPartida = jogo.getTabuleiro().retornoQuadrado(x0, y0);
 
+        moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0);
+
 
         int boardSize = jogo.getTabuleiro().getTamanho();
         if (x0 < 0 || x0 >= boardSize || y0 < 0 || y0 >= boardSize || x1 < 0 || x1 >= boardSize || y1 < 0 || y1 >= boardSize) {
@@ -231,22 +223,15 @@ public class GameManager {
         } else if ((x0 == x1) && (y0 == y1)) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
-        /*} else if ((x1 != x0 + 1) && (x1 != x0 - 1) && (x1 != x0)) {
-            jogo.aumentaTentativasInvalidasPorEquipa();
-            return false;
-        } else if ((y1 != y0 + 1) && (y1 != y0 - 1) && (y1 != y0)) {
-            jogo.aumentaTentativasInvalidasPorEquipa();
-            return false;*/
-        }else if(!sqPartida.getPeca().move(x0,y0,x1,y1)) {
+        } else if(!sqPartida.getPeca().move(x0,y0,x1,y1)) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
-
             return false;
         } else {
-            Square sqChegada = jogo.getTabuleiro().retornoQuadrado(x1, y1);
 
+            Square sqChegada = jogo.getTabuleiro().retornoQuadrado(x1, y1);
             if (sqChegada != null) {
                 if (sqChegada.isOcupado()) {
                     if (sqChegada.getPeca() == null) {
