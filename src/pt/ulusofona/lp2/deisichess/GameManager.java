@@ -226,28 +226,23 @@ public class GameManager {
     }
 
 
-    void undo() {
+    public void undo() {
 
         if (moveHistory.isEmpty()) {
             return;
         }
 
-        try {
-            String lastMove = moveHistory.get(moveHistory.size() - 1);
-            String[] moveInfo = lastMove.split(":");
-            int id = Integer.parseInt(moveInfo[0]);
-            int x0 = Integer.parseInt(moveInfo[1]);
-            int y0 = Integer.parseInt(moveInfo[2]);
-            int x1 = Integer.parseInt(moveInfo[3]);
-            int y1 = Integer.parseInt(moveInfo[4]);
 
-            move(x1, y1, x0, y0);
-            moveHistory.remove(moveHistory.size() - 1);
+        String lastMove = moveHistory.get(moveHistory.size() - 1);
+        String[] moveInfo = lastMove.split(":");
+        int id = Integer.parseInt(moveInfo[0]);
+        int x0 = Integer.parseInt(moveInfo[1]);
+        int y0 = Integer.parseInt(moveInfo[2]);
+        int x1 = Integer.parseInt(moveInfo[3]);
+        int y1 = Integer.parseInt(moveInfo[4]);
 
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            // Handle parsing errors or other exceptions
-            e.printStackTrace();
-        }
+        move(x1, y1, x0, y0);
+        moveHistory.remove(moveHistory.size() - 1);
 
 
     }
@@ -296,6 +291,10 @@ public class GameManager {
                     if (sqChegada.getPeca().getEquipa().getPretoOuBranco() == sqPartida.getPeca().getEquipa().getPretoOuBranco()) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
                         return false;
+                    } else if (sqPartida.getPeca().getClass().equals(Rainha.class) && sqChegada.getPeca().getClass().equals(Rainha.class)) {
+                        jogo.aumentaTentativasInvalidasPorEquipa();
+                        return false;
+
                     } else {
                         sqChegada.getPeca().setNaoCapturado(false);
 
