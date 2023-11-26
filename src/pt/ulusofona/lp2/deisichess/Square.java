@@ -43,6 +43,7 @@ public class Square {
     }
 
     public void setPeca(Peca peca) {
+        this.ocupado = true;
         this.peca = peca;
     }
 
