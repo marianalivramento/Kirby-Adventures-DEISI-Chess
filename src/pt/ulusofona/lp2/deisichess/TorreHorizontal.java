@@ -7,11 +7,12 @@ public class TorreHorizontal extends Peca {
         return valor;
     }
 
-
+    //As torres estão trocadas?
     boolean move(int x0, int y0, int x1, int y1) {
         if (x0 == x1){
-            coordenadas.setCoordenadaX(x1);
-            coordenadas.setCoordenadaY(y1);
+            //coordenadas.setCoordenadaX(x1);
+            //coordenadas.setCoordenadaY(y1);
+            numeroJogadas++;
             return true;
         }
         return false;

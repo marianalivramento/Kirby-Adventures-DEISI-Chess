@@ -59,6 +59,7 @@ public class GameManager {
         }
         peca.setId(Integer.parseInt(elementos[0]));
         peca.setTipo(Integer.parseInt(elementos[1]));
+
         peca.setEquipa(new Equipa(Integer.parseInt(elementos[2])));
 
         jogo.defineEquipa(peca.getEquipa());
@@ -97,9 +98,17 @@ public class GameManager {
         String[] elementos = line.split(":");
 
         Peca p = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[0]));
-        p.coordenadas.coordenadaX = Integer.parseInt(elementos[1]);
-        p.coordenadas.coordenadaY = Integer.parseInt(elementos[2]);
+        int col = Integer.parseInt(elementos[3]);
+        int row = Integer.parseInt(elementos[4]);
+        Square targetSquare = jogo.getTabuleiro().retornoQuadrado(col, row);
+        if (p.coordenadas != null) {
+            p.coordenadas.ocupado = false;
+            p.coordenadas.setPeca(null);
+        }
 
+        p.coordenadas = targetSquare;
+        targetSquare.setPeca(p);
+        targetSquare.ocupado = true;
     }
 
 
@@ -191,12 +200,15 @@ public class GameManager {
                 bufferedWriter.newLine();
             }
 
-            /*for (int i = 0; i < moveHistory.size(); i++) {
+
+            for (int i = 0; i < moveHistory.size(); i++) {
                 bufferedWriter.write(moveHistory.get(i));
                 bufferedWriter.newLine();
-            }*/
+            }
 
 
+
+/*
             for (Peca p : jogo.getTabuleiro().getPecas()) {
                 if (!p.getNaoCapturado()) {
                     bufferedWriter.write("" + p.id);
@@ -209,6 +221,10 @@ public class GameManager {
                     bufferedWriter.newLine();
                 }
             }
+
+
+ */
+
 
 
         } catch (IOException e) {
@@ -236,7 +252,7 @@ public class GameManager {
 
         Square sqPartida = jogo.getTabuleiro().retornoQuadrado(x0, y0);
 
-        moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0);
+
 
 
         int boardSize = jogo.getTabuleiro().getTamanho();
@@ -284,6 +300,8 @@ public class GameManager {
 
                     }
 
+                    moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
+
                     sqPartida.getPeca().getCoordenadas().setOcupado(false);
 
                     sqPartida.getPeca().setCoordenadas(sqChegada);
@@ -294,9 +312,10 @@ public class GameManager {
                     sqPartida.resetQuadrado();
 
                     jogo.resetJogadasSemCaptura();
+
                     //jogo.nrDeJogadasSemCaptura = 0;
                 } else {
-
+                    moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
                     sqPartida.getPeca().getEquipa().setTurno(false);
                     if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
                         jogo.getEquipaBranca().aumentarJogadasValidas();
