@@ -528,10 +528,10 @@ public class GameManager {
                         retorno.append("Padre da Vila | 3");
                         break;
                     case "4":
-                        retorno.append("Torre Horizontal | 3");
+                        retorno.append("TorreHor | 3");
                         break;
                     case "5":
-                        retorno.append("Torre Vertical | 3");
+                        retorno.append("TorreVert | 3");
                         break;
                     case "6":
                         retorno.append("Homer Simpson");
