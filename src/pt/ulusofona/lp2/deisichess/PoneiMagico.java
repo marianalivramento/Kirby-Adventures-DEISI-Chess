@@ -1,6 +1,9 @@
 package pt.ulusofona.lp2.deisichess;
 
-public class PoneiMagico extends Peca{
+import java.util.ArrayList;
+import java.util.List;
+
+public class PoneiMagico extends Peca {
     int valor = 5;
 
     public int getValor() {
@@ -29,4 +32,19 @@ public class PoneiMagico extends Peca{
 
         return true;
     }
+
+    List<Comparable> jogadasPermitidas(Tabuleiro tabuleiro) {
+        List<Comparable> permittedMoves = new ArrayList<>();
+        for (Square s : tabuleiro.getQuadrados()) {
+            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY())) {
+                if (s.getPeca() == null){
+                    permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0" );
+                }else {
+                    permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->" + s.getPeca().getValor());
+                }
+            }
+        }
+        return permittedMoves;
+    }
 }
+

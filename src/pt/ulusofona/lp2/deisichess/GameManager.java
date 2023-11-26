@@ -2,10 +2,7 @@ package pt.ulusofona.lp2.deisichess;
 
 import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GameManager {
 
@@ -15,8 +12,27 @@ public class GameManager {
     ArrayList<String> moveHistory = new ArrayList<>();
     //Formato: id : coordenadaX0 : coordenadaY0
 
+    ArrayList<ArrayList<String>> fileHistory = new ArrayList<ArrayList<String>>();
     public GameManager() {
     }
+
+    public void alteraFile(Tabuleiro tabuleiro) {
+        int count = 0;
+        for (int i = 18; i < gameFileInfo.size(); i++) {
+            String[] linhaY = gameFileInfo.get(i).split(":");
+            for (Square s : tabuleiro.getQuadrados()) {
+                if (s.isOcupado() && s.getCoordenadaX() == count) {
+                    linhaY[s.getCoordenadaY()] = String.valueOf(s.getPeca().getId());
+                } else {
+                    linhaY[s.getCoordenadaY()] = String.valueOf(0);
+                }
+            }
+            gameFileInfo.set(i, String.join(":", linhaY));
+            count++;
+        }
+        fileHistory.add(new ArrayList<>(gameFileInfo));  // Create a copy to store in fileHistory
+    }
+
 
     public void parsePecas(String linha, int numeroLinha) throws InvalidGameInputException, IOException {
 
@@ -241,18 +257,28 @@ public class GameManager {
         int x1 = Integer.parseInt(moveInfo[3]);
         int y1 = Integer.parseInt(moveInfo[4]);
 
-        jogo.getTabuleiro().retornaPecaPorId(id).setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x0,y0));
-        jogo.getTabuleiro().retornoQuadrado(x0,y0).setPeca(jogo.getTabuleiro().retornaPecaPorId(id));
-        jogo.getTabuleiro().retornoQuadrado(x1,y1).resetQuadrado();
+        jogo.getTabuleiro().retornaPecaPorId(id).setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x0, y0));
+        jogo.getTabuleiro().retornoQuadrado(x0, y0).setPeca(jogo.getTabuleiro().retornaPecaPorId(id));
+        jogo.getTabuleiro().retornoQuadrado(x1, y1).resetQuadrado();
         moveHistory.remove(moveHistory.size() - 1);
 
 
+//fileHistory.get(fileHistory.size() -2);
+
     }
 
 
-    List<Comparable> getHints(int x, int y) {
-        return null;
+    public List<Comparable> getHints(int x, int y) {
+        List<Comparable> hints = new ArrayList<>();
+        Square square = jogo.getTabuleiro().retornoQuadrado(x, y);
+        if (square.getPeca() != null) {
+            hints = square.getPeca().jogadasPermitidas(jogo.getTabuleiro());
+            Collections.sort(hints);
+        }
+        return hints;
     }
+
+
 
 
     public int getBoardSize() {
@@ -352,6 +378,7 @@ public class GameManager {
                 return false;
             }
         }
+        alteraFile(jogo.getTabuleiro());
         jogo.mudarEquipa();
         return true;
     }

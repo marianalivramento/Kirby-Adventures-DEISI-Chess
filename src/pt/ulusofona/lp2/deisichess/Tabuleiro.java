@@ -17,6 +17,10 @@ public class Tabuleiro {
         this.tamanho = tamanho;
     }
 
+    public ArrayList<Square> getQuadrados() {
+        return quadrados;
+    }
+
     public int getNumeroDePecas() {
         return numeroDePecas;
     }

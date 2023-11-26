@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisichess;
 
+import java.util.List;
+
 abstract class Peca implements Comparable<Peca> {
 
     int id;
@@ -65,15 +67,23 @@ abstract class Peca implements Comparable<Peca> {
     }
 
     abstract boolean move(int x0, int y0, int x1, int y1);
+    abstract List<Comparable> jogadasPermitidas(Tabuleiro tabuleiro);
+
 
     @Override
     public int compareTo(Peca peca) {
+        if (peca!=null){
         if (peca.getValor() < valor) {
             return 1;
         } else if (peca.getValor() == valor) {
-            return 0;
+            if (!peca.getClass().equals(Rainha.class)){
+                return 0;
+            }
         }
         return -1;
     }
+        return 2;
+    }
+
 }
 
