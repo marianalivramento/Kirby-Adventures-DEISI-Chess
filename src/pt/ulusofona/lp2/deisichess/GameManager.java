@@ -28,7 +28,7 @@ public class GameManager {
         }
 
         Peca peca;
-        switch(elementos[1]) {
+        switch (elementos[1]) {
             case "0":
                 peca = new Rei();
                 break;
@@ -219,7 +219,6 @@ public class GameManager {
  */
 
 
-
         } catch (IOException e) {
             throw new IOException("Error writing to the file", e);
         }
@@ -228,7 +227,29 @@ public class GameManager {
 
 
     void undo() {
-       // loadGame(File fileJogadaAnterior);
+
+        if (moveHistory.isEmpty()) {
+            return;
+        }
+
+        try {
+            String lastMove = moveHistory.get(moveHistory.size() - 1);
+            String[] moveInfo = lastMove.split(":");
+            int id = Integer.parseInt(moveInfo[0]);
+            int x0 = Integer.parseInt(moveInfo[1]);
+            int y0 = Integer.parseInt(moveInfo[2]);
+            int x1 = Integer.parseInt(moveInfo[3]);
+            int y1 = Integer.parseInt(moveInfo[4]);
+
+            move(x1, y1, x0, y0);
+            moveHistory.remove(moveHistory.size() - 1);
+
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            // Handle parsing errors or other exceptions
+            e.printStackTrace();
+        }
+
+
     }
 
 
@@ -246,8 +267,6 @@ public class GameManager {
         Square sqPartida = jogo.getTabuleiro().retornoQuadrado(x0, y0);
 
 
-
-
         int boardSize = jogo.getTabuleiro().getTamanho();
         if (x0 < 0 || x0 >= boardSize || y0 < 0 || y0 >= boardSize || x1 < 0 || x1 >= boardSize || y1 < 0 || y1 >= boardSize) {
             jogo.aumentaTentativasInvalidasPorEquipa();
@@ -260,7 +279,7 @@ public class GameManager {
         } else if ((x0 == x1) && (y0 == y1)) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
-        } else if(!sqPartida.getPeca().move(x0,y0,x1,y1)) {
+        } else if (!sqPartida.getPeca().move(x0, y0, x1, y1)) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
@@ -469,10 +488,6 @@ public class GameManager {
                 retorno.append(" | ");
             }
         }
-
-
-
-
 
 
         if (jogo.getTabuleiro().retornaPecaPorId(ID).getCoordenadas() != null && jogo.getTabuleiro().retornaPecaPorId(ID).getCoordenadas().isOcupado()) {
