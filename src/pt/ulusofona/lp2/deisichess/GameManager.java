@@ -13,6 +13,7 @@ public class GameManager {
 
     ArrayList<String> gameFileInfo = new ArrayList<>();
     ArrayList<String> moveHistory = new ArrayList<>();
+    //Formato: id : coordenadaX0 : coordenadaY0
 
     public GameManager() {
     }
@@ -70,7 +71,9 @@ public class GameManager {
 
     public void parsePosicoes(String linha, int y) {
         String[] elementos = linha.split(":");
+
         for (int i = 0; i < elementos.length; i++) {
+
             Square quadrado = new Square();
             quadrado.setCoordenadaX(i);
             quadrado.setCoordenadaY(y);
@@ -90,11 +93,23 @@ public class GameManager {
         }
     }
 
+    public void parsePosicoesJogoGuardado(String line) {
+        String[] elementos = line.split(":");
+
+        Peca p = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[0]));
+        p.coordenadas.coordenadaX = Integer.parseInt(elementos[1]);
+        p.coordenadas.coordenadaY = Integer.parseInt(elementos[2]);
+
+    }
+
 
     public void loadGame(File file) throws InvalidGameInputException, IOException {
 
 
         jogo.clearGame();
+        gameFileInfo.clear();
+        moveHistory.clear();
+
         if (file == null || !file.exists() || !file.isFile()) {
             throw new IOException();
         }
@@ -104,6 +119,7 @@ public class GameManager {
             int linha = 0;
             int leituraParse = 0;
             boolean jaLeu = false;
+            boolean jaMeteuPosicoesOriginais = false;
 
             while ((line = reader.readLine()) != null) {
                 gameFileInfo.add(line);
@@ -127,10 +143,17 @@ public class GameManager {
                             }
                         } else {
 
-                            parsePosicoes(line, leituraParse);
-                            leituraParse++;
-                            if (leituraParse == jogo.getTabuleiro().getTamanho()) {
-                                jogo.leFicheiroComCapturados();
+                            if (!jaMeteuPosicoesOriginais) {
+
+                                parsePosicoes(line, leituraParse);
+                                leituraParse++;
+                                if (leituraParse == jogo.getTabuleiro().getTamanho()) {
+                                    jogo.leFicheiroComCapturados();
+                                    jaMeteuPosicoesOriginais = true;
+                                }
+
+                            } else {
+                                parsePosicoesJogoGuardado(line);
                             }
                         }
                         break;
@@ -161,13 +184,18 @@ public class GameManager {
         }
 
 
-
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
 
             for (int i = 0; i < gameFileInfo.size(); i++) {
                 bufferedWriter.write(gameFileInfo.get(i));
                 bufferedWriter.newLine();
             }
+
+            /*for (int i = 0; i < moveHistory.size(); i++) {
+                bufferedWriter.write(moveHistory.get(i));
+                bufferedWriter.newLine();
+            }*/
+
 
             for (Peca p : jogo.getTabuleiro().getPecas()) {
                 if (!p.getNaoCapturado()) {
