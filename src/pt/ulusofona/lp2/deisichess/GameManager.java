@@ -22,9 +22,9 @@ public class GameManager {
 
         String[] elementos = linha.split(":");
         if (elementos.length < 4) {
-            throw new InvalidGameInputException((numeroLinha + 1), ("DADOS A MENOS (Esperava 4; Obtive " + elementos.length) + ")");
+            throw new InvalidGameInputException((numeroLinha + 1), ("DADOS A MENOS (Esperava: 4 ; Obtive: " + elementos.length) + ")");
         } else if (elementos.length > 4) {
-            throw new InvalidGameInputException((numeroLinha + 1), ("DADOS A MAIS (Esperava 4; Obtive " + elementos.length + ")"));
+            throw new InvalidGameInputException((numeroLinha + 1), ("DADOS A MAIS (Esperava: 4; Obtive: " + elementos.length + ")"));
         }
 
         Peca peca;
@@ -100,15 +100,8 @@ public class GameManager {
         Peca p = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[0]));
         int col = Integer.parseInt(elementos[3]);
         int row = Integer.parseInt(elementos[4]);
-        Square targetSquare = jogo.getTabuleiro().retornoQuadrado(col, row);
-        if (p.coordenadas != null) {
-            p.coordenadas.ocupado = false;
-            p.coordenadas.setPeca(null);
-        }
 
-        p.coordenadas = targetSquare;
-        targetSquare.setPeca(p);
-        targetSquare.ocupado = true;
+        move(Integer.parseInt(elementos[1]), Integer.parseInt(elementos[2]), col, row);
     }
 
 
