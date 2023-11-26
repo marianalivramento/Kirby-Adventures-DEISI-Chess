@@ -8,6 +8,30 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestProjeto {
+
+    @Test
+    public void teste_loadGame_1() {
+
+        GameManager gm = new GameManager();
+
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(0,0,1,0);
+
+        try {
+            gm.saveGame(new File("test-files/8x16.txt"));
+        } catch (IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        assertEquals(false, gm.move(0,0,1,0));
+
+
+    }
 /*
     @Test
     public void teste_loadGame_1() {
