@@ -40,7 +40,7 @@ public class GameManager {
         if (elementos.length < 4) {
             throw new InvalidGameInputException((numeroLinha + 1), ("DADOS A MENOS (Esperava: 4 ; Obtive: " + elementos.length) + ")");
         } else if (elementos.length > 4) {
-            throw new InvalidGameInputException((numeroLinha + 1), ("DADOS A MAIS (Esperava: 4; Obtive: " + elementos.length + ")"));
+            throw new InvalidGameInputException((numeroLinha + 1), ("DADOS A MAIS (Esperava: 4 ; Obtive: " + elementos.length + ")"));
         }
 
         Peca peca;
@@ -511,7 +511,43 @@ public class GameManager {
         }
 
         for (int i = 0; i < 4; i++) {
-            retorno.append(string[i]);
+            if (i == 0) {
+                retorno.append(string[i]);
+            } else if (i == 1) {
+                switch (string[i]) {
+                    case "0":
+                        retorno.append("Rei | (infinito)");
+                        break;
+                    case "1":
+                        retorno.append("Rainha | 8");
+                        break;
+                    case "2":
+                        retorno.append("Ponei Mágico | 5");
+                        break;
+                    case "3":
+                        retorno.append("Padre da Vila | 3");
+                        break;
+                    case "4":
+                        retorno.append("TorreHor | 3");
+                        break;
+                    case "5":
+                        retorno.append("TorreVert | 3");
+                        break;
+                    case "6":
+                        retorno.append("Homer Simpson");
+                        break;
+                    case "7":
+                        retorno.append("Joker");
+                        break;
+                    default:
+                        retorno.append("Desconhecido");
+                        break;
+                }
+            } else if (i == 2) {
+                retorno.append(string[i]);
+            } else {
+                retorno.append(string[i]);
+            }
             if (i < 3) {
                 retorno.append(" | ");
             }
