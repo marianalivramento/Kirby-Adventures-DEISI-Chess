@@ -6,17 +6,19 @@ import java.util.List;
 
 public class HomerSimpson extends Peca{
     int valor;
-    int turnosDormir;
-
     public int getValor() {
         return valor;
     }
 
     boolean move(int x0, int y0, int x1, int y1){
-        coordenadas.setCoordenadaX(x1);
-        coordenadas.setCoordenadaY(y1);
-        numeroJogadas++;
-        return true;
+
+        if ((x1 == x0 + 1 && y1 == y0 + 1) || (x1 == x0 - 1 && y1 == y0 - 1) || (x1 == x0 + 1 && y1 == y0 - 1) || (x1 == x0 - 1 && y1 == y0 + 1)) {
+            coordenadas.setCoordenadaX(x1);
+            coordenadas.setCoordenadaY(y1);
+            numeroJogadas++;
+            return true;
+        }
+        return false;
     }
 
     List<Comparable> jogadasPermitidas(Tabuleiro tabuleiro) {

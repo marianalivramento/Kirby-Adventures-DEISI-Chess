@@ -9,6 +9,7 @@ public class Jogo {
     int nrDeJogadasSemCaptura = 0;
 
 
+
     public Jogo() {
     }
 
@@ -116,5 +117,15 @@ public class Jogo {
     void resetJogadasSemCaptura() {
         nrDeJogadasSemCaptura = 0;
     }
+
+    boolean homerPodeMexer() {
+        if (equipaAtual == 10) {
+            return equipaPreta.numeroDoTurno % 3 == 0;
+        } else {
+            return equipaBranca.numeroDoTurno % 3 == 0;
+
+        }
+    }
+
 
 }

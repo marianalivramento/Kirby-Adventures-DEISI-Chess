@@ -10,7 +10,6 @@ public class GameManager {
 
     ArrayList<String> gameFileInfo = new ArrayList<>();
     ArrayList<String> moveHistory = new ArrayList<>();
-    //Formato: id : coordenadaX0 : coordenadaY0
 
     ArrayList<ArrayList<String>> fileHistory = new ArrayList<ArrayList<String>>();
     public GameManager() {
@@ -302,6 +301,9 @@ public class GameManager {
         } else if ((x0 == x1) && (y0 == y1)) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
+        } else if (sqPartida.getPeca().tipo == 6 && !jogo.homerPodeMexer()) {
+            jogo.aumentaTentativasInvalidasPorEquipa();
+            return false;
         } else if (!sqPartida.getPeca().move(x0, y0, x1, y1)) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
@@ -330,10 +332,12 @@ public class GameManager {
 
                             jogo.getEquipaBranca().aumentarJogadasValidas();
                             jogo.getEquipaBranca().aumentarPecasCapturadas();
+                            jogo.getEquipaBranca().numeroDoTurno++;
                         } else {
 
                             jogo.getEquipaPreta().aumentarJogadasValidas();
                             jogo.getEquipaPreta().aumentarPecasCapturadas();
+                            jogo.getEquipaPreta().numeroDoTurno++;
 
                         }
 
@@ -358,9 +362,10 @@ public class GameManager {
                     sqPartida.getPeca().getEquipa().setTurno(false);
                     if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
                         jogo.getEquipaBranca().aumentarJogadasValidas();
+                        jogo.getEquipaBranca().numeroDoTurno++;
                     } else {
-
                         jogo.getEquipaPreta().aumentarJogadasValidas();
+                        jogo.getEquipaPreta().numeroDoTurno++;
                     }
 
                     sqChegada.setPeca(sqPartida.getPeca());
@@ -534,7 +539,19 @@ public class GameManager {
                         retorno.append("TorreVert | 3");
                         break;
                     case "6":
-                        retorno.append("Homer Simpson");
+                        if (string[2].equals("10")) {
+                            if ((jogo.getEquipaPreta().numeroDoTurno % 3) == 0 && jogo.getEquipaPreta().numeroDoTurno != 0 && jogo.getEquipaAtual() == 10) {
+                                retorno.append("Homer Simpson");
+                            } else {
+                                return "Doh! zzzzzz";
+                            }
+                        } else {
+                            if ((jogo.getEquipaBranca().numeroDoTurno % 3) == 0 && jogo.getEquipaBranca().numeroDoTurno != 0 && jogo.getEquipaAtual() == 20) {
+                                retorno.append("Homer Simpson");
+                            } else {
+                                return "Doh! zzzzzz";
+                            }
+                        }
                         break;
                     case "7":
                         retorno.append("Joker");
