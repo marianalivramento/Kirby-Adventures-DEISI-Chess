@@ -12,6 +12,14 @@ public class PoneiMagico extends Peca {
 
     boolean move(int x0, int y0, int x1, int y1) {
 
+        if ((x1 == x0 + 2) && ((y1 == y0 + 2) || (y1 == y0 -2))) {
+            return true;
+        } else if ((x1 == x0 - 2) && ((y1 == y0 + 2) || (y1 == y0 -2))) {
+            return true;
+        }
+
+        /*
+
         for (int i = 1; i <= 2; i++) {
             if (x0 == x1 && y0 == y1) {
                 return false;
@@ -20,6 +28,11 @@ public class PoneiMagico extends Peca {
                 //coordenadas.setCoordenadaY(y1);
                 numeroJogadas++;
                 return true;
+            } else if ((y1 == y0 + i && x1 == x0 + i) || (y1 == y0 - i && x1 == x0 - i)) {
+                    //coordenadas.setCoordenadaX(x1);
+                    //coordenadas.setCoordenadaY(y1);
+                    numeroJogadas++;
+                    return true;
             } else if (x0 == x1 && (y1 == y0 + i || y1 == y0 - i)) {
                 //coordenadas.setCoordenadaX(x1);
                 //coordenadas.setCoordenadaY(y1);
@@ -32,6 +45,8 @@ public class PoneiMagico extends Peca {
                 return true;
             }
         }
+
+         */
 
         return false;
     }
