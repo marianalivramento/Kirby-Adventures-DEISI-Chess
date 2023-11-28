@@ -120,9 +120,9 @@ public class Jogo {
 
     boolean homerPodeMexer() {
         if (equipaAtual == 10) {
-            return equipaPreta.numeroDoTurno % 3 == 0;
+            return equipaPreta.numeroDoTurno % 3 == 0 && equipaPreta.numeroDoTurno != 0;
         } else {
-            return equipaBranca.numeroDoTurno % 3 == 0;
+            return equipaBranca.numeroDoTurno % 3 == 0 && equipaBranca.numeroDoTurno != 0;
 
         }
     }
