@@ -15,8 +15,6 @@ public class TorreVertical extends Peca{
             return false;
         }
         if (x0 == x1){
-            //coordenadas.setCoordenadaX(x1);
-            //coordenadas.setCoordenadaY(y1);
             numeroJogadas++;
             return true;
         }

@@ -15,7 +15,7 @@ public class Rainha extends Peca {
             return false;
         }
 
-        for (int i = 0; i <= 4; i++) {
+        for (int i = 1; i <= 5; i++) {
             if ((x1 == x0 + i || x1 == x0 - i) && y1 == y0) {
                 return true; //direita e esquerda
             }
@@ -28,31 +28,6 @@ public class Rainha extends Peca {
                 return true;
             }
         }
-
-        /*
-        for (int i = 1; i <= 5; i++) {
-            if (x0 == x1 && y0 == y1) {
-                return false;
-            }else if ((x1 == x0 + i && y1 == y0 + i) || (x1 == x0 - i && y1 == y0 - i)) {
-                //coordenadas.setCoordenadaX(x1);
-                //coordenadas.setCoordenadaY(y1);
-                numeroJogadas++;
-                return true;
-            } else if (x0 == x1 && (y1 == y0 + i || y1 == y0 - i)) {
-                //coordenadas.setCoordenadaX(x1);
-                //coordenadas.setCoordenadaY(y1);
-                numeroJogadas++;
-                return true;
-            } else if (y0 == y1 && (x1 == x0 + i || x1 == x0 - i)) {
-                //coordenadas.setCoordenadaX(x1);
-                //coordenadas.setCoordenadaY(y1);
-                numeroJogadas++;
-                return true;
-            }
-        }
-
-
-         */
 
         return false;
     }
