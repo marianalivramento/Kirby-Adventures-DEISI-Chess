@@ -11,25 +11,12 @@ public class PoneiMagico extends Peca {
     }
 
 
-    boolean move(int x0, int y0, int x1, int y1, Jogo jogo) {
+    boolean move(int x0, int y0, int x1, int y1) {
 
         if ((x1 == x0 + 2) && ((y1 == y0 + 2) || (y1 == y0 -2))) {
-            if(jogo.getTabuleiro().retornoQuadrado(x1,y1).isOcupado()){
-                if (!pertenceAequipa(jogo)){
-                    return true;
-                }
-            }else {
-                return true;
-            }
-
+            return true;
         } else if ((x1 == x0 - 2) && ((y1 == y0 + 2) || (y1 == y0 -2))) {
-            if(jogo.getTabuleiro().retornoQuadrado(x1,y1).isOcupado()){
-                if (!pertenceAequipa(jogo)){
-                    return true;
-                }
-            }else{
-                return true;
-            }
+            return true;
         }
 
         /*

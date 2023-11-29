@@ -76,7 +76,7 @@ abstract class Peca implements Comparable<Peca> {
         return false;
     }
 
-    abstract boolean move(int x0, int y0, int x1, int y1, Jogo jogo);
+    abstract boolean move(int x0, int y0, int x1, int y1);
 
     abstract List<Comparable> jogadasPermitidas(Tabuleiro tabuleiro);
 

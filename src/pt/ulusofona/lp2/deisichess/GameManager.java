@@ -304,7 +304,7 @@ public class GameManager {
         } else if (sqPartida.getPeca().tipo == 6 && !jogo.homerPodeMexer()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
-        } else if (!sqPartida.getPeca().move(x0, y0, x1, y1, )) {
+        } else if (!sqPartida.getPeca().move(x0, y0, x1, y1)) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
