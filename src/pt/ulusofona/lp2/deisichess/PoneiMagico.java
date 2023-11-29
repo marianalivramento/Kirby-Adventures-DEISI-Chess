@@ -55,7 +55,7 @@ public class PoneiMagico extends Peca {
     List<Comparable> jogadasPermitidas(Tabuleiro tabuleiro) {
         List<Comparable> permittedMoves = new ArrayList<>();
         for (Square s : tabuleiro.getQuadrados()) {
-            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), )) {
+            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY())) {
                 if (s.getPeca() == null) {
                     permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0");
                 } else {
