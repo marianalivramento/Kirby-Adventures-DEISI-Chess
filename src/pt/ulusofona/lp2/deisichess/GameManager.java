@@ -304,7 +304,7 @@ public class GameManager {
         } else if (sqPartida.getPeca().tipo == 6 && !jogo.homerPodeMexer()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
-        } else if (!sqPartida.getPeca().move(x0, y0, x1, y1)) {
+        } else if (!sqPartida.getPeca().move(x0, y0, x1, y1, )) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
@@ -345,6 +345,12 @@ public class GameManager {
 
                     moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
 
+
+                    //sqPartida.getPeca().move(x0, y0, x1, y1);
+                    // podia implementar o move com o jogo como parametro assim teria sempre informaçao sobre os turnos e os quadrados
+
+
+
                     sqPartida.getPeca().getCoordenadas().setOcupado(false);
 
                     sqPartida.getPeca().setCoordenadas(sqChegada);
@@ -352,6 +358,8 @@ public class GameManager {
 
                     sqChegada.setPeca(sqPartida.getPeca());
                     //sqChegada.peca = sqPartida.peca;
+
+
                     sqPartida.resetQuadrado();
 
                     jogo.resetJogadasSemCaptura();

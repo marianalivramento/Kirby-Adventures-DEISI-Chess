@@ -65,22 +65,34 @@ abstract class Peca implements Comparable<Peca> {
         this.naoCapturado = naoCapturado;
     }
 
-    abstract boolean move(int x0, int y0, int x1, int y1);
+    boolean pertenceAequipa(Jogo game){
+        for (Square s: game.getTabuleiro().getQuadrados()){
+            if (s.isOcupado()){
+                if(s.getPeca().getEquipa() == equipa){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    abstract boolean move(int x0, int y0, int x1, int y1, Jogo jogo);
+
     abstract List<Comparable> jogadasPermitidas(Tabuleiro tabuleiro);
 
 
     @Override
     public int compareTo(Peca peca) {
-        if (peca!=null){
-        if (peca.getValor() < valor) {
-            return 1;
-        } else if (peca.getValor() == valor) {
-            if (!peca.getClass().equals(Rainha.class)){
-                return 0;
+        if (peca != null) {
+            if (peca.getValor() < valor) {
+                return 1;
+            } else if (peca.getValor() == valor) {
+                if (!peca.getClass().equals(Rainha.class)) {
+                    return 0;
+                }
             }
+            return -1;
         }
-        return -1;
-    }
         return 2;
     }
 

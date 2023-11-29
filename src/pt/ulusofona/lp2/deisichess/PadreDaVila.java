@@ -12,7 +12,7 @@ public class PadreDaVila extends Peca{
     }
 
     //O PADRE NÃO ESTÁ A ANDAR NA DIAGONAL DIREITA
-    boolean move(int x0, int y0, int x1, int y1){
+    boolean move(int x0, int y0, int x1, int y1, Jogo jogo){
         if (x0 == x1 && y0 == y1) {
             return false;
         }
@@ -28,7 +28,7 @@ public class PadreDaVila extends Peca{
     List<Comparable> jogadasPermitidas(Tabuleiro tabuleiro) {
         List<Comparable> permittedMoves = new ArrayList<>();
         for (Square s : tabuleiro.getQuadrados()) {
-            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY())) {
+            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), )) {
                 if (s.getPeca() == null){
                     permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0" );
                 }else {
