@@ -11,7 +11,7 @@ fun func1(gameManager: GameManager) : ArrayList<String> {
     return stringList
 }
 
-fun getStatsCalculator(stat : StatType) : Function<ArrayList<String>> {
+fun getStatsCalculator(stat : StatType, f : Function<ArrayList<String>>) : Function<ArrayList<String>> {
     when (stat) {
         StatType.TOP_5_CAPTURAS -> return ::func1
         StatType.TOP_5_PONTOS -> return ::func1
