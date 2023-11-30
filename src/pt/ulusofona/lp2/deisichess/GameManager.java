@@ -236,6 +236,8 @@ public class GameManager {
             jogo.getTabuleiro().retornaPecaPorId(id).setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x0, y0));
             jogo.getTabuleiro().retornoQuadrado(x0, y0).setPeca(jogo.getTabuleiro().retornaPecaPorId(id));
             moveHistory.remove(moveHistory.size() - 1);
+
+            jogo.mudarEquipa();
             return;
 
         }
@@ -244,6 +246,8 @@ public class GameManager {
         jogo.getTabuleiro().retornoQuadrado(x0, y0).setPeca(jogo.getTabuleiro().retornaPecaPorId(id));
         jogo.getTabuleiro().retornoQuadrado(x1, y1).resetQuadrado();
         moveHistory.remove(moveHistory.size() - 1);
+
+        jogo.mudarEquipa();
 
 
     }
