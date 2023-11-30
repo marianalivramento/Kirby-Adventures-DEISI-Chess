@@ -183,9 +183,10 @@ public class GameManager {
 
     public void saveGame(File file) throws IOException {
 
-        if (file == null) {
+        if (file == null || moveHistory.isEmpty()) {
             throw new IOException("Invalid file");
         }
+
 
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
@@ -195,13 +196,14 @@ public class GameManager {
                 bufferedWriter.newLine();
             }
 
-            bufferedWriter.write(Integer.toString(jogo.getEquipaAtual()));
-            bufferedWriter.newLine();
 
             for (int i = 0; i < moveHistory.size(); i++) {
                 bufferedWriter.write(moveHistory.get(i));
                 bufferedWriter.newLine();
             }
+
+            bufferedWriter.write(Integer.toString(jogo.getEquipaAtual()));
+            bufferedWriter.newLine();
 
 
 
