@@ -7,7 +7,7 @@ enum class StatType{
 }
 
 fun func1(gameManager: GameManager) : ArrayList<String> {
-    val stringList: ArrayList<String> = ArrayList()
+    val stringList: ArrayList<String> = ArrayList();
     return stringList
 }
 
@@ -20,8 +20,6 @@ fun getStatsCalculator(stat : StatType) : Function<ArrayList<String>> {
 }
 
 fun main() {
-    val v1 = ::getStatsCalculator
-    val v = v1.invoke(StatType.TOP_5_CAPTURAS)
 
 }
 
