@@ -99,11 +99,14 @@ public class GameManager {
 
         }
 
-        Peca p = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[0]));
-        int col = Integer.parseInt(elementos[3]);
-        int row = Integer.parseInt(elementos[4]);
+        int x0 = Integer.parseInt(elementos[1]);
+        int y0 = Integer.parseInt(elementos[2]);
 
-        move(Integer.parseInt(elementos[1]), Integer.parseInt(elementos[2]), col, row);
+
+        int x1 = Integer.parseInt(elementos[3]);
+        int y1 = Integer.parseInt(elementos[4]);
+
+        move(x0, y0, x1, y1);
     }
 
 
@@ -164,12 +167,6 @@ public class GameManager {
                 }
                 linha++;
             }
-
-            //ESTE IF COMENTADO ERA PARA QUÊ?
-            /*if (linha < 2 + jogo.getTabuleiro().getNumeroDePecas() + jogo.getTabuleiro().getTamanho()) {
-                throw new InvalidGameInputException(linha, "Bad line");
-                //return false;
-            }*/
 
             jogo.setEquipaBranca();
             jogo.setEquipaPreta();
@@ -289,7 +286,7 @@ public class GameManager {
         } else if ((x0 == x1) && (y0 == y1)) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
-        } else if (sqPartida.getPeca().tipo == 6 && !jogo.homerPodeMexer()) {
+        } else if (sqPartida.getPeca().tipo == 6 && jogo.homerADormir()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } else if (!sqPartida.getPeca().move(x0, y0, x1, y1)) {
@@ -321,10 +318,12 @@ public class GameManager {
                             jogo.getEquipaBranca().aumentarJogadasValidas();
                             jogo.getEquipaBranca().aumentarPecasCapturadas();
                             jogo.getEquipaBranca().numeroDoTurno++;
+                            jogo.turnoClasse++;
                         } else {
 
                             jogo.getEquipaPreta().aumentarJogadasValidas();
                             jogo.getEquipaPreta().aumentarPecasCapturadas();
+                            jogo.turnoClasse++;
                             jogo.getEquipaPreta().numeroDoTurno++;
 
                         }
@@ -332,12 +331,6 @@ public class GameManager {
                     }
 
                     moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1+ ":PecaCapturada:" +sqChegada.getPeca().id);
-
-
-                    //sqPartida.getPeca().move(x0, y0, x1, y1);
-                    // podia implementar o move com o jogo como parametro assim teria sempre informaçao sobre os turnos e os quadrados
-
-
 
                     sqPartida.getPeca().getCoordenadas().setOcupado(false);
                     sqPartida.getPeca().setCoordenadas(sqChegada);
@@ -352,9 +345,11 @@ public class GameManager {
                     sqPartida.getPeca().getEquipa().setTurno(false);
                     if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
                         jogo.getEquipaBranca().aumentarJogadasValidas();
+                        jogo.turnoClasse++;
                         jogo.getEquipaBranca().numeroDoTurno++;
                     } else {
                         jogo.getEquipaPreta().aumentarJogadasValidas();
+                        jogo.turnoClasse++;
                         jogo.getEquipaPreta().numeroDoTurno++;
                     }
 
@@ -527,16 +522,16 @@ public class GameManager {
                         break;
                     case "6":
                         if (string[2].equals("10")) {
-                            if ((jogo.getEquipaPreta().numeroDoTurno % 3) == 0 && jogo.getEquipaPreta().numeroDoTurno != 0 && jogo.getEquipaAtual() == 10) {
-                                retorno.append("Homer Simpson");
-                            } else {
+                            if ((jogo.homerADormir() && jogo.getEquipaAtual() == 10)) {
                                 return "Doh! zzzzzz";
+                            } else {
+                                retorno.append("Homer Simpson");
                             }
                         } else {
-                            if ((jogo.getEquipaBranca().numeroDoTurno % 3) == 0 && jogo.getEquipaBranca().numeroDoTurno != 0 && jogo.getEquipaAtual() == 20) {
-                                retorno.append("Homer Simpson");
-                            } else {
+                            if (jogo.homerADormir() && jogo.getEquipaAtual() == 20) {
                                 return "Doh! zzzzzz";
+                            } else {
+                                retorno.append("Homer Simpson");
                             }
                         }
                         break;

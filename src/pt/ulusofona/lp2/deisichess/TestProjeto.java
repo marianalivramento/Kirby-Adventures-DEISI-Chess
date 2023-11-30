@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestProjeto {
 
     @Test
-    public void teste_loadGame_1() {
+    public void undo_1_movimento() {
 
         GameManager gm = new GameManager();
 
@@ -20,16 +20,80 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(0,0,1,0);
+        gm.move(0,0,0,1);
+        gm.undo();
+
+        String[] u = gm.getSquareInfo(0, 0);
+
+        String[] r = new String[5];
+        r[0] = "1";
+        r[1] = "0";
+        r[2] = "10";
+        r[3] = "O Poderoso Chefao";
+        r[4] = "crazy_emoji_black.png";
+
+        assertEquals(Arrays.toString(u), Arrays.toString(r));
+
+    }
+
+
+    @Test
+    public void undo_movimento_com_captura_peca_volta_para_jogo() {
+
+        GameManager gm = new GameManager();
 
         try {
-            gm.saveGame(new File("test-files/8x16.txt"));
-        } catch (IOException e) {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        assertEquals(false, gm.move(0,0,1,0));
+        gm.move(0,0,0,1);
+        gm.move(1,7,1,2);
+        gm.move(0,1,1,2);
 
+        gm.undo();
+
+        String[] str = gm.getPieceInfo(10);
+
+        assertEquals(str[4], "em jogo");
+
+    }
+
+    @Test
+    public void undo_ate_o_inicio_do_jogo() {
+
+        GameManager gm = new GameManager();
+
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(0,0,0,1);
+        gm.move(1,7,1,2);
+        gm.move(0,1,1,2);
+        gm.move(0,7,0,6);
+        gm.move(1,2,2,2);
+
+
+        gm.undo();
+        gm.undo();
+        gm.undo();
+        gm.undo();
+        gm.undo();
+
+        String[] str = gm.getSquareInfo(0,0);
+
+        String[] esperado = new String[5];
+        esperado[0] = "1";
+        esperado[1] = "0";
+        esperado[2] = "10";
+        esperado[3] = "O Poderoso Chefao";
+        esperado[4] = "crazy_emoji_black.png";
+
+        assertEquals(Arrays.toString(str), Arrays.toString(esperado));
 
     }
 /*

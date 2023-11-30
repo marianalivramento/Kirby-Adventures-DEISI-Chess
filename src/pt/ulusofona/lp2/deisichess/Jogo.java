@@ -8,6 +8,8 @@ public class Jogo {
     Equipa equipaPreta = new Equipa(10);
     int nrDeJogadasSemCaptura = 0;
 
+    int turnoClasse = 0;
+
 
 
     public Jogo() {
@@ -118,11 +120,11 @@ public class Jogo {
         nrDeJogadasSemCaptura = 0;
     }
 
-    boolean homerPodeMexer() {
+    boolean homerADormir() {
         if (equipaAtual == 10) {
-            return equipaPreta.numeroDoTurno % 3 == 0 && equipaPreta.numeroDoTurno != 0;
+            return turnoClasse % 3 == 0;
         } else {
-            return equipaBranca.numeroDoTurno % 3 == 0 && equipaBranca.numeroDoTurno != 0;
+            return turnoClasse % 3 == 0;
 
         }
     }
