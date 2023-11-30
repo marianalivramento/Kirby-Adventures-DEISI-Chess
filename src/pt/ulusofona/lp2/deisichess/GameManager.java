@@ -219,8 +219,8 @@ public class GameManager {
             return;
         }
 
-
         String lastMove = moveHistory.get(moveHistory.size() - 1);
+
         String[] moveInfo = lastMove.split(":");
         int id = Integer.parseInt(moveInfo[0]);
         int x0 = Integer.parseInt(moveInfo[1]);
@@ -228,13 +228,23 @@ public class GameManager {
         int x1 = Integer.parseInt(moveInfo[3]);
         int y1 = Integer.parseInt(moveInfo[4]);
 
+        if (moveInfo.length == 7) {
+            Peca p = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(moveInfo[6]));
+            p.setNaoCapturado(true);
+            jogo.getTabuleiro().retornoQuadrado(x1, y1).setPeca(p);
+            p.setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x1, y1));
+            jogo.getTabuleiro().retornaPecaPorId(id).setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x0, y0));
+            jogo.getTabuleiro().retornoQuadrado(x0, y0).setPeca(jogo.getTabuleiro().retornaPecaPorId(id));
+            moveHistory.remove(moveHistory.size() - 1);
+            return;
+
+        }
+
         jogo.getTabuleiro().retornaPecaPorId(id).setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x0, y0));
         jogo.getTabuleiro().retornoQuadrado(x0, y0).setPeca(jogo.getTabuleiro().retornaPecaPorId(id));
         jogo.getTabuleiro().retornoQuadrado(x1, y1).resetQuadrado();
         moveHistory.remove(moveHistory.size() - 1);
 
-
-//fileHistory.get(fileHistory.size() -2);
 
     }
 
@@ -315,7 +325,7 @@ public class GameManager {
 
                     }
 
-                    moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
+                    moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1+ ":PecaCapturada:" +sqChegada.getPeca().id);
 
 
                     //sqPartida.getPeca().move(x0, y0, x1, y1);
@@ -327,6 +337,7 @@ public class GameManager {
                     sqPartida.getPeca().setCoordenadas(sqChegada);
                     sqChegada.setPeca(sqPartida.getPeca());
                     sqPartida.resetQuadrado();
+
 
                     jogo.resetJogadasSemCaptura();
 
