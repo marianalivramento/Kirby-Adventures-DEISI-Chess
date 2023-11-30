@@ -8,14 +8,18 @@ enum class StatType{
 
 fun func1(gameManager: GameManager) : ArrayList<String> {
     val stringList: ArrayList<String> = ArrayList();
+
     return stringList
 }
 
-fun getStatsCalculator(stat : StatType, f : Function<ArrayList<String>>) : Function<ArrayList<String>> {
+fun getStatsCalculator(stat : StatType) : Function1<GameManager, ArrayList<String>> {
+    val game : GameManager
     when (stat) {
         StatType.TOP_5_CAPTURAS -> return ::func1
         StatType.TOP_5_PONTOS -> return ::func1
-        else -> return ::func1
+        StatType.PECAS_MAIS_5_CAPTURAS -> return ::func1
+        StatType.PECAS_MAIS_BARALHADAS -> return :: func1
+        StatType.TIPOS_CAPTURADOS -> return :: func1
     }
 }
 
