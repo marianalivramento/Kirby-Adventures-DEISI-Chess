@@ -10,26 +10,7 @@ public class GameManager {
 
     ArrayList<String> gameFileInfo = new ArrayList<>();
     ArrayList<String> moveHistory = new ArrayList<>();
-
-    ArrayList<ArrayList<String>> fileHistory = new ArrayList<ArrayList<String>>();
     public GameManager() {
-    }
-
-    public void alteraFile(Tabuleiro tabuleiro) {
-        int count = 0;
-        for (int i = 18; i < gameFileInfo.size(); i++) {
-            String[] linhaY = gameFileInfo.get(i).split(":");
-            for (Square s : tabuleiro.getQuadrados()) {
-                if (s.isOcupado() && s.getCoordenadaX() == count) {
-                    linhaY[s.getCoordenadaY()] = String.valueOf(s.getPeca().getId());
-                } else {
-                    linhaY[s.getCoordenadaY()] = String.valueOf(0);
-                }
-            }
-            gameFileInfo.set(i, String.join(":", linhaY));
-            count++;
-        }
-        fileHistory.add(new ArrayList<>(gameFileInfo));  // Create a copy to store in fileHistory
     }
 
 
@@ -111,6 +92,12 @@ public class GameManager {
 
     public void parsePosicoesJogoGuardado(String line) {
         String[] elementos = line.split(":");
+
+        if (elementos.length == 1) {
+            jogo.equipaAtual = Integer.parseInt(line);
+            return;
+
+        }
 
         Peca p = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(elementos[0]));
         int col = Integer.parseInt(elementos[3]);
@@ -208,6 +195,8 @@ public class GameManager {
                 bufferedWriter.newLine();
             }
 
+            bufferedWriter.write(Integer.toString(jogo.getEquipaAtual()));
+            bufferedWriter.newLine();
 
             for (int i = 0; i < moveHistory.size(); i++) {
                 bufferedWriter.write(moveHistory.get(i));
@@ -215,23 +204,6 @@ public class GameManager {
             }
 
 
-
-/*
-            for (Peca p : jogo.getTabuleiro().getPecas()) {
-                if (!p.getNaoCapturado()) {
-                    bufferedWriter.write("" + p.id);
-                    bufferedWriter.newLine();
-                    continue;
-                }
-
-                if (p.numeroJogadas > 0) {
-                    bufferedWriter.write("" + p.id + ":" + p.getCoordenadas().coordenadaX + ":" + p.getCoordenadas().coordenadaY);
-                    bufferedWriter.newLine();
-                }
-            }
-
-
- */
 
 
         } catch (IOException e) {
@@ -304,7 +276,7 @@ public class GameManager {
         } else if (sqPartida.getPeca().tipo == 6 && !jogo.homerPodeMexer()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
-        } else if (!sqPartida.getPeca().move(x0, y0, x1, y1, )) {
+        } else if (!sqPartida.getPeca().move(x0, y0, x1, y1)) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
@@ -352,19 +324,12 @@ public class GameManager {
 
 
                     sqPartida.getPeca().getCoordenadas().setOcupado(false);
-
                     sqPartida.getPeca().setCoordenadas(sqChegada);
-                    //sqPartida.getPeca().coordenadas = sqChegada;
-
                     sqChegada.setPeca(sqPartida.getPeca());
-                    //sqChegada.peca = sqPartida.peca;
-
-
                     sqPartida.resetQuadrado();
 
                     jogo.resetJogadasSemCaptura();
 
-                    //jogo.nrDeJogadasSemCaptura = 0;
                 } else {
                     moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
                     sqPartida.getPeca().getEquipa().setTurno(false);
@@ -377,13 +342,11 @@ public class GameManager {
                     }
 
                     sqChegada.setPeca(sqPartida.getPeca());
-                    //sqChegada.peca = sqPartida.peca;
                     sqPartida.getPeca().setCoordenadas(sqChegada);
-                    //sqPartida.peca.coordenadas = sqChegada; //faltava isto
                     sqChegada.setOcupado(true);
                     sqPartida.resetQuadrado();
+
                     jogo.aumentaJogadasSemCaptura();
-                    //jogo.nrDeJogadasSemCaptura++;
                 }
 
             } else {
@@ -391,7 +354,6 @@ public class GameManager {
                 return false;
             }
         }
-        alteraFile(jogo.getTabuleiro());
         jogo.mudarEquipa();
         return true;
     }

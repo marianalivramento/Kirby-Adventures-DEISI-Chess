@@ -10,13 +10,11 @@ public class TorreVertical extends Peca{
         return valor;
     }
 
-    boolean move(int x0, int y0, int x1, int y1, Jogo jogo){
+    boolean move(int x0, int y0, int x1, int y1){
         if (x0 == x1 && y0 == y1) {
             return false;
         }
         if (x0 == x1){
-            //coordenadas.setCoordenadaX(x1);
-            //coordenadas.setCoordenadaY(y1);
             numeroJogadas++;
             return true;
         }
@@ -25,7 +23,7 @@ public class TorreVertical extends Peca{
     List<Comparable> jogadasPermitidas(Tabuleiro tabuleiro) {
         List<Comparable> permittedMoves = new ArrayList<>();
         for (Square s : tabuleiro.getQuadrados()) {
-            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), )) {
+            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY())) {
                 if (s.getPeca() == null){
                     permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0" );
                 }else {

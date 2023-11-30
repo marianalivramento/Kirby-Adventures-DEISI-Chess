@@ -11,25 +11,12 @@ public class PoneiMagico extends Peca {
     }
 
 
-    boolean move(int x0, int y0, int x1, int y1, Jogo jogo) {
+    boolean move(int x0, int y0, int x1, int y1) {
 
         if ((x1 == x0 + 2) && ((y1 == y0 + 2) || (y1 == y0 -2))) {
-            if(jogo.getTabuleiro().retornoQuadrado(x1,y1).isOcupado()){
-                if (!pertenceAequipa(jogo)){
-                    return true;
-                }
-            }else {
-                return true;
-            }
-
+            return true;
         } else if ((x1 == x0 - 2) && ((y1 == y0 + 2) || (y1 == y0 -2))) {
-            if(jogo.getTabuleiro().retornoQuadrado(x1,y1).isOcupado()){
-                if (!pertenceAequipa(jogo)){
-                    return true;
-                }
-            }else{
-                return true;
-            }
+            return true;
         }
 
         /*
@@ -68,7 +55,7 @@ public class PoneiMagico extends Peca {
     List<Comparable> jogadasPermitidas(Tabuleiro tabuleiro) {
         List<Comparable> permittedMoves = new ArrayList<>();
         for (Square s : tabuleiro.getQuadrados()) {
-            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), )) {
+            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY())) {
                 if (s.getPeca() == null) {
                     permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0");
                 } else {
