@@ -256,7 +256,7 @@ public class GameManager {
         List<Comparable> hints = new ArrayList<>();
         Square square = jogo.getTabuleiro().retornoQuadrado(x, y);
         if (square.getPeca() != null) {
-            hints = square.getPeca().jogadasPermitidas(jogo.getTabuleiro());
+            hints = square.getPeca().jogadasPermitidas(jogo);
             Collections.sort(hints);
         }
         return hints;
@@ -272,32 +272,37 @@ public class GameManager {
     public boolean move(int x0, int y0, int x1, int y1) {
 
         Square sqPartida = jogo.getTabuleiro().retornoQuadrado(x0, y0);
-
-
         int boardSize = jogo.getTabuleiro().getTamanho();
+
         if (x0 < 0 || x0 >= boardSize || y0 < 0 || y0 >= boardSize || x1 < 0 || x1 >= boardSize || y1 < 0 || y1 >= boardSize) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         }
 
-        if (sqPartida == null || sqPartida.getPeca() == null) {
+        if (sqPartida == null || sqPartida.getPeca() == null || sqPartida.getPeca().getEquipa() == null) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } else if ((x0 == x1) && (y0 == y1)) {
+            //esta condicao já está dentro dos moves e podemmos contar as tentativas invalidas la dentro tb maybe
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
-        } else if (sqPartida.getPeca().tipo == 6 && jogo.homerADormir()) {
+        } else if (sqPartida.getPeca().tipo == 6 && !jogo.homerADormir()) {
+            //same thing here
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
-        } else if (!sqPartida.getPeca().move(x0, y0, x1, y1)) {
+        } /*else if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)) {
+            //what does this do?
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
-        } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
+
+        }
+       */else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } else {
 
             Square sqChegada = jogo.getTabuleiro().retornoQuadrado(x1, y1);
+
             if (sqChegada != null) {
                 if (sqChegada.isOcupado()) {
                     if (sqChegada.getPeca() == null) {
@@ -323,20 +328,27 @@ public class GameManager {
 
                             jogo.getEquipaPreta().aumentarJogadasValidas();
                             jogo.getEquipaPreta().aumentarPecasCapturadas();
-                            jogo.turnoClasse++;
                             jogo.getEquipaPreta().numeroDoTurno++;
+                            jogo.turnoClasse++;
 
                         }
 
                     }
 
-                    moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1+ ":PecaCapturada:" +sqChegada.getPeca().id);
+                    moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
 
+
+                    sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
+                    // podia implementar o move com o jogo como parametro assim teria sempre informaçao sobre os turnos e os quadrados
+
+
+/*
                     sqPartida.getPeca().getCoordenadas().setOcupado(false);
                     sqPartida.getPeca().setCoordenadas(sqChegada);
                     sqChegada.setPeca(sqPartida.getPeca());
                     sqPartida.resetQuadrado();
 
+ */
 
                     jogo.resetJogadasSemCaptura();
 
@@ -345,18 +357,22 @@ public class GameManager {
                     sqPartida.getPeca().getEquipa().setTurno(false);
                     if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
                         jogo.getEquipaBranca().aumentarJogadasValidas();
-                        jogo.turnoClasse++;
                         jogo.getEquipaBranca().numeroDoTurno++;
                     } else {
                         jogo.getEquipaPreta().aumentarJogadasValidas();
-                        jogo.turnoClasse++;
                         jogo.getEquipaPreta().numeroDoTurno++;
                     }
 
-                    sqChegada.setPeca(sqPartida.getPeca());
+                    //para dar invalido quando faz um move inválido ao inves de n dizer nada
+                    if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)){
+                        return false;
+                    }
+                    /*sqChegada.setPeca(sqPartida.getPeca());
                     sqPartida.getPeca().setCoordenadas(sqChegada);
                     sqChegada.setOcupado(true);
                     sqPartida.resetQuadrado();
+
+                     */
 
                     jogo.aumentaJogadasSemCaptura();
                 }

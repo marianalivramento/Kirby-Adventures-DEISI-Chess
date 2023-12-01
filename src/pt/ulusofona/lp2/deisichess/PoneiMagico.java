@@ -11,51 +11,86 @@ public class PoneiMagico extends Peca {
     }
 
 
-    boolean move(int x0, int y0, int x1, int y1) {
-
-        if ((x1 == x0 + 2) && ((y1 == y0 + 2) || (y1 == y0 -2))) {
-            return true;
-        } else if ((x1 == x0 - 2) && ((y1 == y0 + 2) || (y1 == y0 -2))) {
-            return true;
-        }
-
-        /*
-
-        for (int i = 1; i <= 2; i++) {
-            if (x0 == x1 && y0 == y1) {
-                return false;
-            }else if ((x1 == x0 + i && y1 == y0 + i) || (x1 == x0 - i && y1 == y0 - i)) {
-                //coordenadas.setCoordenadaX(x1);
-                //coordenadas.setCoordenadaY(y1);
-                numeroJogadas++;
-                return true;
-            } else if ((y1 == y0 + i && x1 == x0 + i) || (y1 == y0 - i && x1 == x0 - i)) {
-                    //coordenadas.setCoordenadaX(x1);
-                    //coordenadas.setCoordenadaY(y1);
-                    numeroJogadas++;
-                    return true;
-            } else if (x0 == x1 && (y1 == y0 + i || y1 == y0 - i)) {
-                //coordenadas.setCoordenadaX(x1);
-                //coordenadas.setCoordenadaY(y1);
-                numeroJogadas++;
-                return true;
-            } else if (y0 == y1 && (x1 == x0 + i || x1 == x0 - i)) {
-                //coordenadas.setCoordenadaX(x1);
-                //coordenadas.setCoordenadaY(y1);
-                numeroJogadas++;
-                return true;
+    boolean passaPorPeca(int x0, int y0, int x1, int y1, Jogo jogo) {
+        for (Square s : jogo.getTabuleiro().getQuadrados()) {
+            if (s.getCoordenadaX() != x1 && s.getCoordenadaY() != y1) {
+                if (((x1 == x0 + 2) && (y1 == y0 + 2)) && ((s.getCoordenadaX() == x0 + 1) && ((s.getCoordenadaY() == y0 + 1)))) {
+                    if (s.isOcupado()) {
+                        return true;
+                    }
+                } else if (((x1 == x0 - 2) && (y1 == y0 - 2)) && ((s.getCoordenadaX() == x0 - 1) && ((s.getCoordenadaY() == y0 - 1)))) {
+                    if (s.isOcupado()) {
+                        return true;
+                    }
+                } else if (((x1 == x0 - 2) && (y1 == y0 + 2)) && ((s.getCoordenadaX() == x0 - 1) && ((s.getCoordenadaY() == y0 + 1)))) {
+                    if (s.isOcupado()) {
+                        return true;
+                    }
+                } else if (((x1 == x0 + 2) && (y1 == y0 - 2)) && ((s.getCoordenadaX() == x0 + 1) && ((s.getCoordenadaY() == y0 - 1)))) {
+                    if (s.isOcupado()) {
+                        return true;
+                    }
+                }
             }
         }
-
-         */
 
         return false;
     }
 
-    List<Comparable> jogadasPermitidas(Tabuleiro tabuleiro) {
+    boolean move(int x0, int y0, int x1, int y1, Jogo jogo) {
+        Peca pecaQueMove = jogo.getTabuleiro().retornoQuadrado(x0, y0).getPeca();
+        Square quadradoOrigem = jogo.getTabuleiro().retornoQuadrado(x0, y0);
+        Square quadradoDestino = jogo.getTabuleiro().retornoQuadrado(x1, y1);
+
+        if ((x1 == x0 + 2) && ((y1 == y0 + 2) || (y1 == y0 - 2))) {
+            if (quadradoDestino.isOcupado()) {
+                if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
+                    if (!pertenceAequipa(jogo, x1, y1)) {
+                        pecaQueMove.setCoordenadas(quadradoDestino);
+                        quadradoDestino.setPeca(pecaQueMove);
+                        quadradoDestino.setOcupado(true);
+                        quadradoOrigem.resetQuadrado();
+                        return true;
+                    }
+                }
+            } else {
+                pecaQueMove.setCoordenadas(quadradoDestino);
+                quadradoDestino.setPeca(pecaQueMove);
+                quadradoDestino.setOcupado(true);
+                quadradoOrigem.resetQuadrado();
+                return true;
+            }
+
+        } else if ((x1 == x0 - 2) && ((y1 == y0 + 2) || (y1 == y0 - 2))) {
+            if (quadradoDestino.isOcupado()) {
+                if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
+                    if (!pertenceAequipa(jogo, x1, y1)) {
+                        pecaQueMove.setCoordenadas(quadradoDestino);
+                        quadradoDestino.setPeca(pecaQueMove);
+                        quadradoDestino.setOcupado(true);
+                        quadradoOrigem.resetQuadrado();
+                        return true;
+                    }
+                }
+            } else {
+                quadradoDestino.setPeca(pecaQueMove);
+                quadradoDestino.setOcupado(true);
+                pecaQueMove.setCoordenadas(quadradoDestino);
+                quadradoOrigem.resetQuadrado();
+                return true;
+            }
+        }
+
+        equipa.aumentarTenativasInvalidas();
+        return false;
+    }
+
+    List<Comparable> jogadasPermitidas(Jogo jogo) {
         List<Comparable> permittedMoves = new ArrayList<>();
+        Tabuleiro tabuleiro = jogo.getTabuleiro();
+
         for (Square s : tabuleiro.getQuadrados()) {
-            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY())) {
+            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
                 if (s.getPeca() == null) {
                     permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0");
                 } else {
