@@ -283,7 +283,7 @@ public class GameManager {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         }
-        */else if (sqPartida.getPeca().tipo == 6 && !jogo.homerADormir()) {
+        */else if (sqPartida.getPeca().tipo == 6 && jogo.homerADormir()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } /*else if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)) {
