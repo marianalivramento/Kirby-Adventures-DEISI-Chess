@@ -549,37 +549,38 @@ public class GameManager {
                         break;
                     case "7":
                         String jokerDesteTurno = "";
-                        switch (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa().numeroDoTurno % 6) {
-                            case 1:
-                                jokerDesteTurno = "Joker/Rainha";
-                                break;
+                        if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])) != null && jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa() != null) {
+                            switch (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa().numeroDoTurno % 6) {
+                                case 1:
+                                    jokerDesteTurno = "Joker/Rainha";
+                                    break;
 
-                            case 2:
-                                jokerDesteTurno = "Joker/Ponei Mágico";
-                                break;
+                                case 2:
+                                    jokerDesteTurno = "Joker/Ponei Mágico";
+                                    break;
 
-                            case 3:
-                                jokerDesteTurno = "Joker/Padra da Vila";
-                                break;
+                                case 3:
+                                    jokerDesteTurno = "Joker/Padra da Vila";
+                                    break;
 
-                            case 4:
-                                jokerDesteTurno = "Joker/TorreHor";
-                                break;
+                                case 4:
+                                    jokerDesteTurno = "Joker/TorreHor";
+                                    break;
 
-                            case 5:
-                                jokerDesteTurno = "Joker/TorreVer";
-                                break;
+                                case 5:
+                                    jokerDesteTurno = "Joker/TorreVer";
+                                    break;
 
-                            case 0:
-                                jokerDesteTurno = "Joker/Homer Simpson";
-                                break;
+                                case 0:
+                                    jokerDesteTurno = "Joker/Homer Simpson";
+                                    break;
 
+                                default:
+                                    retorno.append("Desconhecido");
+                                    break;
+                            }
+                            retorno.append(jokerDesteTurno);
                         }
-
-                        retorno.append(jokerDesteTurno);
-                        break;
-                    default:
-                        retorno.append("Desconhecido");
                         break;
                 }
             } else if (i == 2) {

@@ -59,24 +59,4 @@ public class PadreDaVila extends Peca {
         return false;
     }
 
-    List<Comparable> jogadasPermitidas(Jogo jogo) {
-        List<Comparable> permittedMoves = new ArrayList<>();
-        Tabuleiro tabuleiro = jogo.getTabuleiro();
-
-        for (Square s : tabuleiro.getQuadrados()) {
-            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
-                if (s.getPeca() == null) {
-                    permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0");
-                } else {
-                    permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->" + s.getPeca().getValor());
-                }
-            }
-        }
-        Collections.sort(permittedMoves, (move1, move2) -> {
-            int valor1 = Integer.parseInt(move1.toString().split("->")[1]);
-            int valor2 = Integer.parseInt(move2.toString().split("->")[1]);
-            return Integer.compare(valor2, valor1);
-        });
-        return permittedMoves;
-    }
 }

@@ -46,20 +46,4 @@ public class TorreVertical extends Peca {
         }
         return false;
     }
-
-    List<Comparable> jogadasPermitidas(Jogo jogo) {
-        List<Comparable> permittedMoves = new ArrayList<>();
-
-        Tabuleiro tabuleiro = jogo.getTabuleiro();
-        for (Square s : tabuleiro.getQuadrados()) {
-            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
-                if (s.getPeca() == null) {
-                    permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0");
-                } else {
-                    permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->" + s.getPeca().getValor());
-                }
-            }
-        }
-        return permittedMoves;
-    }
 }
