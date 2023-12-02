@@ -96,6 +96,29 @@ public class TestProjeto {
         assertEquals(Arrays.toString(str), Arrays.toString(esperado));
 
     }
+
+    @Test
+    public void joker_muda_turno() {
+
+        GameManager gm = new GameManager();
+
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(0,0,0,1);
+        gm.move(1,7,1,2);
+
+
+        String str = gm.getPieceInfoAsString(8);
+
+        assertEquals(str, "8 | Joker/Ponei Mágico | 10 | O Beberolas @ (7, 0)");
+
+    }
+
+
 /*
     @Test
     public void teste_loadGame_1() {

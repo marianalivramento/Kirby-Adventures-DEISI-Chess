@@ -34,8 +34,7 @@ public class Joker extends Peca {
                return homer.move(x0, y0, x1, y1, jogo);
         }
 
-        numeroJogadas++;
-        return true;
+        return false;
     }
 
 }

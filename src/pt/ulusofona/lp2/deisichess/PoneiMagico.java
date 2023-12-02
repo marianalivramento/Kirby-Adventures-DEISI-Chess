@@ -38,9 +38,17 @@ public class PoneiMagico extends Peca {
     }
 
     boolean move(int x0, int y0, int x1, int y1, Jogo jogo) {
+
         Peca pecaQueMove = jogo.getTabuleiro().retornoQuadrado(x0, y0).getPeca();
         Square quadradoOrigem = jogo.getTabuleiro().retornoQuadrado(x0, y0);
         Square quadradoDestino = jogo.getTabuleiro().retornoQuadrado(x1, y1);
+
+        Equipa equipaPeca;
+        if (jogo.getEquipaBranca() == equipa){
+            equipaPeca = jogo.getEquipaBranca();
+        }else{
+            equipaPeca = jogo.getEquipaPreta();
+        }
 
         if ((x1 == x0 + 2) && ((y1 == y0 + 2) || (y1 == y0 - 2))) {
             if (quadradoDestino.isOcupado()) {
@@ -48,10 +56,13 @@ public class PoneiMagico extends Peca {
                     if (!pertenceAequipa(jogo, x1, y1)) {
                         pecaQueMove.setCoordenadas(quadradoDestino);
                         quadradoDestino.setPeca(pecaQueMove);
+
                         quadradoDestino.setOcupado(true);
+                        //equipaPeca.aumentarPecasCapturadas();
+
                         quadradoOrigem.resetQuadrado();
-                        equipa.aumentarJogadasValidas();
-                        equipa.numeroDoTurno++;
+                        //equipaPeca.aumentarJogadasValidas();
+                        //equipaPeca.numeroDoTurno++;
                         return true;
                     }
                 }
@@ -61,8 +72,9 @@ public class PoneiMagico extends Peca {
                     pecaQueMove.setCoordenadas(quadradoDestino);
                     quadradoDestino.setPeca(pecaQueMove);
                     quadradoOrigem.resetQuadrado();
-                    equipa.aumentarJogadasValidas();
-                    equipa.numeroDoTurno++;
+
+                    //equipaPeca.aumentarJogadasValidas();
+                    //equipaPeca.numeroDoTurno++;
                     return true;
 
                 }
@@ -74,10 +86,13 @@ public class PoneiMagico extends Peca {
                     if (!pertenceAequipa(jogo, x1, y1)) {
                         pecaQueMove.setCoordenadas(quadradoDestino);
                         quadradoDestino.setPeca(pecaQueMove);
+
                         quadradoDestino.setOcupado(true);
+                        equipaPeca.aumentarPecasCapturadas();
+
                         quadradoOrigem.resetQuadrado();
-                        equipa.aumentarJogadasValidas();
-                        equipa.numeroDoTurno++;
+                        //equipaPeca.aumentarJogadasValidas();
+                        //equipaPeca.numeroDoTurno++;
                         return true;
                     }
                 }
@@ -87,15 +102,16 @@ public class PoneiMagico extends Peca {
                     pecaQueMove.setCoordenadas(quadradoDestino);
                     quadradoDestino.setPeca(pecaQueMove);
                     quadradoOrigem.resetQuadrado();
-                    equipa.aumentarJogadasValidas();
-                    equipa.numeroDoTurno++;
+
+                    //equipaPeca.aumentarJogadasValidas();
+                    //equipaPeca.numeroDoTurno++;
                     return true;
 
                 }
             }
         }
-        equipa.numeroDoTurno++;
-        equipa.aumentarTenativasInvalidas();
+        //equipaPeca.numeroDoTurno++;
+        //equipaPeca.aumentarTenativasInvalidas();
         return false;
     }
 

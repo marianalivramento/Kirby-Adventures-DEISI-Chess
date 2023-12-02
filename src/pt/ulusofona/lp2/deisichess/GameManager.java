@@ -278,12 +278,12 @@ public class GameManager {
         if (sqPartida == null || sqPartida.getPeca() == null || sqPartida.getPeca().getEquipa() == null) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
-        } else if ((x0 == x1) && (y0 == y1)) {
+        } /*else if ((x0 == x1) && (y0 == y1)) {
             //esta condicao já está dentro dos moves e podemmos contar as tentativas invalidas la dentro tb maybe
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
-        } else if (sqPartida.getPeca().tipo == 6 && !jogo.homerADormir()) {
-            //same thing here
+        }
+        */else if (sqPartida.getPeca().tipo == 6 && !jogo.homerADormir()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } /*else if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)) {
@@ -300,7 +300,7 @@ public class GameManager {
             Square sqChegada = jogo.getTabuleiro().retornoQuadrado(x1, y1);
 
             if (sqChegada != null) {
-                if (sqChegada.isOcupado()) {
+                if (sqChegada.isOcupado()) { // acho q podemos tirar algumas coisas daqui
                     if (sqChegada.getPeca() == null) {
                         return false;
                     }
@@ -311,19 +311,22 @@ public class GameManager {
                         jogo.aumentaTentativasInvalidasPorEquipa();
                         return false;
 
+                    } else if (sqPartida.getPeca().getEquipa() == null) {
+                        jogo.aumentaTentativasInvalidasPorEquipa();
+                        return false;
                     } else {
-                        sqChegada.getPeca().setNaoCapturado(false);
+                        //sqChegada.getPeca().setNaoCapturado(false); já faco isso dentro do move
 
                         if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
 
                             jogo.getEquipaBranca().aumentarJogadasValidas();
-                            jogo.getEquipaBranca().aumentarPecasCapturadas();
+                            //jogo.getEquipaBranca().aumentarPecasCapturadas(); faz mais sentido as pecas serem capturadas dentro do move da peca n? idk
                             jogo.getEquipaBranca().numeroDoTurno++;
                             jogo.turnoClasse++;
                         } else {
 
                             jogo.getEquipaPreta().aumentarJogadasValidas();
-                            jogo.getEquipaPreta().aumentarPecasCapturadas();
+                            //jogo.getEquipaPreta().aumentarPecasCapturadas();
                             jogo.getEquipaPreta().numeroDoTurno++;
                             jogo.turnoClasse++;
 
@@ -332,9 +335,9 @@ public class GameManager {
                     }
 
                     moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
-
-
                     sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
+
+
                     // podia implementar o move com o jogo como parametro assim teria sempre informaçao sobre os turnos e os quadrados
 
 
@@ -346,11 +349,11 @@ public class GameManager {
 
  */
 
-                    jogo.resetJogadasSemCaptura();
+                    jogo.resetJogadasSemCaptura(); //acho q posso mover isto dentro do move right?
 
                 } else {
                     moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
-                    sqPartida.getPeca().getEquipa().setTurno(false);
+                    //sqPartida.getPeca().getEquipa().setTurno(false); do we still need this?
                     if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
                         jogo.getEquipaBranca().aumentarJogadasValidas();
                         jogo.getEquipaBranca().numeroDoTurno++;
@@ -361,6 +364,7 @@ public class GameManager {
 
                     //para dar invalido quando faz um move inválido ao inves de n dizer nada
                     if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)) {
+                        jogo.aumentaTentativasInvalidasPorEquipa();
                         return false;
                     }
                     /*sqChegada.setPeca(sqPartida.getPeca());
@@ -549,39 +553,34 @@ public class GameManager {
                         break;
                     case "7":
                         String jokerDesteTurno = "";
-                        if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])) != null && jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa() != null) {
-                            switch (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa().numeroDoTurno % 6) {
+                        if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[0])).getEquipa() != null) {
+                            switch (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[0])).getEquipa().numeroDoTurno % 6) {
                                 case 1:
                                     jokerDesteTurno = "Joker/Rainha";
                                     break;
-
                                 case 2:
                                     jokerDesteTurno = "Joker/Ponei Mágico";
                                     break;
-
                                 case 3:
                                     jokerDesteTurno = "Joker/Padra da Vila";
                                     break;
-
                                 case 4:
                                     jokerDesteTurno = "Joker/TorreHor";
                                     break;
-
                                 case 5:
                                     jokerDesteTurno = "Joker/TorreVer";
                                     break;
-
                                 case 0:
                                     jokerDesteTurno = "Joker/Homer Simpson";
                                     break;
-
                                 default:
-                                    retorno.append("Desconhecido");
+                                    jokerDesteTurno = "Desconhecido";
                                     break;
                             }
-                            retorno.append(jokerDesteTurno);
                         }
+                        retorno.append(jokerDesteTurno);
                         break;
+
                 }
             } else if (i == 2) {
                 retorno.append(string[i]);
