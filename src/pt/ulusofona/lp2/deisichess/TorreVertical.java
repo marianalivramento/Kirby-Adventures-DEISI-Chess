@@ -13,6 +13,7 @@ public class TorreVertical extends Peca {
     boolean passaPorPeca(int x0, int y0, int x1, int y1, Jogo jogo) {
         int minY = Math.min(y0, y1);
         int maxY = Math.max(y0, y1);
+        // determina os valores minimos e maximos entre y0 e y1 e dps em baixo conta do menor ao maior e ve se tem algum quadrado ocupado
 
         for (int y = minY + 1; y < maxY; y++) {
             Square square = jogo.getTabuleiro().retornoQuadrado(x0, y);

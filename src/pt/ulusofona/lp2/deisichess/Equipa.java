@@ -6,7 +6,7 @@ public class Equipa {
     int nrCapturas = 0;
     int nrJogadasValidas = 0;
     int nrTentativasInvalidas = 0;
-    int numeroDoTurno = 1;
+    int numeroDoTurno = 0;
 
     public Equipa(int pretoOuBranco) {
         this.pretoOuBranco = pretoOuBranco;
