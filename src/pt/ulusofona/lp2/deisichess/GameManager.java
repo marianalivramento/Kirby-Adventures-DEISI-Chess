@@ -10,6 +10,7 @@ public class GameManager {
 
     ArrayList<String> gameFileInfo = new ArrayList<>();
     ArrayList<String> moveHistory = new ArrayList<>();
+
     public GameManager() {
     }
 
@@ -185,7 +186,6 @@ public class GameManager {
         }
 
 
-
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
 
             for (int i = 0; i < gameFileInfo.size(); i++) {
@@ -201,8 +201,6 @@ public class GameManager {
 
             bufferedWriter.write(Integer.toString(jogo.getEquipaAtual()));
             bufferedWriter.newLine();
-
-
 
 
         } catch (IOException e) {
@@ -263,8 +261,6 @@ public class GameManager {
     }
 
 
-
-
     public int getBoardSize() {
         return jogo.getTabuleiro().getTamanho();
     }
@@ -296,7 +292,7 @@ public class GameManager {
             return false;
 
         }
-       */else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
+       */ else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         } else {
@@ -364,7 +360,7 @@ public class GameManager {
                     }
 
                     //para dar invalido quando faz um move inválido ao inves de n dizer nada
-                    if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)){
+                    if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)) {
                         return false;
                     }
                     /*sqChegada.setPeca(sqPartida.getPeca());
@@ -552,7 +548,35 @@ public class GameManager {
                         }
                         break;
                     case "7":
-                        retorno.append("Joker");
+                        String jokerDesteTurno = "";
+                        switch (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa().numeroDoTurno % 6) {
+                            case 1:
+                                jokerDesteTurno = "Joker/Rainha";
+                                break;
+
+                            case 2:
+                                jokerDesteTurno = "Joker/Ponei Mágico";
+                                break;
+
+                            case 3:
+                                jokerDesteTurno = "Joker/Padra da Vila";
+                                break;
+
+                            case 4:
+                                jokerDesteTurno = "Joker/TorreHor";
+                                break;
+
+                            case 5:
+                                jokerDesteTurno = "Joker/TorreVer";
+                                break;
+
+                            case 0:
+                                jokerDesteTurno = "Joker/Homer Simpson";
+                                break;
+
+                        }
+
+                        retorno.append(jokerDesteTurno);
                         break;
                     default:
                         retorno.append("Desconhecido");

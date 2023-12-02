@@ -50,15 +50,22 @@ public class PoneiMagico extends Peca {
                         quadradoDestino.setPeca(pecaQueMove);
                         quadradoDestino.setOcupado(true);
                         quadradoOrigem.resetQuadrado();
+                        equipa.aumentarJogadasValidas();
+                        equipa.numeroDoTurno++;
                         return true;
                     }
                 }
             } else {
-                pecaQueMove.setCoordenadas(quadradoDestino);
-                quadradoDestino.setPeca(pecaQueMove);
-                quadradoDestino.setOcupado(true);
-                quadradoOrigem.resetQuadrado();
-                return true;
+                if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
+
+                    pecaQueMove.setCoordenadas(quadradoDestino);
+                    quadradoDestino.setPeca(pecaQueMove);
+                    quadradoOrigem.resetQuadrado();
+                    equipa.aumentarJogadasValidas();
+                    equipa.numeroDoTurno++;
+                    return true;
+
+                }
             }
 
         } else if ((x1 == x0 - 2) && ((y1 == y0 + 2) || (y1 == y0 - 2))) {
@@ -69,18 +76,25 @@ public class PoneiMagico extends Peca {
                         quadradoDestino.setPeca(pecaQueMove);
                         quadradoDestino.setOcupado(true);
                         quadradoOrigem.resetQuadrado();
+                        equipa.aumentarJogadasValidas();
+                        equipa.numeroDoTurno++;
                         return true;
                     }
                 }
             } else {
-                quadradoDestino.setPeca(pecaQueMove);
-                quadradoDestino.setOcupado(true);
-                pecaQueMove.setCoordenadas(quadradoDestino);
-                quadradoOrigem.resetQuadrado();
-                return true;
+                if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
+
+                    pecaQueMove.setCoordenadas(quadradoDestino);
+                    quadradoDestino.setPeca(pecaQueMove);
+                    quadradoOrigem.resetQuadrado();
+                    equipa.aumentarJogadasValidas();
+                    equipa.numeroDoTurno++;
+                    return true;
+
+                }
             }
         }
-
+        equipa.numeroDoTurno++;
         equipa.aumentarTenativasInvalidas();
         return false;
     }

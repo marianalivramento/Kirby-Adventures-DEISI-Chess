@@ -38,35 +38,68 @@ public class Rainha extends Peca {
 
         for (int i = 1; i <= 5; i++) {
             if ((x1 == x0 + i || x1 == x0 - i) && y1 == y0) { //direita e esquerda
-                if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
-                    if (!pertenceAequipa(jogo, x1, y1)) {
+                if (quadradoDestino.isOcupado()) {
+                    if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
+                        if (!pertenceAequipa(jogo, x1, y1)) {
+                            pecaQueMove.setCoordenadas(quadradoDestino);
+                            quadradoDestino.setPeca(pecaQueMove);
+                            quadradoDestino.setOcupado(true);
+                            quadradoOrigem.resetQuadrado();
+                            return true;
+                        }
+                    }
+                } else {
+                    if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
+
                         pecaQueMove.setCoordenadas(quadradoDestino);
                         quadradoDestino.setPeca(pecaQueMove);
-                        quadradoDestino.setOcupado(true);
                         quadradoOrigem.resetQuadrado();
                         return true;
+
                     }
                 }
             }
             if (x1 == x0 && (y1 == y0 + i || y1 == y0 - i)) { //frente e trás
-                if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
-                    if (!pertenceAequipa(jogo, x1, y1)) {
+                if (quadradoDestino.isOcupado()) {
+                    if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
+                        if (!pertenceAequipa(jogo, x1, y1)) {
+                            pecaQueMove.setCoordenadas(quadradoDestino);
+                            quadradoDestino.setPeca(pecaQueMove);
+                            quadradoDestino.setOcupado(true);
+                            quadradoOrigem.resetQuadrado();
+                            return true;
+                        }
+                    }
+                } else {
+                    if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
+
                         pecaQueMove.setCoordenadas(quadradoDestino);
                         quadradoDestino.setPeca(pecaQueMove);
-                        quadradoDestino.setOcupado(true);
                         quadradoOrigem.resetQuadrado();
                         return true;
+
                     }
                 }
             }
             if ((y1 == y0 + i || y1 == y0 - i) && (x1 == x0 + i || x1 == x0 - i)) {
-                if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
-                    if (!pertenceAequipa(jogo, x1, y1)) {
+                if (quadradoDestino.isOcupado()) {
+                    if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
+                        if (!pertenceAequipa(jogo, x1, y1)) {
+                            pecaQueMove.setCoordenadas(quadradoDestino);
+                            quadradoDestino.setPeca(pecaQueMove);
+                            quadradoDestino.setOcupado(true);
+                            quadradoOrigem.resetQuadrado();
+                            return true;
+                        }
+                    }
+                } else {
+                    if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
+
                         pecaQueMove.setCoordenadas(quadradoDestino);
                         quadradoDestino.setPeca(pecaQueMove);
-                        quadradoDestino.setOcupado(true);
                         quadradoOrigem.resetQuadrado();
                         return true;
+
                     }
                 }
             }
@@ -79,10 +112,10 @@ public class Rainha extends Peca {
         Tabuleiro tabuleiro = jogo.getTabuleiro();
 
         for (Square s : tabuleiro.getQuadrados()) {
-            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(),jogo )) {
-                if (s.getPeca() == null){
-                    permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0" );
-                }else {
+            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
+                if (s.getPeca() == null) {
+                    permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0");
+                } else {
                     permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->" + s.getPeca().getValor());
                 }
             }
