@@ -379,11 +379,12 @@ public class GameManager {
 
                     //para dar invalido quando faz um move inválido ao inves de n dizer nada
                     if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)) {
-                        jogo.getClassEquipaAtual().aumentarTenativasInvalidas();
+                        jogo.aumentaTentativasInvalidasPorEquipa();
                         return false;
                     }
                     jogo.getClassEquipaAtual().numeroDoTurno++;
                     jogo.getClassEquipaAtual().aumentarJogadasValidas();
+                    //jogo.getClassEquipaAtual().aumentarPecasCapturadas();
                     jogo.turnoClasse++;
 
                     /*sqChegada.setPeca(sqPartida.getPeca());

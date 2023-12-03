@@ -25,9 +25,20 @@ public class Jogo {
 
     public String getResultado() {
 
-        if (tabuleiro.nrDePecasPretasEmJogo() == 0) {
+        boolean flagReiPreto = false;
+        boolean flagReiBranco = false;
+
+        for (Peca p : tabuleiro.getPecas()) {
+            if (p.id == 1 && p.naoCapturado) {
+                flagReiPreto = true;
+            } else if (p.id == 9 && p.naoCapturado) {
+                flagReiBranco = true;
+            }
+        }
+
+        if (tabuleiro.nrDePecasPretasEmJogo() == 0 || !flagReiPreto) {
             this.resultado = "VENCERAM AS BRANCAS";
-        } else if (tabuleiro.nrDePecasBrancasEmJogo() == 0) {
+        } else if (tabuleiro.nrDePecasBrancasEmJogo() == 0 || !flagReiBranco) {
             this.resultado = "VENCERAM AS PRETAS";
         } else {
             this.resultado = "EMPATE";

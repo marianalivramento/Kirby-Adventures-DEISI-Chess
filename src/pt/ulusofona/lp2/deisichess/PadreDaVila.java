@@ -67,7 +67,9 @@ public class PadreDaVila extends Peca {
                     quadradoDestino.setPeca(pecaQueMove);
 
                     quadradoDestino.setOcupado(true);
-                    equipaPeca.aumentarPecasCapturadas();
+                    //equipaPeca.aumentarPecasCapturadas();
+                    jogo.getClassEquipaAtual().aumentarPecasCapturadas();
+
 
                     quadradoOrigem.resetQuadrado();
                     return true;
