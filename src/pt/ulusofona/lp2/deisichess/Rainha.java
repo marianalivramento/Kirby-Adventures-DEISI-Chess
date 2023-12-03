@@ -66,7 +66,9 @@ public class Rainha extends Peca {
                     quadradoDestino.setPeca(pecaQueMove);
 
                     quadradoDestino.setOcupado(true);
-                    equipaPeca.aumentarPecasCapturadas();
+                    //equipaPeca.aumentarPecasCapturadas();
+                    jogo.getClassEquipaAtual().aumentarPecasCapturadas();
+
 
                     //equipaPeca.aumentarJogadasValidas();
                     //equipaPeca.numeroDoTurno++;

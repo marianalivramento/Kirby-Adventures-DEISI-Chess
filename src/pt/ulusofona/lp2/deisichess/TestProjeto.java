@@ -118,6 +118,30 @@ public class TestProjeto {
 
     }
 
+    @Test
+    public void conta_numero_capturas() {
+
+        GameManager gm = new GameManager();
+
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(1,0,1,5);
+        gm.move(0,7,0,6);
+        gm.move(2,0,4,2);
+        gm.move(2,7,4,5);
+        gm.move(5,0,5,5);
+        gm.move(5,7,5,5);
+        gm.move(7,0,7,7);
+
+
+        assertEquals(0, gm.jogo.equipaPreta.nrCapturas);
+
+    }
+
 
 /*
     @Test

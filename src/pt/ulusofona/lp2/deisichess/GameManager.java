@@ -350,7 +350,12 @@ public class GameManager {
                     moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1+ ":PecaCapturada:" +sqChegada.getPeca().id);
 
 
-                    sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
+                    //sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
+
+                    if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)) {
+                        jogo.aumentaTentativasInvalidasPorEquipa();
+                        return false;
+                    }
                     jogo.getClassEquipaAtual().numeroDoTurno++;
                     jogo.turnoClasse++;
                     // podia implementar o move com o jogo como parametro assim teria sempre informaçao sobre os turnos e os quadrados
