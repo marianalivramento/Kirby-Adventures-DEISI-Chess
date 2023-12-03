@@ -225,6 +225,8 @@ public class GameManager {
         int x1 = Integer.parseInt(moveInfo[3]);
         int y1 = Integer.parseInt(moveInfo[4]);
 
+        //if (id == 8 || id == 16) {
+
         if (moveInfo.length == 7) {
             Peca p = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(moveInfo[6]));
             p.setNaoCapturado(true);
@@ -307,7 +309,11 @@ public class GameManager {
                     if (sqChegada.getPeca().getEquipa().getPretoOuBranco() == sqPartida.getPeca().getEquipa().getPretoOuBranco()) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
                         return false;
-                    } else if (sqPartida.getPeca().getClass().equals(Rainha.class) && sqChegada.getPeca().getClass().equals(Rainha.class)) {
+                    } else if (sqPartida.getPeca().getClass().equals(Rainha.class) && (sqChegada.getPeca().getClass().equals(Rainha.class)
+                     || (sqChegada.getPeca().getClass().equals(Joker.class) && jogo.turnoClasse % 6 == 0))) {
+                        jogo.aumentaTentativasInvalidasPorEquipa();
+                        return false;
+                    } else if ((sqPartida.getPeca().getClass().equals(Joker.class) && jogo.turnoClasse % 6 == 0) && sqChegada.getPeca().getClass().equals(Rainha.class)) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
                         return false;
 
