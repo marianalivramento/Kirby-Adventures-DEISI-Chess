@@ -300,7 +300,7 @@ public class GameManager {
             Square sqChegada = jogo.getTabuleiro().retornoQuadrado(x1, y1);
 
             if (sqChegada != null) {
-                if (sqChegada.isOcupado()) { // acho q podemos tirar algumas coisas daqui
+                if (sqChegada.isOcupado()) {
                     if (sqChegada.getPeca() == null) {
                         return false;
                     }
@@ -311,22 +311,19 @@ public class GameManager {
                         jogo.aumentaTentativasInvalidasPorEquipa();
                         return false;
 
-                    } else if (sqPartida.getPeca().getEquipa() == null) {
-                        jogo.aumentaTentativasInvalidasPorEquipa();
-                        return false;
                     } else {
-                        //sqChegada.getPeca().setNaoCapturado(false); já faco isso dentro do move
+                        sqChegada.getPeca().setNaoCapturado(false);
 
                         if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
 
                             jogo.getEquipaBranca().aumentarJogadasValidas();
-                            //jogo.getEquipaBranca().aumentarPecasCapturadas(); faz mais sentido as pecas serem capturadas dentro do move da peca n? idk
+                            jogo.getEquipaBranca().aumentarPecasCapturadas();
                             jogo.getEquipaBranca().numeroDoTurno++;
                             jogo.turnoClasse++;
                         } else {
 
                             jogo.getEquipaPreta().aumentarJogadasValidas();
-                            //jogo.getEquipaPreta().aumentarPecasCapturadas();
+                            jogo.getEquipaPreta().aumentarPecasCapturadas();
                             jogo.getEquipaPreta().numeroDoTurno++;
                             jogo.turnoClasse++;
 
@@ -335,9 +332,9 @@ public class GameManager {
                     }
 
                     moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
+
+
                     sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
-
-
                     // podia implementar o move com o jogo como parametro assim teria sempre informaçao sobre os turnos e os quadrados
 
 
@@ -349,11 +346,11 @@ public class GameManager {
 
  */
 
-                    jogo.resetJogadasSemCaptura(); //acho q posso mover isto dentro do move right?
+                    jogo.resetJogadasSemCaptura();
 
                 } else {
                     moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
-                    //sqPartida.getPeca().getEquipa().setTurno(false); do we still need this?
+                    sqPartida.getPeca().getEquipa().setTurno(false);
                     if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
                         jogo.getEquipaBranca().aumentarJogadasValidas();
                         jogo.getEquipaBranca().numeroDoTurno++;
@@ -364,7 +361,6 @@ public class GameManager {
 
                     //para dar invalido quando faz um move inválido ao inves de n dizer nada
                     if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)) {
-                        jogo.aumentaTentativasInvalidasPorEquipa();
                         return false;
                     }
                     /*sqChegada.setPeca(sqPartida.getPeca());
@@ -541,46 +537,51 @@ public class GameManager {
                             if ((jogo.homerADormir() && jogo.getEquipaAtual() == 10)) {
                                 return "Doh! zzzzzz";
                             } else {
-                                retorno.append("Homer Simpson");
+                                retorno.append("Homer Simpson | 2");
                             }
                         } else {
                             if (jogo.homerADormir() && jogo.getEquipaAtual() == 20) {
                                 return "Doh! zzzzzz";
                             } else {
-                                retorno.append("Homer Simpson");
+                                retorno.append("Homer Simpson | 2");
                             }
                         }
                         break;
                     case "7":
                         String jokerDesteTurno = "";
-                        if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[0])).getEquipa() != null) {
-                            switch (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[0])).getEquipa().numeroDoTurno % 6) {
-                                case 0:
-                                    jokerDesteTurno = "Joker/Rainha";
-                                    break;
+                        if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])) != null && jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa() != null) {
+                            switch (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa().numeroDoTurno % 6) {
                                 case 1:
-                                    jokerDesteTurno = "Joker/Ponei Mágico";
+                                    jokerDesteTurno = "Joker/Rainha | 4";
                                     break;
+
                                 case 2:
-                                    jokerDesteTurno = "Joker/Padra da Vila";
+                                    jokerDesteTurno = "Joker/Ponei Mágico | 4";
                                     break;
+
                                 case 3:
-                                    jokerDesteTurno = "Joker/TorreHor";
+                                    jokerDesteTurno = "Joker/Padra da Vila | 4";
                                     break;
+
                                 case 4:
-                                    jokerDesteTurno = "Joker/TorreVer";
+                                    jokerDesteTurno = "Joker/TorreHor | 4";
                                     break;
+
                                 case 5:
-                                    jokerDesteTurno = "Joker/Homer Simpson";
+                                    jokerDesteTurno = "Joker/TorreVer | 4";
                                     break;
+
+                                case 0:
+                                    jokerDesteTurno = "Joker/Homer Simpson | 4";
+                                    break;
+
                                 default:
-                                    jokerDesteTurno = "Desconhecido";
+                                    retorno.append("Desconhecido");
                                     break;
                             }
+                            retorno.append(jokerDesteTurno);
                         }
-                        retorno.append(jokerDesteTurno);
                         break;
-
                 }
             } else if (i == 2) {
                 retorno.append(string[i]);

@@ -16,7 +16,7 @@ public class HomerSimpson extends Peca {
         Square quadradoDestino = jogo.getTabuleiro().retornoQuadrado(x1, y1);
 // se o o turno for multiplo de 3 ele pode se mexer else he sleeps e quanto o movimento n sei se é msm assim mas era o q estava aqui antes
 
-        if (equipa.numeroDoTurno % 3 != 0) {
+        //if (equipa.numeroDoTurno % 3 != 0) {
             if ((x1 == x0 + 1 && y1 == y0 + 1) || (x1 == x0 - 1 && y1 == y0 - 1) || (x1 == x0 + 1 && y1 == y0 - 1) || (x1 == x0 - 1 && y1 == y0 + 1)) {
                 pecaQueMove.setCoordenadas(quadradoDestino);
                 quadradoDestino.setPeca(pecaQueMove);
@@ -24,7 +24,7 @@ public class HomerSimpson extends Peca {
                 quadradoOrigem.resetQuadrado();
                 numeroJogadas++;
                 return true;
-            }
+            //}
         }
 
         return false;
