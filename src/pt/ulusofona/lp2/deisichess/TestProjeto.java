@@ -114,7 +114,7 @@ public class TestProjeto {
 
         String str = gm.getPieceInfoAsString(8);
 
-        assertEquals(str, "8 | Joker/Ponei Mágico | 10 | O Beberolas @ (7, 0)");
+        assertEquals(str, "8 | Joker/Padre da Vila | 4 | 10 | O Beberolas @ (7, 0)");
 
     }
 

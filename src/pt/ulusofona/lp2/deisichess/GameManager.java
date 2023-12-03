@@ -539,13 +539,13 @@ public class GameManager {
                         break;
                     case "6":
                         if (string[2].equals("10")) {
-                            if ((jogo.homerADormir() && jogo.getEquipaAtual() == 10)) {
+                            if (jogo.homerADormir()) {
                                 return "Doh! zzzzzz";
                             } else {
                                 retorno.append("Homer Simpson | 2");
                             }
                         } else {
-                            if (jogo.homerADormir() && jogo.getEquipaAtual() == 20) {
+                            if (jogo.homerADormir()) {
                                 return "Doh! zzzzzz";
                             } else {
                                 retorno.append("Homer Simpson | 2");
@@ -555,43 +555,43 @@ public class GameManager {
                     case "7":
 
 
-                        String jokerDesteTurno = "";
-                        if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])) != null && jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa() != null) {
-                            int indice = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa().numeroDoTurno;
-                            int indice2 = jogo.getClassEquipaAtual().numeroDoTurno;
-                            switch (indice2 < 6? indice2 : indice2 % 6) {
+                        //String jokerDesteTurno = "";
+                        //if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])) != null && jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa() != null) {
+                            //int indice = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa().numeroDoTurno;
+                            int indice = jogo.turnoClasse;
+                            switch (indice < 6? indice : indice % 6) {
                                 case 0:
-                                    jokerDesteTurno = "Joker/Rainha | 4";
+                                    retorno.append("Joker/Rainha | 4");
                                     break;
 
                                 case 1:
-                                    jokerDesteTurno = "Joker/Ponei Mágico | 4";
+                                    retorno.append("Joker/Ponei Mágico | 4");
                                     break;
 
                                 case 2:
-                                    jokerDesteTurno = "Joker/Padre da Vila | 4";
+                                    retorno.append("Joker/Padre da Vila | 4");
                                     break;
 
                                 case 3:
-                                    jokerDesteTurno = "Joker/TorreHor | 4";
+                                    retorno.append("Joker/TorreHor | 4");
                                     break;
 
                                 case 4:
-                                    jokerDesteTurno = "Joker/TorreVer | 4";
+                                    retorno.append("Joker/TorreVer | 4");
                                     break;
 
                                 case 5:
-                                    jokerDesteTurno = "Joker/Homer Simpson | 4";
+                                    retorno.append("Joker/Homer Simpson | 4");
                                     break;
 
                                 default:
                                     retorno.append("Desconhecido");
                                     break;
                             }
-                            retorno.append(jokerDesteTurno);
+                            //retorno.append(jokerDesteTurno);
                         }
-                        break;
-                }
+                        //break;
+                //}
             } else if (i == 2) {
                 retorno.append(string[i]);
             } else {

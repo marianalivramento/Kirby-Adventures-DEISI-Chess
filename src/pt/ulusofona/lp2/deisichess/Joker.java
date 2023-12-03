@@ -38,7 +38,7 @@ public class Joker extends Peca {
     boolean move(int x0, int y0, int x1, int y1, Jogo jogo) {
         int e = jogo.getEquipaAtual();
 
-        switch (e == 10 ? jogo.getEquipaPreta().numeroDoTurno % 6 : jogo.getEquipaBranca().numeroDoTurno % 6) {
+        switch (jogo.turnoClasse) {
             case 0:
                 Rainha rainha = new Rainha();
                 return rainha.move(x0, y0, x1, y1, jogo);
