@@ -70,15 +70,20 @@ abstract class Peca implements Comparable<Peca> {
     boolean pertenceAequipa(Jogo game, int x, int y) {
         Square s = game.getTabuleiro().retornoQuadrado(x, y);
         if (s.isOcupado()) {
-            if (s.getPeca().getEquipa().getPretoOuBranco() == equipa.getPretoOuBranco()) {
-                return true;
+            if (s.getPeca().getEquipa() != null && equipa != null) {
+                if (s.getPeca().getEquipa().getPretoOuBranco() == equipa.getPretoOuBranco()) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    boolean passaPorPeca(int x0, int y0, int x1, int y1, Jogo jogo){return false;}
-    abstract boolean movesPermitidos(int x0, int y0, int x1, int y1,Jogo jogo);
+    boolean passaPorPeca(int x0, int y0, int x1, int y1, Jogo jogo) {
+        return false;
+    }
+
+    abstract boolean movesPermitidos(int x0, int y0, int x1, int y1, Jogo jogo);
 
     abstract boolean move(int x0, int y0, int x1, int y1, Jogo jogo);
 
@@ -87,7 +92,7 @@ abstract class Peca implements Comparable<Peca> {
         Tabuleiro tabuleiro = jogo.getTabuleiro();
 
         for (Square s : tabuleiro.getQuadrados()) {
-            if (movesPermitidos(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(),jogo )) {
+            if (movesPermitidos(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
                 if (!s.isOcupado()) {
                     permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0");
                 } else {
@@ -95,11 +100,8 @@ abstract class Peca implements Comparable<Peca> {
                 }
             }
         }
-        Collections.sort(permittedMoves, (move1, move2) -> {
-            int valor1 = Integer.parseInt(move1.toString().split("->")[1]);
-            int valor2 = Integer.parseInt(move2.toString().split("->")[1]);
-            return Integer.compare(valor2, valor1);
-        });
+        Collections.sort(permittedMoves);
+
         return permittedMoves;
     }
 
@@ -109,9 +111,10 @@ abstract class Peca implements Comparable<Peca> {
             if (peca.getValor() < valor) {
                 return 1;
             } else if (peca.getValor() == valor) {
-                if (!peca.getClass().equals(Rainha.class)) {
-                    return 0;
+                if (!peca.getClass().equals(Rainha.class) && tipo != 1) {
+                    return 0 ;
                 }
+                return 0;
             }
             return -1;
         }

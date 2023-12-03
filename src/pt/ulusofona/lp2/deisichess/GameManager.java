@@ -551,27 +551,27 @@ public class GameManager {
                         String jokerDesteTurno = "";
                         if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])) != null && jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa() != null) {
                             switch (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa().numeroDoTurno % 6) {
-                                case 1:
+                                case 0:
                                     jokerDesteTurno = "Joker/Rainha | 4";
                                     break;
 
-                                case 2:
+                                case 1:
                                     jokerDesteTurno = "Joker/Ponei Mágico | 4";
                                     break;
 
-                                case 3:
+                                case 2:
                                     jokerDesteTurno = "Joker/Padra da Vila | 4";
                                     break;
 
-                                case 4:
+                                case 3:
                                     jokerDesteTurno = "Joker/TorreHor | 4";
                                     break;
 
-                                case 5:
+                                case 4:
                                     jokerDesteTurno = "Joker/TorreVer | 4";
                                     break;
 
-                                case 0:
+                                case 5:
                                     jokerDesteTurno = "Joker/Homer Simpson | 4";
                                     break;
 

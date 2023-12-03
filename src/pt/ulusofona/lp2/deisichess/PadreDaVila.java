@@ -57,7 +57,7 @@ public class PadreDaVila extends Peca {
             equipaPeca = jogo.getEquipaPreta();
         }
 
-        if (movesPermitidos(x0, y0, x1, y1, jogo))
+        if (movesPermitidos(x0, y0, x1, y1, jogo)) {
             if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
                 if (quadradoDestino.isOcupado()) {
 
@@ -82,6 +82,7 @@ public class PadreDaVila extends Peca {
                 }
 
             }
+        }
 
 
         return false;
