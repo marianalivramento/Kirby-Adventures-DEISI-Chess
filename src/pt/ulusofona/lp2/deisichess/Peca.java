@@ -70,7 +70,7 @@ abstract class Peca implements Comparable<Peca> {
     boolean pertenceAequipa(Jogo game, int x, int y) {
         Square s = game.getTabuleiro().retornoQuadrado(x, y);
         if (s.isOcupado()) {
-            if (s.getPeca().getEquipa() == equipa) {
+            if (s.getPeca().getEquipa().getPretoOuBranco() == equipa.getPretoOuBranco()) {
                 return true;
             }
         }
@@ -78,6 +78,8 @@ abstract class Peca implements Comparable<Peca> {
     }
 
     boolean passaPorPeca(int x0, int y0, int x1, int y1, Jogo jogo){return false;}
+    abstract boolean movesPermitidos(int x0, int y0, int x1, int y1,Jogo jogo);
+
     abstract boolean move(int x0, int y0, int x1, int y1, Jogo jogo);
 
     List<Comparable> jogadasPermitidas(Jogo jogo) {
@@ -85,7 +87,7 @@ abstract class Peca implements Comparable<Peca> {
         Tabuleiro tabuleiro = jogo.getTabuleiro();
 
         for (Square s : tabuleiro.getQuadrados()) {
-            if (move(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
+            if (movesPermitidos(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(),jogo )) {
                 if (!s.isOcupado()) {
                     permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0");
                 } else {

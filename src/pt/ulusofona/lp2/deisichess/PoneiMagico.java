@@ -1,8 +1,5 @@
 package pt.ulusofona.lp2.deisichess;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PoneiMagico extends Peca {
     int valor = 5;
 
@@ -37,6 +34,18 @@ public class PoneiMagico extends Peca {
         return false;
     }
 
+    @Override
+    boolean movesPermitidos(int x0, int y0, int x1, int y1, Jogo jogo) {
+        if (!pertenceAequipa(jogo, x1, y1)) {
+            if ((x1 == x0 + 2) && ((y1 == y0 + 2) || (y1 == y0 - 2))) {
+                return true;
+            } else if ((x1 == x0 - 2) && ((y1 == y0 + 2) || (y1 == y0 - 2))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     boolean move(int x0, int y0, int x1, int y1, Jogo jogo) {
 
         Peca pecaQueMove = jogo.getTabuleiro().retornoQuadrado(x0, y0).getPeca();
@@ -44,72 +53,73 @@ public class PoneiMagico extends Peca {
         Square quadradoDestino = jogo.getTabuleiro().retornoQuadrado(x1, y1);
 
         Equipa equipaPeca;
-        if (jogo.getEquipaBranca() == equipa){
+        if (jogo.getEquipaBranca() == equipa) {
             equipaPeca = jogo.getEquipaBranca();
-        }else{
+        } else {
             equipaPeca = jogo.getEquipaPreta();
         }
 
-        if ((x1 == x0 + 2) && ((y1 == y0 + 2) || (y1 == y0 - 2))) {
+        if (movesPermitidos(x0, y0, x1, y1, jogo)) {
             if (quadradoDestino.isOcupado()) {
                 if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
-                    if (!pertenceAequipa(jogo, x1, y1)) {
-                        pecaQueMove.setCoordenadas(quadradoDestino);
-                        quadradoDestino.setPeca(pecaQueMove);
 
-                        quadradoDestino.setOcupado(true);
-                        //equipaPeca.aumentarPecasCapturadas();
-
-                        quadradoOrigem.resetQuadrado();
-                        //equipaPeca.aumentarJogadasValidas();
-                        //equipaPeca.numeroDoTurno++;
-                        return true;
-                    }
-                }
-            } else {
-                if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
-
+                    quadradoDestino.getPeca().setNaoCapturado(false);
+                    quadradoDestino.getPeca().setCoordenadas(null);
                     pecaQueMove.setCoordenadas(quadradoDestino);
                     quadradoDestino.setPeca(pecaQueMove);
-                    quadradoOrigem.resetQuadrado();
 
-                    //equipaPeca.aumentarJogadasValidas();
-                    //equipaPeca.numeroDoTurno++;
+                    quadradoDestino.setOcupado(true);
+                    equipaPeca.aumentarPecasCapturadas();
+
+                    quadradoOrigem.resetQuadrado();
                     return true;
-
                 }
-            }
 
-        } else if ((x1 == x0 - 2) && ((y1 == y0 + 2) || (y1 == y0 - 2))) {
-            if (quadradoDestino.isOcupado()) {
-                if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
-                    if (!pertenceAequipa(jogo, x1, y1)) {
-                        pecaQueMove.setCoordenadas(quadradoDestino);
-                        quadradoDestino.setPeca(pecaQueMove);
-
-                        quadradoDestino.setOcupado(true);
-                        equipaPeca.aumentarPecasCapturadas();
-
-                        quadradoOrigem.resetQuadrado();
-                        //equipaPeca.aumentarJogadasValidas();
-                        //equipaPeca.numeroDoTurno++;
-                        return true;
-                    }
-                }
             } else {
                 if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
 
                     pecaQueMove.setCoordenadas(quadradoDestino);
                     quadradoDestino.setPeca(pecaQueMove);
-                    quadradoOrigem.resetQuadrado();
 
-                    //equipaPeca.aumentarJogadasValidas();
-                    //equipaPeca.numeroDoTurno++;
+                    quadradoDestino.setOcupado(true);
+                    quadradoOrigem.resetQuadrado();
                     return true;
 
                 }
             }
         }
+/*
+        if (quadradoDestino.isOcupado()) {
+            if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
+                if (!pertenceAequipa(jogo, x1, y1)) {
+                    pecaQueMove.setCoordenadas(quadradoDestino);
+                    quadradoDestino.setPeca(pecaQueMove);
+
+                    quadradoDestino.setOcupado(true);
+                    equipaPeca.aumentarPecasCapturadas();
+
+                    quadradoOrigem.resetQuadrado();
+                    //equipaPeca.aumentarJogadasValidas();
+                    //equipaPeca.numeroDoTurno++;
+                    return true;
+                }
+            }
+        } else {
+            if (!passaPorPeca(x0, y0, x1, y1, jogo)) {
+
+                pecaQueMove.setCoordenadas(quadradoDestino);
+                quadradoDestino.setPeca(pecaQueMove);
+                quadradoOrigem.resetQuadrado();
+
+                //equipaPeca.aumentarJogadasValidas();
+                //equipaPeca.numeroDoTurno++;
+                return true;
+
+            }
+        }
+
+ */
+
         //equipaPeca.numeroDoTurno++;
         //equipaPeca.aumentarTenativasInvalidas();
         return false;
