@@ -95,9 +95,13 @@ public class GameManager {
         String[] elementos = line.split(":");
 
         if (elementos.length == 1) {
-            jogo.equipaAtual = Integer.parseInt(line);
-            return;
-
+            if(elementos[0].equals("GameOver")) {
+                getGameResults();
+                return;
+            } else {
+                jogo.equipaAtual = Integer.parseInt(line);
+                return;
+            }
         }
 
         int x0 = Integer.parseInt(elementos[1]);
@@ -201,6 +205,11 @@ public class GameManager {
 
             bufferedWriter.write(Integer.toString(jogo.getEquipaAtual()));
             bufferedWriter.newLine();
+
+            if(gameOver()) {
+                bufferedWriter.write("GameOver");
+                bufferedWriter.newLine();
+            }
 
 
         } catch (IOException e) {
@@ -323,13 +332,13 @@ public class GameManager {
                         if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
 
                             jogo.getEquipaBranca().aumentarJogadasValidas();
-                            jogo.getEquipaBranca().aumentarPecasCapturadas();
+                            //jogo.getEquipaBranca().aumentarPecasCapturadas();
                             //jogo.getEquipaBranca().numeroDoTurno++;
                             //jogo.turnoClasse++;
                         } else {
 
                             jogo.getEquipaPreta().aumentarJogadasValidas();
-                            jogo.getEquipaPreta().aumentarPecasCapturadas();
+                            //jogo.getEquipaPreta().aumentarPecasCapturadas();
                             //jogo.getEquipaPreta().numeroDoTurno++;
                             //jogo.turnoClasse++;
 
@@ -360,19 +369,21 @@ public class GameManager {
                 } else {
                     moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
                     sqPartida.getPeca().getEquipa().setTurno(false);
-                    if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
-                        jogo.getEquipaBranca().aumentarJogadasValidas();
+                    //if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
+                        //jogo.getEquipaBranca().aumentarJogadasValidas();
                         //jogo.getEquipaBranca().numeroDoTurno++;
-                    } else {
-                        jogo.getEquipaPreta().aumentarJogadasValidas();
+                    //} else {
+                        //jogo.getEquipaPreta().aumentarJogadasValidas();
                         //jogo.getEquipaPreta().numeroDoTurno++;
-                    }
+                    //}
 
                     //para dar invalido quando faz um move inválido ao inves de n dizer nada
                     if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)) {
+                        jogo.getClassEquipaAtual().aumentarTenativasInvalidas();
                         return false;
                     }
                     jogo.getClassEquipaAtual().numeroDoTurno++;
+                    jogo.getClassEquipaAtual().aumentarJogadasValidas();
                     jogo.turnoClasse++;
 
                     /*sqChegada.setPeca(sqPartida.getPeca());
@@ -636,39 +647,68 @@ public class GameManager {
         boolean flagPecasBrancas = false;
         int pecasPretas = 0;
         boolean flagPecasPretas = false;
+
+        boolean pecaReiBrancoFlag = false;
+        boolean pecaReiPretoFlag = false;
+
+
+
         for (Peca p : jogo.getTabuleiro().getPecas()) {
             if (p.getNaoCapturado()) {
                 pecasEmJogo.add(p);
                 if (p.getEquipa().getPretoOuBranco() == 10) {
-                    pecasPretas++;
-                    flagPecasPretas = true;
+                    //pecasPretas++;
+                    //flagPecasPretas = true;
+
+                    if (p.tipo == 0) {
+                        pecaReiPretoFlag = true;
+                    } else {
+                        pecasPretas++;
+                    }
                 } else {
-                    pecasBrancas++;
-                    flagPecasBrancas = true;
+                    //pecasBrancas++;
+                    //flagPecasBrancas = true;
+
+                    if (p.tipo == 0) {
+                        pecaReiBrancoFlag = true;
+                    } else {
+                        pecasBrancas++;
+                    }
                 }
 
             }
         }
 
-        if (pecasBrancas == 1 && pecasPretas == 1) {
+        if (!pecaReiBrancoFlag || !pecaReiPretoFlag) {
             getGameResults();
             return true;
         }
+
+        if ((pecasPretas == 0 && pecaReiPretoFlag) && (pecasBrancas == 0 && pecaReiBrancoFlag)) {
+            getGameResults();
+            return true;
+        }
+
+
+        /*if (pecasBrancas == 1 && pecasPretas == 1) {
+            getGameResults();
+            return true;
+        }*/
 
         if (jogo.getNrDeJogadasSemCaptura() == 10) {
             if (jogo.getEquipaPreta().getNrCapturas() > 0 || jogo.getEquipaBranca().getNrCapturas() > 0) {
                 getGameResults();
                 return true;
             }
-        } else if (jogo.getNrDeJogadasSemCaptura() > 20) {
+        } /*else if (jogo.getNrDeJogadasSemCaptura() > 50) {
             getGameResults();
             return true;
-        }
+        }*/
 
-        if (!flagPecasPretas || !flagPecasBrancas) {
+        /*if (!flagPecasPretas || !flagPecasBrancas) {
             getGameResults();
             return true;
-        }
+        }*/
 
 
         return false;
