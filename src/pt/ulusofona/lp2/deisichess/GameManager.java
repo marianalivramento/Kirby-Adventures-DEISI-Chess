@@ -577,7 +577,7 @@ public class GameManager {
                                     break;
 
                                 case 4:
-                                    retorno.append("Joker/TorreVer | 4");
+                                    retorno.append("Joker/TorreVert | 4");
                                     break;
 
                                 case 5:
