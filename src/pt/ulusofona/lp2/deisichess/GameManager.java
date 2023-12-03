@@ -652,63 +652,58 @@ public class GameManager {
         boolean pecaReiPretoFlag = false;
 
 
-
         for (Peca p : jogo.getTabuleiro().getPecas()) {
             if (p.getNaoCapturado()) {
                 pecasEmJogo.add(p);
                 if (p.getEquipa().getPretoOuBranco() == 10) {
-                    //pecasPretas++;
-                    //flagPecasPretas = true;
+                    pecasPretas++;
+                    flagPecasPretas = true;
 
                     if (p.tipo == 0) {
                         pecaReiPretoFlag = true;
-                    } else {
-                        pecasPretas++;
                     }
                 } else {
-                    //pecasBrancas++;
-                    //flagPecasBrancas = true;
+                    pecasBrancas++;
+                    flagPecasBrancas = true;
 
                     if (p.tipo == 0) {
                         pecaReiBrancoFlag = true;
-                    } else {
-                        pecasBrancas++;
                     }
                 }
 
             }
         }
-
+        //uma equipa ficou sem rei
         if (!pecaReiBrancoFlag || !pecaReiPretoFlag) {
             getGameResults();
             return true;
         }
-
-        if ((pecasPretas == 0 && pecaReiPretoFlag) && (pecasBrancas == 0 && pecaReiBrancoFlag)) {
+        //só há duas peças em jogo e são reis
+        if ((pecasPretas == 1 && pecaReiPretoFlag) && (pecasBrancas == 1 && pecaReiBrancoFlag)) {
             getGameResults();
             return true;
         }
 
 
-        /*if (pecasBrancas == 1 && pecasPretas == 1) {
+        /*if (pecasBrancas == 1  && pecasPretas == 1) {
             getGameResults();
             return true;
         }*/
-
+        //10 jogadas sem capturas
         if (jogo.getNrDeJogadasSemCaptura() == 10) {
             if (jogo.getEquipaPreta().getNrCapturas() > 0 || jogo.getEquipaBranca().getNrCapturas() > 0) {
                 getGameResults();
                 return true;
             }
-        } /*else if (jogo.getNrDeJogadasSemCaptura() > 50) {
+        } /*else if (jogo.getNrDeJogadasSemCaptura() > 60) {
             getGameResults();
             return true;
         }*/
-
-        /*if (!flagPecasPretas || !flagPecasBrancas) {
+        //só há peças de uma equipa
+        if (!flagPecasPretas || !flagPecasBrancas) {
             getGameResults();
             return true;
-        }*/
+        }
 
 
         return false;
