@@ -29,9 +29,9 @@ public class Jogo {
         boolean flagReiBranco = false;
 
         for (Peca p : tabuleiro.getPecas()) {
-            if (p.id == 1 && p.naoCapturado) {
+            if (p.tipo == 0 && p.naoCapturado && p.equipa.pretoOuBranco == 10) {
                 flagReiPreto = true;
-            } else if (p.id == 9 && p.naoCapturado) {
+            } else if (p.tipo == 0 && p.naoCapturado && p.equipa.pretoOuBranco == 20) {
                 flagReiBranco = true;
             }
         }
