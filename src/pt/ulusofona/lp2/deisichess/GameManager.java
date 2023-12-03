@@ -313,6 +313,7 @@ public class GameManager {
             if (sqChegada != null) {
                 if (sqChegada.isOcupado()) {
                     if (sqChegada.getPeca() == null) {
+                        jogo.aumentaTentativasInvalidasPorEquipa();
                         return false;
                     }
                     if (sqChegada.getPeca().getEquipa().getPretoOuBranco() == sqPartida.getPeca().getEquipa().getPretoOuBranco()) {
