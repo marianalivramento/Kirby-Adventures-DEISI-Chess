@@ -36,9 +36,9 @@ public class Jogo {
             }
         }
 
-        if (tabuleiro.nrDePecasPretasEmJogo() == 0 || !flagReiPreto) {
+        if (tabuleiro.nrDePecasPretasEmJogo() == 0 || (!flagReiPreto && flagReiBranco)) {
             this.resultado = "VENCERAM AS BRANCAS";
-        } else if (tabuleiro.nrDePecasBrancasEmJogo() == 0 || !flagReiBranco) {
+        } else if (tabuleiro.nrDePecasBrancasEmJogo() == 0 || (!flagReiBranco && flagReiPreto)) {
             this.resultado = "VENCERAM AS PRETAS";
         } else {
             this.resultado = "EMPATE";
