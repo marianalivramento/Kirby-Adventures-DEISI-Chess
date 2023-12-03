@@ -57,6 +57,14 @@ public class Jogo {
         return equipaAtual;
     }
 
+    public Equipa getClassEquipaAtual() {
+        if (equipaAtual == 10) {
+            return equipaPreta;
+        } else {
+            return equipaBranca;
+        }
+    }
+
     void mudarEquipa() {
         if (equipaAtual == 10) {
             equipaBranca.setTurno(false);

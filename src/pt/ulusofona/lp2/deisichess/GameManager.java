@@ -318,14 +318,14 @@ public class GameManager {
 
                             jogo.getEquipaBranca().aumentarJogadasValidas();
                             jogo.getEquipaBranca().aumentarPecasCapturadas();
-                            jogo.getEquipaBranca().numeroDoTurno++;
-                            jogo.turnoClasse++;
+                            //jogo.getEquipaBranca().numeroDoTurno++;
+                            //jogo.turnoClasse++;
                         } else {
 
                             jogo.getEquipaPreta().aumentarJogadasValidas();
                             jogo.getEquipaPreta().aumentarPecasCapturadas();
-                            jogo.getEquipaPreta().numeroDoTurno++;
-                            jogo.turnoClasse++;
+                            //jogo.getEquipaPreta().numeroDoTurno++;
+                            //jogo.turnoClasse++;
 
                         }
 
@@ -335,6 +335,8 @@ public class GameManager {
 
 
                     sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
+                    jogo.getClassEquipaAtual().numeroDoTurno++;
+                    jogo.turnoClasse++;
                     // podia implementar o move com o jogo como parametro assim teria sempre informaçao sobre os turnos e os quadrados
 
 
@@ -353,16 +355,19 @@ public class GameManager {
                     sqPartida.getPeca().getEquipa().setTurno(false);
                     if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
                         jogo.getEquipaBranca().aumentarJogadasValidas();
-                        jogo.getEquipaBranca().numeroDoTurno++;
+                        //jogo.getEquipaBranca().numeroDoTurno++;
                     } else {
                         jogo.getEquipaPreta().aumentarJogadasValidas();
-                        jogo.getEquipaPreta().numeroDoTurno++;
+                        //jogo.getEquipaPreta().numeroDoTurno++;
                     }
 
                     //para dar invalido quando faz um move inválido ao inves de n dizer nada
                     if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)) {
                         return false;
                     }
+                    jogo.getClassEquipaAtual().numeroDoTurno++;
+                    jogo.turnoClasse++;
+
                     /*sqChegada.setPeca(sqPartida.getPeca());
                     sqPartida.getPeca().setCoordenadas(sqChegada);
                     sqChegada.setOcupado(true);
@@ -548,9 +553,13 @@ public class GameManager {
                         }
                         break;
                     case "7":
+
+
                         String jokerDesteTurno = "";
                         if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])) != null && jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa() != null) {
-                            switch (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa().numeroDoTurno % 6) {
+                            int indice = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa().numeroDoTurno;
+                            int indice2 = jogo.getClassEquipaAtual().numeroDoTurno;
+                            switch (indice2 < 6? indice2 : indice2 % 6) {
                                 case 0:
                                     jokerDesteTurno = "Joker/Rainha | 4";
                                     break;
@@ -560,7 +569,7 @@ public class GameManager {
                                     break;
 
                                 case 2:
-                                    jokerDesteTurno = "Joker/Padra da Vila | 4";
+                                    jokerDesteTurno = "Joker/Padre da Vila | 4";
                                     break;
 
                                 case 3:
