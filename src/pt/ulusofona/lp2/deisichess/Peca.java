@@ -8,12 +8,13 @@ abstract class Peca implements Comparable<Peca> {
 
     int id;
     int tipo;
-    int valor;
+   int valor;
     Equipa equipa;
     String alcunha;
     Square coordenadas;
     boolean naoCapturado = true;
     int numeroJogadas = 0;
+    int pontos = 0;
 
     public int getId() {
         return id;
@@ -31,9 +32,7 @@ abstract class Peca implements Comparable<Peca> {
         this.tipo = tipo;
     }
 
-    public int getValor() {
-        return valor;
-    }
+    abstract int getValor();
 
     public Equipa getEquipa() {
         return equipa;

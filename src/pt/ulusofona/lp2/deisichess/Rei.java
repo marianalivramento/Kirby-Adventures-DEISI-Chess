@@ -56,6 +56,7 @@ public class Rei extends Peca {
                 quadradoOrigem.resetQuadrado();
                 return true;
             }
+
         }
         //equipaPeca.aumentarTenativasInvalidas();
         //equipaPeca.numeroDoTurno++;

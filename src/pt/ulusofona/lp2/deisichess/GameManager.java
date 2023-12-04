@@ -328,38 +328,27 @@ public class GameManager {
                         return false;
 
                     } else {
+
+                        if (!sqPartida.getPeca().movesPermitidos(x0, y0, x1, y1, jogo)) {
+                            jogo.aumentaTentativasInvalidasPorEquipa();
+                            return false;
+                        }
+
                         sqChegada.getPeca().setNaoCapturado(false);
 
                         if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
-
                             jogo.getEquipaBranca().aumentarJogadasValidas();
-                            //jogo.getEquipaBranca().aumentarPecasCapturadas();
-                            //jogo.getEquipaBranca().numeroDoTurno++;
-                            //jogo.turnoClasse++;
                         } else {
-
                             jogo.getEquipaPreta().aumentarJogadasValidas();
-                            //jogo.getEquipaPreta().aumentarPecasCapturadas();
-                            //jogo.getEquipaPreta().numeroDoTurno++;
-                            //jogo.turnoClasse++;
-
                         }
-
                     }
 
-                    //moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
                     moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1+ ":PecaCapturada:" +sqChegada.getPeca().id);
+                    sqPartida.getPeca().pontos += sqChegada.getPeca().getValor();
 
-
-                    //sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
-
-                    if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)) {
-                        jogo.aumentaTentativasInvalidasPorEquipa();
-                        return false;
-                    }
+                    sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
                     jogo.getClassEquipaAtual().numeroDoTurno++;
                     jogo.turnoClasse++;
-                    // podia implementar o move com o jogo como parametro assim teria sempre informaçao sobre os turnos e os quadrados
 
 
 /*

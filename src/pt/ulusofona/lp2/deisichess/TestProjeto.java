@@ -142,6 +142,61 @@ public class TestProjeto {
 
     }
 
+    @Test
+    public void conta_pontos_rei() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(1,0,1,5);
+        gm.move(0,7,0,6);
+        gm.move(1,5,0,6);
+
+        assertEquals(gm.jogo.tabuleiro.retornaPecaPorId(2).pontos, 1000);
+    }
+
+
+    @Test
+    public void conta_pontos_rainha() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(1,0,1,5);
+        gm.move(0,7,0,6);
+        gm.move(0,0,0,1);
+        gm.move(0,6,1,5);
+
+
+
+        assertEquals(gm.jogo.tabuleiro.retornaPecaPorId(9).pontos, 8);
+    }
+
+    @Test
+    public void conta_pontos_ponei() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(2,0,4,2);
+        gm.move(1,7,1,2);
+        gm.move(0,0,0,1);
+        gm.move(1,2,4,2);
+
+
+
+        assertEquals(gm.jogo.tabuleiro.retornaPecaPorId(10).pontos, 5);
+    }
+
 
 /*
     @Test
