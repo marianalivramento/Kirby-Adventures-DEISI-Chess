@@ -264,9 +264,9 @@ public class GameManager {
     public List<Comparable> getHints(int x, int y) {
         List<Comparable> hints = new ArrayList<>();
         Square square = jogo.getTabuleiro().retornoQuadrado(x, y);
+
         if (square.getPeca() != null) {
-            hints = square.getPeca().jogadasPermitidas(jogo);
-            Collections.sort(hints);
+            hints = square.getPeca().jogadasPermitidas(jogo,hints);
         }
         return hints;
     }
@@ -367,6 +367,9 @@ public class GameManager {
                     if (!sqPartida.getPeca().movesPermitidos(x0, y0, x1, y1, jogo)) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
                         return false;
+                    }else if(sqPartida.getPeca().passaPorPeca(x0,y0,x1,y1,jogo)){
+                        jogo.aumentaTentativasInvalidasPorEquipa();
+                        return false;
                     }
                     moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
                     sqPartida.getPeca().getEquipa().setTurno(false);
@@ -377,8 +380,9 @@ public class GameManager {
                         jogo.getEquipaPreta().aumentarJogadasValidas();
                     }
 
-                    sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
 
+
+                    sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
                     jogo.getClassEquipaAtual().numeroDoTurno++;
                     jogo.turnoClasse++;
                     //jogo.getClassEquipaAtual().aumentarJogadasValidas();
