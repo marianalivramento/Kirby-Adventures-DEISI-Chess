@@ -120,7 +120,7 @@ public class Jogo {
     }
 
     void aumentaTentativasInvalidasPorEquipa() {
-        if (equipaAtual == 1) {
+        if (equipaAtual == 10) {
             equipaBranca.aumentarTenativasInvalidas();
         } else {
             equipaPreta.aumentarTenativasInvalidas();

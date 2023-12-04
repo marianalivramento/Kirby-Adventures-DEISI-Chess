@@ -15,6 +15,7 @@ abstract class Peca implements Comparable<Peca> {
     boolean naoCapturado = true;
     int numeroJogadas = 0;
     int pontos = 0;
+    int numeroDeCapturas = 0;
 
     public int getId() {
         return id;
