@@ -25,13 +25,6 @@ public class Rei extends Peca {
         Square quadradoOrigem = jogo.getTabuleiro().retornoQuadrado(x0, y0);
         Square quadradoDestino = jogo.getTabuleiro().retornoQuadrado(x1, y1);
 
-        Equipa equipaPeca;
-        if (jogo.getEquipaBranca() == equipa) {
-            equipaPeca = jogo.getEquipaBranca();
-        } else {
-            equipaPeca = jogo.getEquipaPreta();
-        }
-
         if (movesPermitidos(x0, y0, x1, y1, jogo)) {
             if (quadradoDestino.isOcupado()) {
 
@@ -41,7 +34,6 @@ public class Rei extends Peca {
                 quadradoDestino.setPeca(pecaQueMove);
 
                 quadradoDestino.setOcupado(true);
-                //equipaPeca.aumentarPecasCapturadas();
                 jogo.getClassEquipaAtual().aumentarPecasCapturadas();
 
                 quadradoOrigem.resetQuadrado();
@@ -58,9 +50,6 @@ public class Rei extends Peca {
             }
 
         }
-        //equipaPeca.aumentarTenativasInvalidas();
-        //equipaPeca.numeroDoTurno++;
         return false;
     }
-
 }
