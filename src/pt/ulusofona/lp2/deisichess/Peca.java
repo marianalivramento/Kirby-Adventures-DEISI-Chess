@@ -2,13 +2,14 @@ package pt.ulusofona.lp2.deisichess;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 abstract class Peca implements Comparable<Peca> {
 
     int id;
     int tipo;
-   int valor;
+    int valor;
     Equipa equipa;
     String alcunha;
     Square coordenadas;
@@ -87,24 +88,36 @@ abstract class Peca implements Comparable<Peca> {
 
     abstract boolean move(int x0, int y0, int x1, int y1, Jogo jogo);
 
-    List<Comparable> jogadasPermitidas(Jogo jogo) {
-        List<Comparable> permittedMoves = new ArrayList<>();
+    List<Comparable> jogadasPermitidas(Jogo jogo, List<Comparable> hints) {
+        List<Peca> permittedMoves = new ArrayList<Peca>();
         Tabuleiro tabuleiro = jogo.getTabuleiro();
 
         for (Square s : tabuleiro.getQuadrados()) {
             if (movesPermitidos(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
-                if (!passaPorPeca(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)){
-                    if (!s.isOcupado()) {
-                        permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0");
-                    } else {
-                        permittedMoves.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->" + s.getPeca().getValor());
+                if (!passaPorPeca(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
+                    if (s.isOcupado()) {
+                        permittedMoves.add(s.getPeca());
                     }
+
                 }
             }
         }
         Collections.sort(permittedMoves);
+        for (Peca p : permittedMoves) {
+            hints.add("(" + p.getCoordenadas().getCoordenadaX() + ", " + p.getCoordenadas().getCoordenadaY() + ")->" + p.getValor());
+        }
 
-        return permittedMoves;
+        for (Square s : tabuleiro.getQuadrados()) {
+            if (movesPermitidos(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
+                if (!passaPorPeca(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
+                    if (!s.isOcupado()) {
+                        hints.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0");
+                    }
+
+                }
+            }
+        }
+        return hints;
     }
 
     @Override
@@ -114,7 +127,7 @@ abstract class Peca implements Comparable<Peca> {
                 return 1;
             } else if (peca.getValor() == valor) {
                 if (!peca.getClass().equals(Rainha.class) && tipo != 1) {
-                    return 0 ;
+                    return 0;
                 }
                 return 0;
             }
