@@ -18,7 +18,7 @@ fun func1(gameManager: GameManager) : List<String> {
 
 fun func2(gameManager: GameManager) : List<String> {
 
-    return gameManager.arr().sortedBy { it.numeroDeCapturas }
+    return gameManager.arr().sortedBy { it.pontos }
             .filter { it.pontos > 0 }
             .map { it.alcunha + " (" + it.equipa.pretoOuBrancoString() + ") tem " + it.pontos + " pontos"}
             .reversed()
