@@ -6,13 +6,17 @@ enum class StatType{
     TOP_5_CAPTURAS, TOP_5_PONTOS, PECAS_MAIS_5_CAPTURAS, PECAS_MAIS_BARALHADAS, TIPOS_CAPTURADOS
 }
 
-fun func1(gameManager: GameManager) : ArrayList<String> {
-    val stringList: ArrayList<String> = ArrayList();
 
-    return stringList
+fun func1(gameManager: GameManager) : List<String> {
+
+    return gameManager.arr().sortedBy { it.numeroDeCapturas }
+            .map { it.alcunha + " (" + it.equipa.pretoOuBrancoString() + ") fez " + it.numeroDeCapturas + " capturas"}
+            .reversed()
+            .take(5)
+
 }
 
-fun getStatsCalculator(stat : StatType) : Function1<GameManager, ArrayList<String>> {
+fun getStatsCalculator(stat : StatType) : Function1<GameManager, List<String>> {
     val game : GameManager
     when (stat) {
         StatType.TOP_5_CAPTURAS -> return ::func1

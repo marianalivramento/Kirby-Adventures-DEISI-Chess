@@ -14,6 +14,10 @@ public class GameManager {
     public GameManager() {
     }
 
+    public ArrayList<Peca> arr() {
+        return jogo.getTabuleiro().getPecas();
+    }
+
 
     public void parsePecas(String linha, int numeroLinha) throws InvalidGameInputException, IOException {
 
@@ -96,7 +100,7 @@ public class GameManager {
 
         if (elementos.length == 1) {
             if(elementos[0].equals("GameOver")) {
-                getGameResults();
+                gameOver();
                 return;
             } else {
                 jogo.equipaAtual = Integer.parseInt(line);

@@ -39,9 +39,17 @@ public class Equipa {
     public void aumentarTenativasInvalidas() {
         nrTentativasInvalidas++;
     }
-
     public void aumentarPecasCapturadas() {
         nrCapturas++;
+    }
+    String pretoOuBrancoString() {
+        if (pretoOuBranco == 10) {
+            return "PRETA";
+        } else if (pretoOuBranco == 20) {
+            return "BRANCA";
+        } else {
+            return "ERRO";
+        }
     }
 
 }
