@@ -16,11 +16,23 @@ fun func1(gameManager: GameManager) : List<String> {
 
 }
 
+fun func2(gameManager: GameManager) : List<String> {
+
+    return gameManager.arr().sortedBy { it.numeroDeCapturas }
+            .filter { it.pontos > 0 }
+            .map { it.alcunha + " (" + it.equipa.pretoOuBrancoString() + ") tem " + it.pontos + " pontos"}
+            .reversed()
+            .take(5)
+
+}
+
+
+
 fun getStatsCalculator(stat : StatType) : Function1<GameManager, List<String>> {
     val game : GameManager
     when (stat) {
         StatType.TOP_5_CAPTURAS -> return ::func1
-        StatType.TOP_5_PONTOS -> return ::func1
+        StatType.TOP_5_PONTOS -> return ::func2
         StatType.PECAS_MAIS_5_CAPTURAS -> return ::func1
         StatType.PECAS_MAIS_BARALHADAS -> return :: func1
         StatType.TIPOS_CAPTURADOS -> return :: func1
