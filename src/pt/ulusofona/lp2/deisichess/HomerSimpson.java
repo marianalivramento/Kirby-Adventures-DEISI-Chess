@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.deisichess;
 
 public class HomerSimpson extends Peca {
-    int valor;
+    int valor = 2;
 
     public int getValor() {
         return valor;
