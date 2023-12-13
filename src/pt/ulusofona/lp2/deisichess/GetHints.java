@@ -1,16 +1,13 @@
 package pt.ulusofona.lp2.deisichess;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class getHints implements Comparable<getHints> {
+public class GetHints implements Comparable<GetHints> {
     Square square;
 
     @Override
-    public int compareTo(getHints other) {
+    public int compareTo(GetHints other) {
         if (this.square.getPeca() != null && other.square.getPeca() != null) {
             int value1 = this.square.getPeca().getValor();
             int value2 = other.square.getPeca().getValor();
@@ -34,15 +31,15 @@ public class getHints implements Comparable<getHints> {
 
     }
 
-    List<getHints> jogadasPermitidas(Jogo jogo, List<Comparable> hints) {
+    List<GetHints> jogadasPermitidas(Jogo jogo, List<Comparable> hints) {
         Tabuleiro tabuleiro = jogo.getTabuleiro();
         Peca piece = square.getPeca();
-        List<getHints> ordenar = new ArrayList<>();
+        List<GetHints> ordenar = new ArrayList<>();
         if (piece != null) {
             for (Square s : tabuleiro.getQuadrados()) {
                 if (piece.movesPermitidos(square.getCoordenadaX(), square.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
                     if (!piece.passaPorPeca(square.getCoordenadaX(), square.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
-                        getHints result = new getHints();
+                        GetHints result = new GetHints();
                         result.square = s;
                         ordenar.add(result);
                     }

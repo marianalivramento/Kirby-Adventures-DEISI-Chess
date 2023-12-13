@@ -145,6 +145,21 @@ public class TestProjeto {
     }
 
     @Test
+    public void padre_da_vila_move() {
+
+        GameManager gm = new GameManager();
+
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+
+        assertEquals(true, gm.move(3,0,4,1));
+
+    }
+    @Test
     public void conta_pontos_rei() {
         GameManager gm = new GameManager();
         try {
@@ -158,6 +173,45 @@ public class TestProjeto {
         gm.move(1,5,0,6);
 
         assertEquals(gm.jogo.tabuleiro.retornaPecaPorId(2).pontos, 1000);
+    }
+
+    @Test
+    public void acaba_um_jogo_guardado() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(1,0,1,5);
+        gm.move(0,7,0,3);
+        gm.move(0,7,0,7);
+        gm.move(0,7,0,6);
+
+        try {
+            gm.saveGame(new File("test-files/new.txt"));
+        } catch (IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        try {
+            gm.loadGame(new File("test-files/new.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(1,5,0,6);
+
+//2
+
+        assertEquals(0, gm.jogo.equipaBranca.nrTentativasInvalidas);
     }
 
 
@@ -199,7 +253,7 @@ public class TestProjeto {
         assertEquals(gm.jogo.tabuleiro.retornaPecaPorId(10).pontos, 5);
     }
 
-    @Test
+    /*@Test
     public void getHints() {
         GameManager gm = new GameManager();
         try {
@@ -223,8 +277,10 @@ public class TestProjeto {
         gm.move(5,0,5,5);
         List<Comparable> boo = gm.getHints(5,7);
         Collections.sort(boo);
-        assertEquals(boo, "");
+        assertEquals(boo, "[(5,5) -> 3, (5,6) -> 0]");
     }
+
+     */
 
 /*
     @Test

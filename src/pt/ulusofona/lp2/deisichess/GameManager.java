@@ -181,6 +181,7 @@ public class GameManager {
             jogo.setEquipaPreta();
             jogo.getEquipaPreta().setTurno(true);
 
+
         } catch (IOException e) {
             throw new IOException(e);
         }
@@ -191,6 +192,10 @@ public class GameManager {
 
         if (file == null || moveHistory.isEmpty()) {
             throw new IOException("Invalid file");
+        }
+
+        if(file.exists()) {
+            file.delete();
         }
 
 
@@ -268,11 +273,11 @@ public class GameManager {
     public List<Comparable> getHints(int x, int y) {
         List<Comparable> hints = new ArrayList<>();
         Square square = jogo.getTabuleiro().retornoQuadrado(x, y);
-        getHints retornado = new getHints();
+        GetHints retornado = new GetHints();
         retornado.square = square;
 
         if (square.getPeca() != null) {
-            for (getHints h:  retornado.jogadasPermitidas(jogo, hints)){
+            for (GetHints h:  retornado.jogadasPermitidas(jogo, hints)){
                 hints.add(h);
             }
 
