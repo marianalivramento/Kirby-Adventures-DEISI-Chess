@@ -69,4 +69,8 @@ public class TorreVertical extends Peca {
         }
         return false;
     }
+
+    public String nomeDoTipo(Jogo jogo) {
+        return "TorreVert";
+    }
 }

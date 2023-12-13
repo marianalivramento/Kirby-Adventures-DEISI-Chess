@@ -8,6 +8,7 @@ public class Joker extends Peca {
         return valor;
     }
 
+
     @Override
     boolean movesPermitidos(int x0, int y0, int x1, int y1, Jogo jogo) {
         if (!pertenceAequipa(jogo, x1, y1)) {
@@ -62,4 +63,22 @@ public class Joker extends Peca {
         return false;
     }
 
+    public String nomeDoTipo(Jogo jogo) {
+        switch (jogo.turnoClasse % 6) {
+            case 0:
+                return "Joker/Rainha";
+            case 1:
+                return "Joker/Ponei Mágico";
+            case 2:
+                return "Joker/Padre da Vila";
+            case 3:
+                return "Joker/TorreHor";
+            case 4:
+                return "Joker/TorreVert";
+            case 5:
+                return "Joker/Homer Simpson";
+            default:
+                return "Desconhecido";
+        }
+    }
 }

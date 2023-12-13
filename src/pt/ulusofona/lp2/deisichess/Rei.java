@@ -52,4 +52,8 @@ public class Rei extends Peca {
         }
         return false;
     }
+
+    public String nomeDoTipo(Jogo jogo) {
+        return "Rei";
+    }
 }

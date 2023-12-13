@@ -82,4 +82,8 @@ public class PoneiMagico extends Peca {
         }
         return false;
     }
+
+    public String nomeDoTipo(Jogo jogo) {
+        return "Ponei Mágico";
+    }
 }

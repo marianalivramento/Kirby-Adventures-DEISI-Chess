@@ -17,6 +17,8 @@ abstract class Peca implements Comparable<Peca> {
     int numeroJogadas = 0;
     int pontos = 0;
     int numeroDeCapturas = 0;
+    int numeroDeMovimentosInvalidos = 0;
+    int numeroDeMovimentosValidos = 0;
 
     public int getId() {
         return id;
@@ -54,6 +56,14 @@ abstract class Peca implements Comparable<Peca> {
 
     public Square getCoordenadas() {
         return coordenadas;
+    }
+
+    public int getPontos() {
+        return pontos;
+    }
+
+    public int getNumeroDeCapturas() {
+        return numeroDeCapturas;
     }
 
     public void setCoordenadas(Square coordenadas) {
@@ -135,6 +145,8 @@ abstract class Peca implements Comparable<Peca> {
         }
         return 2;
     }
+
+    abstract String nomeDoTipo(Jogo jogo);
 
 }
 

@@ -81,6 +81,10 @@ public class Rainha extends Peca {
         }
         return false;
     }
+
+    public String nomeDoTipo(Jogo jogo) {
+        return "Rainha";
+    }
 }
 
 

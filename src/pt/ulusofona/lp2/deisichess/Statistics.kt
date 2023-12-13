@@ -9,8 +9,8 @@ enum class StatType{
 
 fun func1(gameManager: GameManager) : List<String> {
 
-    return gameManager.arr().sortedBy { it.numeroDeCapturas }
-            .map { it.alcunha + " (" + it.equipa.pretoOuBrancoString() + ") fez " + it.numeroDeCapturas + " capturas"}
+    return gameManager.arr().sortedBy { it.getNumeroDeCapturas() }
+            .map { it.getAlcunha() + " (" + it.getEquipa().pretoOuBrancoString() + ") fez " + it.getNumeroDeCapturas() + " capturas"}
             .reversed()
             .take(5)
 
@@ -18,13 +18,39 @@ fun func1(gameManager: GameManager) : List<String> {
 
 fun func2(gameManager: GameManager) : List<String> {
 
-    return gameManager.arr().sortedBy { it.pontos }
-            .filter { it.pontos > 0 }
-            .map { it.alcunha + " (" + it.equipa.pretoOuBrancoString() + ") tem " + it.pontos + " pontos"}
+    return gameManager.arr().sortedBy { it.getPontos() }
+            .filter { it.getPontos() > 0 }
+            .map { it.getAlcunha()+ " (" + it.getEquipa().pretoOuBrancoString() + ") tem " + it.getPontos() + " pontos"}
             .reversed()
             .take(5)
 
 }
+
+fun func5(gameManager: GameManager) : List<String> {
+
+    return gameManager.arr().filter { !it.getNaoCapturado() }
+            .distinctBy { it.getTipo() }
+            .map { it.nomeDoTipo(gameManager.jogo) }
+
+
+}
+
+fun func4(gameManager: GameManager) : List<String> {
+    return gameManager.arr().filter { it.numeroDeMovimentosInvalidos >= 1 }
+            .sortedBy { it.numeroDeMovimentosInvalidos }
+            .reversed()
+            .map { "" + it.getEquipa().pretoOuBranco + ":" + it.getAlcunha() + ":" + it.numeroDeMovimentosInvalidos + ":" + it.numeroDeMovimentosValidos}
+            .take(3)
+
+}
+
+fun func3(gameManager: GameManager) : List<String> {
+    return gameManager.arr().filter { it.getNumeroDeCapturas() > 5 }
+            .sortedBy { it.getNumeroDeCapturas()}
+            .reversed()
+            .map { it.getEquipa().pretoOuBrancoString() + ":" + it.getAlcunha() + ":" + it.getNumeroDeCapturas()}
+}
+
 
 
 
@@ -33,9 +59,9 @@ fun getStatsCalculator(stat : StatType) : Function1<GameManager, List<String>> {
     when (stat) {
         StatType.TOP_5_CAPTURAS -> return ::func1
         StatType.TOP_5_PONTOS -> return ::func2
-        StatType.PECAS_MAIS_5_CAPTURAS -> return ::func1
-        StatType.PECAS_MAIS_BARALHADAS -> return :: func1
-        StatType.TIPOS_CAPTURADOS -> return :: func1
+        StatType.PECAS_MAIS_5_CAPTURAS -> return ::func3
+        StatType.PECAS_MAIS_BARALHADAS -> return :: func4
+        StatType.TIPOS_CAPTURADOS -> return :: func5
     }
 }
 

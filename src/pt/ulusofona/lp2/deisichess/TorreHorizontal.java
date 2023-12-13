@@ -76,4 +76,9 @@ public class TorreHorizontal extends Peca {
 
         return false;
     }
+
+
+    public String nomeDoTipo(Jogo jogo) {
+        return "TorreHor";
+    }
 }

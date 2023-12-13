@@ -287,11 +287,14 @@ public class GameManager {
 
         if (x0 < 0 || x0 >= boardSize || y0 < 0 || y0 >= boardSize || x1 < 0 || x1 >= boardSize || y1 < 0 || y1 >= boardSize) {
             jogo.aumentaTentativasInvalidasPorEquipa();
+            sqPartida.getPeca().numeroDeMovimentosInvalidos++;
             return false;
         }
 
         if (sqPartida == null || sqPartida.getPeca() == null || sqPartida.getPeca().getEquipa() == null) {
             jogo.aumentaTentativasInvalidasPorEquipa();
+            sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+
             return false;
         } /*else if ((x0 == x1) && (y0 == y1)) {
             //esta condicao já está dentro dos moves e podemmos contar as tentativas invalidas la dentro tb maybe
@@ -300,6 +303,8 @@ public class GameManager {
         }
         */else if (sqPartida.getPeca().tipo == 6 && jogo.homerADormir()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
+            sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+
             return false;
         } /*else if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)) {
             //what does this do?
@@ -309,6 +314,8 @@ public class GameManager {
         }
        */ else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
+            sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+
             return false;
         } else {
 
@@ -318,23 +325,33 @@ public class GameManager {
                 if (sqChegada.isOcupado()) {
                     if (sqChegada.getPeca() == null) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
+                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+
                         return false;
                     }
                     if (sqChegada.getPeca().getEquipa().getPretoOuBranco() == sqPartida.getPeca().getEquipa().getPretoOuBranco()) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
+                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+
                         return false;
                     } else if (sqPartida.getPeca().getClass().equals(Rainha.class) && (sqChegada.getPeca().getClass().equals(Rainha.class)
                      || (sqChegada.getPeca().getClass().equals(Joker.class) && jogo.turnoClasse % 6 == 0))) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
+                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+
                         return false;
                     } else if ((sqPartida.getPeca().getClass().equals(Joker.class) && jogo.turnoClasse % 6 == 0) && sqChegada.getPeca().getClass().equals(Rainha.class)) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
+                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+
                         return false;
 
                     } else {
 
                         if (!sqPartida.getPeca().movesPermitidos(x0, y0, x1, y1, jogo)) {
                             jogo.aumentaTentativasInvalidasPorEquipa();
+                            sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+
                             return false;
                         }
 
@@ -350,6 +367,7 @@ public class GameManager {
                     moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1+ ":PecaCapturada:" +sqChegada.getPeca().id);
                     sqPartida.getPeca().pontos += sqChegada.getPeca().getValor();
                     sqPartida.getPeca().numeroDeCapturas++;
+                    sqPartida.getPeca().numeroDeMovimentosValidos++;
 
                     sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
                     jogo.getClassEquipaAtual().numeroDoTurno++;
@@ -370,9 +388,13 @@ public class GameManager {
                     //para dar invalido quando faz um move inválido ao inves de n dizer nada
                     if (!sqPartida.getPeca().movesPermitidos(x0, y0, x1, y1, jogo)) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
+                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+
                         return false;
                     }else if(sqPartida.getPeca().passaPorPeca(x0,y0,x1,y1,jogo)){
                         jogo.aumentaTentativasInvalidasPorEquipa();
+                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+
                         return false;
                     }
                     moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
@@ -385,10 +407,12 @@ public class GameManager {
                     }
 
 
-
+                    sqPartida.getPeca().numeroDeMovimentosValidos++;
                     sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
                     jogo.getClassEquipaAtual().numeroDoTurno++;
                     jogo.turnoClasse++;
+
+
                     //jogo.getClassEquipaAtual().aumentarJogadasValidas();
                     //jogo.getClassEquipaAtual().aumentarPecasCapturadas();
 
@@ -405,6 +429,8 @@ public class GameManager {
 
             } else {
                 jogo.aumentaTentativasInvalidasPorEquipa();
+                sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+
                 return false;
             }
         }
