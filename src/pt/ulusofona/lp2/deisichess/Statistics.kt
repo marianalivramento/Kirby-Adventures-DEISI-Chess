@@ -31,6 +31,7 @@ fun func5(gameManager: GameManager) : List<String> {
     return gameManager.arr().filter { !it.getNaoCapturado() }
             .distinctBy { it.getTipo() }
             .map { it.nomeDoTipo(gameManager.jogo) }
+            .sorted()
 
 
 }

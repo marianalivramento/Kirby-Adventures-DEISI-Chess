@@ -287,14 +287,11 @@ public class GameManager {
 
         if (x0 < 0 || x0 >= boardSize || y0 < 0 || y0 >= boardSize || x1 < 0 || x1 >= boardSize || y1 < 0 || y1 >= boardSize) {
             jogo.aumentaTentativasInvalidasPorEquipa();
-            sqPartida.getPeca().numeroDeMovimentosInvalidos++;
             return false;
         }
 
         if (sqPartida == null || sqPartida.getPeca() == null || sqPartida.getPeca().getEquipa() == null) {
             jogo.aumentaTentativasInvalidasPorEquipa();
-            sqPartida.getPeca().numeroDeMovimentosInvalidos++;
-
             return false;
         } /*else if ((x0 == x1) && (y0 == y1)) {
             //esta condicao já está dentro dos moves e podemmos contar as tentativas invalidas la dentro tb maybe
@@ -304,7 +301,6 @@ public class GameManager {
         */else if (sqPartida.getPeca().tipo == 6 && jogo.homerADormir()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             sqPartida.getPeca().numeroDeMovimentosInvalidos++;
-
             return false;
         } /*else if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)) {
             //what does this do?
