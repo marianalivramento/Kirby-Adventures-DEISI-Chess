@@ -1,7 +1,5 @@
 package pt.ulusofona.lp2.deisichess
-
 import java.util.*
-
 enum class StatType{
     TOP_5_CAPTURAS, TOP_5_PONTOS, PECAS_MAIS_5_CAPTURAS, PECAS_MAIS_BARALHADAS, TIPOS_CAPTURADOS
 }
@@ -65,11 +63,6 @@ fun getStatsCalculator(stat : StatType) : Function1<GameManager, List<String>> {
         StatType.TIPOS_CAPTURADOS -> return :: func5
     }
 }
-
-fun main() {
-
-}
-
 //getStatsCalculator retorna 1 função (5). recebe um enumerado do tipo StatType e retorna uma função responsavel
 //por calcular as estatisticas estas 5 funções são escritas aqui. Recebem um gameManager e retornam
 //uma lista de Strings. Os formatos das strings estão no video
