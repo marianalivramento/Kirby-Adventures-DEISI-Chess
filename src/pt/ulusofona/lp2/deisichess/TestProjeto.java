@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -197,6 +199,32 @@ public class TestProjeto {
         assertEquals(gm.jogo.tabuleiro.retornaPecaPorId(10).pontos, 5);
     }
 
+    @Test
+    public void getHints() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        List<Comparable> boo = gm.getHints(5,0);
+        Collections.sort(boo);
+        assertEquals(boo, "");
+    }
+
+    @Test
+    public void getHintsDepoisDeMove() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        gm.move(5,0,5,5);
+        List<Comparable> boo = gm.getHints(5,7);
+        Collections.sort(boo);
+        assertEquals(boo, "");
+    }
 
 /*
     @Test

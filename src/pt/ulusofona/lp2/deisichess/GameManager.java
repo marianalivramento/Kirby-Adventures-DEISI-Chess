@@ -99,7 +99,7 @@ public class GameManager {
         String[] elementos = line.split(":");
 
         if (elementos.length == 1) {
-            if(elementos[0].equals("GameOver")) {
+            if (elementos[0].equals("GameOver")) {
                 gameOver();
                 return;
             } else {
@@ -210,7 +210,7 @@ public class GameManager {
             bufferedWriter.write(Integer.toString(jogo.getEquipaAtual()));
             bufferedWriter.newLine();
 
-            if(gameOver()) {
+            if (gameOver()) {
                 bufferedWriter.write("GameOver");
                 bufferedWriter.newLine();
             }
@@ -268,9 +268,14 @@ public class GameManager {
     public List<Comparable> getHints(int x, int y) {
         List<Comparable> hints = new ArrayList<>();
         Square square = jogo.getTabuleiro().retornoQuadrado(x, y);
+        getHints retornado = new getHints();
+        retornado.square = square;
 
         if (square.getPeca() != null) {
-            hints = square.getPeca().jogadasPermitidas(jogo,hints);
+            for (getHints h:  retornado.jogadasPermitidas(jogo, hints)){
+                hints.add(h);
+            }
+
         }
         return hints;
     }
@@ -298,9 +303,8 @@ public class GameManager {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
         }
-        */else if (sqPartida.getPeca().tipo == 6 && jogo.homerADormir()) {
+        */ else if (sqPartida.getPeca().tipo == 6 && jogo.homerADormir()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
-            sqPartida.getPeca().numeroDeMovimentosInvalidos++;
             return false;
         } /*else if (!sqPartida.getPeca().move(x0, y0, x1, y1, jogo)) {
             //what does this do?
@@ -310,8 +314,6 @@ public class GameManager {
         }
        */ else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
-            sqPartida.getPeca().numeroDeMovimentosInvalidos++;
-
             return false;
         } else {
 
@@ -321,33 +323,23 @@ public class GameManager {
                 if (sqChegada.isOcupado()) {
                     if (sqChegada.getPeca() == null) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
-                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
-
                         return false;
                     }
                     if (sqChegada.getPeca().getEquipa().getPretoOuBranco() == sqPartida.getPeca().getEquipa().getPretoOuBranco()) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
-                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
-
                         return false;
                     } else if (sqPartida.getPeca().getClass().equals(Rainha.class) && (sqChegada.getPeca().getClass().equals(Rainha.class)
-                     || (sqChegada.getPeca().getClass().equals(Joker.class) && jogo.turnoClasse % 6 == 0))) {
+                            || (sqChegada.getPeca().getClass().equals(Joker.class) && jogo.turnoClasse % 6 == 0))) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
-                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
-
                         return false;
                     } else if ((sqPartida.getPeca().getClass().equals(Joker.class) && jogo.turnoClasse % 6 == 0) && sqChegada.getPeca().getClass().equals(Rainha.class)) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
-                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
-
                         return false;
 
                     } else {
 
                         if (!sqPartida.getPeca().movesPermitidos(x0, y0, x1, y1, jogo)) {
                             jogo.aumentaTentativasInvalidasPorEquipa();
-                            sqPartida.getPeca().numeroDeMovimentosInvalidos++;
-
                             return false;
                         }
 
@@ -360,10 +352,9 @@ public class GameManager {
                         }
                     }
 
-                    moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1+ ":PecaCapturada:" +sqChegada.getPeca().id);
+                    moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1 + ":PecaCapturada:" + sqChegada.getPeca().id);
                     sqPartida.getPeca().pontos += sqChegada.getPeca().getValor();
                     sqPartida.getPeca().numeroDeCapturas++;
-                    sqPartida.getPeca().numeroDeMovimentosValidos++;
 
                     sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
                     jogo.getClassEquipaAtual().numeroDoTurno++;
@@ -384,13 +375,9 @@ public class GameManager {
                     //para dar invalido quando faz um move inválido ao inves de n dizer nada
                     if (!sqPartida.getPeca().movesPermitidos(x0, y0, x1, y1, jogo)) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
-                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
-
                         return false;
-                    }else if(sqPartida.getPeca().passaPorPeca(x0,y0,x1,y1,jogo)){
+                    } else if (sqPartida.getPeca().passaPorPeca(x0, y0, x1, y1, jogo)) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
-                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
-
                         return false;
                     }
                     moveHistory.add(sqPartida.getPeca().id + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
@@ -403,12 +390,10 @@ public class GameManager {
                     }
 
 
-                    sqPartida.getPeca().numeroDeMovimentosValidos++;
+
                     sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
                     jogo.getClassEquipaAtual().numeroDoTurno++;
                     jogo.turnoClasse++;
-
-
                     //jogo.getClassEquipaAtual().aumentarJogadasValidas();
                     //jogo.getClassEquipaAtual().aumentarPecasCapturadas();
 
@@ -425,8 +410,6 @@ public class GameManager {
 
             } else {
                 jogo.aumentaTentativasInvalidasPorEquipa();
-                sqPartida.getPeca().numeroDeMovimentosInvalidos++;
-
                 return false;
             }
         }
@@ -604,40 +587,40 @@ public class GameManager {
 
                         //String jokerDesteTurno = "";
                         //if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])) != null && jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa() != null) {
-                            //int indice = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa().numeroDoTurno;
-                            int indice = jogo.turnoClasse;
-                            switch (indice < 6? indice : indice % 6) {
-                                case 0:
-                                    retorno.append("Joker/Rainha | 4");
-                                    break;
+                        //int indice = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa().numeroDoTurno;
+                        int indice = jogo.turnoClasse;
+                        switch (indice < 6 ? indice : indice % 6) {
+                            case 0:
+                                retorno.append("Joker/Rainha | 4");
+                                break;
 
-                                case 1:
-                                    retorno.append("Joker/Ponei Mágico | 4");
-                                    break;
+                            case 1:
+                                retorno.append("Joker/Ponei Mágico | 4");
+                                break;
 
-                                case 2:
-                                    retorno.append("Joker/Padre da Vila | 4");
-                                    break;
+                            case 2:
+                                retorno.append("Joker/Padre da Vila | 4");
+                                break;
 
-                                case 3:
-                                    retorno.append("Joker/TorreHor | 4");
-                                    break;
+                            case 3:
+                                retorno.append("Joker/TorreHor | 4");
+                                break;
 
-                                case 4:
-                                    retorno.append("Joker/TorreVert | 4");
-                                    break;
+                            case 4:
+                                retorno.append("Joker/TorreVert | 4");
+                                break;
 
-                                case 5:
-                                    retorno.append("Joker/Homer Simpson | 4");
-                                    break;
+                            case 5:
+                                retorno.append("Joker/Homer Simpson | 4");
+                                break;
 
-                                default:
-                                    retorno.append("Desconhecido");
-                                    break;
-                            }
-                            //retorno.append(jokerDesteTurno);
+                            default:
+                                retorno.append("Desconhecido");
+                                break;
                         }
-                        //break;
+                        //retorno.append(jokerDesteTurno);
+                }
+                //break;
                 //}
             } else if (i == 2) {
                 retorno.append(string[i]);
