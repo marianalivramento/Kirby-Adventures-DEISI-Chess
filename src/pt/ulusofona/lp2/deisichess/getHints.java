@@ -66,9 +66,9 @@ public class getHints implements Comparable<getHints> {
     @Override
     public String toString() {
         if (square.getPeca() != null) {
-            return "(" + square.getCoordenadaX() + ", " + square.getCoordenadaY() + ")->" + square.getPeca().getValor();
+            return "(" + square.getCoordenadaX() + "," + square.getCoordenadaY() + ") -> " + square.getPeca().getValor();
         }
 
-        return "(" + square.getCoordenadaX() + ", " + square.getCoordenadaY() + ")->0";
+        return "(" + square.getCoordenadaX() + "," + square.getCoordenadaY() + ") -> 0";
     }
 }
