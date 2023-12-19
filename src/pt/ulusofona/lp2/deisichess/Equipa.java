@@ -36,7 +36,7 @@ public class Equipa {
         nrJogadasValidas++;
     }
 
-    public void aumentarTenativasInvalidas() {
+    public void aumentarTentativasInvalidas() {
         nrTentativasInvalidas++;
     }
     public void aumentarPecasCapturadas() {

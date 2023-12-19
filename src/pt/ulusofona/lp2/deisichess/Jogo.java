@@ -107,6 +107,7 @@ public class Jogo {
         for (Peca peca : tabuleiro.getPecas()) {
             if (peca.getEquipa().getPretoOuBranco() == 20) {
                 this.equipaBranca = peca.getEquipa();
+                //peca.equipa = this.equipaBranca;
             }
         }
     }
@@ -115,15 +116,16 @@ public class Jogo {
         for (Peca peca : tabuleiro.getPecas()) {
             if (peca.getEquipa().getPretoOuBranco() == 10) {
                 this.equipaPreta = peca.getEquipa();
+                //peca.equipa = this.equipaPreta;
             }
         }
     }
 
     void aumentaTentativasInvalidasPorEquipa() {
         if (equipaAtual == 20) {
-            equipaBranca.aumentarTenativasInvalidas();
+            equipaBranca.aumentarTentativasInvalidas();
         } else {
-            equipaPreta.aumentarTenativasInvalidas();
+            equipaPreta.aumentarTentativasInvalidas();
         }
     }
 

@@ -108,16 +108,27 @@ public class GameManager {
             }
         }
 
+        if(elementos.length == 4 && elementos[0].equals("PRETAS")) {
+            jogo.equipaPreta.nrCapturas = Integer.parseInt(elementos[1]);
+            jogo.equipaPreta.nrJogadasValidas = Integer.parseInt(elementos[2]);
+            jogo.equipaPreta.nrTentativasInvalidas = Integer.parseInt(elementos[3]);
+            return;
+        } else if (elementos.length == 4 && elementos[0].equals("BRANCAS")) {
+            jogo.equipaBranca.nrCapturas = Integer.parseInt(elementos[1]);
+            jogo.equipaBranca.nrJogadasValidas = Integer.parseInt(elementos[2]);
+            jogo.equipaBranca.nrTentativasInvalidas = Integer.parseInt(elementos[3]);
+            return;
+        }
+
         int x0 = Integer.parseInt(elementos[1]);
         int y0 = Integer.parseInt(elementos[2]);
-
 
         int x1 = Integer.parseInt(elementos[3]);
         int y1 = Integer.parseInt(elementos[4]);
 
-        move(x0, y0, x1, y1);
-    }
 
+       move(x0, y0, x1, y1);
+    }
 
     public void loadGame(File file) throws InvalidGameInputException, IOException {
 
@@ -215,10 +226,20 @@ public class GameManager {
             bufferedWriter.write(Integer.toString(jogo.getEquipaAtual()));
             bufferedWriter.newLine();
 
+
+            //if sem sentido - eliminar quando passarmos 50/50
             if(gameOver()) {
                 bufferedWriter.write("GameOver");
                 bufferedWriter.newLine();
             }
+
+            bufferedWriter.write("PRETAS:" + jogo.equipaPreta.nrCapturas + ":" + jogo.equipaPreta.nrJogadasValidas
+                    + ":" + jogo.equipaPreta.nrTentativasInvalidas);
+            bufferedWriter.newLine();
+
+            bufferedWriter.write("BRANCAS:" + jogo.equipaBranca.nrCapturas + ":" + jogo.equipaBranca.nrJogadasValidas
+            + ":" + jogo.equipaBranca.nrTentativasInvalidas);
+            bufferedWriter.newLine();
 
 
         } catch (IOException e) {
@@ -316,7 +337,6 @@ public class GameManager {
             //what does this do?
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
-
         }
        */ else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
@@ -363,6 +383,7 @@ public class GameManager {
 
                         sqChegada.getPeca().setNaoCapturado(false);
 
+
                         if (sqPartida.getPeca().getEquipa().getPretoOuBranco() == 20) {
                             jogo.getEquipaBranca().aumentarJogadasValidas();
                         } else {
@@ -394,6 +415,7 @@ public class GameManager {
                     //para dar invalido quando faz um move inválido ao inves de n dizer nada
                     if (!sqPartida.getPeca().movesPermitidos(x0, y0, x1, y1, jogo)) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
+                        jogo.tabuleiro.retornaPecaPorId(sqPartida.getPeca().getId()).numeroDeMovimentosInvalidos++;
                         sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
                         return false;

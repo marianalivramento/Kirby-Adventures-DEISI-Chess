@@ -175,6 +175,7 @@ public class TestProjeto {
         assertEquals(gm.jogo.tabuleiro.retornaPecaPorId(2).pontos, 1000);
     }
 
+
     @Test
     public void acaba_um_jogo_guardado() {
         GameManager gm = new GameManager();
@@ -184,10 +185,10 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1,0,1,5);
-        gm.move(0,7,0,3);
-        gm.move(0,7,0,7);
-        gm.move(0,7,0,6);
+        gm.move(1,0,1,5); // preta válida
+        gm.move(0,7,0,3); // branca inválida
+        gm.move(0,7,0,7); // branca inválida
+        gm.move(0,7,0,6); //branca válida
 
         try {
             gm.saveGame(new File("test-files/new.txt"));
@@ -207,11 +208,14 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1,5,0,6);
+        //1-3-0 //0-2-3
 
-//2
+        gm.move(0,0,0,1); //preta válida
+        gm.move(1,7,1,7); //branca invalida
+        gm.move(5,7,5,6); // branca valida
+        gm.move(1,5,0,6); // preta valida - captura
 
-        assertEquals(0, gm.jogo.equipaBranca.nrTentativasInvalidas);
+        assertEquals(3, gm.jogo.equipaBranca.nrTentativasInvalidas);
     }
 
 
