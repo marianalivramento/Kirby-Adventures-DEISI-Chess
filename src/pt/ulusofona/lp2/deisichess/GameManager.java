@@ -335,7 +335,7 @@ public class GameManager {
         }
        */ else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
-            //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+            sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
             return false;
         } else {
@@ -346,7 +346,7 @@ public class GameManager {
                 if (sqChegada.isOcupado()) {
                     if (sqChegada.getPeca() == null) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
-                        //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
                         return false;
                     }
@@ -452,7 +452,7 @@ public class GameManager {
 
             } else {
                 jogo.aumentaTentativasInvalidasPorEquipa();
-                //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+                sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
                 return false;
             }
