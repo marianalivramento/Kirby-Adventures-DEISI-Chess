@@ -13,47 +13,28 @@ public class PadreDaVila extends Peca {
         for (int i = 1; i <= 3; i++) {
             if (x1 == x0 + i && y1 == y0 + i) {
                 return false;
+            } else if (x1 == x0 - i && y1 == y0 - i) {
+                return false;
+            } else if (x1 == x0 + i && y1 == y0 - i) {
+                return false;
+            } else if (x1 == x0 - i && y1 == y0 + i) {
+                return false;
             } else {
                 if (jogo.getTabuleiro().retornoQuadrado(x0 + i, y0 + i).isOcupado()) {
                     return true;
                 }
-            }
-        }
-
-        for (int i = 1; i <= 3; i++) {
-            if (x1 == x0 - i && y1 == y0 - i) {
-                return false;
-            } else {
                 if (jogo.getTabuleiro().retornoQuadrado(x0 - i, y0 - i).isOcupado()) {
                     return true;
                 }
-            }
-        }
-
-        int z = -1;
-        for (int i = 1; i <= 3; i++) {
-            if (x1 == x0 + i && y1 == y0 + z) {
-                return false;
-            } else {
-                if (jogo.getTabuleiro().retornoQuadrado(x0 + i, y0 + z).isOcupado()) {
+                if (jogo.getTabuleiro().retornoQuadrado(x0 + i, y0 - i).isOcupado()) {
                     return true;
                 }
-            }
-            z--;
-        }
-
-        z = -1;
-        for (int i = 1; i <= 3; i++) {
-            if (x1 == x0 + z && y1 == y0 + i) {
-                return false;
-            } else {
-                if (jogo.getTabuleiro().retornoQuadrado(x0 + z, y0 + i).isOcupado()) {
+                if (jogo.getTabuleiro().retornoQuadrado(x0 - i, y0 + i).isOcupado()) {
                     return true;
                 }
-            }
-            z--;
-        }
 
+            }
+        }
 
 
         /*for (Square s : jogo.getTabuleiro().getQuadrados()) {
