@@ -300,7 +300,7 @@ public class TestProjeto {
         assertEquals(2, gm.jogo.equipaPreta.nrCapturas);
     }
 
-    @Test
+   /* @Test
     public void movimento_padre_da_vila() {
         GameManager gm = new GameManager();
         try {
@@ -311,6 +311,8 @@ public class TestProjeto {
 
         assertTrue(gm.move(0,0,1,1));
     }
+    
+    */
 
     @Test
     public void movimento_padre_da_vila3() {

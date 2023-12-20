@@ -346,13 +346,13 @@ public class GameManager {
                 if (sqChegada.isOcupado()) {
                     if (sqChegada.getPeca() == null) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
-                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+                        //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
                         return false;
                     }
                     if (sqChegada.getPeca().getEquipa().getPretoOuBranco() == sqPartida.getPeca().getEquipa().getPretoOuBranco()) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
-                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+                        //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
                         return false;
                     } else if (sqPartida.getPeca().getClass().equals(Rainha.class) && (sqChegada.getPeca().getClass().equals(Rainha.class)
