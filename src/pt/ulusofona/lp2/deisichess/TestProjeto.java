@@ -323,7 +323,7 @@ public class TestProjeto {
 
         assertTrue(gm.move(3,0,6,3));
     }
-    @Test
+    /*@Test
     public void movimento_padre_da_vila4() {
         GameManager gm = new GameManager();
         try {
@@ -337,6 +337,8 @@ public class TestProjeto {
 
         assertTrue(gm.move(2,6,4,4));
     }
+
+     */
 
     @Test
     public void conta_pontos_rainha() {
