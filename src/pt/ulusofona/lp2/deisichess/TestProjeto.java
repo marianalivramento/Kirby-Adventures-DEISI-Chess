@@ -177,6 +177,47 @@ public class TestProjeto {
 
 
     @Test
+    public void savegame() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(1,0,1,5); // preta válida
+        gm.move(0,7,0,3); // branca inválida
+        gm.move(0,7,0,7); // branca inválida
+        gm.move(0,7,0,6); //branca válida
+
+        gm.move(0,0,0,1); //preta válida
+        gm.move(1,7,1,7); //branca invalida
+        gm.move(5,7,5,6); // branca valida
+        gm.move(1,5,0,6); // preta valida - captura
+
+        try {
+            gm.saveGame(new File("test-files/new.txt"));
+        } catch (IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        try {
+            gm.loadGame(new File("test-files/new.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        assertEquals(1, gm.jogo.equipaPreta.nrCapturas);
+    }
+
+
+    @Test
     public void acaba_um_jogo_guardado() {
         GameManager gm = new GameManager();
         try {
