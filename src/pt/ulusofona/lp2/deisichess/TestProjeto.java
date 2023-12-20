@@ -259,6 +259,70 @@ public class TestProjeto {
         assertEquals(1, gm.jogo.equipaPreta.nrCapturas);
     }
 
+    @Test
+    public void jogo_completo_video() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(3,0,0,3); //valida p
+        gm.move(1,7,4,4); //valida b
+        gm.move(1,0,1,1); //valida p
+        gm.move(2,7,0,5); //valida b
+
+        gm.move(5,0,5,7); //preta captura valida p
+        gm.move(0,5,2,3); //valida b
+        gm.move(6,0,5,1); //preta invalida - homer dorme
+        gm.move(2,0,0,2); //valida p
+
+        gm.move(4,4,4,2); //valida b
+        gm.move(0,3,2,5); //valida p
+        gm.move(0,7,1,7); //valida b
+        gm.move(1,1,1,7); //preta invalida
+
+        gm.move(4,2,3,3); //preta invalida
+        gm.move(1,1,1,7); //preta invalida
+        gm.move(6,0,5,1); //valida p
+        gm.move(3,7,0,4); //valida b
+
+        gm.move(7,0,7,3); //valida p
+        gm.move(4,2,5,1); //branca captura valida b
+        gm.move(1,1,1,5); //valida p
+        gm.move(5,1,2,1); //valida b
+
+        gm.move(1,5,1,7); //preta captura valida p
+
+
+
+        assertEquals(2, gm.jogo.equipaPreta.nrCapturas);
+    }
+
+    @Test
+    public void movimento_padre_da_vila() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/teste_padre"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        assertTrue(gm.move(0,0,1,1));
+    }
+
+    @Test
+    public void movimento_padre_da_vila3() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        assertFalse(gm.move(3,0,6,3));
+    }
 
     @Test
     public void conta_pontos_rainha() {
