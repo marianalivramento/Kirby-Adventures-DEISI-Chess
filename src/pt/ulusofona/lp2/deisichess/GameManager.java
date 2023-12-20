@@ -61,9 +61,15 @@ public class GameManager {
         peca.setId(Integer.parseInt(elementos[0]));
         peca.setTipo(Integer.parseInt(elementos[1]));
 
+        if (elementos[2] == "10") {
+            peca.setEquipa(jogo.equipaPreta);
+        } else {
+            peca.setEquipa(jogo.equipaBranca);
+        }
+
         peca.setEquipa(new Equipa(Integer.parseInt(elementos[2])));
 
-        jogo.defineEquipa(peca.getEquipa());
+        //jogo.defineEquipa(peca.getEquipa());
         peca.setAlcunha(elementos[3]);
 
         jogo.getTabuleiro().adicionaPeca(peca);
@@ -99,13 +105,8 @@ public class GameManager {
         String[] elementos = line.split(":");
 
         if (elementos.length == 1) {
-            if(elementos[0].equals("GameOver")) {
-                gameOver();
-                return;
-            } else {
                 jogo.equipaAtual = Integer.parseInt(line);
                 return;
-            }
         }
 
         if(elementos.length == 4 && elementos[0].equals("PRETAS")) {
@@ -132,7 +133,7 @@ public class GameManager {
 
     public void loadGame(File file) throws InvalidGameInputException, IOException {
 
-
+        //jogo = new Jogo();
         jogo.clearGame();
         gameFileInfo.clear();
         moveHistory.clear();
@@ -188,8 +189,8 @@ public class GameManager {
                 linha++;
             }
 
-            jogo.setEquipaBranca();
-            jogo.setEquipaPreta();
+            //jogo.setEquipaBranca();
+            //jogo.setEquipaPreta();
             jogo.getEquipaPreta().setTurno(true);
 
 
@@ -226,12 +227,6 @@ public class GameManager {
             bufferedWriter.write(Integer.toString(jogo.getEquipaAtual()));
             bufferedWriter.newLine();
 
-
-            //if sem sentido - eliminar quando passarmos 50/50
-            if(gameOver()) {
-                bufferedWriter.write("GameOver");
-                bufferedWriter.newLine();
-            }
 
             bufferedWriter.write("PRETAS:" + jogo.equipaPreta.nrCapturas + ":" + jogo.equipaPreta.nrJogadasValidas
                     + ":" + jogo.equipaPreta.nrTentativasInvalidas);

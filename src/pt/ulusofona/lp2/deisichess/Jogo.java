@@ -106,8 +106,8 @@ public class Jogo {
     public void setEquipaBranca() {
         for (Peca peca : tabuleiro.getPecas()) {
             if (peca.getEquipa().getPretoOuBranco() == 20) {
-                this.equipaBranca = peca.getEquipa();
-                //peca.equipa = this.equipaBranca;
+                //this.equipaBranca = peca.getEquipa();
+                peca.equipa = this.equipaBranca;
             }
         }
     }
@@ -115,8 +115,8 @@ public class Jogo {
     public void setEquipaPreta() {
         for (Peca peca : tabuleiro.getPecas()) {
             if (peca.getEquipa().getPretoOuBranco() == 10) {
-                this.equipaPreta = peca.getEquipa();
-                //peca.equipa = this.equipaPreta;
+                //this.equipaPreta = peca.getEquipa();
+                peca.equipa = this.equipaPreta;
             }
         }
     }

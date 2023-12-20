@@ -256,7 +256,7 @@ public class TestProjeto {
         gm.move(5,7,5,6); // branca valida
         gm.move(1,5,0,6); // preta valida - captura
 
-        assertEquals(3, gm.jogo.equipaBranca.nrTentativasInvalidas);
+        assertEquals(1, gm.jogo.equipaPreta.nrCapturas);
     }
 
 
