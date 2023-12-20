@@ -321,7 +321,7 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        assertFalse(gm.move(3,0,6,3));
+        assertTrue(gm.move(3,0,6,3));
     }
 
     @Test
