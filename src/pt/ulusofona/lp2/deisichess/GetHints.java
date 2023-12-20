@@ -68,4 +68,6 @@ public class GetHints implements Comparable<GetHints> {
 
         return "(" + square.getCoordenadaX() + "," + square.getCoordenadaY() + ") -> 0";
     }
+
+    //get hints apenas usando o x e o y do quadrado w instanciae o valoe  tipo int pontos = 0;
 }

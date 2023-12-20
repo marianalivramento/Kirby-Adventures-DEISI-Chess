@@ -35,20 +35,24 @@ public class Rainha extends Peca {
             return false;
         }
         if (!pertenceAequipa(jogo, x1, y1)) {
-            for (int i = 1; i <= 5; i++) {
-                if ((x1 == x0 + i || x1 == x0 - i) && y1 == y0) { //direita e esquerda
-                    return true;
-                } else if (x1 == x0 && (y1 == y0 + i || y1 == y0 - i)) { //frente e trás
-                    return true;
-                } else if ((y1 == y0 + i || y1 == y0 - i) && (x1 == x0 + i || x1 == x0 - i)) {
-                    return true;
+            if (jogo.getTabuleiro().retornoQuadrado(x1, y1).getPeca() != null && jogo.getTabuleiro().retornoQuadrado(x1, y1).getPeca().getTipo() == 1) {
+                return false;
+            }
+        for (int i = 1; i <= 5; i++) {
+            if ((x1 == x0 + i || x1 == x0 - i) && y1 == y0) { //direita e esquerda
+                return true;
+            } else if (x1 == x0 && (y1 == y0 + i || y1 == y0 - i)) { //frente e trás
+                return true;
+            } else if ((y1 == y0 + i || y1 == y0 - i) && (x1 == x0 + i || x1 == x0 - i)) {
+                return true;
 
-                }
             }
         }
 
-        return false;
     }
+
+        return false;
+}
 
     boolean move(int x0, int y0, int x1, int y1, Jogo jogo) {
         Peca pecaQueMove = jogo.getTabuleiro().retornoQuadrado(x0, y0).getPeca();
