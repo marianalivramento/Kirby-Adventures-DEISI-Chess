@@ -21,6 +21,7 @@ public class Jogo {
         equipaAtual = 10;
         equipaBranca = new Equipa(20);
         equipaPreta = new Equipa(10);
+        turnoClasse = 0;
     }
 
     public String getResultado() {
