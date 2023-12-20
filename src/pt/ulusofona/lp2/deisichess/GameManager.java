@@ -335,7 +335,7 @@ public class GameManager {
         }
        */ else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
-            sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+            //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
             return false;
         } else {
@@ -352,7 +352,7 @@ public class GameManager {
                     }
                     if (sqChegada.getPeca().getEquipa().getPretoOuBranco() == sqPartida.getPeca().getEquipa().getPretoOuBranco()) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
-                        //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+                        sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
                         return false;
                     } else if (sqPartida.getPeca().getClass().equals(Rainha.class) && (sqChegada.getPeca().getClass().equals(Rainha.class)
@@ -410,7 +410,7 @@ public class GameManager {
                     //para dar invalido quando faz um move inválido ao inves de n dizer nada
                     if (!sqPartida.getPeca().movesPermitidos(x0, y0, x1, y1, jogo)) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
-                        jogo.tabuleiro.retornaPecaPorId(sqPartida.getPeca().getId()).numeroDeMovimentosInvalidos++;
+                        //jogo.tabuleiro.retornaPecaPorId(sqPartida.getPeca().getId()).numeroDeMovimentosInvalidos++; //esta
                         sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
                         return false;
@@ -452,7 +452,7 @@ public class GameManager {
 
             } else {
                 jogo.aumentaTentativasInvalidasPorEquipa();
-                sqPartida.getPeca().numeroDeMovimentosInvalidos++;
+                //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
                 return false;
             }
