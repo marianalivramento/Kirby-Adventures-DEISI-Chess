@@ -10,7 +10,93 @@ public class PadreDaVila extends Peca {
 
     boolean passaPorPeca(int x0, int y0, int x1, int y1, Jogo jogo) {
 
-        for (Square s : jogo.getTabuleiro().getQuadrados()) {
+        for (int i = 1; i <= 3; i++) {
+            if (x1 == x0 + i && y1 == y0 + i) {
+                return false;
+            } else if (x1 == x0 - i && y1 == y0 - i) {
+                return false;
+            } else if (x1 == x0 + i && y1 == y0 - i) {
+                return false;
+            } else if (x1 == x0 - i && y1 == y0 + i) {
+                return false;
+            } else {
+                if (x1 > x0 && y1 > y0) {
+                    if (jogo.getTabuleiro().retornoQuadrado(x0 + i, y0 + i).isOcupado()) {
+                        return true;
+                    }
+                }
+                if (x1 < x0 && y1 < y0) {
+                    if (jogo.getTabuleiro().retornoQuadrado(x0 - i, y0 - i).isOcupado()) {
+                        return true;
+                    }
+                }
+
+                if (x1 > x0 && y1 < y0) {
+                    if (jogo.getTabuleiro().retornoQuadrado(x0 + i, y0 - i).isOcupado()) {
+                        return true;
+                    }
+                }
+
+                if (x1 < x0 && y1 > y0) {
+                    if (jogo.getTabuleiro().retornoQuadrado(x0 - i, y0 + i).isOcupado()) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        /*if (x1 > x0 && y1 > y0) {
+            for (int i = 1; i <= 3; i++) {
+                if (x1 == x0 + i && y1 == y0 + i) {
+                    return false;
+                } else {
+                    if (jogo.getTabuleiro().retornoQuadrado(x0 + i, y0 + i).isOcupado()) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        if (x1 < x0 && y1 < y0) {
+            for (int i = 1; i <= 3; i++) {
+                if (x1 == x0 - i && y1 == y0 - i) {
+                    return false;
+                } else {
+                    if (jogo.getTabuleiro().retornoQuadrado(x0 - i, y0 - i).isOcupado()) {
+                        return true;
+                    }
+                }
+            }
+
+        }
+
+        int z = -1;
+        for (int i = 1; i <= 3; i++) {
+            if (x1 == x0 + i && y1 == y0 + z) {
+                return false;
+            } else {
+                if (jogo.getTabuleiro().retornoQuadrado(x0 + i, y0 + z).isOcupado()) {
+                    return true;
+                }
+            }
+            z--;
+        }
+
+        z = -1;
+        for (int i = 1; i <= 3; i++) {
+            if (x1 == x0 + z && y1 == y0 + i) {
+                return false;
+            } else {
+                if (jogo.getTabuleiro().retornoQuadrado(x0 + z, y0 + i).isOcupado()) {
+                    return true;
+                }
+            }
+            z--;
+        }
+
+         */
+
+        /*for (Square s : jogo.getTabuleiro().getQuadrados()) {
             if (s.getCoordenadaX() != x1 && s.getCoordenadaY() != y1) {
                 // compara x1 com x0 e se x1 for maior devolve 1 se n devolve -1 same thing for y
                 int sinalX = Integer.compare(x1, x0);
@@ -26,7 +112,7 @@ public class PadreDaVila extends Peca {
                     }
                 }
             }
-        }
+        }*/
         return false;
     }
 
