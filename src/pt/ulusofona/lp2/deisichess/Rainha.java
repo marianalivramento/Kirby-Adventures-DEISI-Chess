@@ -13,6 +13,24 @@ public class Rainha extends Peca {
         int minY = Math.min(y0, y1);
         int maxY = Math.max(y0, y1);
 
+        if (minY == maxY){
+            for (int x = minX + 1; x < maxX; x++) {
+                    Square square = jogo.getTabuleiro().retornoQuadrado(x, minY);
+                    if (square != null && square.isOcupado()) {
+                        return true;
+                    }
+                }
+            }
+
+        if (minX == maxX){
+            for (int y = minY + 1; y < maxY; y++) {
+                Square square = jogo.getTabuleiro().retornoQuadrado(minX, y);
+                if (square != null && square.isOcupado()) {
+                    return true;
+                }
+            }
+        }
+
         for (int x = minX + 1; x < maxX; x++) {
             for (int y = minY + 1; y < maxY; y++) {
                 Square square = jogo.getTabuleiro().retornoQuadrado(x, y);
