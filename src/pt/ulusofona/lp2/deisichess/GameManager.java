@@ -262,12 +262,15 @@ public class GameManager {
         //if (id == 8 || id == 16) {
 
         if (moveInfo.length == 7) {
+            jogo.getTabuleiro().retornaPecaPorId(id).numeroDeCapturas--;
             Peca p = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(moveInfo[6]));
+            jogo.getTabuleiro().retornaPecaPorId(id).pontos -= jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(moveInfo[6])).getValor();
             p.setNaoCapturado(true);
             jogo.getTabuleiro().retornoQuadrado(x1, y1).setPeca(p);
             p.setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x1, y1));
             jogo.getTabuleiro().retornaPecaPorId(id).setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x0, y0));
             jogo.getTabuleiro().retornoQuadrado(x0, y0).setPeca(jogo.getTabuleiro().retornaPecaPorId(id));
+
             moveHistory.remove(moveHistory.size() - 1);
 
             jogo.mudarEquipa();
