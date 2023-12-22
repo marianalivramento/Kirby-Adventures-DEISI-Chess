@@ -53,7 +53,7 @@ public class Rainha extends Peca {
             return false;
         }
         if (!pertenceAequipa(jogo, x1, y1)) {
-            if (jogo.getTabuleiro().retornoQuadrado(x1, y1).getPeca() != null && jogo.getTabuleiro().retornoQuadrado(x1, y1).getPeca().getTipo() == 1) {
+            if (jogo.getTabuleiro().retornoQuadrado(x1, y1).getPeca() != null && (jogo.getTabuleiro().retornoQuadrado(x1, y1).getPeca().getTipo() == 1 || jogo.getTabuleiro().retornoQuadrado(x1, y1).getPeca().nomeDoTipo(jogo).equals("Joker/Rainha")) ){
                 return false;
             }
         for (int i = 1; i <= 5; i++) {
