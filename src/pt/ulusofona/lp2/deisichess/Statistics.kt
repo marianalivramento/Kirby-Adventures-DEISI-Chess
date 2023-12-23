@@ -49,8 +49,11 @@ fun func4(gameManager: GameManager) : List<String> {
 
 fun func3(gameManager: GameManager) : List<String> {
     return gameManager.arr().filter { it.getNumeroDeCapturas() > 5 }
-            .sortedBy { it.getNumeroDeCapturas()}
-            .reversed()
+            .sortedWith(compareBy(
+                    { -it.getNumeroDeCapturas() },
+                    { it.getEquipa().pretoOuBranco }
+            ))
+            //.reversed()
             .map { it.getEquipa().pretoOuBrancoString() + ":" + it.getAlcunha() + ":" + it.getNumeroDeCapturas()}
 }
 
