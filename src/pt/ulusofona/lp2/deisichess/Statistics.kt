@@ -7,9 +7,13 @@ enum class StatType{
 
 fun func1(gameManager: GameManager) : List<String> {
 
-    return gameManager.arr().sortedBy { it.getNumeroDeCapturas() }
+    return gameManager.arr()
+            .sortedWith(compareBy(
+                    { -it.getNumeroDeCapturas() },
+                    { it.getEquipa().pretoOuBranco }
+            ))
             .map { it.getAlcunha() + " (" + it.getEquipa().pretoOuBrancoString() + ") fez " + it.getNumeroDeCapturas() + " capturas"}
-            .reversed()
+            //.reversed()
             .take(5)
 
 }
