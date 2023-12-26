@@ -24,6 +24,18 @@ public class Equipa {
         return nrCapturas;
     }
 
+    public void setNrCapturas(int nrCapturas) {
+        this.nrCapturas = nrCapturas;
+    }
+
+    public void setNrJogadasValidas(int nrJogadasValidas) {
+        this.nrJogadasValidas = nrJogadasValidas;
+    }
+
+    public void setNrTentativasInvalidas(int nrTentativasInvalidas) {
+        this.nrTentativasInvalidas = nrTentativasInvalidas;
+    }
+
     public int getNrJogadasValidas() {
         return nrJogadasValidas;
     }
@@ -41,6 +53,9 @@ public class Equipa {
     }
     public void aumentarPecasCapturadas() {
         nrCapturas++;
+    }
+    public void aumentarNumeroTurno() {
+        numeroDoTurno++;
     }
     String pretoOuBrancoString() {
         if (pretoOuBranco == 10) {

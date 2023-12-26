@@ -66,6 +66,10 @@ abstract class Peca {
         return numeroDeCapturas;
     }
 
+    public void setNumeroDeCapturas(int numeroDeCapturas) {
+        this.numeroDeCapturas = numeroDeCapturas;
+    }
+
     public void setCoordenadas(Square coordenadas) {
         this.coordenadas = coordenadas;
     }
@@ -142,6 +146,46 @@ abstract class Peca {
     }
 
     abstract String nomeDoTipo(Jogo jogo);
+
+    public int getNumeroDeMovimentosInvalidos() {
+        return numeroDeMovimentosInvalidos;
+    }
+
+    public void setNumeroDeMovimentosInvalidos(int numeroDeMovimentosInvalidos) {
+        this.numeroDeMovimentosInvalidos = numeroDeMovimentosInvalidos;
+    }
+
+    public int getNumeroDeMovimentosValidos() {
+        return numeroDeMovimentosValidos;
+    }
+
+    public void setNumeroDeMovimentosValidos(int numeroDeMovimentosValidos) {
+        this.numeroDeMovimentosValidos = numeroDeMovimentosValidos;
+    }
+
+    public void diminuiNumeroDeCapturas() {
+        numeroDeCapturas--;
+    }
+
+    public void aumentaNumeroDeCapturas() {
+        numeroDeCapturas++;
+    }
+
+    public void diminuiPontos(int pontos) {
+        this.pontos -= pontos;
+    }
+
+    public void aumentaPontos(int pontos) {
+        this.pontos += pontos;
+    }
+
+    public void aumentaNumeroDeMovimentosInvalidos() {
+        numeroDeMovimentosInvalidos++;
+    }
+
+    public void aumentaNumeroDeMovimentosValidos() {
+        numeroDeMovimentosValidos++;
+    }
 }
 
 

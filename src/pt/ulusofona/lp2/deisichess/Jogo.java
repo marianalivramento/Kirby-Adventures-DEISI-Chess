@@ -134,6 +134,10 @@ public class Jogo {
         nrDeJogadasSemCaptura++;
     }
 
+    void aumentaTurnoClasse() {
+        turnoClasse++;
+    }
+
     public int getNrDeJogadasSemCaptura() {
         return nrDeJogadasSemCaptura;
     }
@@ -151,5 +155,11 @@ public class Jogo {
         }
     }
 
+    public void setEquipaAtual(int equipaAtual) {
+        this.equipaAtual = equipaAtual;
+    }
 
+    public int getTurnoClasse() {
+        return turnoClasse;
+    }
 }
