@@ -54,9 +54,6 @@ public class GameManager {
             case "7":
                 peca = new Joker();
                 break;
-            case "8":
-                peca = new Kirby();
-                break;
             default:
                 throw new IOException();
 
