@@ -375,6 +375,8 @@ public class TestProjeto {
         gm.move(1,7,1,2);
         gm.move(0,0,0,1);
         gm.move(1,2,4,2);
+        gm.move(3,0,4,2);
+
 
 
 
@@ -463,6 +465,10 @@ public class TestProjeto {
         gm.move(4,7,5,7);
         gm.move(2,7,4,5);
         gm.move(1,5,4,5);
+        gm.move(1,0,1,5);
+        gm.move(3,7,1,5);
+
+
 
         assertEquals("O Maior Grande (PRETA) fez 1 capturas", StatisticsKt.topCincoCapturas(gm).get(0));
     }
@@ -479,5 +485,38 @@ public class TestProjeto {
 
 
         assertEquals("(0,1) -> 0", gm.getHints(0,0).get(0).toString());
+    }
+    @Test
+    public void nomes_dos_tipos() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add(gm.jogo.tabuleiro.retornaPecaPorId(1).nomeDoTipo(gm.jogo));
+        arr.add(gm.jogo.tabuleiro.retornaPecaPorId(2).nomeDoTipo(gm.jogo));
+        arr.add(gm.jogo.tabuleiro.retornaPecaPorId(3).nomeDoTipo(gm.jogo));
+        arr.add(gm.jogo.tabuleiro.retornaPecaPorId(4).nomeDoTipo(gm.jogo));
+        arr.add(gm.jogo.tabuleiro.retornaPecaPorId(5).nomeDoTipo(gm.jogo));
+        arr.add(gm.jogo.tabuleiro.retornaPecaPorId(6).nomeDoTipo(gm.jogo));
+        arr.add(gm.jogo.tabuleiro.retornaPecaPorId(7).nomeDoTipo(gm.jogo));
+        arr.add(gm.jogo.tabuleiro.retornaPecaPorId(8).nomeDoTipo(gm.jogo));
+
+
+        ArrayList<String> expectedArr = new ArrayList<>();
+        expectedArr.add("Rei");
+        expectedArr.add("Rainha");
+        expectedArr.add("Ponei Mágico");
+        expectedArr.add("Padre da Vila");
+        expectedArr.add("TorreHor");
+        expectedArr.add("TorreVert");
+        expectedArr.add("Homer Simpson");
+        expectedArr.add("Joker/Rainha");
+
+
+        assertEquals(expectedArr, arr);
     }
 }
