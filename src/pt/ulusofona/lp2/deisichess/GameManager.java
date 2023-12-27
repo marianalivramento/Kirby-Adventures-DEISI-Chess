@@ -69,7 +69,6 @@ public class GameManager {
 
         peca.setEquipa(new Equipa(Integer.parseInt(elementos[2])));
 
-        //jogo.defineEquipa(peca.getEquipa());
         peca.setAlcunha(elementos[3]);
 
         jogo.getTabuleiro().adicionaPeca(peca);
@@ -112,19 +111,13 @@ public class GameManager {
 
         if(elementos.length == 4 && elementos[0].equals("PRETAS")) {
             jogo.getEquipaPreta().setNrCapturas(Integer.parseInt(elementos[1]));
-            //jogo.equipaPreta.nrCapturas = Integer.parseInt(elementos[1]);
             jogo.getEquipaPreta().setNrJogadasValidas(Integer.parseInt(elementos[2]));
-            //jogo.equipaPreta.nrJogadasValidas = Integer.parseInt(elementos[2]);
             jogo.getEquipaPreta().setNrTentativasInvalidas(Integer.parseInt(elementos[3]));
-            //jogo.equipaPreta.nrTentativasInvalidas = Integer.parseInt(elementos[3]);
             return;
         } else if (elementos.length == 4 && elementos[0].equals("BRANCAS")) {
             jogo.getEquipaBranca().setNrCapturas(Integer.parseInt(elementos[1]));
-            //jogo.equipaBranca.nrCapturas = Integer.parseInt(elementos[1]);
             jogo.getEquipaBranca().setNrJogadasValidas(Integer.parseInt(elementos[2]));
-            //jogo.equipaBranca.nrJogadasValidas = Integer.parseInt(elementos[2]);
             jogo.getEquipaBranca().setNrTentativasInvalidas(Integer.parseInt(elementos[3]));
-            //jogo.equipaBranca.nrTentativasInvalidas = Integer.parseInt(elementos[3]);
             return;
         }
 
@@ -196,8 +189,6 @@ public class GameManager {
                 linha++;
             }
 
-            //jogo.setEquipaBranca();
-            //jogo.setEquipaPreta();
             jogo.getEquipaPreta().setTurno(true);
 
 
@@ -266,16 +257,13 @@ public class GameManager {
         int x1 = Integer.parseInt(moveInfo[3]);
         int y1 = Integer.parseInt(moveInfo[4]);
 
-        //if (id == 8 || id == 16) {
 
         if (moveInfo.length == 7) {
             jogo.getTabuleiro().retornaPecaPorId(id).diminuiNumeroDeCapturas();
-            //jogo.getTabuleiro().retornaPecaPorId(id).numeroDeCapturas--;
 
             Peca p = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(moveInfo[6]));
 
             jogo.getTabuleiro().retornaPecaPorId(id).diminuiPontos(jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(moveInfo[6])).getValor());
-            //jogo.getTabuleiro().retornaPecaPorId(id).pontos -= jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(moveInfo[6])).getValor();
             p.setNaoCapturado(true);
             jogo.getTabuleiro().retornoQuadrado(x1, y1).setPeca(p);
             p.setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x1, y1));
@@ -335,16 +323,14 @@ public class GameManager {
             jogo.aumentaTentativasInvalidasPorEquipa();
             return false;
 
-        } else if (sqPartida.getPeca().tipo == 6 && jogo.homerADormir()) {
+        } else if (sqPartida.getPeca().getTipo() == 6 && jogo.homerADormir()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             sqPartida.getPeca().aumentaNumeroDeMovimentosInvalidos();
-            //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
             return false;
 
         } else if (sqPartida.getPeca().getEquipa().getPretoOuBranco() != jogo.getEquipaAtual()) {
             jogo.aumentaTentativasInvalidasPorEquipa();
             sqPartida.getPeca().aumentaNumeroDeMovimentosInvalidos();
-            //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
             return false;
 
         } else {
@@ -356,14 +342,12 @@ public class GameManager {
                     if (sqChegada.getPeca() == null) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
                         sqPartida.getPeca().aumentaNumeroDeMovimentosInvalidos();
-                        //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
                         return false;
                     }
                     if (sqChegada.getPeca().getEquipa().getPretoOuBranco() == sqPartida.getPeca().getEquipa().getPretoOuBranco()) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
                         sqPartida.getPeca().aumentaNumeroDeMovimentosInvalidos();
-                        //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
                         return false;
                     } else if (sqPartida.getPeca().getClass().equals(Rainha.class) && (sqChegada.getPeca().getClass().equals(Rainha.class)
@@ -371,14 +355,12 @@ public class GameManager {
                         jogo.aumentaTentativasInvalidasPorEquipa();
 
                         sqPartida.getPeca().aumentaNumeroDeMovimentosInvalidos();
-                        //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
                         return false;
                     } else if ((sqPartida.getPeca().getClass().equals(Joker.class) && jogo.getTurnoClasse() % 6 == 0) && sqChegada.getPeca().getClass().equals(Rainha.class)) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
 
                         sqPartida.getPeca().aumentaNumeroDeMovimentosInvalidos();
-                        //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
                         return false;
 
@@ -389,7 +371,6 @@ public class GameManager {
                             jogo.aumentaTentativasInvalidasPorEquipa();
 
                             sqPartida.getPeca().aumentaNumeroDeMovimentosInvalidos();
-                            //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
 
                             return false;
                         }
@@ -408,46 +389,27 @@ public class GameManager {
 
                     moveHistory.add(sqPartida.getPeca().getId() + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1+ ":PecaCapturada:" +sqChegada.getPeca().getId());
                     sqPartida.getPeca().aumentaPontos(sqChegada.getPeca().getValor());
-                    //sqPartida.getPeca().pontos += sqChegada.getPeca().getValor();
                     sqPartida.getPeca().aumentaNumeroDeCapturas();
-                    //sqPartida.getPeca().numeroDeCapturas++;
                     sqPartida.getPeca().aumentaNumeroDeMovimentosValidos();
-                    //sqPartida.getPeca().numeroDeMovimentosValidos++;
 
                     sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
 
                     jogo.getClassEquipaAtual().aumentarNumeroTurno();
-                    //jogo.getClassEquipaAtual().numeroDoTurno++;
                     jogo.aumentaTurnoClasse();
-                    //jogo.turnoClasse++;
-
-
-
-/*
-                    sqPartida.getPeca().getCoordenadas().setOcupado(false);
-                    sqPartida.getPeca().setCoordenadas(sqChegada);
-                    sqChegada.setPeca(sqPartida.getPeca());
-                    sqPartida.resetQuadrado();
-
- */
 
                     jogo.resetJogadasSemCaptura();
 
                 } else {
-                    //para dar invalido quando faz um move inválido ao inves de n dizer nada
                     if (!sqPartida.getPeca().movesPermitidos(x0, y0, x1, y1, jogo)) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
-                        //jogo.tabuleiro.retornaPecaPorId(sqPartida.getPeca().getId()).numeroDeMovimentosInvalidos++; //esta
                         sqPartida.getPeca().aumentaNumeroDeMovimentosInvalidos();
-                        //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
-
                         return false;
+
                     }else if(sqPartida.getPeca().passaPorPeca(x0,y0,x1,y1,jogo)){
                         jogo.aumentaTentativasInvalidasPorEquipa();
                         sqPartida.getPeca().aumentaNumeroDeMovimentosInvalidos();
-                        //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
-
                         return false;
+
                     }
                     moveHistory.add(sqPartida.getPeca().getId() + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1);
                     sqPartida.getPeca().getEquipa().setTurno(false);
@@ -459,30 +421,16 @@ public class GameManager {
                     }
 
                     sqPartida.getPeca().aumentaNumeroDeMovimentosValidos();
-                    //sqPartida.getPeca().numeroDeMovimentosValidos++;
 
                     sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
                     jogo.getClassEquipaAtual().aumentarNumeroTurno();
                     jogo.aumentaTurnoClasse();
-
-
-                    //jogo.getClassEquipaAtual().aumentarJogadasValidas();
-                    //jogo.getClassEquipaAtual().aumentarPecasCapturadas();
-
-
-                    /*sqChegada.setPeca(sqPartida.getPeca());
-                    sqPartida.getPeca().setCoordenadas(sqChegada);
-                    sqChegada.setOcupado(true);
-                    sqPartida.resetQuadrado();
-
-                     */
 
                     jogo.aumentaJogadasSemCaptura();
                 }
 
             } else {
                 jogo.aumentaTentativasInvalidasPorEquipa();
-                //sqPartida.getPeca().numeroDeMovimentosInvalidos++;
                 sqPartida.getPeca().aumentaNumeroDeMovimentosInvalidos();
 
                 return false;
@@ -658,11 +606,6 @@ public class GameManager {
                         }
                         break;
                     case "7":
-
-
-                        //String jokerDesteTurno = "";
-                        //if (jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])) != null && jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa() != null) {
-                        //int indice = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(string[i])).getEquipa().numeroDoTurno;
                         int indice = jogo.getTurnoClasse();
                         switch (indice < 6? indice : indice % 6) {
                             case 0:
@@ -693,10 +636,7 @@ public class GameManager {
                                 retorno.append("Desconhecido");
                                 break;
                         }
-                        //retorno.append(jokerDesteTurno);
                 }
-                //break;
-                //}
             } else if (i == 2) {
                 retorno.append(string[i]);
             } else {
@@ -760,38 +700,30 @@ public class GameManager {
 
             }
         }
-        //uma equipa ficou sem rei
+
         if (!pecaReiBrancoFlag || !pecaReiPretoFlag) {
             getGameResults();
             return true;
         }
-        //só há duas peças em jogo e são reis
         if ((pecasPretas == 1 && pecaReiPretoFlag) && (pecasBrancas == 1 && pecaReiBrancoFlag)) {
             getGameResults();
             return true;
         }
 
 
-        /*if (pecasBrancas == 1  && pecasPretas == 1) {
-            getGameResults();
-            return true;
-        }*/
         //10 jogadas sem capturas
         if (jogo.getNrDeJogadasSemCaptura() == 10) {
             if (jogo.getEquipaPreta().getNrCapturas() > 0 || jogo.getEquipaBranca().getNrCapturas() > 0) {
                 getGameResults();
                 return true;
             }
-        } /*else if (jogo.getNrDeJogadasSemCaptura() > 60) {
-            getGameResults();
-            return true;
-        }*/
+        }
+
         //só há peças de uma equipa
         if (!flagPecasPretas || !flagPecasBrancas) {
             getGameResults();
             return true;
         }
-
 
         return false;
     }

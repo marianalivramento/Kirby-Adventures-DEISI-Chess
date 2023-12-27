@@ -66,5 +66,4 @@ public class Equipa {
             return "ERRO";
         }
     }
-
 }

@@ -7,9 +7,7 @@ public class Jogo {
     Equipa equipaBranca = new Equipa(20);
     Equipa equipaPreta = new Equipa(10);
     int nrDeJogadasSemCaptura = 0;
-
     int turnoClasse = 0;
-
 
 
     public Jogo() {
@@ -30,9 +28,9 @@ public class Jogo {
         boolean flagReiBranco = false;
 
         for (Peca p : tabuleiro.getPecas()) {
-            if (p.tipo == 0 && p.naoCapturado && p.equipa.pretoOuBranco == 10) {
+            if (p.getTipo() == 0 && p.getNaoCapturado() && p.getEquipa().getPretoOuBranco() == 10) {
                 flagReiPreto = true;
-            } else if (p.tipo == 0 && p.naoCapturado && p.equipa.pretoOuBranco == 20) {
+            } else if (p.getTipo() == 0 && p.getNaoCapturado() && p.getEquipa().getPretoOuBranco() == 20) {
                 flagReiBranco = true;
             }
         }
@@ -89,35 +87,10 @@ public class Jogo {
         }
     }
 
-    void defineEquipa(Equipa equipa) {
-        if (equipa.getPretoOuBranco() == 20) {
-            equipaBranca = equipa;
-        }
-        equipaPreta = equipa;
-    }
-
     void leFicheiroComCapturados() {
         for (Peca p : getTabuleiro().getPecas()) {
             if (p.getCoordenadas() == null) {
                 p.setNaoCapturado(false);
-            }
-        }
-    }
-
-    public void setEquipaBranca() {
-        for (Peca peca : tabuleiro.getPecas()) {
-            if (peca.getEquipa().getPretoOuBranco() == 20) {
-                //this.equipaBranca = peca.getEquipa();
-                peca.equipa = this.equipaBranca;
-            }
-        }
-    }
-
-    public void setEquipaPreta() {
-        for (Peca peca : tabuleiro.getPecas()) {
-            if (peca.getEquipa().getPretoOuBranco() == 10) {
-                //this.equipaPreta = peca.getEquipa();
-                peca.equipa = this.equipaPreta;
             }
         }
     }

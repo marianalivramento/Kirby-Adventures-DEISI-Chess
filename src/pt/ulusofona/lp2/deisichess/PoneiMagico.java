@@ -10,7 +10,7 @@ public class PoneiMagico extends Peca {
 
     boolean passaPorPeca(int x0, int y0, int x1, int y1, Jogo jogo) {
         for (int coordenadaY = -2; coordenadaY <= 2; coordenadaY++) {
-            Square s = jogo.tabuleiro.retornoQuadrado(x1, coordenadaY);
+            Square s = jogo.getTabuleiro().retornoQuadrado(x1, coordenadaY);
             if (coordenadaY != y0 && s != null) {
                 if (((x1 == x0 + 2) && (y1 == y0 + 2)) && ((s.getCoordenadaX() == x0) && ((s.getCoordenadaY() == y0 + coordenadaY)))) {
                     if (s.isOcupado()) {
@@ -21,7 +21,7 @@ public class PoneiMagico extends Peca {
         }
 
         for (int coordenadaX = -1; coordenadaX <= 1; coordenadaX++) {
-            Square s = jogo.tabuleiro.retornoQuadrado(coordenadaX, y1);
+            Square s = jogo.getTabuleiro().retornoQuadrado(coordenadaX, y1);
             if (coordenadaX != x0 && s != null) {
                 if (((x1 == x0 + 2) && (y1 == y0 + 2)) && ((s.getCoordenadaX() == x0 + coordenadaX) && ((s.getCoordenadaY() == y0)))) {
                     if (s.isOcupado()) {

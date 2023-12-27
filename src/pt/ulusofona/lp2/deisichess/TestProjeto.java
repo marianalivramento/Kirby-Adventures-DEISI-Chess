@@ -140,7 +140,7 @@ public class TestProjeto {
         gm.move(7,0,7,7);
 
 
-        assertEquals(0, gm.jogo.equipaPreta.nrCapturas);
+        assertEquals(0, gm.jogo.getEquipaPreta().getNrCapturas());
 
     }
 
@@ -172,7 +172,7 @@ public class TestProjeto {
         gm.move(0,7,0,6);
         gm.move(1,5,0,6);
 
-        assertEquals(gm.jogo.tabuleiro.retornaPecaPorId(2).pontos, 1000);
+        assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(2).getPontos(), 1000);
     }
 
 
@@ -213,7 +213,7 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        assertEquals(1, gm.jogo.equipaPreta.nrCapturas);
+        assertEquals(1, gm.jogo.getEquipaPreta().getNrCapturas());
     }
 
 
@@ -256,7 +256,7 @@ public class TestProjeto {
         gm.move(5,7,5,6); // branca valida
         gm.move(1,5,0,6); // preta valida - captura
 
-        assertEquals(1, gm.jogo.equipaPreta.nrCapturas);
+        assertEquals(1, gm.jogo.getEquipaPreta().getNrCapturas());
     }
 
     @Test
@@ -297,7 +297,7 @@ public class TestProjeto {
 
 
 
-        assertEquals(2, gm.jogo.equipaPreta.nrCapturas);
+        assertEquals(2, gm.jogo.getEquipaPreta().getNrCapturas());
     }
 
    /* @Test
@@ -358,7 +358,7 @@ public class TestProjeto {
 
 
 
-        assertEquals(gm.jogo.tabuleiro.retornaPecaPorId(9).pontos, 8);
+        assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(9).getPontos(), 8);
     }
 
     @Test
@@ -377,7 +377,7 @@ public class TestProjeto {
 
 
 
-        assertEquals(gm.jogo.tabuleiro.retornaPecaPorId(10).pontos, 5);
+        assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(10).getPontos(), 5);
     }
 
     /*@Test

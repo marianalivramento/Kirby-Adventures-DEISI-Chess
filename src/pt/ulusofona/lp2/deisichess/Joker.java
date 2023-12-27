@@ -12,7 +12,7 @@ public class Joker extends Peca {
     @Override
     boolean movesPermitidos(int x0, int y0, int x1, int y1, Jogo jogo) {
         if (!pertenceAequipa(jogo, x1, y1)) {
-            switch (jogo.turnoClasse % 6) {
+            switch (jogo.getTurnoClasse() % 6) {
                 case 0:
                     Rainha rainha = new Rainha();
                     return rainha.movesPermitidos(x0, y0, x1, y1, jogo);
@@ -38,7 +38,7 @@ public class Joker extends Peca {
 
     boolean move(int x0, int y0, int x1, int y1, Jogo jogo) {
 
-        switch (jogo.turnoClasse % 6) {
+        switch (jogo.getTurnoClasse() % 6) {
             case 0:
                 Rainha rainha = new Rainha();
                 return rainha.move(x0, y0, x1, y1, jogo);
@@ -64,7 +64,7 @@ public class Joker extends Peca {
     }
 
     public String nomeDoTipo(Jogo jogo) {
-        switch (jogo.turnoClasse % 6) {
+        switch (jogo.getTurnoClasse() % 6) {
             case 0:
                 return "Joker/Rainha";
             case 1:

@@ -9,16 +9,15 @@ abstract class Peca {
 
     int id;
     int tipo;
-    int valor = 0;
     Equipa equipa;
     String alcunha;
     Square coordenadas;
     boolean naoCapturado = true;
-    int numeroJogadas = 0;
     int pontos = 0;
     int numeroDeCapturas = 0;
     int numeroDeMovimentosInvalidos = 0;
     int numeroDeMovimentosValidos = 0;
+
 
     public int getId() {
         return id;
@@ -102,66 +101,16 @@ abstract class Peca {
 
     abstract boolean move(int x0, int y0, int x1, int y1, Jogo jogo);
 
-    void jogadasPermitidas(Jogo jogo, List<Comparable> hints) {
-        List<Comparable<Peca>> permittedMoves = new ArrayList<>();
-        List<Peca> pecas = new ArrayList<>();
-        Tabuleiro tabuleiro = jogo.getTabuleiro();
-
-        for (Square s : tabuleiro.getQuadrados()) {
-            if (movesPermitidos(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
-                if (!passaPorPeca(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
-
-                    //hints.add(s.getPeca());
-
-                }
-            }
-        }
-        /*
-        Collections.sort(pecas);
-        for (Peca p: pecas){
-            permittedMoves.add(p);
-            hints.add(p);
-        }
-
-
-         */
-        /*
-        for (Peca p : pecas) {
-            hints.add("(" + p.getCoordenadas().getCoordenadaX() + ", " + p.getCoordenadas().getCoordenadaY() + ")->" + p.getValor());
-        }
-
-        for (Square s : tabuleiro.getQuadrados()) {
-            if (movesPermitidos(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
-                if (!passaPorPeca(coordenadas.getCoordenadaX(), coordenadas.getCoordenadaY(), s.getCoordenadaX(), s.getCoordenadaY(), jogo)) {
-                    if (!s.isOcupado()) {
-                        hints.add("(" + s.getCoordenadaX() + ", " + s.getCoordenadaY() + ")->0");
-                    }
-
-                }
-            }
-        }
-
-         */
-        // return permittedMoves;
-    }
-
     abstract String nomeDoTipo(Jogo jogo);
 
     public int getNumeroDeMovimentosInvalidos() {
         return numeroDeMovimentosInvalidos;
     }
 
-    public void setNumeroDeMovimentosInvalidos(int numeroDeMovimentosInvalidos) {
-        this.numeroDeMovimentosInvalidos = numeroDeMovimentosInvalidos;
-    }
-
     public int getNumeroDeMovimentosValidos() {
         return numeroDeMovimentosValidos;
     }
 
-    public void setNumeroDeMovimentosValidos(int numeroDeMovimentosValidos) {
-        this.numeroDeMovimentosValidos = numeroDeMovimentosValidos;
-    }
 
     public void diminuiNumeroDeCapturas() {
         numeroDeCapturas--;
@@ -186,6 +135,7 @@ abstract class Peca {
     public void aumentaNumeroDeMovimentosValidos() {
         numeroDeMovimentosValidos++;
     }
+
 }
 
 
