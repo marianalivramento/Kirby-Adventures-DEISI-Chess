@@ -17,6 +17,7 @@ abstract class Peca {
     int numeroDeCapturas = 0;
     int numeroDeMovimentosInvalidos = 0;
     int numeroDeMovimentosValidos = 0;
+    String kirbs = "Normal";
 
 
     public int getId() {
@@ -98,7 +99,6 @@ abstract class Peca {
     }
 
     abstract boolean movesPermitidos(int x0, int y0, int x1, int y1, Jogo jogo);
-
     boolean move(int x0, int y0, int x1, int y1, Jogo jogo) {
         Peca pecaQueMove = jogo.getTabuleiro().retornoQuadrado(x0, y0).getPeca();
         Square quadradoOrigem = jogo.getTabuleiro().retornoQuadrado(x0, y0);

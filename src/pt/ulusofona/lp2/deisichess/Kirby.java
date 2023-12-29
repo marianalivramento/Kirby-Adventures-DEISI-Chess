@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisichess;
 
 public class Kirby extends Peca {
 
-    private Peca pecaComida = new Rei();
+    Peca pecaComida = new Rei();
     int valor = 20;
 
     @Override
@@ -18,27 +18,38 @@ public class Kirby extends Peca {
     void kirbyTranforma(Peca p) {
         if (Rainha.class.equals(p.getClass())) {
             pecaComida = new Rainha();
+            kirbs = "Rainha";
 
         } else if (Rei.class.equals(p.getClass())) {
             pecaComida = new Rei();
+            kirbs = "Rei";
 
         } else if (PadreDaVila.class.equals(p.getClass())) {
             pecaComida = new PadreDaVila();
+            kirbs = "Padre";
 
         } else if (PoneiMagico.class.equals(p.getClass())) {
             pecaComida = new PoneiMagico();
+            kirbs = "Ponei";
 
         } else if (TorreHorizontal.class.equals(p.getClass())) {
             pecaComida = new TorreHorizontal();
+            kirbs = "TorreH";
 
         } else if (TorreVertical.class.equals(p.getClass())) {
             pecaComida = new TorreVertical();
+            kirbs = "TorreV";
+
 
         } else if (Joker.class.equals(p.getClass())) {
             pecaComida = new Joker();
+            kirbs = "Joker";
+
 
         } else if (HomerSimpson.class.equals(p.getClass())) {
             pecaComida = new HomerSimpson();
+            kirbs = "Homer";
+
         }
 
     }
@@ -74,6 +85,8 @@ public class Kirby extends Peca {
         }
         return false;
     }
+
+
 
     @Override
     String nomeDoTipo(Jogo jogo) {

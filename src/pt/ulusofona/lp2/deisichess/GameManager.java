@@ -371,7 +371,6 @@ public class GameManager {
 
                     } else {
 
-
                         if (!sqPartida.getPeca().movesPermitidos(x0, y0, x1, y1, jogo)) {
                             jogo.aumentaTentativasInvalidasPorEquipa();
 
@@ -390,20 +389,22 @@ public class GameManager {
                         }
                     }
 
+                    if (sqPartida.getPeca().getId() == 8) {
 
+                    } else {
 
-                    moveHistory.add(sqPartida.getPeca().getId() + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1+ ":PecaCapturada:" +sqChegada.getPeca().getId());
-                    sqPartida.getPeca().aumentaPontos(sqChegada.getPeca().getValor());
-                    sqPartida.getPeca().aumentaNumeroDeCapturas();
-                    sqPartida.getPeca().aumentaNumeroDeMovimentosValidos();
+                        moveHistory.add(sqPartida.getPeca().getId() + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1 + ":PecaCapturada:" + sqChegada.getPeca().getId());
+                        sqPartida.getPeca().aumentaPontos(sqChegada.getPeca().getValor());
+                        sqPartida.getPeca().aumentaNumeroDeCapturas();
+                        sqPartida.getPeca().aumentaNumeroDeMovimentosValidos();
 
-                    sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
+                        sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
 
-                    jogo.getClassEquipaAtual().aumentarNumeroTurno();
-                    jogo.aumentaTurnoClasse();
+                        jogo.getClassEquipaAtual().aumentarNumeroTurno();
+                        jogo.aumentaTurnoClasse();
 
-                    jogo.resetJogadasSemCaptura();
-
+                        jogo.resetJogadasSemCaptura();
+                    }
                 } else {
                     if (!sqPartida.getPeca().movesPermitidos(x0, y0, x1, y1, jogo)) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
@@ -488,8 +489,34 @@ public class GameManager {
                                 retorno[4] = "joker-branco.png";
                                 break;
                             case 8:
-                                retorno[4] = "kirby-branco.png";
-                                break;
+                                if (sq.getPeca().kirbs.equals("Rainha")) {
+                                    retorno[4] = "kirby-rainha-branco.png";
+                                    break;
+                                } else if (sq.getPeca().kirbs.equals("Rei")) {
+                                    retorno[4] = "kirby-rei-branco.png";
+                                    break;
+                                } else if (sq.getPeca().kirbs.equals("Padre")) {
+                                    retorno[4] = "kirby-padre-branco.png";
+                                    break;
+                                } else if (sq.getPeca().kirbs.equals("Ponei")) {
+                                    retorno[4] = "kirby-ponei-branco.png";
+                                    break;
+                                } else if (sq.getPeca().kirbs.equals("TorreV")) {
+                                    retorno[4] = "kirby-torreV-branco.png";
+                                    break;
+                                } else if (sq.getPeca().kirbs.equals("TorreH")) {
+                                    retorno[4] = "kirby-torreH-branco.png";
+                                    break;
+                                } else if (sq.getPeca().kirbs.equals("Joker")) {
+                                    retorno[4] = "kirby-joker-branco.png";
+                                    break;
+                                } else if (sq.getPeca().kirbs.equals("Homer")) {
+                                    retorno[4] = "kirby-homer-branco.png";
+                                    break;
+                                } else {
+                                    retorno[4] = "kirby-branco.png";
+                                     break;
+                                }
                             default:
                                 retorno[4] = "unknown-piece.png";
                                 break;
@@ -522,8 +549,34 @@ public class GameManager {
                                 retorno[4] = "joker-preto.png";
                                 break;
                             case 8:
-                                retorno[4] = "kirby-preto.png";
-                                break;
+                                if (sq.getPeca().kirbs.equals("Rainha")) {
+                                    retorno[4] = "kirby-rainha-preto.png";
+                                    break;
+                                } else if (sq.getPeca().kirbs.equals("Rei")) {
+                                    retorno[4] = "kirby-rei-preto.png";
+                                    break;
+                                } else if (sq.getPeca().kirbs.equals("Padre")) {
+                                    retorno[4] = "kirby-padre-preto.png";
+                                    break;
+                                } else if (sq.getPeca().kirbs.equals("Ponei")) {
+                                    retorno[4] = "kirby-ponei-preto.png";
+                                    break;
+                                } else if (sq.getPeca().kirbs.equals("TorreV")) {
+                                    retorno[4] = "kirby-torreV-preto.png";
+                                    break;
+                                } else if (sq.getPeca().kirbs.equals("TorreH")) {
+                                    retorno[4] = "kirby-torreH-preto.png";
+                                    break;
+                                } else if (sq.getPeca().kirbs.equals("Joker")) {
+                                    retorno[4] = "kirby-joker-preto.png";
+                                    break;
+                                } else if (sq.getPeca().kirbs.equals("Homer")) {
+                                    retorno[4] = "kirby-homer-preto.png";
+                                    break;
+                                } else {
+                                    retorno[4] = "kirby-preto.png";
+                                    break;
+                                }
                             default:
                                 retorno[4] = "unknown-piece.png";
                                 break;
