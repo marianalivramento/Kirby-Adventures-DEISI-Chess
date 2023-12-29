@@ -766,7 +766,7 @@ public class GameManager {
 
     public Map<String, String> customizeBoard() {
         Map<String, String> map = new HashMap<>();
-        //map.put("rei-branco", "rei-branco.png");
+        map.put("imageBackground", "kirby backgrounf.png");
         //map.put("Kirby-Branco", "Kirby-Branco.png");
         //map.put("Kirby-Preto", "Kirby-Preto.png");
         return map;
