@@ -473,7 +473,7 @@ public class GameManager {
                                 retorno[4] = "ponei-branco.png";
                                 break;
                             case 3:
-                                retorno[4] = "padre_vila_white.png";
+                                retorno[4] = "padre-branco.png";
                                 break;
                             case 4:
                                 retorno[4] = "torreH-branca.png";
@@ -482,10 +482,10 @@ public class GameManager {
                                 retorno[4] = "torreV-branca.png";
                                 break;
                             case 6:
-                                retorno[4] = "homer_white.png";
+                                retorno[4] = "homer-branco.png";
                                 break;
                             case 7:
-                                retorno[4] = "joker_white.png";
+                                retorno[4] = "joker-branco.png";
                                 break;
                             case 8:
                                 retorno[4] = "kirby-branco.png";
@@ -507,7 +507,7 @@ public class GameManager {
                                 retorno[4] = "ponei-preto.png";
                                 break;
                             case 3:
-                                retorno[4] = "padre_vila_black.png";
+                                retorno[4] = "padre-preto.png";
                                 break;
                             case 4:
                                 retorno[4] = "torreH-preto.png";
@@ -516,10 +516,10 @@ public class GameManager {
                                 retorno[4] = "torreV-preto.png";
                                 break;
                             case 6:
-                                retorno[4] = "homer_black.png";
+                                retorno[4] = "homer-preto.png";
                                 break;
                             case 7:
-                                retorno[4] = "joker_black.png";
+                                retorno[4] = "joker-preto.png";
                                 break;
                             case 8:
                                 retorno[4] = "kirby-preto.png";
