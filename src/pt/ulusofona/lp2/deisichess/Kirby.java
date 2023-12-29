@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisichess;
 
 public class Kirby extends Peca {
 
-    private Peca pecaComida;
+    private Peca pecaComida = new Rei();
     int valor = 20;
 
     @Override
@@ -15,6 +15,34 @@ public class Kirby extends Peca {
         return pecaComida.movesPermitidos(x0, y0, x1, y1, jogo);
     }
 
+    void kirbyTranforma(Peca p) {
+        if (Rainha.class.equals(p.getClass())) {
+            pecaComida = new Rainha();
+
+        } else if (Rei.class.equals(p.getClass())) {
+            pecaComida = new Rei();
+
+        } else if (PadreDaVila.class.equals(p.getClass())) {
+            pecaComida = new PadreDaVila();
+
+        } else if (PoneiMagico.class.equals(p.getClass())) {
+            pecaComida = new PoneiMagico();
+
+        } else if (TorreHorizontal.class.equals(p.getClass())) {
+            pecaComida = new TorreHorizontal();
+
+        } else if (TorreVertical.class.equals(p.getClass())) {
+            pecaComida = new TorreVertical();
+
+        } else if (Joker.class.equals(p.getClass())) {
+            pecaComida = new Joker();
+
+        } else if (HomerSimpson.class.equals(p.getClass())) {
+            pecaComida = new HomerSimpson();
+        }
+
+    }
+
     boolean move(int x0, int y0, int x1, int y1, Jogo jogo) {
         Peca pecaQueMove = jogo.getTabuleiro().retornoQuadrado(x0, y0).getPeca();
         Square quadradoOrigem = jogo.getTabuleiro().retornoQuadrado(x0, y0);
@@ -24,7 +52,7 @@ public class Kirby extends Peca {
             if (quadradoDestino.isOcupado()) {
 
                 quadradoDestino.getPeca().setNaoCapturado(false);
-                pecaComida = quadradoDestino.getPeca();
+                kirbyTranforma(quadradoDestino.getPeca());
                 quadradoDestino.getPeca().setCoordenadas(null);
                 pecaQueMove.setCoordenadas(quadradoDestino);
                 quadradoDestino.setPeca(pecaQueMove);
