@@ -297,8 +297,8 @@ public class GameManager {
     public List<Comparable> getHints(int x, int y) {
         List<Comparable> hints = new ArrayList<>();
         Square square = jogo.getTabuleiro().retornoQuadrado(x, y);
-        GetHints retornado = new GetHints();
-        retornado.square = square;
+        GetHints retornado = new GetHints(x,y);
+        retornado.valorPeca = square.getPeca().getValor();
 
         if (square.getPeca() != null) {
             for (GetHints h:  retornado.jogadasPermitidas(jogo, hints)){

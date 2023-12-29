@@ -69,37 +69,6 @@ public class PadreDaVila extends Peca {
         return false;
     }
 
-
-    boolean move(int x0, int y0, int x1, int y1, Jogo jogo) {
-        Peca pecaQueMove = jogo.getTabuleiro().retornoQuadrado(x0, y0).getPeca();
-        Square quadradoOrigem = jogo.getTabuleiro().retornoQuadrado(x0, y0);
-        Square quadradoDestino = jogo.getTabuleiro().retornoQuadrado(x1, y1);
-
-        if (movesPermitidos(x0, y0, x1, y1, jogo)) {
-            if (quadradoDestino.isOcupado()) {
-                quadradoDestino.getPeca().setNaoCapturado(false);
-                quadradoDestino.getPeca().setCoordenadas(null);
-                pecaQueMove.setCoordenadas(quadradoDestino);
-                quadradoDestino.setPeca(pecaQueMove);
-
-                quadradoDestino.setOcupado(true);
-                jogo.getClassEquipaAtual().aumentarPecasCapturadas();
-
-                quadradoOrigem.resetQuadrado();
-                return true;
-
-            } else {
-                pecaQueMove.setCoordenadas(quadradoDestino);
-                quadradoDestino.setPeca(pecaQueMove);
-
-                quadradoDestino.setOcupado(true);
-                quadradoOrigem.resetQuadrado();
-                return true;
-            }
-        }
-        return false;
-    }
-
     public String nomeDoTipo(Jogo jogo) {
         return "Padre da Vila";
     }

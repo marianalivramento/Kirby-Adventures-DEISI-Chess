@@ -1,12 +1,10 @@
 package pt.ulusofona.lp2.deisichess;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -518,5 +516,38 @@ public class TestProjeto {
 
 
         assertEquals(expectedArr, arr);
+    }
+
+    @Test
+    public void getHints_compareTo_maior() {
+        GetHints um = new GetHints(1,2);
+        um.valorPeca = 3;
+
+        GetHints dois = new GetHints(3,4);
+        dois.valorPeca = 2;
+
+        Assertions.assertEquals(um.compareTo(dois), -1);
+    }
+
+    @Test
+    public void getHints_compareTo_igual() {
+        GetHints um = new GetHints(1,2);
+        um.valorPeca = 1;
+
+        GetHints dois = new GetHints(3,4);
+        dois.valorPeca = 1;
+
+        Assertions.assertEquals(um.compareTo(dois), 0);
+    }
+
+    @Test
+    public void getHints_compareTo_menor() {
+        GetHints um = new GetHints(1,2);
+        um.valorPeca = 2;
+
+        GetHints dois = new GetHints(3,4);
+        dois.valorPeca = 5;
+
+        Assertions.assertEquals(um.compareTo(dois), 1);
     }
 }
