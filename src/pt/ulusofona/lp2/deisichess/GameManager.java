@@ -19,6 +19,8 @@ public class GameManager {
     }
 
 
+
+
     public void parsePecas(String linha, int numeroLinha) throws InvalidGameInputException, IOException {
 
         String[] elementos = linha.split(":");
@@ -53,6 +55,9 @@ public class GameManager {
                 break;
             case "7":
                 peca = new Joker();
+                break;
+            case "8":
+                peca = new Kirby();
                 break;
             default:
                 throw new IOException();
@@ -459,28 +464,31 @@ public class GameManager {
                     if (sq.getPeca().getEquipa().getPretoOuBranco() == 20) {
                         switch (sq.getPeca().getTipo()) {
                             case 0:
-                                retorno[4] = "crazy_emoji_white.png";
+                                retorno[4] = "rei-branco.png";
                                 break;
                             case 1:
-                                retorno[4] = "rainha_white.png";
+                                retorno[4] = "rainha-branca.png";
                                 break;
                             case 2:
-                                retorno[4] = "ponei_magico_white.png";
+                                retorno[4] = "ponei-branco.png";
                                 break;
                             case 3:
                                 retorno[4] = "padre_vila_white.png";
                                 break;
                             case 4:
-                                retorno[4] = "torre_h_white.png";
+                                retorno[4] = "torreH-branca.png";
                                 break;
                             case 5:
-                                retorno[4] = "torre_v_white.png";
+                                retorno[4] = "torreV-branca.png";
                                 break;
                             case 6:
                                 retorno[4] = "homer_white.png";
                                 break;
                             case 7:
                                 retorno[4] = "joker_white.png";
+                                break;
+                            case 8:
+                                retorno[4] = "kirby-branco.png";
                                 break;
                             default:
                                 retorno[4] = "unknown-piece.png";
@@ -490,28 +498,31 @@ public class GameManager {
                     } else {
                         switch (sq.getPeca().getTipo()) {
                             case 0:
-                                retorno[4] = "crazy_emoji_black.png";
+                                retorno[4] = "rei-preto.png";
                                 break;
                             case 1:
-                                retorno[4] = "rainha_black.png";
+                                retorno[4] = "rainha-preta.png";
                                 break;
                             case 2:
-                                retorno[4] = "ponei_magico_black.png";
+                                retorno[4] = "ponei-preto.png";
                                 break;
                             case 3:
                                 retorno[4] = "padre_vila_black.png";
                                 break;
                             case 4:
-                                retorno[4] = "torre_h_black.png";
+                                retorno[4] = "torreH-preto.png";
                                 break;
                             case 5:
-                                retorno[4] = "torre_v_black.png";
+                                retorno[4] = "torreV-preto.png";
                                 break;
                             case 6:
                                 retorno[4] = "homer_black.png";
                                 break;
                             case 7:
                                 retorno[4] = "joker_black.png";
+                                break;
+                            case 8:
+                                retorno[4] = "kirby-preto.png";
                                 break;
                             default:
                                 retorno[4] = "unknown-piece.png";
@@ -755,6 +766,9 @@ public class GameManager {
 
     public Map<String, String> customizeBoard() {
         Map<String, String> map = new HashMap<>();
+        //map.put("rei-branco", "rei-branco.png");
+        //map.put("Kirby-Branco", "Kirby-Branco.png");
+        //map.put("Kirby-Preto", "Kirby-Preto.png");
         return map;
     }
 }
