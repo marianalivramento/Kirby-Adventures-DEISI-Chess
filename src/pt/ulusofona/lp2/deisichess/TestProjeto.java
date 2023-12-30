@@ -324,22 +324,6 @@ public class TestProjeto {
 
         assertTrue(gm.move(3,0,6,3));
     }
-    /*@Test
-    public void movimento_padre_da_vila4() {
-        GameManager gm = new GameManager();
-        try {
-            gm.loadGame(new File("test-files/8x16.txt"));
-        } catch (InvalidGameInputException | IOException e) {
-            fail("Exception not expected: " + e.getMessage());
-        }
-        gm.move(0,0,0,1);
-        gm.move(3,7,2,6);
-        gm.move(0,1,0,2);
-
-        assertTrue(gm.move(2,6,4,4));
-    }
-
-     */
 
     @Test
     public void conta_pontos_rainha() {
@@ -551,6 +535,136 @@ public class TestProjeto {
         Assertions.assertEquals(um.compareTo(dois), 1);
     }
 
+    // ************* aumenta e diminui valor ***************
+
+    @Test
+    public void aumenta_valor_rei() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.jogo.getTabuleiro().retornaPecaPorId(1).aumentaValor(10);
+        gm.jogo.getTabuleiro().retornaPecaPorId(1).diminuiValor(100);
+        assertEquals(910 , gm.jogo.getTabuleiro().retornaPecaPorId(1).getValor());
+
+    }
+    @Test
+    public void aumenta_valor_rainha() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.jogo.getTabuleiro().retornaPecaPorId(2).aumentaValor(2);
+        gm.jogo.getTabuleiro().retornaPecaPorId(2).diminuiValor(10);
+        assertEquals(0 , gm.jogo.getTabuleiro().retornaPecaPorId(2).getValor());
+
+    }
+    @Test
+    public void aumenta_valor_ponei() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.jogo.getTabuleiro().retornaPecaPorId(3).aumentaValor(10);
+        gm.jogo.getTabuleiro().retornaPecaPorId(3).diminuiValor(5);
+        assertEquals(10 , gm.jogo.getTabuleiro().retornaPecaPorId(3).getValor());
+
+    }
+    @Test
+    public void aumenta_valor_padre() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.jogo.getTabuleiro().retornaPecaPorId(4).aumentaValor(10);
+        gm.jogo.getTabuleiro().retornaPecaPorId(4).diminuiValor(5);
+        assertEquals(8 , gm.jogo.getTabuleiro().retornaPecaPorId(4).getValor());
+
+    }
+    @Test
+    public void aumenta_valor_torreV() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.jogo.getTabuleiro().retornaPecaPorId(5).aumentaValor(0);
+        gm.jogo.getTabuleiro().retornaPecaPorId(5).diminuiValor(0);
+        assertEquals(3 , gm.jogo.getTabuleiro().retornaPecaPorId(5).getValor());
+
+    }
+    @Test
+    public void aumenta_valor_torreH() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.jogo.getTabuleiro().retornaPecaPorId(6).aumentaValor(1);
+        gm.jogo.getTabuleiro().retornaPecaPorId(6).diminuiValor(3);
+        assertEquals(1 , gm.jogo.getTabuleiro().retornaPecaPorId(6).getValor());
+
+    }
+    @Test
+    public void aumenta_valor_Homer() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.jogo.getTabuleiro().retornaPecaPorId(7).aumentaValor(2);
+        gm.jogo.getTabuleiro().retornaPecaPorId(7).diminuiValor(4);
+        assertEquals(0 , gm.jogo.getTabuleiro().retornaPecaPorId(7).getValor());
+
+    }
+    @Test
+    public void aumenta_valor_Joker() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.jogo.getTabuleiro().retornaPecaPorId(8).aumentaValor(1);
+        gm.jogo.getTabuleiro().retornaPecaPorId(8).diminuiValor(3);
+        assertEquals(2 , gm.jogo.getTabuleiro().retornaPecaPorId(8).getValor());
+
+    }
+    @Test
+    public void aumenta_valor_kirby() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.jogo.getTabuleiro().retornaPecaPorId(17).aumentaValor(100);
+        gm.jogo.getTabuleiro().retornaPecaPorId(17).diminuiValor(50);
+        assertEquals(50 , gm.jogo.getTabuleiro().retornaPecaPorId(17).getValor());
+
+    }
+
+
     // ******************** TESTES KIRBY ************************
 
     @Test
@@ -607,6 +721,8 @@ public class TestProjeto {
 
         assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(18).kirbs, "Rainha");
     }
+
+    
 }
 
 
