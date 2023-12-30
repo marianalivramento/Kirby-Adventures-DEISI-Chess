@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestProjeto {
@@ -31,7 +32,7 @@ public class TestProjeto {
         r[1] = "0";
         r[2] = "10";
         r[3] = "O Poderoso Chefao";
-        r[4] = "crazy_emoji_black.png";
+        r[4] = "rei-preto.png";
 
         assertEquals(Arrays.toString(u), Arrays.toString(r));
 
@@ -92,7 +93,7 @@ public class TestProjeto {
         esperado[1] = "0";
         esperado[2] = "10";
         esperado[3] = "O Poderoso Chefao";
-        esperado[4] = "crazy_emoji_black.png";
+        esperado[4] = "rei-preto.png";
 
         assertEquals(Arrays.toString(str), Arrays.toString(esperado));
 
@@ -173,7 +174,6 @@ public class TestProjeto {
 
         assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(2).getPontos(), 1000);
     }
-
 
     @Test
     public void savegame() {
@@ -550,4 +550,63 @@ public class TestProjeto {
 
         Assertions.assertEquals(um.compareTo(dois), 1);
     }
+
+    // ******************** TESTES KIRBY ************************
+
+    @Test
+    public void valor_kirby() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(1,0,1,4);
+        gm.move(3,6,2,5);
+        gm.move(1,4,2,4);
+        gm.move(2,5,2,4);
+
+        assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(18).getValor(), 8);
+    }
+
+    @Test
+    public void conta_ponto_kirby() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(1,0,1,4);
+        gm.move(3,6,2,5);
+        gm.move(1,4,2,4);
+        gm.move(2,5,2,4);
+        gm.move(0,0,1,1);
+        gm.move(2,4,1,3);
+        gm.move(1,1,1,2);
+        gm.move(1,3,1,2);
+
+        assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(18).getPontos(), 2016);
+    }
+
+    @Test
+    public void kirby_muda_estado() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(1,0,1,4);
+        gm.move(3,6,2,5);
+        gm.move(1,4,2,4);
+        gm.move(2,5,2,4);
+
+        assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(18).kirbs, "Rainha");
+    }
 }
+
+

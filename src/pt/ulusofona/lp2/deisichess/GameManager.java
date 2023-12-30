@@ -704,7 +704,7 @@ public class GameManager {
                                 retorno.append("Desconhecido");
                                 break;
                         }
-
+                        break;
                     case "8":
                         if(jogo.getTabuleiro().retornaPecaPorId(ID).kirbs.equals("")) {
                             retorno.append("Kirby" + jogo.getTabuleiro().retornaPecaPorId(ID).kirbs + " | " +jogo.getTabuleiro().retornaPecaPorId(ID).getValor());
