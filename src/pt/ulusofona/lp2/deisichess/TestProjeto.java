@@ -121,6 +121,28 @@ public class TestProjeto {
     }
 
     @Test
+    public void joker_Rainha_nao_pode_capturar_Rainha() {
+
+        GameManager gm = new GameManager();
+
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        gm.move(7,0,3,4);
+        gm.move(1,7,1,4);
+        gm.move(0,0,0,1);
+        gm.move(1,4,2,4);
+
+        gm.move(0,1,0,2);
+        gm.move(0,7,0,6);
+
+        assertEquals(false,gm.move(3,4,2,4));
+
+    }
+
+    @Test
     public void conta_numero_capturas() {
 
         GameManager gm = new GameManager();
@@ -503,7 +525,7 @@ public class TestProjeto {
     }
 
     @Test
-    public void getHints_compareTo_maior() {
+    public void getHints_jogadas_permitidas_atualiza_pontos() {
         GetHints um = new GetHints(1,2);
         um.valorPeca = 3;
 
@@ -514,15 +536,16 @@ public class TestProjeto {
     }
 
     @Test
-    public void getHints_compareTo_igual() {
+    public void getHints_compareTo_maior() {
         GetHints um = new GetHints(1,2);
-        um.valorPeca = 1;
+        um.valorPeca = 3;
 
         GetHints dois = new GetHints(3,4);
-        dois.valorPeca = 1;
+        dois.valorPeca = 2;
 
-        Assertions.assertEquals(um.compareTo(dois), 0);
+        Assertions.assertEquals(um.compareTo(dois), -1);
     }
+
 
     @Test
     public void getHints_compareTo_menor() {

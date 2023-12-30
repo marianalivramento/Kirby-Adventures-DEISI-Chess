@@ -73,7 +73,6 @@ public class GetHints implements Comparable<GetHints> {
                         if (tabuleiro.retornoQuadrado(s.getCoordenadaX(), s.getCoordenadaY()).getPeca() != null){
                             result.valorPeca = tabuleiro.retornoQuadrado(s.getCoordenadaX(), s.getCoordenadaY()).getPeca().getValor();
                         }
-                        //result.square = s;
                         ordenar.add(result);
                     }
                 }
@@ -87,15 +86,6 @@ public class GetHints implements Comparable<GetHints> {
     @Override
     public String toString() {
         return "(" + x + "," + y + ") -> " + valorPeca;
-        /*
-        if (square.getPeca() != null) {
-            return "(" + square.getCoordenadaX() + "," + square.getCoordenadaY() + ") -> " + square.getPeca().getValor();
-        }
-
-        return "(" + square.getCoordenadaX() + "," + square.getCoordenadaY() + ") -> 0";
-
-         */
     }
 
-    //get hints apenas usando o x e o y do quadrado w instanciae o valoe  tipo int pontos = 0;
 }
