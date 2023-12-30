@@ -315,6 +315,7 @@ public class GameManager {
         }
 
         moveHistory.remove(moveHistory.size() - 1);
+        jogo.turnoClasse--;
         jogo.mudarEquipa();
     }
 

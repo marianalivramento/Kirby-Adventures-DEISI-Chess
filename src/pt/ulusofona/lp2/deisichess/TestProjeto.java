@@ -91,7 +91,7 @@ public class TestProjeto {
         assertEquals("Resultado: VENCERAM AS PRETAS" , gm.getGameResults().get(1));
 
     }
-/* !!!!!!!!!
+
     @Test
     public void jokerRainha_captura_rainha() {
 
@@ -105,15 +105,16 @@ public class TestProjeto {
 
         gm.move(7,0,4,3);
         gm.move(1,7,1,3);
-        gm.move(4,3,2,3);
-        gm.move(0,7,0,6);
         gm.move(0,0,0,1);
+        gm.move(1,3,3,3);
+        gm.move(0,1,0,2);
+        gm.move(0,7,0,6);
 
-        assertFalse(gm.move(1,3,2,3));
+        assertFalse(gm.move(4,3,3,3));
 
     }
 
- */
+
     @Test
     public void undo_1_movimento() {
 
@@ -423,20 +424,6 @@ public class TestProjeto {
 
         assertEquals(2, gm.jogo.getEquipaPreta().getNrCapturas());
     }
-
-   /* @Test
-    public void movimento_padre_da_vila() {
-        GameManager gm = new GameManager();
-        try {
-            gm.loadGame(new File("test-files/teste_padre"));
-        } catch (InvalidGameInputException | IOException e) {
-            fail("Exception not expected: " + e.getMessage());
-        }
-
-        assertTrue(gm.move(0,0,1,1));
-    }
-    
-    */
 
     @Test
     public void movimento_padre_da_vila3() {
