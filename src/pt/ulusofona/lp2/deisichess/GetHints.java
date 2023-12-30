@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetHints implements Comparable<GetHints> {
-    //Square square;
     int x;
     int y;
     int valorPeca = 0;
@@ -14,12 +13,8 @@ public class GetHints implements Comparable<GetHints> {
         this.y = y;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
+    public void setValorPeca(int valorPeca) {
+        this.valorPeca = valorPeca;
     }
 
     public int getValorPeca() {
@@ -34,30 +29,6 @@ public class GetHints implements Comparable<GetHints> {
             return 0;
         }
         return -1;
-
-        /*
-        if (this.square.getPeca() != null && other.square.getPeca() != null) {
-            int value1 = this.square.getPeca().getValor();
-            int value2 = other.square.getPeca().getValor();
-
-            if (value1 < value2) {
-                return 1;
-            } else if (value1 == value2) {
-                return 0;
-            }
-            return -1;
-
-        } else {
-            if (this.square.getPeca() != null && other.square.getPeca() == null) {
-                return -1;
-            }
-            if (this.square.getPeca() == null && other.square.getPeca() != null) {
-                return 1;
-            }
-            return 0;
-        }
-
-         */
 
     }
 
