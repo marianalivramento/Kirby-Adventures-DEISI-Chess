@@ -10,6 +10,7 @@ public class Rainha extends Peca {
     public void aumentaValor(int pontos) {
         this.valor += pontos;
     }
+
     public void diminuiValor(int pontos) {
         this.valor -= pontos;
     }
@@ -38,14 +39,41 @@ public class Rainha extends Peca {
             }
         }
 
-        for (int x = minX + 1; x < maxX; x++) {
-            for (int y = minY + 1; y < maxY; y++) {
-                Square square = jogo.getTabuleiro().retornoQuadrado(x, y);
-                if (square != null && square.isOcupado()) {
-                    return true;
+        for (int i = 1; i <= 5; i++) {
+            if (x1 == x0 + i && y1 == y0 + i) {
+                return false;
+            } else if (x1 == x0 - i && y1 == y0 - i) {
+                return false;
+            } else if (x1 == x0 + i && y1 == y0 - i) {
+                return false;
+            } else if (x1 == x0 - i && y1 == y0 + i) {
+                return false;
+            } else {
+                if (x1 > x0 && y1 > y0) {
+                    if (jogo.getTabuleiro().retornoQuadrado(x0 + i, y0 + i).isOcupado()) {
+                        return true;
+                    }
+                }
+                if (x1 < x0 && y1 < y0) {
+                    if (jogo.getTabuleiro().retornoQuadrado(x0 - i, y0 - i).isOcupado()) {
+                        return true;
+                    }
+                }
+
+                if (x1 > x0 && y1 < y0) {
+                    if (jogo.getTabuleiro().retornoQuadrado(x0 + i, y0 - i).isOcupado()) {
+                        return true;
+                    }
+                }
+
+                if (x1 < x0 && y1 > y0) {
+                    if (jogo.getTabuleiro().retornoQuadrado(x0 - i, y0 + i).isOcupado()) {
+                        return true;
+                    }
                 }
             }
         }
+
         return false;
     }
 
