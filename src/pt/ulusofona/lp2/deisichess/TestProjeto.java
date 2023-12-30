@@ -12,6 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestProjeto {
 
     @Test
+    public void get_board_size() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        assertEquals(8, gm.getBoardSize());
+    }
+
+    @Test
     public void get_current_team_id() {
 
         GameManager gm = new GameManager();
