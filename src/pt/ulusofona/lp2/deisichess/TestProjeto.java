@@ -12,6 +12,109 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestProjeto {
 
     @Test
+    public void get_current_team_id() {
+
+        GameManager gm = new GameManager();
+
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+
+        assertEquals(10, gm.getCurrentTeamID());
+
+    }
+
+    @Test
+    public void game_over_simples() {
+
+        GameManager gm = new GameManager();
+
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(1, 0, 1,5);
+        gm.move(0, 7, 0,6);
+        gm.move(1, 5, 0,6);
+
+
+
+        assertTrue(gm.gameOver());
+
+    }
+
+    /*
+    @Test
+    public void kirby_undo_volta_ao_estado_anterior() {
+
+        GameManager gm = new GameManager();
+
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(1,0,1,4);
+        gm.move(3,6,2,5);
+        gm.move(1,4,2,4);
+        gm.move(2,5,2,4);
+        gm.undo();
+
+        assertFalse(gm.move(2,5,6,5));
+
+    }
+
+     */
+    @Test
+    public void mensagem_vitoria() {
+
+        GameManager gm = new GameManager();
+
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(1,0,1,5);
+        gm.move(0,7,0,6);
+        gm.move(1,5,0,6);
+        gm.getGameResults().get(1);
+
+
+        assertEquals("Resultado: VENCERAM AS PRETAS" , gm.getGameResults().get(1));
+
+    }
+/* !!!!!!!!!
+    @Test
+    public void jokerRainha_captura_rainha() {
+
+        GameManager gm = new GameManager();
+
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(7,0,4,3);
+        gm.move(1,7,1,3);
+        gm.move(4,3,2,3);
+        gm.move(0,7,0,6);
+        gm.move(0,0,0,1);
+
+        assertFalse(gm.move(1,3,2,3));
+
+    }
+
+ */
+    @Test
     public void undo_1_movimento() {
 
         GameManager gm = new GameManager();
@@ -745,7 +848,7 @@ public class TestProjeto {
         assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(18).kirbs, "Rainha");
     }
 
-    
+
 }
 
 

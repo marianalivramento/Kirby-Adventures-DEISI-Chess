@@ -1,9 +1,11 @@
 package pt.ulusofona.lp2.deisichess;
 
+import java.util.ArrayList;
+
 public class Kirby extends Peca {
 
-    Peca pecaComida = new Rei();
     int valor = 0;
+    Peca pecaComida = new Rei();
 
     @Override
     int getValor() {
@@ -26,36 +28,44 @@ public class Kirby extends Peca {
         if (Rainha.class.equals(p.getClass())) {
             pecaComida = new Rainha();
             kirbs = "Rainha";
+            versoesKirby.add("Rainha");
 
         } else if (Rei.class.equals(p.getClass())) {
             pecaComida = new Rei();
             kirbs = "Rei";
+            versoesKirby.add("Rei");
 
         } else if (PadreDaVila.class.equals(p.getClass())) {
             pecaComida = new PadreDaVila();
             kirbs = "Padre";
+            versoesKirby.add("Padre");
 
         } else if (PoneiMagico.class.equals(p.getClass())) {
             pecaComida = new PoneiMagico();
             kirbs = "Ponei";
+            versoesKirby.add("Ponei");
 
         } else if (TorreHorizontal.class.equals(p.getClass())) {
             pecaComida = new TorreHorizontal();
             kirbs = "TorreH";
+            versoesKirby.add("TorreH");
 
         } else if (TorreVertical.class.equals(p.getClass())) {
             pecaComida = new TorreVertical();
             kirbs = "TorreV";
+            versoesKirby.add("TorreV");
 
 
         } else if (Joker.class.equals(p.getClass())) {
             pecaComida = new Joker();
             kirbs = "Joker";
+            versoesKirby.add("Joker");
 
 
         } else if (HomerSimpson.class.equals(p.getClass())) {
             pecaComida = new HomerSimpson();
             kirbs = "Homer";
+            versoesKirby.add("Homer");
 
         }
 

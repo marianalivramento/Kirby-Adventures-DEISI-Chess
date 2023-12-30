@@ -264,33 +264,58 @@ public class GameManager {
 
 
         if (moveInfo.length == 7) {
+            //18:2:5:1:5:PecaCapturada:2
             jogo.getTabuleiro().retornaPecaPorId(id).diminuiNumeroDeCapturas();
 
-            Peca p = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(moveInfo[6]));
+            Peca pecaCapturada = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(moveInfo[6]));
+            Peca pecaAtual =  jogo.getTabuleiro().retornaPecaPorId(id);
+            if (pecaAtual.getTipo() == 8) {
+                if (pecaAtual.versoesKirby.size() == 1) {
+                    pecaAtual.kirbs = "";
+                    pecaAtual.versoesKirby.remove(0);
+                    pecaAtual.pecaComida = new Rei();
+                } else {
+                    pecaAtual.kirbs = pecaAtual.versoesKirby.get(pecaAtual.versoesKirby.size() - 1);
+                    pecaAtual.versoesKirby.remove(pecaAtual.versoesKirby.size() - 1);
+                    switch (pecaAtual.kirbs) {
+                        case "Rei":
+                            pecaAtual.pecaComida = new Rei();
+                        case "Rainha":
+                            pecaAtual.pecaComida = new Rainha();
+                        case "Ponei":
+                            pecaAtual.pecaComida = new PoneiMagico();
+                        case "Padre":
+                            pecaAtual.pecaComida = new PadreDaVila();
+                        case "TorreV":
+                            pecaAtual.pecaComida = new TorreVertical();
+                        case "TorreH":
+                            pecaAtual.pecaComida = new TorreHorizontal();
+                        case "Homer":
+                            pecaAtual.pecaComida = new HomerSimpson();
+                        case "Joker":
+                            pecaAtual.pecaComida = new Joker();
+                    }
+                }
+            }
 
             jogo.getTabuleiro().retornaPecaPorId(id).diminuiPontos(jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(moveInfo[6])).getValor());
-            p.setNaoCapturado(true);
-            jogo.getTabuleiro().retornoQuadrado(x1, y1).setPeca(p);
-            p.setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x1, y1));
+            pecaCapturada.setNaoCapturado(true);
+            jogo.getTabuleiro().retornoQuadrado(x1, y1).setPeca(pecaCapturada);
+            pecaCapturada.setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x1, y1));
             jogo.getTabuleiro().retornaPecaPorId(id).setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x0, y0));
             jogo.getTabuleiro().retornoQuadrado(x0, y0).setPeca(jogo.getTabuleiro().retornaPecaPorId(id));
 
-            moveHistory.remove(moveHistory.size() - 1);
 
+        } else {
 
-            jogo.mudarEquipa();
-            return;
+            jogo.getTabuleiro().retornaPecaPorId(id).setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x0, y0));
+            jogo.getTabuleiro().retornoQuadrado(x0, y0).setPeca(jogo.getTabuleiro().retornaPecaPorId(id));
+            jogo.getTabuleiro().retornoQuadrado(x1, y1).resetQuadrado();
 
         }
 
-        jogo.getTabuleiro().retornaPecaPorId(id).setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x0, y0));
-        jogo.getTabuleiro().retornoQuadrado(x0, y0).setPeca(jogo.getTabuleiro().retornaPecaPorId(id));
-        jogo.getTabuleiro().retornoQuadrado(x1, y1).resetQuadrado();
         moveHistory.remove(moveHistory.size() - 1);
-
         jogo.mudarEquipa();
-
-
     }
 
 
@@ -394,6 +419,7 @@ public class GameManager {
                     if (sqPartida.getPeca().getTipo() == 8) {
                         sqPartida.getPeca().aumentaValor(sqChegada.getPeca().getValor());
                         sqPartida.getPeca().aumentaPontos(sqChegada.getPeca().getValor() * 2);
+                        //sqPartida.getPeca().versoesKirby.add("Kirby/" + sqChegada.getPeca().nomeDoTipo(jogo));
 
                     } else {
                         sqPartida.getPeca().aumentaPontos(sqChegada.getPeca().getValor());

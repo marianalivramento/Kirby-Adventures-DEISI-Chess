@@ -135,4 +135,8 @@ public class Jogo {
     public int getTurnoClasse() {
         return turnoClasse;
     }
+
+   // public void undo (int id) {
+       // tabuleiro.retornaPecaPorId(id).diminuiNumeroDeCapturas();
+    //}
 }

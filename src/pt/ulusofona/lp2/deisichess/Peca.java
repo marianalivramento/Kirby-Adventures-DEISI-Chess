@@ -18,6 +18,8 @@ abstract class Peca {
     int numeroDeMovimentosInvalidos = 0;
     int numeroDeMovimentosValidos = 0;
     String kirbs = "";
+    ArrayList<String> versoesKirby = new ArrayList<>();
+    Peca pecaComida;
 
 
     public int getId() {
