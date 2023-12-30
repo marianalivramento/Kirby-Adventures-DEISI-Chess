@@ -7,6 +7,13 @@ public class Rainha extends Peca {
         return valor;
     }
 
+    public void aumentaValor(int pontos) {
+        this.valor += pontos;
+    }
+    public void diminuiValor(int pontos) {
+        this.valor -= pontos;
+    }
+
     boolean passaPorPeca(int x0, int y0, int x1, int y1, Jogo jogo) {
         int minX = Math.min(x0, x1);
         int maxX = Math.max(x0, x1);
@@ -71,6 +78,7 @@ public class Rainha extends Peca {
 
         return false;
     }
+
 
     public String nomeDoTipo(Jogo jogo) {
         return "Rainha";

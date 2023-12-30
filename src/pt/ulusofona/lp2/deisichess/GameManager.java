@@ -389,22 +389,26 @@ public class GameManager {
                         }
                     }
 
-                    if (sqPartida.getPeca().getId() == 8) {
+
+                    moveHistory.add(sqPartida.getPeca().getId() + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1 + ":PecaCapturada:" + sqChegada.getPeca().getId());
+                    if (sqPartida.getPeca().getTipo() == 8) {
+                        sqPartida.getPeca().aumentaValor(sqChegada.getPeca().getValor());
+                        sqPartida.getPeca().aumentaPontos(sqChegada.getPeca().getValor() * 2);
 
                     } else {
-
-                        moveHistory.add(sqPartida.getPeca().getId() + ":" + x0 + ":" + y0 + ":" + x1 + ":" + y1 + ":PecaCapturada:" + sqChegada.getPeca().getId());
                         sqPartida.getPeca().aumentaPontos(sqChegada.getPeca().getValor());
-                        sqPartida.getPeca().aumentaNumeroDeCapturas();
-                        sqPartida.getPeca().aumentaNumeroDeMovimentosValidos();
 
-                        sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
-
-                        jogo.getClassEquipaAtual().aumentarNumeroTurno();
-                        jogo.aumentaTurnoClasse();
-
-                        jogo.resetJogadasSemCaptura();
                     }
+                    //sqPartida.getPeca().aumentaPontos(sqChegada.getPeca().getValor());
+                    sqPartida.getPeca().aumentaNumeroDeCapturas();
+                    sqPartida.getPeca().aumentaNumeroDeMovimentosValidos();
+
+                    sqPartida.getPeca().move(x0, y0, x1, y1, jogo);
+
+                    jogo.getClassEquipaAtual().aumentarNumeroTurno();
+                    jogo.aumentaTurnoClasse();
+                    jogo.resetJogadasSemCaptura();
+
                 } else {
                     if (!sqPartida.getPeca().movesPermitidos(x0, y0, x1, y1, jogo)) {
                         jogo.aumentaTentativasInvalidasPorEquipa();
@@ -700,6 +704,15 @@ public class GameManager {
                                 retorno.append("Desconhecido");
                                 break;
                         }
+
+                    case "8":
+                        if(jogo.getTabuleiro().retornaPecaPorId(ID).kirbs.equals("")) {
+                            retorno.append("Kirby" + jogo.getTabuleiro().retornaPecaPorId(ID).kirbs + " | " +jogo.getTabuleiro().retornaPecaPorId(ID).getValor());
+
+                        } else {
+                            retorno.append("Kirby/" + jogo.getTabuleiro().retornaPecaPorId(ID).kirbs + " | " +jogo.getTabuleiro().retornaPecaPorId(ID).getValor());
+                        }
+                        break;
                 }
             } else if (i == 2) {
                 retorno.append(string[i]);

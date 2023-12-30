@@ -7,6 +7,13 @@ public class PoneiMagico extends Peca {
         return valor;
     }
 
+    public void aumentaValor(int pontos) {
+        this.valor += pontos;
+    }
+    public void diminuiValor(int pontos) {
+        this.valor -= pontos;
+    }
+
 
     boolean passaPorPeca(int x0, int y0, int x1, int y1, Jogo jogo) {
         for (int coordenadaY = -2; coordenadaY <= 2; coordenadaY++) {
@@ -49,6 +56,7 @@ public class PoneiMagico extends Peca {
         }
         return false;
     }
+
 
     public String nomeDoTipo(Jogo jogo) {
         return "Ponei Mágico";

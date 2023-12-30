@@ -7,6 +7,13 @@ public class TorreHorizontal extends Peca {
         return valor;
     }
 
+    public void aumentaValor(int pontos) {
+        this.valor += pontos;
+    }
+    public void diminuiValor(int pontos) {
+        this.valor -= pontos;
+    }
+
 
     //verifico se quando faz o movimento se passa por cima de uma peca
     // as condicoes sao para n declara q passa por cima de outra peca quando o move é possivel
@@ -42,6 +49,7 @@ public class TorreHorizontal extends Peca {
 
         return false;
     }
+
 
     public String nomeDoTipo(Jogo jogo) {
         return "TorreHor";

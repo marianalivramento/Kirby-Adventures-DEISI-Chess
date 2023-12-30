@@ -17,7 +17,7 @@ abstract class Peca {
     int numeroDeCapturas = 0;
     int numeroDeMovimentosInvalidos = 0;
     int numeroDeMovimentosValidos = 0;
-    String kirbs = "Normal";
+    String kirbs = "";
 
 
     public int getId() {
@@ -37,6 +37,8 @@ abstract class Peca {
     }
 
     abstract int getValor();
+    abstract void aumentaValor(int pontos);
+    abstract void diminuiValor(int pontos);
 
     public Equipa getEquipa() {
         return equipa;
@@ -157,6 +159,7 @@ abstract class Peca {
     public void aumentaPontos(int pontos) {
         this.pontos += pontos;
     }
+
 
     public void aumentaNumeroDeMovimentosInvalidos() {
         numeroDeMovimentosInvalidos++;

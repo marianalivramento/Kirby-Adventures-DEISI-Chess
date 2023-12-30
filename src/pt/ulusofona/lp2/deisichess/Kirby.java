@@ -3,11 +3,18 @@ package pt.ulusofona.lp2.deisichess;
 public class Kirby extends Peca {
 
     Peca pecaComida = new Rei();
-    int valor = 20;
+    int valor = 0;
 
     @Override
     int getValor() {
         return valor;
+    }
+
+    public void aumentaValor(int pontos) {
+        this.valor += pontos;
+    }
+    public void diminuiValor(int pontos) {
+        this.valor -= pontos;
     }
 
     @Override

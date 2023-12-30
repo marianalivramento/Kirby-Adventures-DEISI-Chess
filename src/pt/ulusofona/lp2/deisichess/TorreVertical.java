@@ -6,6 +6,12 @@ public class TorreVertical extends Peca {
     public int getValor() {
         return valor;
     }
+    public void aumentaValor(int pontos) {
+        this.valor += pontos;
+    }
+    public void diminuiValor(int pontos) {
+        this.valor -= pontos;
+    }
 
     boolean passaPorPeca(int x0, int y0, int x1, int y1, Jogo jogo) {
         int minY = Math.min(y0, y1);
@@ -37,6 +43,8 @@ public class TorreVertical extends Peca {
         }
         return false;
     }
+
+
     public String nomeDoTipo(Jogo jogo) {
         return "TorreVert";
     }

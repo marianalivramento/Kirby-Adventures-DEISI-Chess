@@ -7,6 +7,13 @@ public class HomerSimpson extends Peca {
         return valor;
     }
 
+    public void aumentaValor(int pontos) {
+        this.valor += pontos;
+    }
+    public void diminuiValor(int pontos) {
+        this.valor -= pontos;
+    }
+
     @Override
     boolean movesPermitidos(int x0, int y0, int x1, int y1, Jogo jogo) {
         if ((x1 == x0 + 1 && y1 == y0 + 1) || (x1 == x0 - 1 && y1 == y0 - 1) || (x1 == x0 + 1 && y1 == y0 - 1) || (x1 == x0 - 1 && y1 == y0 + 1)) {

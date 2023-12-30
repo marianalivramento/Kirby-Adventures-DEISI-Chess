@@ -7,6 +7,13 @@ public class Rei extends Peca {
         return valor;
     }
 
+    public void aumentaValor(int pontos) {
+        this.valor += pontos;
+    }
+    public void diminuiValor(int pontos) {
+        this.valor -= pontos;
+    }
+
     @Override
     boolean movesPermitidos(int x0, int y0, int x1, int y1, Jogo jogo) {
         if (x0 == x1 && y0 == y1) {
@@ -19,6 +26,8 @@ public class Rei extends Peca {
         }
         return false;
     }
+
+
 
     public String nomeDoTipo(Jogo jogo) {
         return "Rei";
