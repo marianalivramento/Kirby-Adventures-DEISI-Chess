@@ -9,7 +9,6 @@ public class Jogo {
     int nrDeJogadasSemCaptura = 0;
     int turnoClasse = 0;
 
-
     public Jogo() {
     }
 

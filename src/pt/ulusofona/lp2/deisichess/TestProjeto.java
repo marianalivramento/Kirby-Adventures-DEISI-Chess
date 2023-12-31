@@ -82,7 +82,7 @@ public class TestProjeto {
     }
 
     @Test
-    public void erro_null_pointer_exception() {
+    public void teste_kirby() {
 
         GameManager gm = new GameManager();
 
