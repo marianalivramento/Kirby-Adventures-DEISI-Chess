@@ -106,6 +106,6 @@ public class Kirby extends Peca {
 
     @Override
     String nomeDoTipo(Jogo jogo) {
-        return "Kirby/" + pecaComida;
+        return "Kirby/" + pecaComida.nomeDoTipo(jogo);
     }
 }

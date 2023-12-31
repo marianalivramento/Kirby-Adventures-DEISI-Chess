@@ -70,10 +70,6 @@ abstract class Peca {
         return numeroDeCapturas;
     }
 
-    public void setNumeroDeCapturas(int numeroDeCapturas) {
-        this.numeroDeCapturas = numeroDeCapturas;
-    }
-
     public void setCoordenadas(Square coordenadas) {
         this.coordenadas = coordenadas;
     }
