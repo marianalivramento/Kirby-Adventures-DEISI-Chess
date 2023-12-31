@@ -2,6 +2,7 @@ package pt.ulusofona.lp2.deisichess;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -49,10 +50,9 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1, 0, 1,5);
-        gm.move(0, 7, 0,6);
-        gm.move(1, 5, 0,6);
-
+        gm.move(1, 0, 1, 5);
+        gm.move(0, 7, 0, 6);
+        gm.move(1, 5, 0, 6);
 
 
         assertTrue(gm.gameOver());
@@ -93,13 +93,13 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1,0,1,5);
-        gm.move(0,7,0,6);
-        gm.move(1,5,0,6);
+        gm.move(1, 0, 1, 5);
+        gm.move(0, 7, 0, 6);
+        gm.move(1, 5, 0, 6);
         gm.getGameResults().get(1);
 
 
-        assertEquals("Resultado: VENCERAM AS PRETAS" , gm.getGameResults().get(1));
+        assertEquals("Resultado: VENCERAM AS PRETAS", gm.getGameResults().get(1));
 
     }
 
@@ -114,14 +114,14 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(7,0,4,3);
-        gm.move(1,7,1,3);
-        gm.move(0,0,0,1);
-        gm.move(1,3,3,3);
-        gm.move(0,1,0,2);
-        gm.move(0,7,0,6);
+        gm.move(7, 0, 4, 3);
+        gm.move(1, 7, 1, 3);
+        gm.move(0, 0, 0, 1);
+        gm.move(1, 3, 3, 3);
+        gm.move(0, 1, 0, 2);
+        gm.move(0, 7, 0, 6);
 
-        assertFalse(gm.move(4,3,3,3));
+        assertFalse(gm.move(4, 3, 3, 3));
 
     }
 
@@ -137,7 +137,7 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(0,0,0,1);
+        gm.move(0, 0, 0, 1);
         gm.undo();
 
         String[] u = gm.getSquareInfo(0, 0);
@@ -165,9 +165,9 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(0,0,0,1);
-        gm.move(1,7,1,2);
-        gm.move(0,1,1,2);
+        gm.move(0, 0, 0, 1);
+        gm.move(1, 7, 1, 2);
+        gm.move(0, 1, 1, 2);
 
         gm.undo();
 
@@ -188,11 +188,11 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(0,0,0,1);
-        gm.move(1,7,1,2);
-        gm.move(0,1,1,2);
-        gm.move(0,7,0,6);
-        gm.move(1,2,2,2);
+        gm.move(0, 0, 0, 1);
+        gm.move(1, 7, 1, 2);
+        gm.move(0, 1, 1, 2);
+        gm.move(0, 7, 0, 6);
+        gm.move(1, 2, 2, 2);
 
 
         gm.undo();
@@ -201,7 +201,7 @@ public class TestProjeto {
         gm.undo();
         gm.undo();
 
-        String[] str = gm.getSquareInfo(0,0);
+        String[] str = gm.getSquareInfo(0, 0);
 
         String[] esperado = new String[5];
         esperado[0] = "1";
@@ -225,8 +225,8 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(0,0,0,1);
-        gm.move(1,7,1,2);
+        gm.move(0, 0, 0, 1);
+        gm.move(1, 7, 1, 2);
 
 
         String str = gm.getPieceInfoAsString(8);
@@ -245,15 +245,15 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-        gm.move(7,0,3,4);
-        gm.move(1,7,1,4);
-        gm.move(0,0,0,1);
-        gm.move(1,4,2,4);
+        gm.move(7, 0, 3, 4);
+        gm.move(1, 7, 1, 4);
+        gm.move(0, 0, 0, 1);
+        gm.move(1, 4, 2, 4);
 
-        gm.move(0,1,0,2);
-        gm.move(0,7,0,6);
+        gm.move(0, 1, 0, 2);
+        gm.move(0, 7, 0, 6);
 
-        assertEquals(false,gm.move(3,4,2,4));
+        assertEquals(false, gm.move(3, 4, 2, 4));
 
     }
 
@@ -268,13 +268,13 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1,0,1,5);
-        gm.move(0,7,0,6);
-        gm.move(2,0,4,2);
-        gm.move(2,7,4,5);
-        gm.move(5,0,5,5);
-        gm.move(5,7,5,5);
-        gm.move(7,0,7,7);
+        gm.move(1, 0, 1, 5);
+        gm.move(0, 7, 0, 6);
+        gm.move(2, 0, 4, 2);
+        gm.move(2, 7, 4, 5);
+        gm.move(5, 0, 5, 5);
+        gm.move(5, 7, 5, 5);
+        gm.move(7, 0, 7, 7);
 
 
         assertEquals(0, gm.jogo.getEquipaPreta().getNrCapturas());
@@ -293,9 +293,10 @@ public class TestProjeto {
         }
 
 
-        assertEquals(true, gm.move(3,0,4,1));
+        assertEquals(true, gm.move(3, 0, 4, 1));
 
     }
+
     @Test
     public void conta_pontos_rei() {
         GameManager gm = new GameManager();
@@ -305,9 +306,9 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1,0,1,5);
-        gm.move(0,7,0,6);
-        gm.move(1,5,0,6);
+        gm.move(1, 0, 1, 5);
+        gm.move(0, 7, 0, 6);
+        gm.move(1, 5, 0, 6);
 
         assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(2).getPontos(), 1000);
     }
@@ -321,15 +322,15 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1,0,1,5); // preta válida
-        gm.move(0,7,0,3); // branca inválida
-        gm.move(0,7,0,7); // branca inválida
-        gm.move(0,7,0,6); //branca válida
+        gm.move(1, 0, 1, 5); // preta válida
+        gm.move(0, 7, 0, 3); // branca inválida
+        gm.move(0, 7, 0, 7); // branca inválida
+        gm.move(0, 7, 0, 6); //branca válida
 
-        gm.move(0,0,0,1); //preta válida
-        gm.move(1,7,1,7); //branca invalida
-        gm.move(5,7,5,6); // branca valida
-        gm.move(1,5,0,6); // preta valida - captura
+        gm.move(0, 0, 0, 1); //preta válida
+        gm.move(1, 7, 1, 7); //branca invalida
+        gm.move(5, 7, 5, 6); // branca valida
+        gm.move(1, 5, 0, 6); // preta valida - captura
 
         try {
             gm.saveGame(new File("test-files/new.txt"));
@@ -362,10 +363,10 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1,0,1,5); // preta válida
-        gm.move(0,7,0,3); // branca inválida
-        gm.move(0,7,0,7); // branca inválida
-        gm.move(0,7,0,6); //branca válida
+        gm.move(1, 0, 1, 5); // preta válida
+        gm.move(0, 7, 0, 3); // branca inválida
+        gm.move(0, 7, 0, 7); // branca inválida
+        gm.move(0, 7, 0, 6); //branca válida
 
         try {
             gm.saveGame(new File("test-files/new.txt"));
@@ -387,10 +388,10 @@ public class TestProjeto {
 
         //1-3-0 //0-2-3
 
-        gm.move(0,0,0,1); //preta válida
-        gm.move(1,7,1,7); //branca invalida
-        gm.move(5,7,5,6); // branca valida
-        gm.move(1,5,0,6); // preta valida - captura
+        gm.move(0, 0, 0, 1); //preta válida
+        gm.move(1, 7, 1, 7); //branca invalida
+        gm.move(5, 7, 5, 6); // branca valida
+        gm.move(1, 5, 0, 6); // preta valida - captura
 
         assertEquals(1, gm.jogo.getEquipaPreta().getNrCapturas());
     }
@@ -404,33 +405,32 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(3,0,0,3); //valida p
-        gm.move(1,7,4,4); //valida b
-        gm.move(1,0,1,1); //valida p
-        gm.move(2,7,0,5); //valida b
+        gm.move(3, 0, 0, 3); //valida p
+        gm.move(1, 7, 4, 4); //valida b
+        gm.move(1, 0, 1, 1); //valida p
+        gm.move(2, 7, 0, 5); //valida b
 
-        gm.move(5,0,5,7); //preta captura valida p
-        gm.move(0,5,2,3); //valida b
-        gm.move(6,0,5,1); //preta invalida - homer dorme
-        gm.move(2,0,0,2); //valida p
+        gm.move(5, 0, 5, 7); //preta captura valida p
+        gm.move(0, 5, 2, 3); //valida b
+        gm.move(6, 0, 5, 1); //preta invalida - homer dorme
+        gm.move(2, 0, 0, 2); //valida p
 
-        gm.move(4,4,4,2); //valida b
-        gm.move(0,3,2,5); //valida p
-        gm.move(0,7,1,7); //valida b
-        gm.move(1,1,1,7); //preta invalida
+        gm.move(4, 4, 4, 2); //valida b
+        gm.move(0, 3, 2, 5); //valida p
+        gm.move(0, 7, 1, 7); //valida b
+        gm.move(1, 1, 1, 7); //preta invalida
 
-        gm.move(4,2,3,3); //preta invalida
-        gm.move(1,1,1,7); //preta invalida
-        gm.move(6,0,5,1); //valida p
-        gm.move(3,7,0,4); //valida b
+        gm.move(4, 2, 3, 3); //preta invalida
+        gm.move(1, 1, 1, 7); //preta invalida
+        gm.move(6, 0, 5, 1); //valida p
+        gm.move(3, 7, 0, 4); //valida b
 
-        gm.move(7,0,7,3); //valida p
-        gm.move(4,2,5,1); //branca captura valida b
-        gm.move(1,1,1,5); //valida p
-        gm.move(5,1,2,1); //valida b
+        gm.move(7, 0, 7, 3); //valida p
+        gm.move(4, 2, 5, 1); //branca captura valida b
+        gm.move(1, 1, 1, 5); //valida p
+        gm.move(5, 1, 2, 1); //valida b
 
-        gm.move(1,5,1,7); //preta captura valida p
-
+        gm.move(1, 5, 1, 7); //preta captura valida p
 
 
         assertEquals(2, gm.jogo.getEquipaPreta().getNrCapturas());
@@ -445,7 +445,7 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        assertTrue(gm.move(3,0,6,3));
+        assertTrue(gm.move(3, 0, 6, 3));
     }
 
     @Test
@@ -457,11 +457,10 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1,0,1,5);
-        gm.move(0,7,0,6);
-        gm.move(0,0,0,1);
-        gm.move(0,6,1,5);
-
+        gm.move(1, 0, 1, 5);
+        gm.move(0, 7, 0, 6);
+        gm.move(0, 0, 0, 1);
+        gm.move(0, 6, 1, 5);
 
 
         assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(9).getPontos(), 8);
@@ -476,13 +475,11 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(2,0,4,2);
-        gm.move(1,7,1,2);
-        gm.move(0,0,0,1);
-        gm.move(1,2,4,2);
-        gm.move(3,0,4,2);
-
-
+        gm.move(2, 0, 4, 2);
+        gm.move(1, 7, 1, 2);
+        gm.move(0, 0, 0, 1);
+        gm.move(1, 2, 4, 2);
+        gm.move(3, 0, 4, 2);
 
 
         assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(10).getPontos(), 5);
@@ -497,9 +494,9 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1,0,1,5);
-        gm.move(0,7,0,6);
-        gm.move(1,5,0,6);
+        gm.move(1, 0, 1, 5);
+        gm.move(0, 7, 0, 6);
+        gm.move(1, 5, 0, 6);
 
 
         ArrayList<String> arr = new ArrayList<>();
@@ -517,9 +514,9 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1,0,1,5);
-        gm.move(0,7,0,6);
-        gm.move(1,5,0,6);
+        gm.move(1, 0, 1, 5);
+        gm.move(0, 7, 0, 6);
+        gm.move(1, 5, 0, 6);
 
 
         ArrayList<String> arr = new ArrayList<>();
@@ -537,17 +534,16 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1,0,1,0);
-        gm.move(1,0,1,0);
-        gm.move(1,0,1,0);
-        gm.move(1,0,1,0);
-        gm.move(1,0,1,0);
-        gm.move(1,0,1,0);
-        gm.move(5,0,5,4);
-        gm.move(0,7,0,6);
-        gm.move(4,0,4,0);
-        gm.move(4,0,5,0);
-
+        gm.move(1, 0, 1, 0);
+        gm.move(1, 0, 1, 0);
+        gm.move(1, 0, 1, 0);
+        gm.move(1, 0, 1, 0);
+        gm.move(1, 0, 1, 0);
+        gm.move(1, 0, 1, 0);
+        gm.move(5, 0, 5, 4);
+        gm.move(0, 7, 0, 6);
+        gm.move(4, 0, 4, 0);
+        gm.move(4, 0, 5, 0);
 
 
         ArrayList<String> arr = new ArrayList<>();
@@ -566,18 +562,45 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(5,0,5,7);
-        gm.move(4,7,5,7);
-        gm.move(2,7,4,5);
-        gm.move(1,5,4,5);
-        gm.move(1,0,1,5);
-        gm.move(3,7,1,5);
-
+        gm.move(5, 0, 5, 7);
+        gm.move(4, 7, 5, 7);
+        gm.move(2, 7, 4, 5);
+        gm.move(1, 5, 4, 5);
+        gm.move(1, 0, 1, 5);
+        gm.move(3, 7, 1, 5);
 
 
         assertEquals("O Maior Grande (PRETA) fez 1 capturas", StatisticsKt.topCincoCapturas(gm).get(0));
     }
 
+    @Test
+    public void estatistica_pecas_mais_5_capturas() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(3, 0, 1, 2);
+        gm.move(1, 7, 1, 2);
+        gm.move(2, 0, 0, 2);
+        gm.move(1, 2, 0, 2);
+        gm.move(5, 0, 5, 2);
+        gm.move(0, 2, 5, 2);
+        gm.move(4, 0, 5, 0);
+        gm.move(5, 2, 5, 0);
+        gm.move(7, 0, 6, 1);
+        gm.move(5, 0, 6, 1);
+        gm.move(0, 0, 1, 1);
+        gm.move(6, 1, 6, 0);
+
+
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add("BRANCA:A Barulhenta do Bairro:6");
+
+        assertEquals(arr, StatisticsKt.maisCincoCapturas(gm));
+    }
 
     @Test
     public void get_hints_simples_sem_nada() {
@@ -589,8 +612,9 @@ public class TestProjeto {
         }
 
 
-        assertEquals("(0,1) -> 0", gm.getHints(0,0).get(0).toString());
+        assertEquals("(0,1) -> 0", gm.getHints(0, 0).get(0).toString());
     }
+
     @Test
     public void nomes_dos_tipos() {
         GameManager gm = new GameManager();
@@ -627,10 +651,10 @@ public class TestProjeto {
 
     @Test
     public void getHints_jogadas_permitidas_atualiza_pontos() {
-        GetHints um = new GetHints(1,2);
+        GetHints um = new GetHints(1, 2);
         um.valorPeca = 3;
 
-        GetHints dois = new GetHints(3,4);
+        GetHints dois = new GetHints(3, 4);
         dois.valorPeca = 2;
 
         Assertions.assertEquals(um.compareTo(dois), -1);
@@ -638,10 +662,10 @@ public class TestProjeto {
 
     @Test
     public void getHints_compareTo_maior() {
-        GetHints um = new GetHints(1,2);
+        GetHints um = new GetHints(1, 2);
         um.valorPeca = 3;
 
-        GetHints dois = new GetHints(3,4);
+        GetHints dois = new GetHints(3, 4);
         dois.valorPeca = 2;
 
         Assertions.assertEquals(um.compareTo(dois), -1);
@@ -650,10 +674,10 @@ public class TestProjeto {
 
     @Test
     public void getHints_compareTo_menor() {
-        GetHints um = new GetHints(1,2);
+        GetHints um = new GetHints(1, 2);
         um.valorPeca = 2;
 
-        GetHints dois = new GetHints(3,4);
+        GetHints dois = new GetHints(3, 4);
         dois.valorPeca = 5;
 
         Assertions.assertEquals(um.compareTo(dois), 1);
@@ -672,9 +696,10 @@ public class TestProjeto {
 
         gm.jogo.getTabuleiro().retornaPecaPorId(1).aumentaValor(10);
         gm.jogo.getTabuleiro().retornaPecaPorId(1).diminuiValor(100);
-        assertEquals(910 , gm.jogo.getTabuleiro().retornaPecaPorId(1).getValor());
+        assertEquals(910, gm.jogo.getTabuleiro().retornaPecaPorId(1).getValor());
 
     }
+
     @Test
     public void aumenta_valor_rainha() {
         GameManager gm = new GameManager();
@@ -686,9 +711,10 @@ public class TestProjeto {
 
         gm.jogo.getTabuleiro().retornaPecaPorId(2).aumentaValor(2);
         gm.jogo.getTabuleiro().retornaPecaPorId(2).diminuiValor(10);
-        assertEquals(0 , gm.jogo.getTabuleiro().retornaPecaPorId(2).getValor());
+        assertEquals(0, gm.jogo.getTabuleiro().retornaPecaPorId(2).getValor());
 
     }
+
     @Test
     public void aumenta_valor_ponei() {
         GameManager gm = new GameManager();
@@ -700,9 +726,10 @@ public class TestProjeto {
 
         gm.jogo.getTabuleiro().retornaPecaPorId(3).aumentaValor(10);
         gm.jogo.getTabuleiro().retornaPecaPorId(3).diminuiValor(5);
-        assertEquals(10 , gm.jogo.getTabuleiro().retornaPecaPorId(3).getValor());
+        assertEquals(10, gm.jogo.getTabuleiro().retornaPecaPorId(3).getValor());
 
     }
+
     @Test
     public void aumenta_valor_padre() {
         GameManager gm = new GameManager();
@@ -714,9 +741,10 @@ public class TestProjeto {
 
         gm.jogo.getTabuleiro().retornaPecaPorId(4).aumentaValor(10);
         gm.jogo.getTabuleiro().retornaPecaPorId(4).diminuiValor(5);
-        assertEquals(8 , gm.jogo.getTabuleiro().retornaPecaPorId(4).getValor());
+        assertEquals(8, gm.jogo.getTabuleiro().retornaPecaPorId(4).getValor());
 
     }
+
     @Test
     public void aumenta_valor_torreV() {
         GameManager gm = new GameManager();
@@ -728,9 +756,10 @@ public class TestProjeto {
 
         gm.jogo.getTabuleiro().retornaPecaPorId(5).aumentaValor(0);
         gm.jogo.getTabuleiro().retornaPecaPorId(5).diminuiValor(0);
-        assertEquals(3 , gm.jogo.getTabuleiro().retornaPecaPorId(5).getValor());
+        assertEquals(3, gm.jogo.getTabuleiro().retornaPecaPorId(5).getValor());
 
     }
+
     @Test
     public void aumenta_valor_torreH() {
         GameManager gm = new GameManager();
@@ -742,9 +771,10 @@ public class TestProjeto {
 
         gm.jogo.getTabuleiro().retornaPecaPorId(6).aumentaValor(1);
         gm.jogo.getTabuleiro().retornaPecaPorId(6).diminuiValor(3);
-        assertEquals(1 , gm.jogo.getTabuleiro().retornaPecaPorId(6).getValor());
+        assertEquals(1, gm.jogo.getTabuleiro().retornaPecaPorId(6).getValor());
 
     }
+
     @Test
     public void aumenta_valor_Homer() {
         GameManager gm = new GameManager();
@@ -756,9 +786,10 @@ public class TestProjeto {
 
         gm.jogo.getTabuleiro().retornaPecaPorId(7).aumentaValor(2);
         gm.jogo.getTabuleiro().retornaPecaPorId(7).diminuiValor(4);
-        assertEquals(0 , gm.jogo.getTabuleiro().retornaPecaPorId(7).getValor());
+        assertEquals(0, gm.jogo.getTabuleiro().retornaPecaPorId(7).getValor());
 
     }
+
     @Test
     public void aumenta_valor_Joker() {
         GameManager gm = new GameManager();
@@ -770,9 +801,10 @@ public class TestProjeto {
 
         gm.jogo.getTabuleiro().retornaPecaPorId(8).aumentaValor(1);
         gm.jogo.getTabuleiro().retornaPecaPorId(8).diminuiValor(3);
-        assertEquals(2 , gm.jogo.getTabuleiro().retornaPecaPorId(8).getValor());
+        assertEquals(2, gm.jogo.getTabuleiro().retornaPecaPorId(8).getValor());
 
     }
+
     @Test
     public void aumenta_valor_kirby() {
         GameManager gm = new GameManager();
@@ -784,7 +816,7 @@ public class TestProjeto {
 
         gm.jogo.getTabuleiro().retornaPecaPorId(17).aumentaValor(100);
         gm.jogo.getTabuleiro().retornaPecaPorId(17).diminuiValor(50);
-        assertEquals(50 , gm.jogo.getTabuleiro().retornaPecaPorId(17).getValor());
+        assertEquals(50, gm.jogo.getTabuleiro().retornaPecaPorId(17).getValor());
 
     }
 
@@ -800,10 +832,10 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1,0,1,4);
-        gm.move(3,6,2,5);
-        gm.move(1,4,2,4);
-        gm.move(2,5,2,4);
+        gm.move(1, 0, 1, 4);
+        gm.move(3, 6, 2, 5);
+        gm.move(1, 4, 2, 4);
+        gm.move(2, 5, 2, 4);
 
         assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(18).getValor(), 8);
     }
@@ -817,14 +849,14 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1,0,1,4);
-        gm.move(3,6,2,5);
-        gm.move(1,4,2,4);
-        gm.move(2,5,2,4);
-        gm.move(0,0,1,1);
-        gm.move(2,4,1,3);
-        gm.move(1,1,1,2);
-        gm.move(1,3,1,2);
+        gm.move(1, 0, 1, 4);
+        gm.move(3, 6, 2, 5);
+        gm.move(1, 4, 2, 4);
+        gm.move(2, 5, 2, 4);
+        gm.move(0, 0, 1, 1);
+        gm.move(2, 4, 1, 3);
+        gm.move(1, 1, 1, 2);
+        gm.move(1, 3, 1, 2);
 
         assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(18).getPontos(), 2016);
     }
@@ -838,14 +870,99 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        gm.move(1,0,1,4);
-        gm.move(3,6,2,5);
-        gm.move(1,4,2,4);
-        gm.move(2,5,2,4);
+        gm.move(1, 0, 1, 4);
+        gm.move(3, 6, 2, 5);
+        gm.move(1, 4, 2, 4);
+        gm.move(2, 5, 2, 4);
 
         assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(18).kirbs, "Rainha");
     }
 
+
+    @Test
+    public void ficheiro_invalido() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/ficheiro-invalido.txt"));
+            fail("Expected InvalidGameInputException, but no exception was thrown");
+        } catch (IOException e) {
+            fail("Unexpected IOException: " + e.getMessage());
+        } catch (InvalidGameInputException e) {
+            assertEquals("DADOS A MENOS (Esperava: 4 ; Obtive: 1)", e.getProblemDescription());
+            assertEquals(3, e.getLineWithError());
+        }
+    }
+
+    @Test
+    public void getPieceinfoAsString() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        assertEquals("1 | Rei | (infinito) | 10 | O Poderoso Chefao @ (0, 0)", gm.getPieceInfoAsString(1));
+        assertEquals("2 | Rainha | 8 | 10 | A Dama Selvagem @ (1, 0)", gm.getPieceInfoAsString(2));
+        assertEquals("3 | Ponei Mágico | 5 | 10 | O Grande Artista @ (2, 0)", gm.getPieceInfoAsString(3));
+        assertEquals("4 | Padre da Vila | 3 | 10 | Amante de Praia @ (3, 0)", gm.getPieceInfoAsString(4));
+        assertEquals("5 | TorreHor | 3 | 10 | Artolas @ (4, 0)", gm.getPieceInfoAsString(5));
+        assertEquals("6 | TorreVert | 3 | 10 | O Maior Grande @ (5, 0)", gm.getPieceInfoAsString(6));
+
+    }
+
+    @Test
+    public void getPieceinfoAsString_homerAcordado() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        gm.move(1, 0, 1, 5);
+        gm.move(0, 7, 0, 6);
+
+        assertEquals("7 | Homer Simpson | 2 | 10 | O Hommie @ (6, 0)", gm.getPieceInfoAsString(7));
+
+    }
+
+    @Test
+    public void getPieceinfoAsString_homerADormir() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        if (gm.jogo.homerADormir()) {
+            assertEquals("Doh! zzzzzz", gm.getPieceInfoAsString(7));
+        }
+    }
+
+    @Test
+    public void getPieceinfoAsString_joker() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        assertEquals("8 | Joker/Rainha | 4 | 10 | O Beberolas @ (7, 0)", gm.getPieceInfoAsString(8));
+        gm.move(3, 0, 1, 2);
+        assertEquals("8 | Joker/Ponei Mágico | 4 | 10 | O Beberolas @ (7, 0)", gm.getPieceInfoAsString(8));
+        gm.move(1, 7, 1, 2);
+        assertEquals("8 | Joker/Padre da Vila | 4 | 10 | O Beberolas @ (7, 0)", gm.getPieceInfoAsString(8));
+        gm.move(2, 0, 0, 2);
+        assertEquals("8 | Joker/TorreHor | 4 | 10 | O Beberolas @ (7, 0)", gm.getPieceInfoAsString(8));
+        gm.move(1, 2, 0, 2);
+        assertEquals("8 | Joker/TorreVert | 4 | 10 | O Beberolas @ (7, 0)", gm.getPieceInfoAsString(8));
+        gm.move(5, 0, 5, 2);
+        assertEquals("8 | Joker/Homer Simpson | 4 | 10 | O Beberolas @ (7, 0)", gm.getPieceInfoAsString(8));
+        gm.move(0, 2, 5, 2);
+        assertEquals("8 | Joker/Rainha | 4 | 10 | O Beberolas @ (7, 0)", gm.getPieceInfoAsString(8));
+
+    }
 
 }
 
