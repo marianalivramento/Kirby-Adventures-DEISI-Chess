@@ -59,7 +59,7 @@ public class TestProjeto {
 
     }
 
-    /*
+
     @Test
     public void kirby_undo_volta_ao_estado_anterior() {
 
@@ -81,7 +81,31 @@ public class TestProjeto {
 
     }
 
-     */
+    @Test
+    public void erro_null_pointer_exception() {
+
+        GameManager gm = new GameManager();
+
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        gm.move(1,0,1,4);
+        gm.move(3,6,2,5);
+        gm.move(1,4,2,4);
+        gm.move(2,5,2,4);
+        gm.undo();
+        gm.move(2,5,3,5);
+        gm.move(5,0,5,5);
+        gm.move(3,5,4,5);
+        gm.move(3,1,3,2);
+
+        assertTrue(gm.move(4,5,5,5));
+
+    }
+
     @Test
     public void mensagem_vitoria() {
 

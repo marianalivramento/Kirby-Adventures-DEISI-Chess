@@ -136,7 +136,9 @@ public class Jogo {
         return turnoClasse;
     }
 
-   // public void undo (int id) {
-       // tabuleiro.retornaPecaPorId(id).diminuiNumeroDeCapturas();
-    //}
+    public void undoClasseJogo(String lastMove) {
+        tabuleiro.undoClassTabuleiro(lastMove);
+        turnoClasse--;
+        mudarEquipa();
+    }
 }

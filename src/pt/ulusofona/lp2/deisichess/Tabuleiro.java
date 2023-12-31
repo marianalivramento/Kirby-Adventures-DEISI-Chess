@@ -81,4 +81,80 @@ public class Tabuleiro {
         return retorno;
     }
 
+    public void undoClassTabuleiro(String lastMove) {
+        String[] moveInfo = lastMove.split(":");
+        int id = Integer.parseInt(moveInfo[0]);
+        int x0 = Integer.parseInt(moveInfo[1]);
+        int y0 = Integer.parseInt(moveInfo[2]);
+        int x1 = Integer.parseInt(moveInfo[3]);
+        int y1 = Integer.parseInt(moveInfo[4]);
+
+        Peca pecaAtual =  retornaPecaPorId(id);
+
+        if (moveInfo.length == 7) {
+            //18:2:5:1:5:PecaCapturada:2
+
+            Peca pecaCapturada = retornaPecaPorId(Integer.parseInt(moveInfo[6]));
+
+            if (pecaAtual.getTipo() == 8) {
+                if (pecaAtual.versoesKirby.size() == 1) {
+                    pecaAtual.kirbs = "";
+                    pecaAtual.versoesKirby.remove(0);
+                    Kirby kirby = (Kirby) pecaAtual;
+                    kirby.pecaComida = new Rei();
+                } else {
+                    pecaAtual.kirbs = pecaAtual.versoesKirby.get(pecaAtual.versoesKirby.size() - 1);
+                    pecaAtual.versoesKirby.remove(pecaAtual.versoesKirby.size() - 1);
+                    Kirby kirby = (Kirby) pecaAtual;
+                    switch (pecaAtual.kirbs) {
+                        case "Rei":
+                            kirby.pecaComida = new Rei();
+                            break;
+                        case "Rainha":
+                            kirby.pecaComida = new Rainha();
+                            break;
+                        case "Ponei":
+                            kirby.pecaComida = new PoneiMagico();
+                            break;
+                        case "Padre":
+                            kirby.pecaComida = new PadreDaVila();
+                            break;
+                        case "TorreV":
+                            kirby.pecaComida = new TorreVertical();
+                            break;
+                        case "TorreH":
+                            kirby.pecaComida = new TorreHorizontal();
+                            break;
+                        case "Homer":
+                            kirby.pecaComida = new HomerSimpson();
+                            break;
+                        case "Joker":
+                            kirby.pecaComida = new Joker();
+                            break;
+                    }
+                }
+            }
+
+            //peca atual
+            pecaAtual.diminuiNumeroDeCapturas();
+            pecaAtual.diminuiPontos(pecaCapturada.getValor());
+            pecaAtual.setCoordenadas(retornoQuadrado(x0, y0));
+            retornoQuadrado(x0, y0).setPeca(pecaAtual);
+
+
+            //peca capturada
+            pecaCapturada.setNaoCapturado(true);
+            retornoQuadrado(x1, y1).setPeca(pecaCapturada);
+            pecaCapturada.setCoordenadas(retornoQuadrado(x1, y1));
+
+
+        } else {
+
+            pecaAtual.setCoordenadas(retornoQuadrado(x0, y0));
+            retornoQuadrado(x0, y0).setPeca(pecaAtual);
+            retornoQuadrado(x1, y1).resetQuadrado();
+
+        }
+    }
+
 }

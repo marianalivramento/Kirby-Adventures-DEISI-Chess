@@ -19,7 +19,7 @@ abstract class Peca {
     int numeroDeMovimentosValidos = 0;
     String kirbs = "";
     ArrayList<String> versoesKirby = new ArrayList<>();
-    Peca pecaComida;
+
 
 
     public int getId() {
@@ -170,6 +170,7 @@ abstract class Peca {
     public void aumentaNumeroDeMovimentosValidos() {
         numeroDeMovimentosValidos++;
     }
+
 
 }
 

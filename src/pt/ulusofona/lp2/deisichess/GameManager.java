@@ -255,6 +255,10 @@ public class GameManager {
 
         String lastMove = moveHistory.get(moveHistory.size() - 1);
 
+        jogo.undoClasseJogo(lastMove);
+
+
+        /*
         String[] moveInfo = lastMove.split(":");
         int id = Integer.parseInt(moveInfo[0]);
         int x0 = Integer.parseInt(moveInfo[1]);
@@ -262,9 +266,11 @@ public class GameManager {
         int x1 = Integer.parseInt(moveInfo[3]);
         int y1 = Integer.parseInt(moveInfo[4]);
 
-
         if (moveInfo.length == 7) {
             //18:2:5:1:5:PecaCapturada:2
+
+            //jogo.undo(lastMove);
+
             jogo.getTabuleiro().retornaPecaPorId(id).diminuiNumeroDeCapturas();
 
             Peca pecaCapturada = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(moveInfo[6]));
@@ -280,20 +286,28 @@ public class GameManager {
                     switch (pecaAtual.kirbs) {
                         case "Rei":
                             pecaAtual.pecaComida = new Rei();
+                            break;
                         case "Rainha":
                             pecaAtual.pecaComida = new Rainha();
+                            break;
                         case "Ponei":
                             pecaAtual.pecaComida = new PoneiMagico();
+                            break;
                         case "Padre":
                             pecaAtual.pecaComida = new PadreDaVila();
+                            break;
                         case "TorreV":
                             pecaAtual.pecaComida = new TorreVertical();
+                            break;
                         case "TorreH":
                             pecaAtual.pecaComida = new TorreHorizontal();
+                            break;
                         case "Homer":
                             pecaAtual.pecaComida = new HomerSimpson();
+                            break;
                         case "Joker":
                             pecaAtual.pecaComida = new Joker();
+                            break;
                     }
                 }
             }
@@ -308,15 +322,15 @@ public class GameManager {
 
         } else {
 
+
             jogo.getTabuleiro().retornaPecaPorId(id).setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x0, y0));
             jogo.getTabuleiro().retornoQuadrado(x0, y0).setPeca(jogo.getTabuleiro().retornaPecaPorId(id));
             jogo.getTabuleiro().retornoQuadrado(x1, y1).resetQuadrado();
 
         }
+        */
 
         moveHistory.remove(moveHistory.size() - 1);
-        jogo.turnoClasse--;
-        jogo.mudarEquipa();
     }
 
 
@@ -334,7 +348,6 @@ public class GameManager {
         }
         return hints;
     }
-
 
     public int getBoardSize() {
         return jogo.getTabuleiro().getTamanho();
@@ -766,7 +779,6 @@ public class GameManager {
         }
         return String.valueOf(retorno);
     }
-
 
     public int getCurrentTeamID() {
         return jogo.getEquipaAtual();
