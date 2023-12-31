@@ -561,6 +561,7 @@ public class GameManager {
                                     retorno[4] = "kirby-branco.png";
                                      break;
                                 }
+
                             default:
                                 retorno[4] = "unknown-piece.png";
                                 break;
