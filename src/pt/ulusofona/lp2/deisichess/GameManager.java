@@ -801,6 +801,7 @@ public class GameManager {
         map.put("imageBlackSquare", "blackSquare.png");
         map.put("imageWhiteSquare", "whiteSquare.png");
         map.put("imageBackground", "kirby backgrounf.png");
+        map.put("title", "Kirby Adventures");
         return map;
     }
 }
