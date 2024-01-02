@@ -472,7 +472,7 @@ public class GameManager {
                                     retorno[4] = "kirby-ponei-branco.png";
                                     break;
                                 } else if (sq.getPeca().getTipoDeKirby().equals("TorreV")) {
-                                    retorno[4] = "kirby-torreV-branco.png";
+                                    retorno[4] = "kirby-torreV-branca.png";
                                     break;
                                 } else if (sq.getPeca().getTipoDeKirby().equals("TorreH")) {
                                     retorno[4] = "kirby-torreH-branco.png";
