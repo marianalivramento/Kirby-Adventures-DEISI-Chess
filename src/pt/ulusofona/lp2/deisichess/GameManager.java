@@ -109,7 +109,6 @@ public class GameManager {
         String[] elementos = line.split(":");
 
         if (elementos.length == 1) {
-                //jogo.equipaAtual = Integer.parseInt(line);
                 jogo.setEquipaAtual(Integer.parseInt(line));
                 return;
         }
@@ -256,89 +255,6 @@ public class GameManager {
         String lastMove = moveHistory.get(moveHistory.size() - 1);
 
         jogo.undoClasseJogo(lastMove);
-
-
-        /*
-        String[] moveInfo = lastMove.split(":");
-        int id = Integer.parseInt(moveInfo[0]);
-        int x0 = Integer.parseInt(moveInfo[1]);
-        int y0 = Integer.parseInt(moveInfo[2]);
-        int x1 = Integer.parseInt(moveInfo[3]);
-        int y1 = Integer.parseInt(moveInfo[4]);
-
-        if (moveInfo.length == 7) {
-            //18:2:5:1:5:PecaCapturada:2
-
-            //jogo.undo(lastMove);
-
-            jogo.getTabuleiro().retornaPecaPorId(id).diminuiNumeroDeCapturas();
-
-            Peca pecaCapturada = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(moveInfo[6]));
-            Peca pecaAtual =  jogo.getTabuleiro().retornaPecaPorId(id);
-
-            if (pecaAtual.getTipo() == 8) {
-                if (pecaAtual.versoesKirby.size() == 1) {
-                    pecaAtual.kirbs = "";
-                    pecaAtual.versoesKirby.remove(0);
-                    pecaAtual.pecaComida = new Rei();
-                } else {
-                    pecaAtual.kirbs = pecaAtual.versoesKirby.get(pecaAtual.versoesKirby.size() - 1);
-                    pecaAtual.versoesKirby.remove(pecaAtual.versoesKirby.size() - 1);
-                    Kirby kirby = (Kirby) pecaAtual;
-                    switch (pecaAtual.kirbs) {
-                        case "Rei":
-                            kirby.kirbyTranforma(new Rei());
-                            break;
-                            break;
-                        case "Rainha":
-                            kirby.kirbyTranforma(new Rainha());
-                            break;
-                            break;
-                        case "Ponei":
-                            kirby.pecaComida = new PoneiMagico();
-                            break;
-                            break;
-                        case "Padre":
-                            kirby.pecaComida = new PadreDaVila();
-                            break;
-                            break;
-                        case "TorreV":
-                            kirby.pecaComida = new TorreVertical();
-                            break;
-                            break;
-                        case "TorreH":
-                            kirby.pecaComida = new TorreHorizontal();
-                            break;
-                            break;
-                        case "Homer":
-                            kirby.pecaComida = new HomerSimpson();
-                            break;
-                            break;
-                        case "Joker":
-                            kirby.pecaComida = new Joker();
-                            break;
-                            break;
-                    }
-                }
-            }
-
-            jogo.getTabuleiro().retornaPecaPorId(id).diminuiPontos(jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(moveInfo[6])).getValor());
-            pecaCapturada.setNaoCapturado(true);
-            jogo.getTabuleiro().retornoQuadrado(x1, y1).setPeca(pecaCapturada);
-            pecaCapturada.setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x1, y1));
-            jogo.getTabuleiro().retornaPecaPorId(id).setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x0, y0));
-            jogo.getTabuleiro().retornoQuadrado(x0, y0).setPeca(jogo.getTabuleiro().retornaPecaPorId(id));
-
-
-        } else {
-
-
-            jogo.getTabuleiro().retornaPecaPorId(id).setCoordenadas(jogo.getTabuleiro().retornoQuadrado(x0, y0));
-            jogo.getTabuleiro().retornoQuadrado(x0, y0).setPeca(jogo.getTabuleiro().retornaPecaPorId(id));
-            jogo.getTabuleiro().retornoQuadrado(x1, y1).resetQuadrado();
-
-        }
-        */
 
         moveHistory.remove(moveHistory.size() - 1);
     }
@@ -828,6 +744,12 @@ public class GameManager {
             }
         }
 
+        //só há peças de uma equipa
+        if (!flagPecasPretas || !flagPecasBrancas) {
+            getGameResults();
+            return true;
+        }
+
         if (!pecaReiBrancoFlag || !pecaReiPretoFlag) {
             getGameResults();
             return true;
@@ -837,7 +759,6 @@ public class GameManager {
             return true;
         }
 
-
         //10 jogadas sem capturas
         if (jogo.getNrDeJogadasSemCaptura() == 10) {
             if (jogo.getEquipaPreta().getNrCapturas() > 0 || jogo.getEquipaBranca().getNrCapturas() > 0) {
@@ -846,11 +767,6 @@ public class GameManager {
             }
         }
 
-        //só há peças de uma equipa
-        if (!flagPecasPretas || !flagPecasBrancas) {
-            getGameResults();
-            return true;
-        }
 
         return false;
     }
@@ -882,6 +798,8 @@ public class GameManager {
 
     public Map<String, String> customizeBoard() {
         Map<String, String> map = new HashMap<>();
+        map.put("imageBlackSquare", "blackSquare.png");
+        map.put("imageWhiteSquare", "whiteSquare.png");
         map.put("imageBackground", "kirby backgrounf.png");
         return map;
     }
