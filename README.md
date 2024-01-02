@@ -44,4 +44,5 @@ Para além da peça original, mudámos ainda a imagem de fundo para uma que foss
 
 Mudámos também o titulo para "kirby adventures".
 
-![My_Image](jogo_incio.png)
+<img width="723" alt="Screenshot_2024-01-02_at_22 07 20" src="https://github.com/marianalivramento-a22202518/projeto-lp2-a22202518-a22207312/assets/126899582/d25d8a7d-ef01-4214-b077-a38b28e0ba22">
+
