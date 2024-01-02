@@ -1,9 +1,6 @@
 package pt.ulusofona.lp2.deisichess;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 abstract class Peca {
 
@@ -17,10 +14,21 @@ abstract class Peca {
     int numeroDeCapturas = 0;
     int numeroDeMovimentosInvalidos = 0;
     int numeroDeMovimentosValidos = 0;
-    String kirbs = "";
+    String tipoDeKirby = "";
     ArrayList<String> versoesKirby = new ArrayList<>();
 
 
+    public ArrayList<String> getVersoesKirby() {
+        return versoesKirby;
+    }
+
+    public void setTipoDeKirby(String tipoDeKirby) {
+        this.tipoDeKirby = tipoDeKirby;
+    }
+
+    public String getTipoDeKirby() {
+        return tipoDeKirby;
+    }
 
     public int getId() {
         return id;
@@ -172,6 +180,9 @@ abstract class Peca {
     }
 
 
+    public void setVersoesKirby(ArrayList<String> versoesKirby) {
+        this.versoesKirby = versoesKirby;
+    }
 }
 
 

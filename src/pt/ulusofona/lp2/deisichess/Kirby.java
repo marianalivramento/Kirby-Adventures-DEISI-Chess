@@ -1,7 +1,5 @@
 package pt.ulusofona.lp2.deisichess;
 
-import java.util.ArrayList;
-
 public class Kirby extends Peca {
 
     int valor = 0;
@@ -21,51 +19,51 @@ public class Kirby extends Peca {
 
     @Override
     boolean movesPermitidos(int x0, int y0, int x1, int y1, Jogo jogo) {
-        return pecaComida.movesPermitidos(x0, y0, x1, y1, jogo);
+        return getPecaComida().movesPermitidos(x0, y0, x1, y1, jogo);
     }
 
     void kirbyTranforma(Peca p) {
         if (Rainha.class.equals(p.getClass())) {
-            pecaComida = new Rainha();
-            kirbs = "Rainha";
-            versoesKirby.add("Rainha");
+            setPecaComida(new Rainha());
+            setTipoDeKirby("Rainha");
+            getVersoesKirby().add("Rainha");
 
         } else if (Rei.class.equals(p.getClass())) {
-            pecaComida = new Rei();
-            kirbs = "Rei";
-            versoesKirby.add("Rei");
+            setPecaComida(new Rei());
+            setTipoDeKirby("Rei");
+            getVersoesKirby().add("Rei");
 
         } else if (PadreDaVila.class.equals(p.getClass())) {
-            pecaComida = new PadreDaVila();
-            kirbs = "Padre";
-            versoesKirby.add("Padre");
+            setPecaComida(new PadreDaVila());
+            setTipoDeKirby("Padre");
+            getVersoesKirby().add("Padre");
 
         } else if (PoneiMagico.class.equals(p.getClass())) {
-            pecaComida = new PoneiMagico();
-            kirbs = "Ponei";
-            versoesKirby.add("Ponei");
+            setPecaComida(new PoneiMagico());
+            setTipoDeKirby("Ponei");
+            getVersoesKirby().add("Ponei");
 
         } else if (TorreHorizontal.class.equals(p.getClass())) {
-            pecaComida = new TorreHorizontal();
-            kirbs = "TorreH";
-            versoesKirby.add("TorreH");
+            setPecaComida(new TorreHorizontal());
+            setTipoDeKirby("TorreH");
+            getVersoesKirby().add("TorreH");
 
         } else if (TorreVertical.class.equals(p.getClass())) {
-            pecaComida = new TorreVertical();
-            kirbs = "TorreV";
-            versoesKirby.add("TorreV");
+            setPecaComida(new TorreVertical());
+            setTipoDeKirby("TorreV");
+            getVersoesKirby().add("TorreV");
 
 
         } else if (Joker.class.equals(p.getClass())) {
-            pecaComida = new Joker();
-            kirbs = "Joker";
-            versoesKirby.add("Joker");
+            setPecaComida(new Joker());
+            setTipoDeKirby("Joker");
+            getVersoesKirby().add("Joker");
 
 
         } else if (HomerSimpson.class.equals(p.getClass())) {
-            pecaComida = new HomerSimpson();
-            kirbs = "Homer";
-            versoesKirby.add("Homer");
+            setPecaComida(new HomerSimpson());
+            setTipoDeKirby("Homer");
+            getVersoesKirby().add("Homer");
 
         }
 
@@ -106,6 +104,14 @@ public class Kirby extends Peca {
 
     @Override
     String nomeDoTipo(Jogo jogo) {
-        return "Kirby/" + pecaComida;
+        return "Kirby/" + getPecaComida();
+    }
+
+    public Peca getPecaComida() {
+        return pecaComida;
+    }
+
+    public void setPecaComida(Peca pecaComida) {
+        this.pecaComida = pecaComida;
     }
 }

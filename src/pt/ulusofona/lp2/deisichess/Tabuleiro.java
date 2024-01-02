@@ -93,43 +93,42 @@ public class Tabuleiro {
 
         if (moveInfo.length == 7) {
             //18:2:5:1:5:PecaCapturada:2
-
             Peca pecaCapturada = retornaPecaPorId(Integer.parseInt(moveInfo[6]));
 
             if (pecaAtual.getTipo() == 8) {
-                if (pecaAtual.versoesKirby.size() == 1) {
-                    pecaAtual.kirbs = "";
-                    pecaAtual.versoesKirby.remove(0);
+                if (pecaAtual.getVersoesKirby().size() == 1) {
+                    pecaAtual.setTipoDeKirby("");
+                    pecaAtual.getVersoesKirby().remove(0);
                     Kirby kirby = (Kirby) pecaAtual;
-                    kirby.pecaComida = new Rei();
+                    kirby.setPecaComida(new Rei());
                 } else {
-                    pecaAtual.kirbs = pecaAtual.versoesKirby.get(pecaAtual.versoesKirby.size() - 1);
-                    pecaAtual.versoesKirby.remove(pecaAtual.versoesKirby.size() - 1);
+                    pecaAtual.setTipoDeKirby(pecaAtual.getVersoesKirby().get(pecaAtual.getVersoesKirby().size() - 1));
+                    pecaAtual.getVersoesKirby().remove(pecaAtual.getVersoesKirby().size() - 1);
                     Kirby kirby = (Kirby) pecaAtual;
-                    switch (pecaAtual.kirbs) {
+                    switch (pecaAtual.getTipoDeKirby()) {
                         case "Rei":
-                            kirby.pecaComida = new Rei();
+                            kirby.setPecaComida(new Rei());
                             break;
                         case "Rainha":
-                            kirby.pecaComida = new Rainha();
+                            kirby.setPecaComida(new Rainha());
                             break;
                         case "Ponei":
-                            kirby.pecaComida = new PoneiMagico();
+                            kirby.setPecaComida(new PoneiMagico());
                             break;
                         case "Padre":
-                            kirby.pecaComida = new PadreDaVila();
+                            kirby.setPecaComida(new PadreDaVila());
                             break;
                         case "TorreV":
-                            kirby.pecaComida = new TorreVertical();
+                            kirby.setPecaComida(new TorreVertical());
                             break;
                         case "TorreH":
-                            kirby.pecaComida = new TorreHorizontal();
+                            kirby.setPecaComida(new TorreHorizontal());
                             break;
                         case "Homer":
-                            kirby.pecaComida = new HomerSimpson();
+                            kirby.setPecaComida(new HomerSimpson());
                             break;
                         case "Joker":
-                            kirby.pecaComida = new Joker();
+                            kirby.setPecaComida(new Joker());
                             break;
                     }
                 }

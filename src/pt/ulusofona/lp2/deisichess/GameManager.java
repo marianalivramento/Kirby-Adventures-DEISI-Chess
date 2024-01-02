@@ -275,6 +275,7 @@ public class GameManager {
 
             Peca pecaCapturada = jogo.getTabuleiro().retornaPecaPorId(Integer.parseInt(moveInfo[6]));
             Peca pecaAtual =  jogo.getTabuleiro().retornaPecaPorId(id);
+
             if (pecaAtual.getTipo() == 8) {
                 if (pecaAtual.versoesKirby.size() == 1) {
                     pecaAtual.kirbs = "";
@@ -283,30 +284,39 @@ public class GameManager {
                 } else {
                     pecaAtual.kirbs = pecaAtual.versoesKirby.get(pecaAtual.versoesKirby.size() - 1);
                     pecaAtual.versoesKirby.remove(pecaAtual.versoesKirby.size() - 1);
+                    Kirby kirby = (Kirby) pecaAtual;
                     switch (pecaAtual.kirbs) {
                         case "Rei":
-                            pecaAtual.pecaComida = new Rei();
+                            kirby.kirbyTranforma(new Rei());
+                            break;
                             break;
                         case "Rainha":
-                            pecaAtual.pecaComida = new Rainha();
+                            kirby.kirbyTranforma(new Rainha());
+                            break;
                             break;
                         case "Ponei":
-                            pecaAtual.pecaComida = new PoneiMagico();
+                            kirby.pecaComida = new PoneiMagico();
+                            break;
                             break;
                         case "Padre":
-                            pecaAtual.pecaComida = new PadreDaVila();
+                            kirby.pecaComida = new PadreDaVila();
+                            break;
                             break;
                         case "TorreV":
-                            pecaAtual.pecaComida = new TorreVertical();
+                            kirby.pecaComida = new TorreVertical();
+                            break;
                             break;
                         case "TorreH":
-                            pecaAtual.pecaComida = new TorreHorizontal();
+                            kirby.pecaComida = new TorreHorizontal();
+                            break;
                             break;
                         case "Homer":
-                            pecaAtual.pecaComida = new HomerSimpson();
+                            kirby.pecaComida = new HomerSimpson();
+                            break;
                             break;
                         case "Joker":
-                            pecaAtual.pecaComida = new Joker();
+                            kirby.pecaComida = new Joker();
+                            break;
                             break;
                     }
                 }
@@ -338,7 +348,7 @@ public class GameManager {
         List<Comparable> hints = new ArrayList<>();
         Square square = jogo.getTabuleiro().retornoQuadrado(x, y);
         GetHints retornado = new GetHints(x,y);
-        retornado.valorPeca = square.getPeca().getValor();
+        retornado.setValorPeca(square.getPeca().getValor());
 
         if (square.getPeca() != null) {
             for (GetHints h:  retornado.jogadasPermitidas(jogo, hints)){
@@ -533,28 +543,28 @@ public class GameManager {
                                 retorno[4] = "joker-branco.png";
                                 break;
                             case 8:
-                                if (sq.getPeca().kirbs.equals("Rainha")) {
+                                if (sq.getPeca().getTipoDeKirby().equals("Rainha")) {
                                     retorno[4] = "kirby-rainha-branco.png";
                                     break;
-                                } else if (sq.getPeca().kirbs.equals("Rei")) {
+                                } else if (sq.getPeca().getTipoDeKirby().equals("Rei")) {
                                     retorno[4] = "kirby-rei-branco.png";
                                     break;
-                                } else if (sq.getPeca().kirbs.equals("Padre")) {
+                                } else if (sq.getPeca().getTipoDeKirby().equals("Padre")) {
                                     retorno[4] = "kirby-padre-branco.png";
                                     break;
-                                } else if (sq.getPeca().kirbs.equals("Ponei")) {
+                                } else if (sq.getPeca().getTipoDeKirby().equals("Ponei")) {
                                     retorno[4] = "kirby-ponei-branco.png";
                                     break;
-                                } else if (sq.getPeca().kirbs.equals("TorreV")) {
+                                } else if (sq.getPeca().getTipoDeKirby().equals("TorreV")) {
                                     retorno[4] = "kirby-torreV-branco.png";
                                     break;
-                                } else if (sq.getPeca().kirbs.equals("TorreH")) {
+                                } else if (sq.getPeca().getTipoDeKirby().equals("TorreH")) {
                                     retorno[4] = "kirby-torreH-branco.png";
                                     break;
-                                } else if (sq.getPeca().kirbs.equals("Joker")) {
+                                } else if (sq.getPeca().getTipoDeKirby().equals("Joker")) {
                                     retorno[4] = "kirby-joker-branco.png";
                                     break;
-                                } else if (sq.getPeca().kirbs.equals("Homer")) {
+                                } else if (sq.getPeca().getTipoDeKirby().equals("Homer")) {
                                     retorno[4] = "kirby-homer-branco.png";
                                     break;
                                 } else {
@@ -594,28 +604,28 @@ public class GameManager {
                                 retorno[4] = "joker-preto.png";
                                 break;
                             case 8:
-                                if (sq.getPeca().kirbs.equals("Rainha")) {
+                                if (sq.getPeca().getTipoDeKirby().equals("Rainha")) {
                                     retorno[4] = "kirby-rainha-preto.png";
                                     break;
-                                } else if (sq.getPeca().kirbs.equals("Rei")) {
+                                } else if (sq.getPeca().getTipoDeKirby().equals("Rei")) {
                                     retorno[4] = "kirby-rei-preto.png";
                                     break;
-                                } else if (sq.getPeca().kirbs.equals("Padre")) {
+                                } else if (sq.getPeca().getTipoDeKirby().equals("Padre")) {
                                     retorno[4] = "kirby-padre-preto.png";
                                     break;
-                                } else if (sq.getPeca().kirbs.equals("Ponei")) {
+                                } else if (sq.getPeca().getTipoDeKirby().equals("Ponei")) {
                                     retorno[4] = "kirby-ponei-preto.png";
                                     break;
-                                } else if (sq.getPeca().kirbs.equals("TorreV")) {
+                                } else if (sq.getPeca().getTipoDeKirby().equals("TorreV")) {
                                     retorno[4] = "kirby-torreV-preto.png";
                                     break;
-                                } else if (sq.getPeca().kirbs.equals("TorreH")) {
+                                } else if (sq.getPeca().getTipoDeKirby().equals("TorreH")) {
                                     retorno[4] = "kirby-torreH-preto.png";
                                     break;
-                                } else if (sq.getPeca().kirbs.equals("Joker")) {
+                                } else if (sq.getPeca().getTipoDeKirby().equals("Joker")) {
                                     retorno[4] = "kirby-joker-preto.png";
                                     break;
-                                } else if (sq.getPeca().kirbs.equals("Homer")) {
+                                } else if (sq.getPeca().getTipoDeKirby().equals("Homer")) {
                                     retorno[4] = "kirby-homer-preto.png";
                                     break;
                                 } else {
@@ -747,11 +757,11 @@ public class GameManager {
                         }
                         break;
                     case "8":
-                        if(jogo.getTabuleiro().retornaPecaPorId(ID).kirbs.equals("")) {
-                            retorno.append("Kirby" + jogo.getTabuleiro().retornaPecaPorId(ID).kirbs + " | " +jogo.getTabuleiro().retornaPecaPorId(ID).getValor());
+                        if(jogo.getTabuleiro().retornaPecaPorId(ID).getTipoDeKirby().equals("")) {
+                            retorno.append("Kirby" + jogo.getTabuleiro().retornaPecaPorId(ID).getTipoDeKirby() + " | " +jogo.getTabuleiro().retornaPecaPorId(ID).getValor());
 
                         } else {
-                            retorno.append("Kirby/" + jogo.getTabuleiro().retornaPecaPorId(ID).kirbs + " | " +jogo.getTabuleiro().retornaPecaPorId(ID).getValor());
+                            retorno.append("Kirby/" + jogo.getTabuleiro().retornaPecaPorId(ID).getTipoDeKirby() + " | " +jogo.getTabuleiro().retornaPecaPorId(ID).getValor());
                         }
                         break;
                 }

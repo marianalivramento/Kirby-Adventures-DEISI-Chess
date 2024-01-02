@@ -899,7 +899,7 @@ public class TestProjeto {
         gm.move(1, 4, 2, 4);
         gm.move(2, 5, 2, 4);
 
-        assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(18).kirbs, "Rainha");
+        assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(18).getTipoDeKirby(), "Rainha");
     }
 
 
