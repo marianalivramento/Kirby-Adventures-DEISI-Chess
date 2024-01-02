@@ -13,6 +13,46 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestProjeto {
 
     @Test
+    public void save_game_sem_movimentos() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        try {
+            gm.saveGame(new File("test-files/8x16.txt"));
+            fail("Expected InvalidGameInputException, but no exception was thrown");
+        } catch (IOException e) {
+            assertEquals("Invalid file", e.getMessage());
+        }
+    }
+
+    @Test
+    public void load_game_terminado() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/fim-jogo.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        assertTrue(gm.gameOver());
+    }
+
+    @Test
+    public void load_game_terminado_2() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/fim-jogo-2.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        assertTrue(gm.gameOver());
+    }
+
+
+    @Test
     public void get_board_size() {
         GameManager gm = new GameManager();
         try {
@@ -20,6 +60,8 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
+
+
         assertEquals(8, gm.getBoardSize());
     }
 
@@ -410,7 +452,6 @@ public class TestProjeto {
             fail("Exception not expected: " + e.getMessage());
         }
 
-        //1-3-0 //0-2-3
 
         gm.move(0, 0, 0, 1); //preta válida
         gm.move(1, 7, 1, 7); //branca invalida
@@ -525,7 +566,7 @@ public class TestProjeto {
 
         ArrayList<String> arr = new ArrayList<>();
         arr.add("A Dama Selvagem (PRETA) tem 1000 pontos");
-
+        StatisticsKt.getStatsCalculator(StatType.TOP_5_PONTOS);
         assertEquals(arr, StatisticsKt.topCincoPontos(gm));
     }
 
@@ -537,14 +578,13 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.move(1, 0, 1, 5);
         gm.move(0, 7, 0, 6);
         gm.move(1, 5, 0, 6);
 
-
         ArrayList<String> arr = new ArrayList<>();
         arr.add("Rei");
+        StatisticsKt.getStatsCalculator(StatType.TIPOS_CAPTURADOS);
 
         assertEquals(arr, StatisticsKt.tiposCapturados(gm));
     }
@@ -557,7 +597,6 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.move(1, 0, 1, 0);
         gm.move(1, 0, 1, 0);
         gm.move(1, 0, 1, 0);
@@ -568,11 +607,12 @@ public class TestProjeto {
         gm.move(0, 7, 0, 6);
         gm.move(4, 0, 4, 0);
         gm.move(4, 0, 5, 0);
-
-
         ArrayList<String> arr = new ArrayList<>();
         arr.add("10:A Dama Selvagem:6:0");
         arr.add("10:Artolas:1:1");
+
+
+        StatisticsKt.getStatsCalculator(StatType.PECAS_MAIS_BARALHADAS);
 
         assertEquals(arr, StatisticsKt.maisBaralhadas(gm));
     }
@@ -593,7 +633,7 @@ public class TestProjeto {
         gm.move(1, 0, 1, 5);
         gm.move(3, 7, 1, 5);
 
-
+        StatisticsKt.getStatsCalculator(StatType.TOP_5_CAPTURAS);
         assertEquals("O Maior Grande (PRETA) fez 1 capturas", StatisticsKt.topCincoCapturas(gm).get(0));
     }
 
@@ -605,7 +645,6 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.move(3, 0, 1, 2);
         gm.move(1, 7, 1, 2);
         gm.move(2, 0, 0, 2);
@@ -619,11 +658,94 @@ public class TestProjeto {
         gm.move(0, 0, 1, 1);
         gm.move(6, 1, 6, 0);
 
-
         ArrayList<String> arr = new ArrayList<>();
         arr.add("BRANCA:A Barulhenta do Bairro:6");
-
+        StatisticsKt.getStatsCalculator(StatType.PECAS_MAIS_5_CAPTURAS);
         assertEquals(arr, StatisticsKt.maisCincoCapturas(gm));
+    }
+    @Test
+    public void jogo_grande() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        gm.move(7, 0, 7, 3);
+        gm.move(5, 7, 5, 5);
+        gm.move(7, 3, 5, 5);
+        gm.move(3, 6, 2, 5);
+        gm.move(3, 0, 0, 3);
+        gm.move(2, 5, 1, 4);
+        gm.move(5, 0, 5, 4);
+        gm.move(1, 4, 0, 3);
+        gm.move(1, 0, 1, 2);
+        gm.move(0, 3, 1, 2);
+        gm.move(5, 5, 5, 6);
+        gm.move(1, 2, 6, 2);
+        gm.move(0, 0, 0, 1);
+        assertTrue(gm.move(6, 2, 6, 0));
+    }
+
+    @Test
+    public void jogo_grande_2() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        gm.move(2, 0, 4, 2);
+        gm.move(7, 7, 5, 5);
+        gm.move(4, 2, 2, 4);
+        gm.move(5, 5, 6, 5);
+        gm.move(2, 4, 4, 6);
+        gm.move(6, 5, 5, 6);
+        gm.move(3, 1, 3, 2);
+        gm.move(3, 6, 4, 6);
+        gm.move(3, 0, 0, 3);
+        gm.move(3, 7, 0, 4);
+        gm.move(3, 2, 3, 3);
+        gm.move(4, 7, 3, 7);
+        gm.move(3, 3, 3, 4);
+        gm.move(5, 6, 7, 4);
+        gm.move(3, 4, 3, 5);
+        gm.move(7, 4, 3, 4);
+        gm.move(3, 5, 3, 6);
+        gm.move(3, 4, 4, 5);
+        assertTrue(gm.move(3, 6, 3, 7));
+    }
+
+    @Test
+    public void moves_invalidos() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        gm.move(5, 0, 7, 2);
+        gm.move(4, 0, 2, 3);
+        gm.move(1, 0, 1, 0);
+        gm.move(2, 0, 2, 0);
+        gm.move(3, 0, 3, 0);
+        gm.move(4, 0, 4, 0);
+        gm.move(5, 0, 5, 0);
+        gm.move(6, 0, 6, 0);
+        gm.move(7, 0, 7, 0);
+        gm.move(8, 0, 9, 0);
+        gm.move(4, 0, 5, 0);
+        gm.move(1, 0, 1, 3);
+        gm.move(1, 7, 1, 4);
+        gm.move(7, 0, 4, 3);
+        gm.move(1, 4, 2, 3);
+        gm.move(1, 3, 4, 6);
+        gm.move(7, 7, 6, 6);
+        gm.move(4, 3, 2, 3);
+        gm.move(4, 3, 1, 3);
+        gm.jogo.getTabuleiro().retornoQuadrado(1,1).setPeca(null);
+        gm.move(0, 0, 1, 1);
+        assertFalse(gm.move(4, 0, 2, 3));
     }
 
     @Test
@@ -634,8 +756,6 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
-
         assertEquals("(0,1) -> 0", gm.getHints(0, 0).get(0).toString());
     }
 
@@ -643,11 +763,10 @@ public class TestProjeto {
     public void nomes_dos_tipos() {
         GameManager gm = new GameManager();
         try {
-            gm.loadGame(new File("test-files/8x16.txt"));
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         ArrayList<String> arr = new ArrayList<>();
         arr.add(gm.jogo.tabuleiro.retornaPecaPorId(1).nomeDoTipo(gm.jogo));
         arr.add(gm.jogo.tabuleiro.retornaPecaPorId(2).nomeDoTipo(gm.jogo));
@@ -657,8 +776,7 @@ public class TestProjeto {
         arr.add(gm.jogo.tabuleiro.retornaPecaPorId(6).nomeDoTipo(gm.jogo));
         arr.add(gm.jogo.tabuleiro.retornaPecaPorId(7).nomeDoTipo(gm.jogo));
         arr.add(gm.jogo.tabuleiro.retornaPecaPorId(8).nomeDoTipo(gm.jogo));
-
-
+        arr.add(gm.jogo.tabuleiro.retornaPecaPorId(18).nomeDoTipo(gm.jogo));
         ArrayList<String> expectedArr = new ArrayList<>();
         expectedArr.add("Rei");
         expectedArr.add("Rainha");
@@ -668,19 +786,18 @@ public class TestProjeto {
         expectedArr.add("TorreVert");
         expectedArr.add("Homer Simpson");
         expectedArr.add("Joker/Rainha");
-
+        expectedArr.add("Kirby/Rei");
 
         assertEquals(expectedArr, arr);
     }
+
 
     @Test
     public void getHints_jogadas_permitidas_atualiza_pontos() {
         GetHints um = new GetHints(1, 2);
         um.valorPeca = 3;
-
         GetHints dois = new GetHints(3, 4);
         dois.valorPeca = 2;
-
         Assertions.assertEquals(um.compareTo(dois), -1);
     }
 
@@ -688,26 +805,19 @@ public class TestProjeto {
     public void getHints_compareTo_maior() {
         GetHints um = new GetHints(1, 2);
         um.valorPeca = 3;
-
         GetHints dois = new GetHints(3, 4);
         dois.valorPeca = 2;
-
         Assertions.assertEquals(um.compareTo(dois), -1);
     }
-
 
     @Test
     public void getHints_compareTo_menor() {
         GetHints um = new GetHints(1, 2);
         um.valorPeca = 2;
-
         GetHints dois = new GetHints(3, 4);
         dois.valorPeca = 5;
-
         Assertions.assertEquals(um.compareTo(dois), 1);
     }
-
-    // ************* aumenta e diminui valor ***************
 
     @Test
     public void aumenta_valor_rei() {
@@ -717,11 +827,9 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.jogo.getTabuleiro().retornaPecaPorId(1).aumentaValor(10);
         gm.jogo.getTabuleiro().retornaPecaPorId(1).diminuiValor(100);
         assertEquals(910, gm.jogo.getTabuleiro().retornaPecaPorId(1).getValor());
-
     }
 
     @Test
@@ -732,11 +840,9 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.jogo.getTabuleiro().retornaPecaPorId(2).aumentaValor(2);
         gm.jogo.getTabuleiro().retornaPecaPorId(2).diminuiValor(10);
         assertEquals(0, gm.jogo.getTabuleiro().retornaPecaPorId(2).getValor());
-
     }
 
     @Test
@@ -747,11 +853,9 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.jogo.getTabuleiro().retornaPecaPorId(3).aumentaValor(10);
         gm.jogo.getTabuleiro().retornaPecaPorId(3).diminuiValor(5);
         assertEquals(10, gm.jogo.getTabuleiro().retornaPecaPorId(3).getValor());
-
     }
 
     @Test
@@ -762,11 +866,9 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.jogo.getTabuleiro().retornaPecaPorId(4).aumentaValor(10);
         gm.jogo.getTabuleiro().retornaPecaPorId(4).diminuiValor(5);
         assertEquals(8, gm.jogo.getTabuleiro().retornaPecaPorId(4).getValor());
-
     }
 
     @Test
@@ -777,11 +879,9 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.jogo.getTabuleiro().retornaPecaPorId(5).aumentaValor(0);
         gm.jogo.getTabuleiro().retornaPecaPorId(5).diminuiValor(0);
         assertEquals(3, gm.jogo.getTabuleiro().retornaPecaPorId(5).getValor());
-
     }
 
     @Test
@@ -792,11 +892,9 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.jogo.getTabuleiro().retornaPecaPorId(6).aumentaValor(1);
         gm.jogo.getTabuleiro().retornaPecaPorId(6).diminuiValor(3);
         assertEquals(1, gm.jogo.getTabuleiro().retornaPecaPorId(6).getValor());
-
     }
 
     @Test
@@ -807,11 +905,9 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.jogo.getTabuleiro().retornaPecaPorId(7).aumentaValor(2);
         gm.jogo.getTabuleiro().retornaPecaPorId(7).diminuiValor(4);
         assertEquals(0, gm.jogo.getTabuleiro().retornaPecaPorId(7).getValor());
-
     }
 
     @Test
@@ -822,13 +918,10 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.jogo.getTabuleiro().retornaPecaPorId(8).aumentaValor(1);
         gm.jogo.getTabuleiro().retornaPecaPorId(8).diminuiValor(3);
         assertEquals(2, gm.jogo.getTabuleiro().retornaPecaPorId(8).getValor());
-
     }
-
     @Test
     public void aumenta_valor_kirby() {
         GameManager gm = new GameManager();
@@ -837,15 +930,34 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.jogo.getTabuleiro().retornaPecaPorId(17).aumentaValor(100);
         gm.jogo.getTabuleiro().retornaPecaPorId(17).diminuiValor(50);
         assertEquals(50, gm.jogo.getTabuleiro().retornaPecaPorId(17).getValor());
-
     }
 
+    @Test
+    public void testEnumValues() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        assertEquals(StatType.TOP_5_PONTOS, StatType.valueOf("TOP_5_PONTOS"));
+    }
 
-    // ******************** TESTES KIRBY ************************
+    @Test
+    public void equipa_nao_existe() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+
+        Equipa e = new Equipa(30);
+        assertEquals("ERRO", e.pretoOuBrancoString());
+    }
 
     @Test
     public void valor_kirby() {
@@ -855,13 +967,42 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.move(1, 0, 1, 4);
         gm.move(3, 6, 2, 5);
         gm.move(1, 4, 2, 4);
         gm.move(2, 5, 2, 4);
-
         assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(18).getValor(), 8);
+    }
+
+    @Test
+    public void capturas_com_kirby() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        gm.move(1, 0, 1, 4);
+        gm.move(3, 6, 2, 5);
+        gm.move(1, 4, 2, 4);
+        gm.move(2, 5, 2, 4);
+        assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(18).getValor(), 8);
+    }
+
+    @Test
+    public void kirby_imita_joker() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        gm.move(3, 1, 1, 4);
+        gm.move(7, 0, 3, 4);
+        gm.move(3, 6, 3, 5);
+        gm.move(0, 0, 0, 1);
+
+        assertTrue(gm.move(3, 5, 3, 4));
     }
 
     @Test
@@ -872,7 +1013,6 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.move(1, 0, 1, 4);
         gm.move(3, 6, 2, 5);
         gm.move(1, 4, 2, 4);
@@ -881,7 +1021,6 @@ public class TestProjeto {
         gm.move(2, 4, 1, 3);
         gm.move(1, 1, 1, 2);
         gm.move(1, 3, 1, 2);
-
         assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(18).getPontos(), 2016);
     }
 
@@ -893,13 +1032,23 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         gm.move(1, 0, 1, 4);
         gm.move(3, 6, 2, 5);
         gm.move(1, 4, 2, 4);
         gm.move(2, 5, 2, 4);
+        gm.move(3, 1, 4, 1);
+        gm.move(5, 7, 5, 1);
+        gm.move(4, 1, 5, 1);
 
-        assertEquals(gm.jogo.getTabuleiro().retornaPecaPorId(18).getTipoDeKirby(), "Rainha");
+        assertEquals("[18, 8, 20, WhiteKirby, kirby-rainha-branco.png]", Arrays.toString(gm.getSquareInfo(2,4)));
+        assertEquals("[17, 8, 10, BlackKirby, kirby-torreV-preto.png]", Arrays.toString(gm.getSquareInfo(5,1)));
+
+        gm.move(3, 7, 5, 5);
+        gm.move(5, 1, 5, 5);
+        gm.move(2, 4, 2, 0);
+        assertEquals("[18, 8, 20, WhiteKirby, kirby-ponei-branco.png]", Arrays.toString(gm.getSquareInfo(2,0)));
+        assertEquals("[17, 8, 10, BlackKirby, kirby-padre-preto.png]", Arrays.toString(gm.getSquareInfo(5,5)));
+
     }
 
 
@@ -925,14 +1074,12 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         assertEquals("1 | Rei | (infinito) | 10 | O Poderoso Chefao @ (0, 0)", gm.getPieceInfoAsString(1));
         assertEquals("2 | Rainha | 8 | 10 | A Dama Selvagem @ (1, 0)", gm.getPieceInfoAsString(2));
         assertEquals("3 | Ponei Mágico | 5 | 10 | O Grande Artista @ (2, 0)", gm.getPieceInfoAsString(3));
         assertEquals("4 | Padre da Vila | 3 | 10 | Amante de Praia @ (3, 0)", gm.getPieceInfoAsString(4));
         assertEquals("5 | TorreHor | 3 | 10 | Artolas @ (4, 0)", gm.getPieceInfoAsString(5));
         assertEquals("6 | TorreVert | 3 | 10 | O Maior Grande @ (5, 0)", gm.getPieceInfoAsString(6));
-
     }
 
     @Test
@@ -947,7 +1094,6 @@ public class TestProjeto {
         gm.move(0, 7, 0, 6);
 
         assertEquals("7 | Homer Simpson | 2 | 10 | O Hommie @ (6, 0)", gm.getPieceInfoAsString(7));
-
     }
 
     @Test
@@ -971,23 +1117,60 @@ public class TestProjeto {
         } catch (InvalidGameInputException | IOException e) {
             fail("Exception not expected: " + e.getMessage());
         }
-
         assertEquals("8 | Joker/Rainha | 4 | 10 | O Beberolas @ (7, 0)", gm.getPieceInfoAsString(8));
+        assertEquals("Joker/Rainha", gm.jogo.tabuleiro.retornaPecaPorId(8).nomeDoTipo(gm.jogo));
+
         gm.move(3, 0, 1, 2);
         assertEquals("8 | Joker/Ponei Mágico | 4 | 10 | O Beberolas @ (7, 0)", gm.getPieceInfoAsString(8));
+        assertEquals("Joker/Ponei Mágico", gm.jogo.tabuleiro.retornaPecaPorId(8).nomeDoTipo(gm.jogo));
+
         gm.move(1, 7, 1, 2);
         assertEquals("8 | Joker/Padre da Vila | 4 | 10 | O Beberolas @ (7, 0)", gm.getPieceInfoAsString(8));
+        assertEquals("Joker/Padre da Vila", gm.jogo.tabuleiro.retornaPecaPorId(8).nomeDoTipo(gm.jogo));
+
         gm.move(2, 0, 0, 2);
         assertEquals("8 | Joker/TorreHor | 4 | 10 | O Beberolas @ (7, 0)", gm.getPieceInfoAsString(8));
+        assertEquals("Joker/TorreHor", gm.jogo.tabuleiro.retornaPecaPorId(8).nomeDoTipo(gm.jogo));
+
         gm.move(1, 2, 0, 2);
         assertEquals("8 | Joker/TorreVert | 4 | 10 | O Beberolas @ (7, 0)", gm.getPieceInfoAsString(8));
+        assertEquals("Joker/TorreVert", gm.jogo.tabuleiro.retornaPecaPorId(8).nomeDoTipo(gm.jogo));
+
         gm.move(5, 0, 5, 2);
         assertEquals("8 | Joker/Homer Simpson | 4 | 10 | O Beberolas @ (7, 0)", gm.getPieceInfoAsString(8));
+        assertEquals("Joker/Homer Simpson", gm.jogo.tabuleiro.retornaPecaPorId(8).nomeDoTipo(gm.jogo));
+
         gm.move(0, 2, 5, 2);
         assertEquals("8 | Joker/Rainha | 4 | 10 | O Beberolas @ (7, 0)", gm.getPieceInfoAsString(8));
-
     }
 
+    @Test
+    public void getSquareInfo() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x8-kirby.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        assertEquals("[1, 0, 10, O Poderoso Chefao, rei-preto.png]", Arrays.toString(gm.getSquareInfo(0,0)));
+        assertEquals("[2, 1, 10, A Dama Selvagem, rainha-preta.png]", Arrays.toString(gm.getSquareInfo(1,0)));
+        assertEquals("[3, 2, 10, O Grande Artista, ponei-preto.png]", Arrays.toString(gm.getSquareInfo(2,0)));
+        assertEquals("[4, 3, 10, Amante de Praia, padre-preto.png]", Arrays.toString(gm.getSquareInfo(3,0)));
+        assertEquals("[5, 4, 10, Artolas, torreH-preto.png]", Arrays.toString(gm.getSquareInfo(4,0)));
+        assertEquals("[6, 5, 10, O Maior Grande, torreV-preto.png]", Arrays.toString(gm.getSquareInfo(5,0)));
+        assertEquals("[7, 6, 10, O Hommie, homer-preto.png]", Arrays.toString(gm.getSquareInfo(6,0)));
+        assertEquals("[8, 7, 10, O Beberolas, joker-preto.png]", Arrays.toString(gm.getSquareInfo(7,0)));
+        assertEquals("[17, 8, 10, BlackKirby, kirby-preto.png]", Arrays.toString(gm.getSquareInfo(3,1)));
+
+        assertEquals("[9, 0, 20, O Chefe dos Indios, rei-branco.png]", Arrays.toString(gm.getSquareInfo(0,7)));
+        assertEquals("[10, 1, 20, A Barulhenta do Bairro, rainha-branca.png]", Arrays.toString(gm.getSquareInfo(1,7)));
+        assertEquals("[11, 2, 20, My Little Pony, ponei-branco.png]", Arrays.toString(gm.getSquareInfo(2,7)));
+        assertEquals("[12, 3, 20, Padreco, padre-branco.png]", Arrays.toString(gm.getSquareInfo(3,7)));
+        assertEquals("[13, 4, 20, Torre Poderosa, torreH-branca.png]", Arrays.toString(gm.getSquareInfo(4,7)));
+        assertEquals("[14, 5, 20, Torre Trapalhona, torreV-branca.png]", Arrays.toString(gm.getSquareInfo(5,7)));
+        assertEquals("[15, 6, 20, Homer Jay Simpson, homer-branco.png]", Arrays.toString(gm.getSquareInfo(6,7)));
+        assertEquals("[16, 7, 20, O Bobo da Corte, joker-branco.png]", Arrays.toString(gm.getSquareInfo(7,7)));
+        assertEquals("[18, 8, 20, WhiteKirby, kirby-branco.png]", Arrays.toString(gm.getSquareInfo(3,6)));
+
+    }
 }
-
-
