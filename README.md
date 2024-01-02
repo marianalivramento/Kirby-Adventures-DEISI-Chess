@@ -41,3 +41,6 @@ Inicialmente, antes de capturar uma peça o Kirby pode-se mexer em qualquer dire
 Para combinar com a peça do Kirby decidimos desenhar todos os ícones. As imagens estão todas disponíveis na pasta imagens.
 
 Para além da peça original, mudámos ainda a imagem de fundo para uma que fosse igual à imagem de fundo do jogo do Kirby. Mudámos também as cores do tabuleiro passando de preto e branco para roxo e branco pois achámos que ficava mais giro de acordo com o fundo e os ícones das peças.
+
+****** EXEMPLOS ******
+
