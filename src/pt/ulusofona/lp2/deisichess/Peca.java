@@ -175,10 +175,6 @@ abstract class Peca {
         numeroDeMovimentosValidos++;
     }
 
-
-    public void setVersoesKirby(ArrayList<String> versoesKirby) {
-        this.versoesKirby = versoesKirby;
-    }
 }
 
 
