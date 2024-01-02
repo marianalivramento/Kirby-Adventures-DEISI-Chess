@@ -514,6 +514,17 @@ public class TestProjeto {
     }
 
     @Test
+    public void movimentos_invalido_ponei() {
+        GameManager gm = new GameManager();
+        try {
+            gm.loadGame(new File("test-files/8x16.txt"));
+        } catch (InvalidGameInputException | IOException e) {
+            fail("Exception not expected: " + e.getMessage());
+        }
+        //gm.move()
+    }
+
+    @Test
     public void conta_pontos_rainha() {
         GameManager gm = new GameManager();
         try {

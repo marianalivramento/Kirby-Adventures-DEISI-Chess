@@ -92,7 +92,6 @@ public class Tabuleiro {
         Peca pecaAtual =  retornaPecaPorId(id);
 
         if (moveInfo.length == 7) {
-            //18:2:5:1:5:PecaCapturada:2
             Peca pecaCapturada = retornaPecaPorId(Integer.parseInt(moveInfo[6]));
 
             if (pecaAtual.getTipo() == 8) {
