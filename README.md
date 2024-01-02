@@ -20,7 +20,7 @@ As nossas classes interagem da seguinte forma: criámos uma classe Jogo que por 
 ****** VIDEO *******
 
 
-
+https://youtu.be/IPXNHwmEfWc
 
 ****** PECA ORIGINAL ******
 
