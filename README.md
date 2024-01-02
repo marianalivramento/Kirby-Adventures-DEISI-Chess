@@ -46,3 +46,13 @@ Mudámos também o titulo para "kirby adventures".
 
 <img width="723" alt="Screenshot_2024-01-02_at_22 07 20" src="https://github.com/marianalivramento-a22202518/projeto-lp2-a22202518-a22207312/assets/126899582/d25d8a7d-ef01-4214-b077-a38b28e0ba22">
 
+
+****** EXEMPLOS ******
+
+Aqui em baixo estão alguns exemplos da peça Kirby a mudar de ícone.
+<img width="724" alt="Screenshot 2024-01-02 at 20 28 17" src="https://github.com/marianalivramento-a22202518/projeto-lp2-a22202518-a22207312/assets/126899582/bd095029-b31a-4b6e-98bd-69105a88f7ea">
+<img width="721" alt="Screenshot 2024-01-02 at 20 36 40" src="https://github.com/marianalivramento-a22202518/projeto-lp2-a2220251<img width="727" alt="Screenshot 2024-01-02 at 20 37 21" src="https://github.com/marianalivramento-a22202518/projeto-lp2-a22202518-a22207312/assets/126899582/89e51337-80a9-4e83-9129-fcdafc9ba529">
+8-a22207312/assets/126899582/86e3fdfa-358c-464a-8371-bb6209a081b0">
+
+
+
