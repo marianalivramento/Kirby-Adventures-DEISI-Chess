@@ -41,6 +41,7 @@ public class TorreHorizontal extends Peca {
         if (x0 == x1 && y0 == y1) {
             return false;
         }
+        
         if (y0 == y1) {
             if (!pertenceAequipa(jogo, x1, y1)) {
                 return true;
